@@ -60,6 +60,7 @@
     blackd: 'mfpc' T5 fix
     pixel/cody56: fix for irx files
     emoon/pixel/mrbrown: mips-opc.c mfpc fix
+    mharris: vu code disassembly fix
 
    gcc-3.2.2-PS2-20041130.patch:
     pixel: 20040214 (gruntwork) patch
@@ -67,6 +68,7 @@
     blackd: 'scei' name fix patch
     pixel: fixed alignment bug
     ooPo: bash-3.0 'trap - 0' configure bug
+    pixel/LavosSpawn: another alignment fix
 
    newlib-1.10.0-PS2-20040312.patch:
     ps2lib 2.0: patches for fileio

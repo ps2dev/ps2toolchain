@@ -14,7 +14,6 @@
   export BINUTILS="binutils-2.14"
   export GCC="gcc-3.2.2"
   export NEWLIB="newlib-1.10.0"
-  export PS2CLIENT="ps2client-2.0.0"
 
   ## CVS configuration.
   if [ "`cat ~/.cvspass | grep $CVSROOT`" = "" ]; then
@@ -29,9 +28,13 @@
   ## Check for which make to use.
   export MAKE="gmake"; $MAKE -v || { export MAKE="make"; }
 
-  ## Check for make, patch and wget.
+  ## Check for make.
   $MAKE -v || { echo "ERROR: Please make sure you have GNU 'make' installed."; exit; }
+
+  ## Check for patch.
   patch -v || { echo "ERROR: Please make sure you have 'patch' installed."; exit; }
+
+  ## Check for wget.
   wget -V || { echo "ERROR: Please make sure you have 'wget' installed."; exit; }
 
  ################################
@@ -42,7 +45,6 @@
   wget -c ftp://ftp.gnu.org/pub/gnu/binutils/$BINUTILS.tar.gz
   wget -c ftp://ftp.gnu.org/pub/gnu/gcc/$GCC.tar.gz
   wget -c ftp://sources.redhat.com/pub/newlib/$NEWLIB.tar.gz
-  wget -c http://www.oopo.net/consoledev/files/$PS2CLIENT.tar.gz
 
   ## Create the build directory.
   mkdir -p $TMPDIR; cd $TMPDIR
@@ -51,7 +53,6 @@
   rm -Rf $BINUTILS; tar xfvz $SRCDIR/$BINUTILS.tar.gz
   rm -Rf $GCC; tar xfvz $SRCDIR/$GCC.tar.gz
   rm -Rf $NEWLIB; tar xfvz $SRCDIR/$NEWLIB.tar.gz
-  rm -Rf $PS2CLIENT; tar xfvz $SRCDIR/$PS2CLIENT.tar.gz
 
   ## Patch the source.
   cd $BINUTILS; cat $SRCDIR/$BINUTILS.patch | patch -p1; cd ..
@@ -210,8 +211,14 @@
  ## BUILD AND INSTALL PS2CLIENT ##
  #################################
 
+  ## Remove any previous builds.
+  rm -Rf ps2client
+
+  ## Check out the latest source.
+  cvs checkout ps2client
+
   ## Enter the source directory.
-  cd $PS2CLIENT
+  cd ps2client
 
   ## Build the source.
   $MAKE clean; $MAKE || { echo "ERROR BUILDING PS2CLIENT"; exit; }
@@ -271,7 +278,7 @@
   rm -Rf $NEWLIB
 
   ## Clean up ps2client.
-  rm -Rf $PS2CLIENT
+  rm -Rf ps2client
 
   ## Clean up ps2sdk.
   rm -Rf ps2sdk
