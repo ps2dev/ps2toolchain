@@ -1,6 +1,6 @@
-diff -burN orig.gcc-3.2.2/README.PS2 gcc-3.2.2/README.PS2
---- orig.gcc-3.2.2/README.PS2	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/README.PS2	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/README.PS2 ps2-gcc-3.2.2/README.PS2
+--- gcc-3.2.2/README.PS2	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/README.PS2	Thu Jan 20 00:10:05 2005
 @@ -0,0 +1,80 @@
 +Apologies to mrbrown, who's README.PS2 this was based on.
 +GCC for Sony Playstation 2
@@ -82,9 +82,9 @@ diff -burN orig.gcc-3.2.2/README.PS2 gcc-3.2.2/README.PS2
 +--
 +MrHTFord (mrhtford_ps2dev@hotmail.com)
 +Friday 14th February 2004.
-diff -burN orig.gcc-3.2.2/config.sub gcc-3.2.2/config.sub
---- orig.gcc-3.2.2/config.sub	2003-01-30 18:32:36.000000000 -0400
-+++ gcc-3.2.2/config.sub	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/config.sub ps2-gcc-3.2.2/config.sub
+--- gcc-3.2.2/config.sub	Thu Jan 30 23:32:36 2003
++++ ps2-gcc-3.2.2/config.sub	Thu Jan 20 00:10:05 2005
 @@ -236,6 +236,7 @@
  	| i370 | i860 | i960 | ia64 \
  	| ip2k \
@@ -139,9 +139,9 @@ diff -burN orig.gcc-3.2.2/config.sub gcc-3.2.2/config.sub
  	# Remember, each alternative MUST END IN *, to match a version number.
  		;;
  	-qnx*)
-diff -burN orig.gcc-3.2.2/configure gcc-3.2.2/configure
---- orig.gcc-3.2.2/configure	2002-06-24 13:14:28.000000000 -0300
-+++ gcc-3.2.2/configure	2004-11-30 13:34:29.000000000 -0400
+diff -uNr gcc-3.2.2/configure ps2-gcc-3.2.2/configure
+--- gcc-3.2.2/configure	Mon Jun 24 18:14:28 2002
++++ ps2-gcc-3.2.2/configure	Thu Jan 20 00:10:05 2005
 @@ -697,7 +697,7 @@
  if test -f skip-this-dir; then
  	# Perform the same cleanup as the trap handler, minus the "exit 1" of course,
@@ -160,9 +160,9 @@ diff -burN orig.gcc-3.2.2/configure gcc-3.2.2/configure
  
  exit 0
  
-diff -burN orig.gcc-3.2.2/configure.in gcc-3.2.2/configure.in
---- orig.gcc-3.2.2/configure.in	2002-07-08 07:00:57.000000000 -0300
-+++ gcc-3.2.2/configure.in	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/configure.in ps2-gcc-3.2.2/configure.in
+--- gcc-3.2.2/configure.in	Mon Jul  8 12:00:57 2002
++++ ps2-gcc-3.2.2/configure.in	Thu Jan 20 00:10:05 2005
 @@ -980,6 +980,9 @@
    mips*-*-linux*)
      noconfigdirs="$noconfigdirs target-libffi"
@@ -173,9 +173,9 @@ diff -burN orig.gcc-3.2.2/configure.in gcc-3.2.2/configure.in
    mips*-*-*)
      noconfigdirs="$noconfigdirs gprof ${libgcj}"
      ;;
-diff -burN orig.gcc-3.2.2/gcc/Makefile.in gcc-3.2.2/gcc/Makefile.in
---- orig.gcc-3.2.2/gcc/Makefile.in	2003-01-28 17:54:07.000000000 -0400
-+++ gcc-3.2.2/gcc/Makefile.in	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/Makefile.in ps2-gcc-3.2.2/gcc/Makefile.in
+--- gcc-3.2.2/gcc/Makefile.in	Tue Jan 28 22:54:07 2003
++++ ps2-gcc-3.2.2/gcc/Makefile.in	Thu Jan 20 00:10:05 2005
 @@ -987,6 +987,7 @@
  	LIB2FUNCS_ST='$(LIB2FUNCS_ST)' \
  	LIB2ADD='$(LIB2ADD)' \
@@ -184,9 +184,9 @@ diff -burN orig.gcc-3.2.2/gcc/Makefile.in gcc-3.2.2/gcc/Makefile.in
  	LIB2ADDEH='$(LIB2ADDEH)' \
  	LIB2ADDEHDEP='$(LIB2ADDEHDEP)' \
  	FPBIT='$(FPBIT)' \
-diff -burN orig.gcc-3.2.2/gcc/c-common.c gcc-3.2.2/gcc/c-common.c
---- orig.gcc-3.2.2/gcc/c-common.c	2002-12-01 14:19:08.000000000 -0400
-+++ gcc-3.2.2/gcc/c-common.c	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/c-common.c ps2-gcc-3.2.2/gcc/c-common.c
+--- gcc-3.2.2/gcc/c-common.c	Sun Dec  1 19:19:08 2002
++++ ps2-gcc-3.2.2/gcc/c-common.c	Thu Jan 20 00:10:05 2005
 @@ -1336,6 +1336,9 @@
    if (bits <= TYPE_PRECISION (intDI_type_node))
      return unsignedp ? unsigned_intDI_type_node : intDI_type_node;
@@ -258,9 +258,9 @@ diff -burN orig.gcc-3.2.2/gcc/c-common.c gcc-3.2.2/gcc/c-common.c
  
    /* Create the widest literal types.  */
    widest_integer_literal_type_node
-diff -burN orig.gcc-3.2.2/gcc/config/mips/core-mmi.h gcc-3.2.2/gcc/config/mips/core-mmi.h
---- orig.gcc-3.2.2/gcc/config/mips/core-mmi.h	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/core-mmi.h	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/core-mmi.h ps2-gcc-3.2.2/gcc/config/mips/core-mmi.h
+--- gcc-3.2.2/gcc/config/mips/core-mmi.h	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/gcc/config/mips/core-mmi.h	Thu Jan 20 00:10:05 2005
 @@ -0,0 +1,104 @@
 +/*
 + * mmi-intrinsics.h - R5900 MMI compiler intrinsics.
@@ -366,14 +366,14 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/core-mmi.h gcc-3.2.2/gcc/config/mips/c
 +
 +#endif /* __mmi_intrinsics_h */
 +
-diff -burN orig.gcc-3.2.2/gcc/config/mips/core-vumm.h gcc-3.2.2/gcc/config/mips/core-vumm.h
---- orig.gcc-3.2.2/gcc/config/mips/core-vumm.h	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/core-vumm.h	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/core-vumm.h ps2-gcc-3.2.2/gcc/config/mips/core-vumm.h
+--- gcc-3.2.2/gcc/config/mips/core-vumm.h	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/gcc/config/mips/core-vumm.h	Thu Jan 20 00:10:05 2005
 @@ -0,0 +1 @@
 +#define __THIS__IS__A__BLANK__FILE__
-diff -burN orig.gcc-3.2.2/gcc/config/mips/crti5900.asm gcc-3.2.2/gcc/config/mips/crti5900.asm
---- orig.gcc-3.2.2/gcc/config/mips/crti5900.asm	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/crti5900.asm	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/crti5900.asm ps2-gcc-3.2.2/gcc/config/mips/crti5900.asm
+--- gcc-3.2.2/gcc/config/mips/crti5900.asm	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/gcc/config/mips/crti5900.asm	Thu Jan 20 00:10:05 2005
 @@ -0,0 +1,16 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -391,9 +391,9 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/crti5900.asm gcc-3.2.2/gcc/config/mips
 +_fini:
 +	addu    $sp,$sp,-96
 +	sq      $31,80($sp)
-diff -burN orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm gcc-3.2.2/gcc/config/mips/crtn5900.asm
---- orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/crtn5900.asm	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/crtn5900.asm ps2-gcc-3.2.2/gcc/config/mips/crtn5900.asm
+--- gcc-3.2.2/gcc/config/mips/crtn5900.asm	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/gcc/config/mips/crtn5900.asm	Thu Jan 20 00:10:05 2005
 @@ -0,0 +1,12 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -407,9 +407,9 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm gcc-3.2.2/gcc/config/mips
 +	lq	$31,80($sp)
 +	addu	$sp,$sp,96
 +	j	$31
-diff -burN orig.gcc-3.2.2/gcc/config/mips/mips-protos.h gcc-3.2.2/gcc/config/mips/mips-protos.h
---- orig.gcc-3.2.2/gcc/config/mips/mips-protos.h	2002-03-24 04:13:16.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/mips-protos.h	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/mips-protos.h ps2-gcc-3.2.2/gcc/config/mips/mips-protos.h
+--- gcc-3.2.2/gcc/config/mips/mips-protos.h	Sun Mar 24 09:13:16 2002
++++ ps2-gcc-3.2.2/gcc/config/mips/mips-protos.h	Thu Jan 20 00:10:05 2005
 @@ -81,6 +81,7 @@
  extern void		gen_conditional_move PARAMS ((rtx *));
  extern void		mips_gen_conditional_trap PARAMS ((rtx *));
@@ -418,9 +418,9 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/mips-protos.h gcc-3.2.2/gcc/config/mip
  extern int		mips_address_cost PARAMS ((rtx));
  extern void		mips_count_memory_refs PARAMS ((rtx, int));
  extern HOST_WIDE_INT	mips_debugger_offset PARAMS ((rtx, HOST_WIDE_INT));
-diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.c gcc-3.2.2/gcc/config/mips/mips.c
---- orig.gcc-3.2.2/gcc/config/mips/mips.c	2002-07-26 20:23:02.000000000 -0300
-+++ gcc-3.2.2/gcc/config/mips/mips.c	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
+--- gcc-3.2.2/gcc/config/mips/mips.c	Sat Jul 27 01:23:02 2002
++++ ps2-gcc-3.2.2/gcc/config/mips/mips.c	Thu Jan 20 00:10:05 2005
 @@ -51,6 +51,7 @@
  #include "gstab.h"
  #include "hashtab.h"
@@ -1816,9 +1816,9 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.c gcc-3.2.2/gcc/config/mips/mips.
 +  if (TARGET_MIPS5900)
 +    r5900_init_builtins ();
 +}
-diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.h gcc-3.2.2/gcc/config/mips/mips.h
---- orig.gcc-3.2.2/gcc/config/mips/mips.h	2002-04-26 18:32:14.000000000 -0300
-+++ gcc-3.2.2/gcc/config/mips/mips.h	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
+--- gcc-3.2.2/gcc/config/mips/mips.h	Fri Apr 26 23:32:14 2002
++++ ps2-gcc-3.2.2/gcc/config/mips/mips.h	Thu Jan 20 00:10:06 2005
 @@ -48,6 +48,7 @@
    DELAY_NONE,				/* no delay slot */
    DELAY_LOAD,				/* load from memory delay */
@@ -2368,9 +2368,9 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.h gcc-3.2.2/gcc/config/mips/mips.
 +
 +  R5900_BUILTIN_MAX
 +};
-diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.h~ gcc-3.2.2/gcc/config/mips/mips.h~
---- orig.gcc-3.2.2/gcc/config/mips/mips.h~	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/mips.h~	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/mips.h~ ps2-gcc-3.2.2/gcc/config/mips/mips.h~
+--- gcc-3.2.2/gcc/config/mips/mips.h~	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/gcc/config/mips/mips.h~	Thu Jan 20 00:10:06 2005
 @@ -0,0 +1,4960 @@
 +/* Definitions of target machine for GNU compiler.  MIPS version.
 +   Copyright (C) 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998
@@ -7332,9 +7332,9 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.h~ gcc-3.2.2/gcc/config/mips/mips
 +
 +  R5900_BUILTIN_MAX
 +};
-diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.md gcc-3.2.2/gcc/config/mips/mips.md
---- orig.gcc-3.2.2/gcc/config/mips/mips.md	2002-11-11 01:57:14.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/mips.md	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/mips.md ps2-gcc-3.2.2/gcc/config/mips/mips.md
+--- gcc-3.2.2/gcc/config/mips/mips.md	Mon Nov 11 06:57:14 2002
++++ ps2-gcc-3.2.2/gcc/config/mips/mips.md	Thu Jan 20 00:10:06 2005
 @@ -84,11 +84,11 @@
  ;; nop		no operation
  
@@ -8905,10 +8905,10 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.md gcc-3.2.2/gcc/config/mips/mips
 +  "psubuw\\t%0,%1,%2"
 +  [(set_attr "type" "mmi")])
 +
-diff -burN orig.gcc-3.2.2/gcc/config/mips/r5900.h gcc-3.2.2/gcc/config/mips/r5900.h
---- orig.gcc-3.2.2/gcc/config/mips/r5900.h	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/r5900.h	2004-11-30 13:33:49.000000000 -0400
-@@ -0,0 +1,266 @@
+diff -uNr gcc-3.2.2/gcc/config/mips/r5900.h ps2-gcc-3.2.2/gcc/config/mips/r5900.h
+--- gcc-3.2.2/gcc/config/mips/r5900.h	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/gcc/config/mips/r5900.h	Thu Jan 20 00:31:32 2005
+@@ -0,0 +1,283 @@
 +/*
 + * Target machine definitions for the Toshiba r5900.
 + *
@@ -9045,7 +9045,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/r5900.h gcc-3.2.2/gcc/config/mips/r590
 +#define CPP_PREDEFINES "\
 +-D__ELF__ \
 +-Dmips -D_mips -D__mips -D__mips__ \
-+%{!miop: -DR5900 -D_R5900 -D__R5900 } \
++%{!miop: -DR5900 -D_R5900 -D__R5900 -D_EE } \
 +%{miop: -DR3000 -D_3000 -D__3000 } \
 +-DMIPSEL -D_MIPSEL -D__MIPSEL -D__MIPSEL__ \
 +-Acpu(mips) -Amachine(mips) \
@@ -9175,9 +9175,26 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/r5900.h gcc-3.2.2/gcc/config/mips/r590
 +	 > (mips_abi == ABI_EABI ? 2 * UNITS_PER_WORD : 16))))
 +
 +#define EH_FRAME_IN_DATA_SECTION 1
-diff -burN orig.gcc-3.2.2/gcc/config/mips/t-irx gcc-3.2.2/gcc/config/mips/t-irx
---- orig.gcc-3.2.2/gcc/config/mips/t-irx	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/t-irx	2004-11-30 13:33:49.000000000 -0400
++
++/*
++ * This patch is ugly. But it hopefully will put an end to that
++ * 128-bits alignment madness.
++ */
++
++#undef CONSTANT_ALIGNMENT
++#define CONSTANT_ALIGNMENT(EXP, ALIGN)                                  \
++  ((TREE_CODE (EXP) == STRING_CST  || TREE_CODE (EXP) == CONSTRUCTOR)   \
++   && (ALIGN) < 128 ? 128 : (ALIGN))
++
++#undef DATA_ALIGNMENT
++#define DATA_ALIGNMENT(TYPE, ALIGN)                                     \
++  ((((ALIGN) < 128)                                                     \
++    && (TREE_CODE (TYPE) == ARRAY_TYPE                                  \
++        || TREE_CODE (TYPE) == UNION_TYPE                               \
++        || TREE_CODE (TYPE) == RECORD_TYPE)) ? 128 : (ALIGN))
+diff -uNr gcc-3.2.2/gcc/config/mips/t-irx ps2-gcc-3.2.2/gcc/config/mips/t-irx
+--- gcc-3.2.2/gcc/config/mips/t-irx	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/gcc/config/mips/t-irx	Thu Jan 20 00:10:06 2005
 @@ -0,0 +1,77 @@
 +CONFIG2_H	= $(srcdir)/config/mips/ecoff.h
 +
@@ -9256,9 +9273,9 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/t-irx gcc-3.2.2/gcc/config/mips/t-irx
 +explow.o: $(CONFIG2_H)
 +recog.o: $(CONFIG2_H)
 +reload.o: $(CONFIG2_H)
-diff -burN orig.gcc-3.2.2/gcc/config/mips/t-r5900 gcc-3.2.2/gcc/config/mips/t-r5900
---- orig.gcc-3.2.2/gcc/config/mips/t-r5900	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/t-r5900	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config/mips/t-r5900 ps2-gcc-3.2.2/gcc/config/mips/t-r5900
+--- gcc-3.2.2/gcc/config/mips/t-r5900	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/gcc/config/mips/t-r5900	Thu Jan 20 00:10:06 2005
 @@ -0,0 +1,56 @@
 +# Suppress building libgcc1.a, since the MIPS compiler port is complete
 +# and does not need anything from libgcc1.a.
@@ -9316,9 +9333,9 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/t-r5900 gcc-3.2.2/gcc/config/mips/t-r5
 +	floattidf floattisf lshrti3 modti3 multi3 negti2 ucmpti2 udivti3 umodti3
 +
 +LIB2FUNCS_TI = $(TIMODE_FUNCS_LIST)
-diff -burN orig.gcc-3.2.2/gcc/config.gcc gcc-3.2.2/gcc/config.gcc
---- orig.gcc-3.2.2/gcc/config.gcc	2003-01-30 10:03:42.000000000 -0400
-+++ gcc-3.2.2/gcc/config.gcc	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/config.gcc ps2-gcc-3.2.2/gcc/config.gcc
+--- gcc-3.2.2/gcc/config.gcc	Thu Jan 30 15:03:42 2003
++++ ps2-gcc-3.2.2/gcc/config.gcc	Thu Jan 20 00:10:06 2005
 @@ -1553,6 +1553,10 @@
  		*minwg32msv* | *mingw32*)
  			;;
@@ -9378,9 +9395,9 @@ diff -burN orig.gcc-3.2.2/gcc/config.gcc gcc-3.2.2/gcc/config.gcc
  	fi
  fi
 +
-diff -burN orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c gcc-3.2.2/gcc/fixinc/gnu-regex.c
---- orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c	2002-02-26 20:23:56.000000000 -0400
-+++ gcc-3.2.2/gcc/fixinc/gnu-regex.c	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/fixinc/gnu-regex.c ps2-gcc-3.2.2/gcc/fixinc/gnu-regex.c
+--- gcc-3.2.2/gcc/fixinc/gnu-regex.c	Wed Feb 27 01:23:56 2002
++++ ps2-gcc-3.2.2/gcc/fixinc/gnu-regex.c	Thu Jan 20 00:10:06 2005
 @@ -26,6 +26,9 @@
  # include <config.h>
  #endif
@@ -9391,9 +9408,9 @@ diff -burN orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c gcc-3.2.2/gcc/fixinc/gnu-regex.
  /* GCC LOCAL: we don't need NLS here.  */
  #undef ENABLE_NLS
  /* GCC LOCAL: to handle defining alloca.  */
-diff -burN orig.gcc-3.2.2/gcc/libgcc2-timode.c gcc-3.2.2/gcc/libgcc2-timode.c
---- orig.gcc-3.2.2/gcc/libgcc2-timode.c	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/libgcc2-timode.c	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/libgcc2-timode.c ps2-gcc-3.2.2/gcc/libgcc2-timode.c
+--- gcc-3.2.2/gcc/libgcc2-timode.c	Thu Jan  1 01:00:00 1970
++++ ps2-gcc-3.2.2/gcc/libgcc2-timode.c	Thu Jan 20 00:10:06 2005
 @@ -0,0 +1,792 @@
 +/* GCC rutime support routines for TI mode */
 +
@@ -10187,9 +10204,9 @@ diff -burN orig.gcc-3.2.2/gcc/libgcc2-timode.c gcc-3.2.2/gcc/libgcc2-timode.c
 +  return (SFtype) df;
 +}
 +#endif
-diff -burN orig.gcc-3.2.2/gcc/mklibgcc.in gcc-3.2.2/gcc/mklibgcc.in
---- orig.gcc-3.2.2/gcc/mklibgcc.in	2003-01-28 17:57:40.000000000 -0400
-+++ gcc-3.2.2/gcc/mklibgcc.in	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/mklibgcc.in ps2-gcc-3.2.2/gcc/mklibgcc.in
+--- gcc-3.2.2/gcc/mklibgcc.in	Tue Jan 28 22:57:40 2003
++++ ps2-gcc-3.2.2/gcc/mklibgcc.in	Thu Jan 20 00:10:06 2005
 @@ -232,6 +232,21 @@
    libgcc2_st_objs="$libgcc2_st_objs ${oname}${objext}"
  done
@@ -10212,9 +10229,9 @@ diff -burN orig.gcc-3.2.2/gcc/mklibgcc.in gcc-3.2.2/gcc/mklibgcc.in
  # SHLIB_MKMAP
  # SHLIB_MKMAP_OPTS
  # SHLIB_MAPFILES
-diff -burN orig.gcc-3.2.2/gcc/toplev.c gcc-3.2.2/gcc/toplev.c
---- orig.gcc-3.2.2/gcc/toplev.c	2002-11-01 20:57:23.000000000 -0400
-+++ gcc-3.2.2/gcc/toplev.c	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/gcc/toplev.c ps2-gcc-3.2.2/gcc/toplev.c
+--- gcc-3.2.2/gcc/toplev.c	Sat Nov  2 01:57:23 2002
++++ ps2-gcc-3.2.2/gcc/toplev.c	Thu Jan 20 00:10:06 2005
 @@ -3469,6 +3469,18 @@
  
    convert_to_eh_region_ranges ();
@@ -10234,9 +10251,9 @@ diff -burN orig.gcc-3.2.2/gcc/toplev.c gcc-3.2.2/gcc/toplev.c
    /* Shorten branches.  */
    timevar_push (TV_SHORTEN_BRANCH);
    shorten_branches (get_insns ());
-diff -burN orig.gcc-3.2.2/libstdc++-v3/configure.target gcc-3.2.2/libstdc++-v3/configure.target
---- orig.gcc-3.2.2/libstdc++-v3/configure.target	2002-09-06 15:32:08.000000000 -0300
-+++ gcc-3.2.2/libstdc++-v3/configure.target	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/libstdc++-v3/configure.target ps2-gcc-3.2.2/libstdc++-v3/configure.target
+--- gcc-3.2.2/libstdc++-v3/configure.target	Fri Sep  6 20:32:08 2002
++++ ps2-gcc-3.2.2/libstdc++-v3/configure.target	Thu Jan 20 00:10:06 2005
 @@ -55,6 +55,9 @@
    m68k | m680[246]0)
      cpu_include_dir="config/cpu/m68k"
@@ -10247,9 +10264,9 @@ diff -burN orig.gcc-3.2.2/libstdc++-v3/configure.target gcc-3.2.2/libstdc++-v3/c
    powerpc | rs6000)
      cpu_include_dir="config/cpu/powerpc"
      ;;
-diff -burN orig.gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc
---- orig.gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	2002-06-28 05:22:38.000000000 -0300
-+++ gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	2004-11-30 13:33:49.000000000 -0400
+diff -uNr gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc ps2-gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc
+--- gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	Fri Jun 28 10:22:38 2002
++++ ps2-gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	Thu Jan 20 00:10:06 2005
 @@ -46,6 +46,6 @@
  extern "C" void
  __cxa_pure_virtual (void)

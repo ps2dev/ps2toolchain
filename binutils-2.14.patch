@@ -1,6 +1,6 @@
-diff -burN orig.binutils-2.14/bfd/archures.c binutils-2.14/bfd/archures.c
---- orig.binutils-2.14/bfd/archures.c	2003-04-24 09:36:06.000000000 -0300
-+++ binutils-2.14/bfd/archures.c	2004-11-27 14:22:06.000000000 -0400
+diff -uNr binutils-2.14/bfd/archures.c ps2-binutils-2.14/bfd/archures.c
+--- binutils-2.14/bfd/archures.c	Thu Apr 24 14:36:06 2003
++++ ps2-binutils-2.14/bfd/archures.c	Thu Jan 20 00:56:48 2005
 @@ -137,6 +137,7 @@
  .#define bfd_mach_mips5000		5000
  .#define bfd_mach_mips5400		5400
@@ -21,9 +21,9 @@ diff -burN orig.binutils-2.14/bfd/archures.c binutils-2.14/bfd/archures.c
  .  bfd_arch_i386,      {* Intel 386 *}
  .#define bfd_mach_i386_i386 1
  .#define bfd_mach_i386_i8086 2
-diff -burN orig.binutils-2.14/bfd/bfd-in2.h binutils-2.14/bfd/bfd-in2.h
---- orig.binutils-2.14/bfd/bfd-in2.h	2003-05-03 13:06:57.000000000 -0300
-+++ binutils-2.14/bfd/bfd-in2.h	2004-11-27 14:22:06.000000000 -0400
+diff -uNr binutils-2.14/bfd/bfd-in2.h ps2-binutils-2.14/bfd/bfd-in2.h
+--- binutils-2.14/bfd/bfd-in2.h	Sat May  3 18:06:57 2003
++++ ps2-binutils-2.14/bfd/bfd-in2.h	Thu Jan 20 00:56:48 2005
 @@ -1605,6 +1605,7 @@
  #define bfd_mach_mips5000              5000
  #define bfd_mach_mips5400              5400
@@ -74,9 +74,9 @@ diff -burN orig.binutils-2.14/bfd/bfd-in2.h binutils-2.14/bfd/bfd-in2.h
  
  /* i386/elf relocations  */
    BFD_RELOC_386_GOT32,
-diff -burN orig.binutils-2.14/bfd/config.bfd binutils-2.14/bfd/config.bfd
---- orig.binutils-2.14/bfd/config.bfd	2003-06-02 17:35:20.000000000 -0300
-+++ binutils-2.14/bfd/config.bfd	2004-11-27 14:22:06.000000000 -0400
+diff -uNr binutils-2.14/bfd/config.bfd ps2-binutils-2.14/bfd/config.bfd
+--- binutils-2.14/bfd/config.bfd	Mon Jun  2 22:35:20 2003
++++ ps2-binutils-2.14/bfd/config.bfd	Thu Jan 20 00:56:48 2005
 @@ -63,6 +63,9 @@
  *)	         targ_archs=bfd_${targ_cpu}_arch ;;
  esac
@@ -98,20 +98,20 @@ diff -burN orig.binutils-2.14/bfd/config.bfd binutils-2.14/bfd/config.bfd
  
    h8300*-*-elf)
      targ_defvec=bfd_elf32_h8300_vec
-@@ -781,6 +788,10 @@
+@@ -780,6 +787,10 @@
+   mips*-*-elf* | mips*-*-rtems* | mips*-*-vxworks*)
      targ_defvec=bfd_elf32_bigmips_vec
      targ_selvecs="bfd_elf32_littlemips_vec bfd_elf64_bigmips_vec bfd_elf64_littlemips_vec"
-     ;;
++    ;;
 +  mips*-*-irx*)
 +    targ_defvec=bfd_elf32_littlemips_vec
 +    targ_selvecs="bfd_elf32_bigmips_vec bfd_elf64_bigmips_vec bfd_elf64_littlemips_vec"
-+    ;;
+     ;;
    mips*-*-none)
      targ_defvec=bfd_elf32_bigmips_vec
-     targ_selvecs="bfd_elf32_littlemips_vec bfd_elf64_bigmips_vec bfd_elf64_littlemips_vec"
-diff -burN orig.binutils-2.14/bfd/configure binutils-2.14/bfd/configure
---- orig.binutils-2.14/bfd/configure	2003-06-12 11:25:46.000000000 -0300
-+++ binutils-2.14/bfd/configure	2004-11-27 14:22:06.000000000 -0400
+diff -uNr binutils-2.14/bfd/configure ps2-binutils-2.14/bfd/configure
+--- binutils-2.14/bfd/configure	Thu Jun 12 16:25:46 2003
++++ ps2-binutils-2.14/bfd/configure	Thu Jan 20 00:56:48 2005
 @@ -6046,6 +6046,8 @@
  done
  selvecs="$f"
@@ -121,9 +121,9 @@ diff -burN orig.binutils-2.14/bfd/configure binutils-2.14/bfd/configure
  
  # uniq the associated vectors in all the configured targets.
  f=""
-diff -burN orig.binutils-2.14/bfd/configure.in binutils-2.14/bfd/configure.in
---- orig.binutils-2.14/bfd/configure.in	2003-06-12 11:25:46.000000000 -0300
-+++ binutils-2.14/bfd/configure.in	2004-11-27 14:22:06.000000000 -0400
+diff -uNr binutils-2.14/bfd/configure.in ps2-binutils-2.14/bfd/configure.in
+--- binutils-2.14/bfd/configure.in	Thu Jun 12 16:25:46 2003
++++ ps2-binutils-2.14/bfd/configure.in	Thu Jan 20 00:56:48 2005
 @@ -508,6 +508,8 @@
  done
  selvecs="$f"
@@ -133,9 +133,9 @@ diff -burN orig.binutils-2.14/bfd/configure.in binutils-2.14/bfd/configure.in
  
  # uniq the associated vectors in all the configured targets.
  f=""
-diff -burN orig.binutils-2.14/bfd/cpu-mips.c binutils-2.14/bfd/cpu-mips.c
---- orig.binutils-2.14/bfd/cpu-mips.c	2002-12-31 03:29:25.000000000 -0400
-+++ binutils-2.14/bfd/cpu-mips.c	2004-11-27 14:22:06.000000000 -0400
+diff -uNr binutils-2.14/bfd/cpu-mips.c ps2-binutils-2.14/bfd/cpu-mips.c
+--- binutils-2.14/bfd/cpu-mips.c	Tue Dec 31 08:29:25 2002
++++ ps2-binutils-2.14/bfd/cpu-mips.c	Thu Jan 20 00:56:48 2005
 @@ -75,6 +75,7 @@
    I_mips5000,
    I_mips5400,
@@ -174,9 +174,9 @@ diff -burN orig.binutils-2.14/bfd/cpu-mips.c binutils-2.14/bfd/cpu-mips.c
    N (64, 64, bfd_mach_mips_sb1, "mips:sb1",       FALSE, 0),
  };
  
-diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
---- orig.binutils-2.14/bfd/elf.c	2003-06-02 17:35:20.000000000 -0300
-+++ binutils-2.14/bfd/elf.c	2004-11-27 14:22:06.000000000 -0400
+diff -uNr binutils-2.14/bfd/elf.c ps2-binutils-2.14/bfd/elf.c
+--- binutils-2.14/bfd/elf.c	Mon Jun  2 22:35:20 2003
++++ ps2-binutils-2.14/bfd/elf.c	Thu Jan 20 00:56:48 2005
 @@ -2214,7 +2214,7 @@
    newsect->_raw_size = hdr->p_filesz;
    newsect->filepos = hdr->p_offset;
@@ -286,9 +286,9 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  	{
  	  BFD_ASSERT (! m->includes_filehdr && ! m->includes_phdrs);
  	  p->p_offset = m->sections[0]->filepos;
-diff -burN orig.binutils-2.14/bfd/elf32-mips.c binutils-2.14/bfd/elf32-mips.c
---- orig.binutils-2.14/bfd/elf32-mips.c	2003-04-08 23:55:40.000000000 -0300
-+++ binutils-2.14/bfd/elf32-mips.c	2004-11-27 14:22:06.000000000 -0400
+diff -uNr binutils-2.14/bfd/elf32-mips.c ps2-binutils-2.14/bfd/elf32-mips.c
+--- binutils-2.14/bfd/elf32-mips.c	Wed Apr  9 04:55:40 2003
++++ ps2-binutils-2.14/bfd/elf32-mips.c	Thu Jan 20 00:56:48 2005
 @@ -75,6 +75,8 @@
    PARAMS ((bfd *, arelent *, asymbol *, PTR, asection *, bfd *, char **));
  static bfd_reloc_status_type mips16_gprel_reloc
@@ -473,9 +473,9 @@ diff -burN orig.binutils-2.14/bfd/elf32-mips.c binutils-2.14/bfd/elf32-mips.c
      case R_MIPS_GNU_VTINHERIT:
        return &elf_mips_gnu_vtinherit_howto;
      case R_MIPS_GNU_VTENTRY:
-diff -burN orig.binutils-2.14/bfd/elflink.h binutils-2.14/bfd/elflink.h
---- orig.binutils-2.14/bfd/elflink.h	2003-06-02 17:35:21.000000000 -0300
-+++ binutils-2.14/bfd/elflink.h	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/bfd/elflink.h ps2-binutils-2.14/bfd/elflink.h
+--- binutils-2.14/bfd/elflink.h	Mon Jun  2 22:35:21 2003
++++ ps2-binutils-2.14/bfd/elflink.h	Thu Jan 20 00:56:48 2005
 @@ -7238,9 +7238,18 @@
  			 elf_link_output_extsym that this symbol is
  			 used by a reloc.  */
@@ -506,9 +506,9 @@ diff -burN orig.binutils-2.14/bfd/elflink.h binutils-2.14/bfd/elflink.h
  			}
  
  		      /* Adjust the addend according to where the
-diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
---- orig.binutils-2.14/bfd/elfxx-mips.c	2003-06-02 17:35:22.000000000 -0300
-+++ binutils-2.14/bfd/elfxx-mips.c	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/bfd/elfxx-mips.c ps2-binutils-2.14/bfd/elfxx-mips.c
+--- binutils-2.14/bfd/elfxx-mips.c	Mon Jun  2 22:35:22 2003
++++ ps2-binutils-2.14/bfd/elfxx-mips.c	Thu Jan 20 00:56:48 2005
 @@ -4064,6 +4064,9 @@
      case E_MIPS_MACH_5500:
        return bfd_mach_mips5500;
@@ -633,9 +633,9 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
        ok = FALSE;
      }
    else if (!mips_mach_extends_p (bfd_get_mach (ibfd), bfd_get_mach (obfd)))
-diff -burN orig.binutils-2.14/bfd/libbfd.h binutils-2.14/bfd/libbfd.h
---- orig.binutils-2.14/bfd/libbfd.h	2003-04-01 11:50:27.000000000 -0400
-+++ binutils-2.14/bfd/libbfd.h	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/bfd/libbfd.h ps2-binutils-2.14/bfd/libbfd.h
+--- binutils-2.14/bfd/libbfd.h	Tue Apr  1 17:50:27 2003
++++ ps2-binutils-2.14/bfd/libbfd.h	Thu Jan 20 00:56:48 2005
 @@ -872,6 +872,7 @@
    "BFD_RELOC_MIPS_REL16",
    "BFD_RELOC_MIPS_RELGOT",
@@ -655,9 +655,9 @@ diff -burN orig.binutils-2.14/bfd/libbfd.h binutils-2.14/bfd/libbfd.h
  
    "BFD_RELOC_386_GOT32",
    "BFD_RELOC_386_PLT32",
-diff -burN orig.binutils-2.14/bfd/reloc.c binutils-2.14/bfd/reloc.c
---- orig.binutils-2.14/bfd/reloc.c	2003-04-23 18:09:02.000000000 -0300
-+++ binutils-2.14/bfd/reloc.c	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/bfd/reloc.c ps2-binutils-2.14/bfd/reloc.c
+--- binutils-2.14/bfd/reloc.c	Wed Apr 23 23:09:02 2003
++++ ps2-binutils-2.14/bfd/reloc.c	Thu Jan 20 00:56:48 2005
 @@ -2128,6 +2128,8 @@
    BFD_RELOC_MIPS_RELGOT
  ENUMX
@@ -695,9 +695,9 @@ diff -burN orig.binutils-2.14/bfd/reloc.c binutils-2.14/bfd/reloc.c
  
  ENUM
    BFD_RELOC_386_GOT32
-diff -burN orig.binutils-2.14/config.sub binutils-2.14/config.sub
---- orig.binutils-2.14/config.sub	2003-06-02 17:35:43.000000000 -0300
-+++ binutils-2.14/config.sub	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/config.sub ps2-binutils-2.14/config.sub
+--- binutils-2.14/config.sub	Mon Jun  2 22:35:43 2003
++++ ps2-binutils-2.14/config.sub	Thu Jan 20 00:56:48 2005
 @@ -250,6 +250,7 @@
  	| mipsisa64sb1 | mipsisa64sb1el \
  	| mipsisa64sr71k | mipsisa64sr71kel \
@@ -757,9 +757,9 @@ diff -burN orig.binutils-2.14/config.sub binutils-2.14/config.sub
  	# Remember, each alternative MUST END IN *, to match a version number.
  		;;
  	-qnx*)
-diff -burN orig.binutils-2.14/configure binutils-2.14/configure
---- orig.binutils-2.14/configure	2003-06-02 17:35:43.000000000 -0300
-+++ binutils-2.14/configure	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/configure ps2-binutils-2.14/configure
+--- binutils-2.14/configure	Mon Jun  2 22:35:43 2003
++++ ps2-binutils-2.14/configure	Thu Jan 20 00:56:48 2005
 @@ -1116,6 +1116,9 @@
    d30v-*-*)
      noconfigdirs="$noconfigdirs ${libgcj}"
@@ -770,9 +770,9 @@ diff -burN orig.binutils-2.14/configure binutils-2.14/configure
    fr30-*-elf*)
      noconfigdirs="$noconfigdirs ${libgcj}"
      ;;
-diff -burN orig.binutils-2.14/configure.in binutils-2.14/configure.in
---- orig.binutils-2.14/configure.in	2003-06-12 11:33:14.000000000 -0300
-+++ binutils-2.14/configure.in	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/configure.in ps2-binutils-2.14/configure.in
+--- binutils-2.14/configure.in	Thu Jun 12 16:33:14 2003
++++ ps2-binutils-2.14/configure.in	Thu Jan 20 00:56:48 2005
 @@ -456,6 +456,9 @@
    d30v-*-*)
      noconfigdirs="$noconfigdirs ${libgcj}"
@@ -783,9 +783,9 @@ diff -burN orig.binutils-2.14/configure.in binutils-2.14/configure.in
    fr30-*-elf*)
      noconfigdirs="$noconfigdirs ${libgcj}"
      ;;
-diff -burN orig.binutils-2.14/gas/config/tc-dvp.c binutils-2.14/gas/config/tc-dvp.c
---- orig.binutils-2.14/gas/config/tc-dvp.c	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/gas/config/tc-dvp.c	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/gas/config/tc-dvp.c ps2-binutils-2.14/gas/config/tc-dvp.c
+--- binutils-2.14/gas/config/tc-dvp.c	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/gas/config/tc-dvp.c	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,3436 @@
 +/* tc-dvp.c -- Assembler for the DVP
 +   Copyright (C) 1997, 1998 Free Software Foundation.
@@ -4223,9 +4223,9 @@ diff -burN orig.binutils-2.14/gas/config/tc-dvp.c binutils-2.14/gas/config/tc-dv
 +{
 +  do_s_func (end_p, VU_LABEL_PREFIX);
 +}
-diff -burN orig.binutils-2.14/gas/config/tc-dvp.h binutils-2.14/gas/config/tc-dvp.h
---- orig.binutils-2.14/gas/config/tc-dvp.h	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/gas/config/tc-dvp.h	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/gas/config/tc-dvp.h ps2-binutils-2.14/gas/config/tc-dvp.h
+--- binutils-2.14/gas/config/tc-dvp.h	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/gas/config/tc-dvp.h	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,105 @@
 +/* tc-dvp.h -- Header file for tc-dvp.c.
 +   Copyright (C) 1997, 1998 Free Software Foundation, Inc.
@@ -4332,9 +4332,9 @@ diff -burN orig.binutils-2.14/gas/config/tc-dvp.h binutils-2.14/gas/config/tc-dv
 +  { ".vubss",	SHT_NOBITS,	SHF_ALLOC + SHF_WRITE		}, \
 +  { ".vudata",	SHT_PROGBITS,	SHF_ALLOC + SHF_WRITE		}, \
 +  { ".vutext",	SHT_PROGBITS,	SHF_ALLOC + SHF_EXECINSTR	},
-diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-mips.c
---- orig.binutils-2.14/gas/config/tc-mips.c	2003-06-02 17:35:25.000000000 -0300
-+++ binutils-2.14/gas/config/tc-mips.c	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/gas/config/tc-mips.c ps2-binutils-2.14/gas/config/tc-mips.c
+--- binutils-2.14/gas/config/tc-mips.c	Mon Jun  2 22:35:25 2003
++++ ps2-binutils-2.14/gas/config/tc-mips.c	Thu Jan 20 00:56:48 2005
 @@ -177,6 +177,10 @@
       is passed but can changed if the assembler code uses .set mipsN.  */
    int gp32;
@@ -5466,9 +5466,9 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
    fputc ('\n', stream);
  
    fprintf (stream, _("\
-diff -burN orig.binutils-2.14/gas/configure binutils-2.14/gas/configure
---- orig.binutils-2.14/gas/configure	2003-06-02 17:35:23.000000000 -0300
-+++ binutils-2.14/gas/configure	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/gas/configure ps2-binutils-2.14/gas/configure
+--- binutils-2.14/gas/configure	Mon Jun  2 22:35:23 2003
++++ ps2-binutils-2.14/gas/configure	Thu Jan 20 00:56:48 2005
 @@ -2338,6 +2338,7 @@
        m5200)		cpu_type=m68k ;;
        m8*)		cpu_type=m88k ;;
@@ -5502,9 +5502,9 @@ diff -burN orig.binutils-2.14/gas/configure binutils-2.14/gas/configure
  
        mmix-*-*)				fmt=elf ;;
        mn10200-*-*)			fmt=elf ;;
-diff -burN orig.binutils-2.14/gas/configure.in binutils-2.14/gas/configure.in
---- orig.binutils-2.14/gas/configure.in	2003-06-02 17:35:23.000000000 -0300
-+++ binutils-2.14/gas/configure.in	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/gas/configure.in ps2-binutils-2.14/gas/configure.in
+--- binutils-2.14/gas/configure.in	Mon Jun  2 22:35:23 2003
++++ ps2-binutils-2.14/gas/configure.in	Thu Jan 20 00:56:48 2005
 @@ -132,6 +132,7 @@
        m5200)		cpu_type=m68k ;;
        m8*)		cpu_type=m88k ;;
@@ -5530,9 +5530,9 @@ diff -burN orig.binutils-2.14/gas/configure.in binutils-2.14/gas/configure.in
  
        mmix-*-*)				fmt=elf ;;
        mn10200-*-*)			fmt=elf ;;
-diff -burN orig.binutils-2.14/include/dis-asm.h binutils-2.14/include/dis-asm.h
---- orig.binutils-2.14/include/dis-asm.h	2003-04-01 11:50:30.000000000 -0400
-+++ binutils-2.14/include/dis-asm.h	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/include/dis-asm.h ps2-binutils-2.14/include/dis-asm.h
+--- binutils-2.14/include/dis-asm.h	Tue Apr  1 17:50:30 2003
++++ ps2-binutils-2.14/include/dis-asm.h	Thu Jan 20 00:56:48 2005
 @@ -242,6 +242,8 @@
  extern int print_insn_sh64x_media	PARAMS ((bfd_vma, disassemble_info *));
  extern int print_insn_frv		PARAMS ((bfd_vma, disassemble_info *));
@@ -5542,9 +5542,9 @@ diff -burN orig.binutils-2.14/include/dis-asm.h binutils-2.14/include/dis-asm.h
  
  extern disassembler_ftype arc_get_disassembler PARAMS ((void *));
  extern disassembler_ftype cris_get_disassembler PARAMS ((bfd *));
-diff -burN orig.binutils-2.14/include/elf/common.h binutils-2.14/include/elf/common.h
---- orig.binutils-2.14/include/elf/common.h	2003-04-23 18:09:04.000000000 -0300
-+++ binutils-2.14/include/elf/common.h	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/include/elf/common.h ps2-binutils-2.14/include/elf/common.h
+--- binutils-2.14/include/elf/common.h	Wed Apr 23 23:09:04 2003
++++ ps2-binutils-2.14/include/elf/common.h	Thu Jan 20 00:56:48 2005
 @@ -92,6 +92,7 @@
  #define ET_LOOS		0xFE00	/* Operating system-specific */
  #define ET_HIOS		0xFEFF	/* Operating system-specific */
@@ -5561,9 +5561,9 @@ diff -burN orig.binutils-2.14/include/elf/common.h binutils-2.14/include/elf/com
  
  #define PT_GNU_EH_FRAME	(PT_LOOS + 0x474e550)
  
-diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.h
---- orig.binutils-2.14/include/elf/mips.h	2003-01-27 20:01:08.000000000 -0400
-+++ binutils-2.14/include/elf/mips.h	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/include/elf/mips.h ps2-binutils-2.14/include/elf/mips.h
+--- binutils-2.14/include/elf/mips.h	Tue Jan 28 01:01:08 2003
++++ ps2-binutils-2.14/include/elf/mips.h	Thu Jan 20 00:56:48 2005
 @@ -76,6 +76,13 @@
    /* These relocs are used for the mips16.  */
    RELOC_NUMBER (R_MIPS16_26, 100)
@@ -5632,10 +5632,11 @@ diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.
  /* This value is used for a mips16 .text symbol.  */
  #define STO_MIPS16		0xf0
  
-@@ -930,6 +963,31 @@
+@@ -929,6 +962,31 @@
+   PARAMS ((bfd *, const Elf64_External_RegInfo *, Elf64_Internal_RegInfo *));
  extern void bfd_mips_elf64_swap_reginfo_out
    PARAMS ((bfd *, const Elf64_Internal_RegInfo *, Elf64_External_RegInfo *));
- 
++
 +/* The vu overlay table is an array of this.  */
 +
 +typedef struct
@@ -5660,13 +5661,12 @@ diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.
 +extern void bfd_dvp_elf32_swap_overlay_out
 +  PARAMS ((bfd *, const Elf32_Dvp_Internal_Overlay *,
 +           Elf32_Dvp_External_Overlay *));
-+
+ 
  /* Masks for the info work of an ODK_EXCEPTIONS descriptor.  */
  #define OEX_FPU_MIN	0x1f	/* FPEs which must be enabled.  */
- #define OEX_FPU_MAX	0x1f00	/* FPEs which may be enabled.  */
-diff -burN orig.binutils-2.14/include/opcode/dvp.h binutils-2.14/include/opcode/dvp.h
---- orig.binutils-2.14/include/opcode/dvp.h	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/include/opcode/dvp.h	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/include/opcode/dvp.h ps2-binutils-2.14/include/opcode/dvp.h
+--- binutils-2.14/include/opcode/dvp.h	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/include/opcode/dvp.h	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,454 @@
 +/* Opcode table for the DVP.
 +   Copyright 1998 Free Software Foundation, Inc.
@@ -6122,9 +6122,9 @@ diff -burN orig.binutils-2.14/include/opcode/dvp.h binutils-2.14/include/opcode/
 +void dvp_opcode_init_tables PARAMS ((int));
 +void dvp_opcode_init_parse PARAMS ((void));
 +void dvp_opcode_init_print PARAMS ((void));
-diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode/mips.h
---- orig.binutils-2.14/include/opcode/mips.h	2003-04-08 21:12:24.000000000 -0300
-+++ binutils-2.14/include/opcode/mips.h	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/include/opcode/mips.h ps2-binutils-2.14/include/opcode/mips.h
+--- binutils-2.14/include/opcode/mips.h	Wed Apr  9 02:12:24 2003
++++ ps2-binutils-2.14/include/opcode/mips.h	Thu Jan 20 00:56:48 2005
 @@ -164,6 +164,24 @@
  #define	OP_OP_SDC2		0x3e
  #define	OP_OP_SDC3		0x3f	/* a.k.a. sd */
@@ -6243,9 +6243,9 @@ diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode
       || 0)	/* Please keep this term for easier source merging.  */
  
  /* This is a list of macro expanded instructions.
-diff -burN orig.binutils-2.14/ld/Makefile.am binutils-2.14/ld/Makefile.am
---- orig.binutils-2.14/ld/Makefile.am	2003-04-24 09:36:07.000000000 -0300
-+++ binutils-2.14/ld/Makefile.am	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/ld/Makefile.am ps2-binutils-2.14/ld/Makefile.am
+--- binutils-2.14/ld/Makefile.am	Thu Apr 24 14:36:07 2003
++++ ps2-binutils-2.14/ld/Makefile.am	Thu Jan 20 00:56:48 2005
 @@ -154,6 +154,7 @@
  	eelf32_i860.o \
  	eelf32_sparc.o \
@@ -6282,9 +6282,9 @@ diff -burN orig.binutils-2.14/ld/Makefile.am binutils-2.14/ld/Makefile.am
  emipslit.c:  $(srcdir)/emulparams/mipslit.sh \
    $(srcdir)/emultempl/generic.em $(srcdir)/scripttempl/mips.sc ${GEN_DEPENDS}
  	${GENSCRIPTS} mipslit "$(tdir_mipslit)"
-diff -burN orig.binutils-2.14/ld/Makefile.in binutils-2.14/ld/Makefile.in
---- orig.binutils-2.14/ld/Makefile.in	2003-04-24 09:36:07.000000000 -0300
-+++ binutils-2.14/ld/Makefile.in	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/ld/Makefile.in ps2-binutils-2.14/ld/Makefile.in
+--- binutils-2.14/ld/Makefile.in	Thu Apr 24 14:36:07 2003
++++ ps2-binutils-2.14/ld/Makefile.in	Thu Jan 20 00:56:48 2005
 @@ -283,6 +283,7 @@
  	eelf32iq2000.o \
  	eelf32iq10.o \
@@ -6321,9 +6321,9 @@ diff -burN orig.binutils-2.14/ld/Makefile.in binutils-2.14/ld/Makefile.in
  emipslit.c:  $(srcdir)/emulparams/mipslit.sh \
    $(srcdir)/emultempl/generic.em $(srcdir)/scripttempl/mips.sc ${GEN_DEPENDS}
  	${GENSCRIPTS} mipslit "$(tdir_mipslit)"
-diff -burN orig.binutils-2.14/ld/configure.tgt binutils-2.14/ld/configure.tgt
---- orig.binutils-2.14/ld/configure.tgt	2003-06-12 11:25:52.000000000 -0300
-+++ binutils-2.14/ld/configure.tgt	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/ld/configure.tgt ps2-binutils-2.14/ld/configure.tgt
+--- binutils-2.14/ld/configure.tgt	Thu Jun 12 16:25:52 2003
++++ ps2-binutils-2.14/ld/configure.tgt	Thu Jan 20 00:56:48 2005
 @@ -404,8 +404,15 @@
  mips*vr4100-*-elf*)	targ_emul=elf32b4300 ;;
  mips*vr5000el-*-elf*)	targ_emul=elf32l4300 ;;
@@ -6340,9 +6340,9 @@ diff -burN orig.binutils-2.14/ld/configure.tgt binutils-2.14/ld/configure.tgt
  mips*el-*-rtems*)	targ_emul=elf32elmip ;;
  mips*-*-rtems*)		targ_emul=elf32ebmip ;;
  mips*el-*-vxworks*)	targ_emul=elf32elmip ;;
-diff -burN orig.binutils-2.14/ld/emulparams/elf32l5900.sh binutils-2.14/ld/emulparams/elf32l5900.sh
---- orig.binutils-2.14/ld/emulparams/elf32l5900.sh	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/ld/emulparams/elf32l5900.sh	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/ld/emulparams/elf32l5900.sh ps2-binutils-2.14/ld/emulparams/elf32l5900.sh
+--- binutils-2.14/ld/emulparams/elf32l5900.sh	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/ld/emulparams/elf32l5900.sh	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,29 @@
 +SCRIPT_NAME=elf
 +OUTPUT_FORMAT="elf32-littlemips"
@@ -6373,9 +6373,9 @@ diff -burN orig.binutils-2.14/ld/emulparams/elf32l5900.sh binutils-2.14/ld/emulp
 +GENERATE_SHLIB_SCRIPT=yes
 +DYNAMIC_LINK=FALSE
 +EMBEDDED=yes
-diff -burN orig.binutils-2.14/ld/emulparams/mipsirx.sh binutils-2.14/ld/emulparams/mipsirx.sh
---- orig.binutils-2.14/ld/emulparams/mipsirx.sh	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/ld/emulparams/mipsirx.sh	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/ld/emulparams/mipsirx.sh ps2-binutils-2.14/ld/emulparams/mipsirx.sh
+--- binutils-2.14/ld/emulparams/mipsirx.sh	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/ld/emulparams/mipsirx.sh	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,8 @@
 +SCRIPT_NAME=irx
 +OUTPUT_FORMAT="elf32-littlemips"
@@ -6385,9 +6385,9 @@ diff -burN orig.binutils-2.14/ld/emulparams/mipsirx.sh binutils-2.14/ld/emulpara
 +DATA_ADDR=.
 +TEMPLATE_NAME=irx
 +
-diff -burN orig.binutils-2.14/ld/emultempl/irx.em binutils-2.14/ld/emultempl/irx.em
---- orig.binutils-2.14/ld/emultempl/irx.em	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/ld/emultempl/irx.em	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/ld/emultempl/irx.em ps2-binutils-2.14/ld/emultempl/irx.em
+--- binutils-2.14/ld/emultempl/irx.em	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/ld/emultempl/irx.em	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,560 @@
 +# This shell script emits a C file. -*- C -*-
 +# It does some substitutions.
@@ -6949,9 +6949,9 @@ diff -burN orig.binutils-2.14/ld/emultempl/irx.em binutils-2.14/ld/emultempl/irx
 +  NULL
 +};
 +EOF
-diff -burN orig.binutils-2.14/ld/scripttempl/irx.sc binutils-2.14/ld/scripttempl/irx.sc
---- orig.binutils-2.14/ld/scripttempl/irx.sc	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/ld/scripttempl/irx.sc	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/ld/scripttempl/irx.sc ps2-binutils-2.14/ld/scripttempl/irx.sc
+--- binutils-2.14/ld/scripttempl/irx.sc	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/ld/scripttempl/irx.sc	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,121 @@
 +# Link scripts for PlayStation 2 IRXs.
 +
@@ -7074,9 +7074,9 @@ diff -burN orig.binutils-2.14/ld/scripttempl/irx.sc binutils-2.14/ld/scripttempl
 +}
 +
 +EOF
-diff -burN orig.binutils-2.14/opcodes/configure binutils-2.14/opcodes/configure
---- orig.binutils-2.14/opcodes/configure	2003-06-02 17:35:17.000000000 -0300
-+++ binutils-2.14/opcodes/configure	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/opcodes/configure ps2-binutils-2.14/opcodes/configure
+--- binutils-2.14/opcodes/configure	Mon Jun  2 22:35:17 2003
++++ ps2-binutils-2.14/opcodes/configure	Thu Jan 20 00:56:48 2005
 @@ -4671,6 +4671,7 @@
          bfd_tic4x_arch)         ta="$ta tic4x-dis.lo" ;;
  	bfd_tic54x_arch)	ta="$ta tic54x-dis.lo tic54x-opc.lo" ;;
@@ -7085,9 +7085,9 @@ diff -burN orig.binutils-2.14/opcodes/configure binutils-2.14/opcodes/configure
  	bfd_v850_arch)		ta="$ta v850-opc.lo v850-dis.lo" ;;
  	bfd_v850e_arch)		ta="$ta v850-opc.lo v850-dis.lo" ;;
  	bfd_v850ea_arch)	ta="$ta v850-opc.lo v850-dis.lo" ;;
-diff -burN orig.binutils-2.14/opcodes/configure.in binutils-2.14/opcodes/configure.in
---- orig.binutils-2.14/opcodes/configure.in	2003-06-02 17:35:17.000000000 -0300
-+++ binutils-2.14/opcodes/configure.in	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/opcodes/configure.in ps2-binutils-2.14/opcodes/configure.in
+--- binutils-2.14/opcodes/configure.in	Mon Jun  2 22:35:17 2003
++++ ps2-binutils-2.14/opcodes/configure.in	Thu Jan 20 00:56:48 2005
 @@ -234,6 +234,7 @@
          bfd_tic4x_arch)         ta="$ta tic4x-dis.lo" ;;
  	bfd_tic54x_arch)	ta="$ta tic54x-dis.lo tic54x-opc.lo" ;;
@@ -7096,9 +7096,9 @@ diff -burN orig.binutils-2.14/opcodes/configure.in binutils-2.14/opcodes/configu
  	bfd_v850_arch)		ta="$ta v850-opc.lo v850-dis.lo" ;;
  	bfd_v850e_arch)		ta="$ta v850-opc.lo v850-dis.lo" ;;
  	bfd_v850ea_arch)	ta="$ta v850-opc.lo v850-dis.lo" ;;
-diff -burN orig.binutils-2.14/opcodes/disassemble.c binutils-2.14/opcodes/disassemble.c
---- orig.binutils-2.14/opcodes/disassemble.c	2003-04-01 11:50:30.000000000 -0400
-+++ binutils-2.14/opcodes/disassemble.c	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/opcodes/disassemble.c ps2-binutils-2.14/opcodes/disassemble.c
+--- binutils-2.14/opcodes/disassemble.c	Tue Apr  1 17:50:30 2003
++++ ps2-binutils-2.14/opcodes/disassemble.c	Thu Jan 20 00:59:49 2005
 @@ -75,6 +75,9 @@
  #define INCLUDE_SHMEDIA
  #endif
@@ -7109,9 +7109,24 @@ diff -burN orig.binutils-2.14/opcodes/disassemble.c binutils-2.14/opcodes/disass
  
  disassembler_ftype
  disassembler (abfd)
-diff -burN orig.binutils-2.14/opcodes/dvp-dis.c binutils-2.14/opcodes/dvp-dis.c
---- orig.binutils-2.14/opcodes/dvp-dis.c	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/opcodes/dvp-dis.c	2004-11-27 14:22:07.000000000 -0400
+@@ -234,10 +237,14 @@
+ #endif
+ #ifdef ARCH_mips
+     case bfd_arch_mips:
++#ifdef ARCH_dvp
++      disassemble = print_insn_dvp;
++#else /* !ARCH_dvp */
+       if (bfd_big_endian (abfd))
+ 	disassemble = print_insn_big_mips;
+       else
+ 	disassemble = print_insn_little_mips;
++#endif /* ARCH_dvp */
+       break;
+ #endif
+ #ifdef ARCH_mmix
+diff -uNr binutils-2.14/opcodes/dvp-dis.c ps2-binutils-2.14/opcodes/dvp-dis.c
+--- binutils-2.14/opcodes/dvp-dis.c	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/opcodes/dvp-dis.c	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,439 @@
 +/* Instruction printing code for the DVP
 +   Copyright (C) 1998 Free Software Foundation, Inc. 
@@ -7552,9 +7567,9 @@ diff -burN orig.binutils-2.14/opcodes/dvp-dis.c binutils-2.14/opcodes/dvp-dis.c
 +  *insn_buf = bfd_getl32 (buffer);
 +  return 0;
 +}
-diff -burN orig.binutils-2.14/opcodes/dvp-opc.c binutils-2.14/opcodes/dvp-opc.c
---- orig.binutils-2.14/opcodes/dvp-opc.c	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/opcodes/dvp-opc.c	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/opcodes/dvp-opc.c ps2-binutils-2.14/opcodes/dvp-opc.c
+--- binutils-2.14/opcodes/dvp-opc.c	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/opcodes/dvp-opc.c	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,3458 @@
 +/* Opcode table for the DVP
 +   Copyright (c) 1998 Free Software Foundation, Inc.
@@ -11014,9 +11029,9 @@ diff -burN orig.binutils-2.14/opcodes/dvp-opc.c binutils-2.14/opcodes/dvp-opc.c
 +
 +  return NULL;
 +}
-diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.c
---- orig.binutils-2.14/opcodes/mips-dis.c	2003-04-08 04:14:47.000000000 -0300
-+++ binutils-2.14/opcodes/mips-dis.c	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/opcodes/mips-dis.c ps2-binutils-2.14/opcodes/mips-dis.c
+--- binutils-2.14/opcodes/mips-dis.c	Tue Apr  8 09:14:47 2003
++++ ps2-binutils-2.14/opcodes/mips-dis.c	Thu Jan 20 00:56:48 2005
 @@ -345,6 +345,8 @@
      mips_cp0_names_numeric, NULL, 0, mips_hwr_names_numeric },
    { "vr5500",	1, bfd_mach_mips5500, CPU_VR5500, ISA_MIPS4,
@@ -11195,10 +11210,11 @@ diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.
  		  print_insn_args (d, word, memaddr, info);
  		}
  
-@@ -1138,6 +1280,19 @@
+@@ -1137,6 +1279,19 @@
+ {
    bfd_byte buffer[INSNLEN];
    int status;
- 
++
 +#ifdef ARCH_dvp  
 +  {
 +    /* bfd_mach_dvp_p is a macro which may evaluate its arguments more than  
@@ -11211,13 +11227,12 @@ diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.
 +      return print_insn_dvp (memaddr, info);
 +  }
 +#endif  
-+
+ 
    set_default_mips_dis_options (info);
    parse_mips_dis_options (info->disassembler_options);
- 
-diff -burN orig.binutils-2.14/opcodes/mips-dis.c.orig binutils-2.14/opcodes/mips-dis.c.orig
---- orig.binutils-2.14/opcodes/mips-dis.c.orig	1969-12-31 20:00:00.000000000 -0400
-+++ binutils-2.14/opcodes/mips-dis.c.orig	2004-11-27 14:22:07.000000000 -0400
+diff -uNr binutils-2.14/opcodes/mips-dis.c.orig ps2-binutils-2.14/opcodes/mips-dis.c.orig
+--- binutils-2.14/opcodes/mips-dis.c.orig	Thu Jan  1 01:00:00 1970
++++ ps2-binutils-2.14/opcodes/mips-dis.c.orig	Thu Jan 20 00:56:48 2005
 @@ -0,0 +1,1949 @@
 +/* Print mips instructions for GDB, the GNU debugger, or for objdump.
 +   Copyright 1989, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999,
@@ -13168,9 +13183,9 @@ diff -burN orig.binutils-2.14/opcodes/mips-dis.c.orig binutils-2.14/opcodes/mips
 +
 +  fprintf (stream, _("\n"));
 +}
-diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.c
---- orig.binutils-2.14/opcodes/mips-opc.c	2002-12-31 21:06:13.000000000 -0400
-+++ binutils-2.14/opcodes/mips-opc.c	2004-11-27 14:23:29.000000000 -0400
+diff -uNr binutils-2.14/opcodes/mips-opc.c ps2-binutils-2.14/opcodes/mips-opc.c
+--- binutils-2.14/opcodes/mips-opc.c	Wed Jan  1 02:06:13 2003
++++ ps2-binutils-2.14/opcodes/mips-opc.c	Thu Jan 20 00:56:48 2005
 @@ -101,6 +101,7 @@
  #define L1	INSN_4010
  #define V1	(INSN_4100 | INSN_4111 | INSN_4120)
