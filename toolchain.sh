@@ -22,7 +22,7 @@
   export NEWLIB="newlib-1.10.0"
 
   ## CVS configuration.
-  if [ "`cat ~/.cvspass | grep $CVSROOT`" -eq "" ]; then
+  if [ -z "`cat ~/.cvspass | grep $CVSROOT`" ]; then
    echo "THE SECRET PASSWORD IS: anonymous"
    cvs -d $CVSROOT login
   fi
