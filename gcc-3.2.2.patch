@@ -1,6 +1,6 @@
-diff -uNr gcc-3.2.2/README.PS2 ps2-gcc-3.2.2/README.PS2
---- gcc-3.2.2/README.PS2	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/README.PS2	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/README.PS2 gcc-3.2.2/README.PS2
+--- orig.gcc-3.2.2/README.PS2	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/README.PS2	2004-11-30 13:33:49.000000000 -0400
 @@ -0,0 +1,80 @@
 +Apologies to mrbrown, who's README.PS2 this was based on.
 +GCC for Sony Playstation 2
@@ -82,9 +82,9 @@ diff -uNr gcc-3.2.2/README.PS2 ps2-gcc-3.2.2/README.PS2
 +--
 +MrHTFord (mrhtford_ps2dev@hotmail.com)
 +Friday 14th February 2004.
-diff -uNr gcc-3.2.2/config.sub ps2-gcc-3.2.2/config.sub
---- gcc-3.2.2/config.sub	Thu Jan 30 23:32:36 2003
-+++ ps2-gcc-3.2.2/config.sub	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/config.sub gcc-3.2.2/config.sub
+--- orig.gcc-3.2.2/config.sub	2003-01-30 18:32:36.000000000 -0400
++++ gcc-3.2.2/config.sub	2004-11-30 13:33:49.000000000 -0400
 @@ -236,6 +236,7 @@
  	| i370 | i860 | i960 | ia64 \
  	| ip2k \
@@ -139,9 +139,9 @@ diff -uNr gcc-3.2.2/config.sub ps2-gcc-3.2.2/config.sub
  	# Remember, each alternative MUST END IN *, to match a version number.
  		;;
  	-qnx*)
-diff -uNr gcc-3.2.2/configure ps2-gcc-3.2.2/configure
---- gcc-3.2.2/configure	Mon Jun 24 18:14:28 2002
-+++ ps2-gcc-3.2.2/configure	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/configure gcc-3.2.2/configure
+--- orig.gcc-3.2.2/configure	2002-06-24 13:14:28.000000000 -0300
++++ gcc-3.2.2/configure	2004-11-30 13:34:29.000000000 -0400
 @@ -697,7 +697,7 @@
  if test -f skip-this-dir; then
  	# Perform the same cleanup as the trap handler, minus the "exit 1" of course,
@@ -160,9 +160,9 @@ diff -uNr gcc-3.2.2/configure ps2-gcc-3.2.2/configure
  
  exit 0
  
-diff -uNr gcc-3.2.2/configure.in ps2-gcc-3.2.2/configure.in
---- gcc-3.2.2/configure.in	Mon Jul  8 12:00:57 2002
-+++ ps2-gcc-3.2.2/configure.in	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/configure.in gcc-3.2.2/configure.in
+--- orig.gcc-3.2.2/configure.in	2002-07-08 07:00:57.000000000 -0300
++++ gcc-3.2.2/configure.in	2004-11-30 13:33:49.000000000 -0400
 @@ -980,6 +980,9 @@
    mips*-*-linux*)
      noconfigdirs="$noconfigdirs target-libffi"
@@ -173,9 +173,9 @@ diff -uNr gcc-3.2.2/configure.in ps2-gcc-3.2.2/configure.in
    mips*-*-*)
      noconfigdirs="$noconfigdirs gprof ${libgcj}"
      ;;
-diff -uNr gcc-3.2.2/gcc/Makefile.in ps2-gcc-3.2.2/gcc/Makefile.in
---- gcc-3.2.2/gcc/Makefile.in	Tue Jan 28 22:54:07 2003
-+++ ps2-gcc-3.2.2/gcc/Makefile.in	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/gcc/Makefile.in gcc-3.2.2/gcc/Makefile.in
+--- orig.gcc-3.2.2/gcc/Makefile.in	2003-01-28 17:54:07.000000000 -0400
++++ gcc-3.2.2/gcc/Makefile.in	2004-11-30 13:33:49.000000000 -0400
 @@ -987,6 +987,7 @@
  	LIB2FUNCS_ST='$(LIB2FUNCS_ST)' \
  	LIB2ADD='$(LIB2ADD)' \
@@ -184,9 +184,9 @@ diff -uNr gcc-3.2.2/gcc/Makefile.in ps2-gcc-3.2.2/gcc/Makefile.in
  	LIB2ADDEH='$(LIB2ADDEH)' \
  	LIB2ADDEHDEP='$(LIB2ADDEHDEP)' \
  	FPBIT='$(FPBIT)' \
-diff -uNr gcc-3.2.2/gcc/c-common.c ps2-gcc-3.2.2/gcc/c-common.c
---- gcc-3.2.2/gcc/c-common.c	Sun Dec  1 19:19:08 2002
-+++ ps2-gcc-3.2.2/gcc/c-common.c	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/gcc/c-common.c gcc-3.2.2/gcc/c-common.c
+--- orig.gcc-3.2.2/gcc/c-common.c	2002-12-01 14:19:08.000000000 -0400
++++ gcc-3.2.2/gcc/c-common.c	2004-11-30 13:33:49.000000000 -0400
 @@ -1336,6 +1336,9 @@
    if (bits <= TYPE_PRECISION (intDI_type_node))
      return unsignedp ? unsigned_intDI_type_node : intDI_type_node;
@@ -258,34 +258,9 @@ diff -uNr gcc-3.2.2/gcc/c-common.c ps2-gcc-3.2.2/gcc/c-common.c
  
    /* Create the widest literal types.  */
    widest_integer_literal_type_node
-diff -uNr gcc-3.2.2/gcc/caller-save.c ps2-gcc-3.2.2/gcc/caller-save.c
---- gcc-3.2.2/gcc/caller-save.c	Tue Mar  1 12:34:54 2005
-+++ ps2-gcc-3.2.2/gcc/caller-save.c	Tue Mar  1 12:35:17 2005
-@@ -50,13 +50,21 @@
-    If that is not possible the save is done one register at a time.  */
- 
- static enum machine_mode 
-+#if TARGET_MIPS5900
-+  regno_save_mode[FIRST_PSEUDO_REGISTER][16 / MIN_UNITS_PER_WORD + 1];
-+#else
-   regno_save_mode[FIRST_PSEUDO_REGISTER][MAX_MOVE_MAX / MIN_UNITS_PER_WORD + 1];
-+#endif
- 
- /* For each hard register, a place on the stack where it can be saved,
-    if needed.  */
- 
- static rtx 
-+#if TARGET_MIPS5900
-+  regno_save_mem[FIRST_PSEUDO_REGISTER][16 / MIN_UNITS_PER_WORD + 1];
-+#else
-   regno_save_mem[FIRST_PSEUDO_REGISTER][MAX_MOVE_MAX / MIN_UNITS_PER_WORD + 1];
-+#endif
- 
- /* We will only make a register eligible for caller-save if it can be
-    saved in its widest mode with a simple SET insn as long as the memory
-diff -uNr gcc-3.2.2/gcc/config/mips/core-mmi.h ps2-gcc-3.2.2/gcc/config/mips/core-mmi.h
---- gcc-3.2.2/gcc/config/mips/core-mmi.h	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/gcc/config/mips/core-mmi.h	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/core-mmi.h gcc-3.2.2/gcc/config/mips/core-mmi.h
+--- orig.gcc-3.2.2/gcc/config/mips/core-mmi.h	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/core-mmi.h	2004-11-30 13:33:49.000000000 -0400
 @@ -0,0 +1,104 @@
 +/*
 + * mmi-intrinsics.h - R5900 MMI compiler intrinsics.
@@ -391,14 +366,14 @@ diff -uNr gcc-3.2.2/gcc/config/mips/core-mmi.h ps2-gcc-3.2.2/gcc/config/mips/cor
 +
 +#endif /* __mmi_intrinsics_h */
 +
-diff -uNr gcc-3.2.2/gcc/config/mips/core-vumm.h ps2-gcc-3.2.2/gcc/config/mips/core-vumm.h
---- gcc-3.2.2/gcc/config/mips/core-vumm.h	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/gcc/config/mips/core-vumm.h	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/core-vumm.h gcc-3.2.2/gcc/config/mips/core-vumm.h
+--- orig.gcc-3.2.2/gcc/config/mips/core-vumm.h	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/core-vumm.h	2004-11-30 13:33:49.000000000 -0400
 @@ -0,0 +1 @@
 +#define __THIS__IS__A__BLANK__FILE__
-diff -uNr gcc-3.2.2/gcc/config/mips/crti5900.asm ps2-gcc-3.2.2/gcc/config/mips/crti5900.asm
---- gcc-3.2.2/gcc/config/mips/crti5900.asm	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/gcc/config/mips/crti5900.asm	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/crti5900.asm gcc-3.2.2/gcc/config/mips/crti5900.asm
+--- orig.gcc-3.2.2/gcc/config/mips/crti5900.asm	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/crti5900.asm	2004-11-30 13:33:49.000000000 -0400
 @@ -0,0 +1,16 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -416,9 +391,9 @@ diff -uNr gcc-3.2.2/gcc/config/mips/crti5900.asm ps2-gcc-3.2.2/gcc/config/mips/c
 +_fini:
 +	addu    $sp,$sp,-96
 +	sq      $31,80($sp)
-diff -uNr gcc-3.2.2/gcc/config/mips/crtn5900.asm ps2-gcc-3.2.2/gcc/config/mips/crtn5900.asm
---- gcc-3.2.2/gcc/config/mips/crtn5900.asm	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/gcc/config/mips/crtn5900.asm	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm gcc-3.2.2/gcc/config/mips/crtn5900.asm
+--- orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/crtn5900.asm	2004-11-30 13:33:49.000000000 -0400
 @@ -0,0 +1,12 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -432,9 +407,9 @@ diff -uNr gcc-3.2.2/gcc/config/mips/crtn5900.asm ps2-gcc-3.2.2/gcc/config/mips/c
 +	lq	$31,80($sp)
 +	addu	$sp,$sp,96
 +	j	$31
-diff -uNr gcc-3.2.2/gcc/config/mips/mips-protos.h ps2-gcc-3.2.2/gcc/config/mips/mips-protos.h
---- gcc-3.2.2/gcc/config/mips/mips-protos.h	Sun Mar 24 09:13:16 2002
-+++ ps2-gcc-3.2.2/gcc/config/mips/mips-protos.h	Thu Jan 20 00:10:05 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/mips-protos.h gcc-3.2.2/gcc/config/mips/mips-protos.h
+--- orig.gcc-3.2.2/gcc/config/mips/mips-protos.h	2002-03-24 04:13:16.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/mips-protos.h	2004-11-30 13:33:49.000000000 -0400
 @@ -81,6 +81,7 @@
  extern void		gen_conditional_move PARAMS ((rtx *));
  extern void		mips_gen_conditional_trap PARAMS ((rtx *));
@@ -443,9 +418,9 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips-protos.h ps2-gcc-3.2.2/gcc/config/mips/
  extern int		mips_address_cost PARAMS ((rtx));
  extern void		mips_count_memory_refs PARAMS ((rtx, int));
  extern HOST_WIDE_INT	mips_debugger_offset PARAMS ((rtx, HOST_WIDE_INT));
-diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
---- gcc-3.2.2/gcc/config/mips/mips.c	Sat Jul 27 01:23:02 2002
-+++ ps2-gcc-3.2.2/gcc/config/mips/mips.c	Sun Feb 13 18:19:41 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.c gcc-3.2.2/gcc/config/mips/mips.c
+--- orig.gcc-3.2.2/gcc/config/mips/mips.c	2002-07-26 20:23:02.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/mips.c	2004-11-30 13:33:49.000000000 -0400
 @@ -51,6 +51,7 @@
  #include "gstab.h"
  #include "hashtab.h"
@@ -495,7 +470,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  /* Strings to hold which cpu and instruction set architecture to use.  */
  const char *mips_cpu_string;	/* for -mcpu=<xxx> */
  const char *mips_arch_string;   /* for -march=<xxx> */
-@@ -253,6 +274,18 @@
+@@ -253,6 +274,16 @@
     set this option if such an option is used.  */
  const char *mips_explicit_type_size_string;
  
@@ -506,15 +481,13 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
 +#endif
 +const char * mips_no_align128_string;
 +const char * mips_align128_string;
-+const char * mips_use_128_string;
 +const char * mips_align_all_string;
 +int mips_align_all = 1;
-+int mips_use_128 = 0;
 +
  /* Whether we are generating mips16 hard float code.  In mips16 mode
     we always set TARGET_SOFT_FLOAT; this variable is nonzero if
     -msoft-float was not specified by the user, which means that we
-@@ -280,8 +313,11 @@
+@@ -280,8 +311,11 @@
     initialized in override_options.  */
  REAL_VALUE_TYPE dfhigh, dflow, sfhigh, sflow;
  
@@ -528,7 +501,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  
  /* Array giving truth value on whether or not a given hard register
     can support a given mode.  */
-@@ -343,7 +379,8 @@
+@@ -343,7 +377,8 @@
   "$f16", "$f17", "$f18", "$f19", "$f20", "$f21", "$f22", "$f23",
   "$f24", "$f25", "$f26", "$f27", "$f28", "$f29", "$f30", "$f31",
   "hi",   "lo",   "accum","$fcc0","$fcc1","$fcc2","$fcc3","$fcc4",
@@ -538,7 +511,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  };
  
  /* Mips software names for the registers, used to overwrite the
-@@ -360,7 +397,8 @@
+@@ -360,7 +395,8 @@
    "$f16", "$f17", "$f18", "$f19", "$f20", "$f21", "$f22", "$f23",
    "$f24", "$f25", "$f26", "$f27", "$f28", "$f29", "$f30", "$f31",
    "hi",   "lo",   "accum","$fcc0","$fcc1","$fcc2","$fcc3","$fcc4",
@@ -548,7 +521,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  };
  
  /* Map hard register number to register class */
-@@ -384,7 +422,8 @@
+@@ -384,7 +420,8 @@
    FP_REGS,	FP_REGS,	FP_REGS,	FP_REGS,
    HI_REG,	LO_REG,		HILO_REG,	ST_REGS,
    ST_REGS,	ST_REGS,	ST_REGS,	ST_REGS,
@@ -558,7 +531,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  };
  
  /* Map register constraint character to register class.  */
-@@ -479,6 +518,18 @@
+@@ -479,6 +516,18 @@
  #undef TARGET_SCHED_ADJUST_COST
  #define TARGET_SCHED_ADJUST_COST mips_adjust_cost
  
@@ -577,7 +550,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  struct gcc_target targetm = TARGET_INITIALIZER;
  
  /* Return truth value of whether OP can be used as an operands
-@@ -1111,6 +1162,38 @@
+@@ -1111,6 +1160,38 @@
  		&& ! mips16_constant (op, mode, 1, 0)));
  }
  
@@ -616,7 +589,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  /* Like register_operand, but when in 64 bit mode also accept a sign
     extend of a 32 bit register, since the value is known to be already
     sign extended.  */
-@@ -1315,6 +1398,7 @@
+@@ -1315,6 +1396,7 @@
       accept (subreg (const_int)) which will fail to reload.  */
    if (CONSTANT_ADDRESS_P (xinsn)
        && ! (mips_split_addresses && mips_check_split (xinsn, mode))
@@ -624,7 +597,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
        && (! TARGET_MIPS16 || mips16_constant (xinsn, mode, 1, 0)))
      return 1;
  
-@@ -1651,7 +1735,7 @@
+@@ -1651,7 +1733,7 @@
    if (type == DELAY_LOAD || type == DELAY_FCMP)
      num_nops = 1;
  
@@ -633,7 +606,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
      num_nops = 2;
  
    else
-@@ -1663,6 +1747,7 @@
+@@ -1663,6 +1745,7 @@
      next_insn = NEXT_INSN (next_insn);
  
    dslots_load_total += num_nops;
@@ -641,7 +614,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    if (TARGET_DEBUG_F_MODE
        || !optimize
        || type == DELAY_NONE
-@@ -1701,6 +1786,11 @@
+@@ -1701,6 +1784,11 @@
        mips_load_reg3 = gen_rtx_REG (SImode, MD_REG_FIRST);
        mips_load_reg4 = gen_rtx_REG (SImode, MD_REG_FIRST+1);
      }
@@ -653,7 +626,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    else
      {
        mips_load_reg3 = 0;
-@@ -1935,6 +2025,15 @@
+@@ -1935,6 +2023,15 @@
  		    ret = "mflo\t%0";
  		}
  
@@ -669,7 +642,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	      else if (ST_REG_P (regno1) && ISA_HAS_8CC)
  		ret = "li\t%0,1\n\tmovf\t%0,%.,%1";
  
-@@ -1971,6 +2070,16 @@
+@@ -1971,6 +2068,16 @@
  		}
  	    }
  
@@ -686,7 +659,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	  else if (regno0 == FPSW_REGNUM && ! ISA_HAS_8CC)
  	    {
  	      if (GP_REG_P (regno1))
-@@ -2056,6 +2165,12 @@
+@@ -2056,6 +2163,12 @@
  		  delay = DELAY_HILO;
  		  ret = "mt%0\t%.";
  		}
@@ -699,7 +672,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	    }
  
  	  else if (GP_REG_P (regno0))
-@@ -2390,6 +2505,20 @@
+@@ -2390,6 +2503,20 @@
  		ret = "mthi\t%M1\n\tmtlo\t%L1";
  	    }
  
@@ -720,7 +693,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	  else if (GP_REG_P (regno0) && MD_REG_P (regno1))
  	    {
  	      delay = DELAY_HILO;
-@@ -2402,6 +2531,18 @@
+@@ -2402,6 +2529,18 @@
  		ret = "mfhi\t%M0\n\tmflo\t%L0";
  	    }
  
@@ -739,7 +712,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	  else if (TARGET_64BIT)
  	    ret = "move\t%0,%1";
  
-@@ -2507,6 +2648,14 @@
+@@ -2507,6 +2646,14 @@
  		      ? "mtlo\t%.\n\tmthi\t%."
  		      : "mt%0\t%.\n");
  	    }
@@ -754,7 +727,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	}
  
        else if (code1 == CONST_INT && GET_MODE (op0) == DImode
-@@ -3970,6 +4119,14 @@
+@@ -3970,6 +4117,14 @@
        cum->gp_reg_found = 1;
        cum->arg_words++;
        break;
@@ -769,7 +742,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
      }
  }
  
-@@ -4090,6 +4247,15 @@
+@@ -4090,6 +4245,15 @@
        if (! TARGET_64BIT)
  	cum->arg_words += (cum->arg_words & 1);
        regbase = GP_ARG_FIRST;
@@ -785,7 +758,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
      }
  
    if (*arg_words >= (unsigned) MAX_ARGS_IN_REGISTERS)
-@@ -4266,6 +4432,7 @@
+@@ -4266,6 +4430,7 @@
       int named ATTRIBUTE_UNUSED;/* != 0 for normal args, == 0 for ... args */
  {
    if ((mode == BLKmode
@@ -793,7 +766,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
         || GET_MODE_CLASS (mode) != MODE_COMPLEX_INT
         || GET_MODE_CLASS (mode) != MODE_COMPLEX_FLOAT)
        && cum->arg_words < (unsigned) MAX_ARGS_IN_REGISTERS
-@@ -4806,6 +4973,14 @@
+@@ -4806,6 +4971,14 @@
      target_flags &= ~((TARGET_DEFAULT) & (MASK_SOFT_FLOAT | MASK_SINGLE_FLOAT));
  #endif
  
@@ -808,7 +781,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    /* Get the architectural level.  */
    if (mips_isa_string == 0)
      mips_isa = MIPS_ISA_DEFAULT;
-@@ -5036,6 +5211,10 @@
+@@ -5036,6 +5209,10 @@
  	}
      }
  
@@ -819,7 +792,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    /* make sure sizes of ints/longs/etc. are ok */
    if (! ISA_HAS_64BIT_REGS)
      {
-@@ -5189,6 +5368,10 @@
+@@ -5189,6 +5366,10 @@
    mips_char_to_class['l'] = LO_REG;
    mips_char_to_class['a'] = HILO_REG;
    mips_char_to_class['x'] = MD_REGS;
@@ -830,7 +803,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    mips_char_to_class['b'] = ALL_REGS;
    mips_char_to_class['y'] = GR_REGS;
    mips_char_to_class['z'] = ST_REGS;
-@@ -5234,6 +5417,10 @@
+@@ -5234,6 +5415,10 @@
  			|| FP_REG_P (regno));
  	    }
  
@@ -841,7 +814,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	  else if (GP_REG_P (regno))
  	    temp = ((regno & 1) == 0 || size <= UNITS_PER_WORD);
  
-@@ -5257,6 +5444,12 @@
+@@ -5257,6 +5442,12 @@
  			|| (regno == MD_REG_FIRST
  			    && size == 2 * UNITS_PER_WORD)));
  
@@ -854,7 +827,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	  else
  	    temp = 0;
  
-@@ -5266,9 +5459,18 @@
+@@ -5266,9 +5457,18 @@
  
    /* Save GPR registers in word_mode sized hunks.  word_mode hasn't been
       initialized yet, so we can't use that here.  */
@@ -874,7 +847,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    if (TARGET_64BIT && !TARGET_MIPS16)
      {
        if (align_loops == 0)
-@@ -5279,6 +5481,21 @@
+@@ -5279,6 +5479,17 @@
  	align_functions = 8;
      }
  
@@ -889,14 +862,10 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
 +  }
 +#endif
 +
-+  if (mips_use_128_string != NULL) {
-+	mips_use_128=1;
-+  }
-+
    /* Register global variables with the garbage collector.  */
    mips_add_gc_roots ();
  }
-@@ -5380,6 +5597,7 @@
+@@ -5380,6 +5591,7 @@
     'M'  print high-order register of double-word register operand.
     'C'  print part of opcode for a branch condition.
     'F'  print part of opcode for a floating-point branch condition.
@@ -904,7 +873,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
     'N'  print part of opcode for a branch condition, inverted.
     'W'  print part of opcode for a floating-point branch condition, inverted.
     'S'  X is CODE_LABEL, print with prefix of "LS" (for embedded switch).
-@@ -5604,7 +5822,17 @@
+@@ -5604,7 +5816,17 @@
        default:
  	abort_with_insn (op, "PRINT_OPERAND, invalid insn for %%W");
        }
@@ -922,7 +891,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    else if (letter == 'S')
      {
        char buffer[100];
-@@ -5628,6 +5856,16 @@
+@@ -5628,6 +5850,16 @@
  	fprintf (file, "%s,", reg_names[regnum]);
      }
  
@@ -939,7 +908,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    else if (code == REG || code == SUBREG)
      {
        register int regnum;
-@@ -6099,8 +6337,7 @@
+@@ -6099,8 +6331,7 @@
  	  || (mips_load_reg != 0 && reg_mentioned_p (mips_load_reg,  pattern))
  	  || (mips_load_reg2 != 0 && reg_mentioned_p (mips_load_reg2, pattern))
  	  || (mips_load_reg3 != 0 && reg_mentioned_p (mips_load_reg3, pattern))
@@ -949,7 +918,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	fputs ("\t#nop\n", asm_out_file);
  
        else
-@@ -6298,6 +6535,27 @@
+@@ -6298,6 +6529,27 @@
      }
  }
  
@@ -977,7 +946,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  /* Return the bytes needed to compute the frame pointer from the current
     stack pointer.
  
-@@ -6410,7 +6668,7 @@
+@@ -6410,7 +6662,7 @@
  		  || (GET_MODE_SIZE (DECL_MODE (DECL_RESULT (current_function_decl)))
  		      <= 4))))
  	{
@@ -986,7 +955,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	  mask |= 1L << (regno - GP_REG_FIRST);
  
  	  /* The entry and exit pseudo instructions can not save $17
-@@ -6434,7 +6692,7 @@
+@@ -6434,7 +6686,7 @@
  	  regno = EH_RETURN_DATA_REGNO (i);
  	  if (regno == INVALID_REGNUM)
  	    break;
@@ -995,7 +964,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	  mask |= 1L << (regno - GP_REG_FIRST);
  	}
      }
-@@ -6516,9 +6774,9 @@
+@@ -6516,9 +6768,9 @@
           top of the stack.  */
        if (! mips_entry)
  	offset = (args_size + extra_size + var_size
@@ -1007,7 +976,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  
        current_frame_info.gp_sp_offset = offset;
        current_frame_info.gp_save_offset = offset - total_size;
-@@ -6654,6 +6912,24 @@
+@@ -6654,6 +6906,24 @@
    mips_annotate_frame_insn (emit_move_insn (mem, reg), dwarf_expr);
  }
  
@@ -1032,7 +1001,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  static void
  save_restore_insns (store_p, large_reg, large_offset, file)
       int store_p;	/* true if this is prologue */
-@@ -6690,6 +6966,47 @@
+@@ -6690,6 +6960,47 @@
       need a nop in the epilog if at least one register is reloaded in
       addition to return address.  */
  
@@ -1080,7 +1049,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    /* Save GP registers if needed.  */
    if (mask)
      {
-@@ -6702,7 +7019,7 @@
+@@ -6702,7 +7013,7 @@
        gp_offset = current_frame_info.gp_sp_offset;
        end_offset
  	= gp_offset - (current_frame_info.gp_reg_size
@@ -1089,7 +1058,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  
        if (gp_offset < 0 || end_offset < 0)
  	internal_error
-@@ -6765,7 +7082,8 @@
+@@ -6765,7 +7076,8 @@
  	      {
  		rtx reg_rtx;
  		rtx mem_rtx
@@ -1099,7 +1068,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  			     gen_rtx (PLUS, Pmode, base_reg_rtx,
  				      GEN_INT (gp_offset - base_offset)));
  
-@@ -6776,23 +7094,24 @@
+@@ -6776,23 +7088,24 @@
                     $31, so we load $7 instead, and work things out
                     in mips_expand_epilogue.  */
  		if (TARGET_MIPS16 && ! store_p && regno == GP_REG_FIRST + 31)
@@ -1129,7 +1098,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  
  		if (store_p)
  		  mips_emit_frame_related_store (mem_rtx, reg_rtx, gp_offset);
-@@ -6802,7 +7121,7 @@
+@@ -6802,7 +7115,7 @@
  		    if (TARGET_MIPS16
  			&& regno != GP_REG_FIRST + 31
  			&& ! M16_REG_P (regno))
@@ -1138,7 +1107,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  				      reg_rtx);
  		  }
  	      }
-@@ -6844,13 +7163,13 @@
+@@ -6844,13 +7157,13 @@
  		  fprintf (file, "\tmove\t%s,%s\n",
  			   reg_names[regno], reg_names[r]);
  	      }
@@ -1154,7 +1123,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	  }
      }
    else
-@@ -6875,13 +7194,13 @@
+@@ -6875,13 +7188,13 @@
  	base_reg_rtx = stack_pointer_rtx, base_offset  = 0;
  
        else if (base_reg_rtx != 0
@@ -1172,7 +1141,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	{
  	  base_reg_rtx = gen_rtx_REG (Pmode, MIPS_TEMP2_REGNUM);
  	  base_offset = large_offset;
-@@ -7313,10 +7632,10 @@
+@@ -7313,10 +7626,10 @@
  	{
  	  if (offset != 0)
  	    ptr = gen_rtx (PLUS, Pmode, stack_pointer_rtx, GEN_INT (offset));
@@ -1186,7 +1155,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	}
      }
  
-@@ -7361,7 +7680,8 @@
+@@ -7361,7 +7674,8 @@
  	 moment.  */
        if (TARGET_MIPS16 && BITSET_P (current_frame_info.mask, 18))
  	{
@@ -1196,7 +1165,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  	  long gp_offset, base_offset;
  
  	  gp_offset = current_frame_info.gp_sp_offset;
-@@ -7377,8 +7697,9 @@
+@@ -7377,8 +7691,9 @@
  	    base_offset = 0;
  	  start_sequence ();
  	  emit_move_insn (reg_rtx,
@@ -1208,7 +1177,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  				   gen_rtx (PLUS, Pmode, stack_pointer_rtx,
  					    GEN_INT (gp_offset
  						     - base_offset))),
-@@ -8108,6 +8429,11 @@
+@@ -8108,6 +8423,11 @@
    if (type == NULL_TREE || mode == DImode || mode == DFmode)
      return 0;
  
@@ -1220,7 +1189,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    size = int_size_in_bytes (type);
    return size == -1 || size > UNITS_PER_WORD;
  }
-@@ -8168,15 +8494,30 @@
+@@ -8168,15 +8488,30 @@
  	     && gp_reg_p
  	     && GET_MODE_SIZE (mode) <= GET_MODE_SIZE (SImode))
  	    ? NO_REGS : gr_regs);
@@ -1252,7 +1221,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
      {
        if (TARGET_MIPS16 && in_p)
  	{
-@@ -8185,7 +8526,8 @@
+@@ -8185,7 +8520,8 @@
  	}
        return gp_reg_p ? NO_REGS : gr_regs;
      }
@@ -1262,7 +1231,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
      {
        if (TARGET_MIPS16 && ! in_p)
  	{
-@@ -9344,6 +9686,11 @@
+@@ -9344,6 +9680,11 @@
    if (! TARGET_MIPS16)
      return;
  
@@ -1274,7 +1243,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
    /* If $gp is used, try to remove stores, and replace loads with
       copies from $gp.  */
    if (optimize)
-@@ -9533,6 +9880,205 @@
+@@ -9533,6 +9874,205 @@
       constant table, but we have no way to prevent that.  */
  }
  
@@ -1480,7 +1449,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
  /* Return nonzero if X is a SIGN or ZERO extend operator.  */
  int
  extend_operator (x, mode)
-@@ -9933,6 +10479,8 @@
+@@ -9933,6 +10473,8 @@
      case '5':
        if (!strcmp (p, "5000") || !strcmp (p, "5k") || !strcmp (p, "5K"))
  	cpu = PROCESSOR_R5000;
@@ -1489,7 +1458,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
        else if (!strcmp (p, "5kc") || !strcmp (p, "5Kc") )
            cpu = PROCESSOR_R5KC;
        break;
-@@ -10057,7 +10605,10 @@
+@@ -10057,7 +10599,10 @@
      int regno;
      enum machine_mode mode;
  {
@@ -1501,7 +1470,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
      return ((GET_MODE_SIZE (mode) + UNITS_PER_WORD - 1) / UNITS_PER_WORD);
    else
      return ((GET_MODE_SIZE (mode) + UNITS_PER_FPREG - 1) / UNITS_PER_FPREG);
-@@ -10223,3 +10774,345 @@
+@@ -10223,3 +10768,345 @@
    mips_asm_file_end (stream);
  }
  #endif /* TARGET_IRIX6 */
@@ -1847,9 +1816,9 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.c ps2-gcc-3.2.2/gcc/config/mips/mips.c
 +  if (TARGET_MIPS5900)
 +    r5900_init_builtins ();
 +}
-diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
---- gcc-3.2.2/gcc/config/mips/mips.h	Fri Apr 26 23:32:14 2002
-+++ ps2-gcc-3.2.2/gcc/config/mips/mips.h	Sun Feb 13 18:26:08 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.h gcc-3.2.2/gcc/config/mips/mips.h
+--- orig.gcc-3.2.2/gcc/config/mips/mips.h	2002-04-26 18:32:14.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/mips.h	2004-11-30 13:33:49.000000000 -0400
 @@ -48,6 +48,7 @@
    DELAY_NONE,				/* no delay slot */
    DELAY_LOAD,				/* load from memory delay */
@@ -1874,19 +1843,17 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  extern const char *mips_cpu_string;	/* for -mcpu=<xxx> */
  extern const char *mips_arch_string;    /* for -march=<xxx> */
  extern const char *mips_tune_string;    /* for -mtune=<xxx> */
-@@ -155,6 +158,11 @@
+@@ -155,6 +158,9 @@
  extern const char *mips_no_mips16_string;/* for -mno-mips16 */
  extern const char *mips_explicit_type_size_string;/* for -mexplicit-type-size */
  extern const char *mips_cache_flush_func;/* for -mflush-func= and -mno-flush-func */
 +extern const char *mips_align_all_string;/* for -malign-all= */
 +extern const char * mips_align128_string;/* for -malign128 */
 +extern const char * mips_no_align128_string;/* for -mno-align128 */
-+extern const char * mips_use_128_string; /* for -muse-128 */
-+extern int mips_use_128;                /* the boolean for -muse-128 */
  extern int mips_split_addresses;	/* perform high/lo_sum support */
  extern int dslots_load_total;		/* total # load related delay slots */
  extern int dslots_load_filled;		/* # filled load delay slots */
-@@ -175,6 +183,8 @@
+@@ -175,6 +181,8 @@
  extern void		sdata_section PARAMS ((void));
  extern void		sbss_section PARAMS ((void));
  
@@ -1895,7 +1862,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  /* Stubs for half-pic support if not OSF/1 reference platform.  */
  
  #ifndef HALF_PIC_P
-@@ -232,6 +242,10 @@
+@@ -232,6 +240,10 @@
  					   consts in rodata */
  #define MASK_NO_FUSED_MADD 0x01000000   /* Don't generate floating point
  					   multiply-add operations.  */
@@ -1906,7 +1873,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  					/* Debug switches, not documented */
  #define MASK_DEBUG	0		/* unused */
-@@ -327,6 +341,16 @@
+@@ -327,6 +339,16 @@
  #define TARGET_NO_CHECK_ZERO_DIV (target_flags & MASK_NO_CHECK_ZERO_DIV)
  #define TARGET_CHECK_RANGE_DIV  (target_flags & MASK_CHECK_RANGE_DIV)
  
@@ -1923,7 +1890,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  /* This is true if we must enable the assembly language file switching
     code.  */
  
-@@ -346,6 +370,7 @@
+@@ -346,6 +368,7 @@
  #define TARGET_MIPS4000             (mips_arch == PROCESSOR_R4000)
  #define TARGET_MIPS4100             (mips_arch == PROCESSOR_R4100)
  #define TARGET_MIPS4300             (mips_arch == PROCESSOR_R4300)
@@ -1931,7 +1898,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  #define TARGET_MIPS4KC              (mips_arch == PROCESSOR_R4KC)
  #define TARGET_MIPS5KC              (mips_arch == PROCESSOR_R5KC)
  
-@@ -354,6 +379,7 @@
+@@ -354,6 +377,7 @@
  #define TUNE_MIPS3900               (mips_tune == PROCESSOR_R3900)
  #define TUNE_MIPS4000               (mips_tune == PROCESSOR_R4000)
  #define TUNE_MIPS5000               (mips_tune == PROCESSOR_R5000)
@@ -1939,7 +1906,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  #define TUNE_MIPS6000               (mips_tune == PROCESSOR_R6000)
  
  /* Macro to define tables used to set the flags.
-@@ -464,6 +490,18 @@
+@@ -464,6 +488,18 @@
       N_("Optimize for 3900")},						\
    {"4650",		  0,                    			\
       N_("Optimize for 4650")},						\
@@ -1958,7 +1925,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
    {"check-zero-division",-MASK_NO_CHECK_ZERO_DIV,			\
       N_("Trap on integer divide by zero")},				\
    {"no-check-zero-division", MASK_NO_CHECK_ZERO_DIV,			\
-@@ -472,6 +510,8 @@
+@@ -472,6 +508,8 @@
       N_("Trap on integer divide overflow")},				\
    {"no-check-range-division",-MASK_CHECK_RANGE_DIV,			\
       N_("Don't trap on integer divide overflow")},			\
@@ -1967,7 +1934,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
    {"debug",		  MASK_DEBUG,					\
       NULL},								\
    {"debuga",		  MASK_DEBUG_A,					\
-@@ -604,6 +644,8 @@
+@@ -604,6 +642,8 @@
        N_("Don't call any cache flush functions")},			\
    { "flush-func=", &mips_cache_flush_func,				\
        N_("Specify cache flush function")},				\
@@ -1976,7 +1943,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  }
  
  /* This is meant to be redefined in the host dependent files.  */
-@@ -613,6 +655,7 @@
+@@ -613,6 +653,7 @@
  
  /* Generate three-operand multiply instructions for SImode.  */
  #define GENERATE_MULT3_SI       ((TARGET_MIPS3900                       \
@@ -1984,7 +1951,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
                                    || mips_isa == 32                     \
                                    || mips_isa == 64)                    \
                                   && !TARGET_MIPS16)
-@@ -644,7 +687,7 @@
+@@ -644,7 +685,7 @@
  				 || mips_isa == 64)
  
  /* ISA has just the integer condition move instructions (movn,movz) */
@@ -1993,7 +1960,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  
  
-@@ -847,7 +890,7 @@
+@@ -847,7 +888,7 @@
  /* GAS_ASM_SPEC is passed when using gas, rather than the MIPS
     assembler.  */
  
@@ -2002,7 +1969,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  
  extern int mips_abi;
-@@ -964,7 +1007,7 @@
+@@ -964,7 +1005,7 @@
  #ifndef LINK_SPEC
  #define LINK_SPEC "\
  %(endian_spec) \
@@ -2011,7 +1978,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  %{bestGnum} %{shared} %{non_shared}"
  #endif  /* LINK_SPEC defined */
  
-@@ -984,7 +1027,9 @@
+@@ -984,7 +1025,9 @@
  %{m3900:-march=r3900 -mips1 -mfp32 -mgp32 \
  %n`-m3900' is deprecated. Use `-march=r3900' instead.\n} \
  %{m4650:-march=r4650 -mmad -msingle-float \
@@ -2022,7 +1989,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  #endif
  
  /* CC1_SPEC is the set of arguments to pass to the compiler proper.  */
-@@ -1003,6 +1048,7 @@
+@@ -1003,6 +1046,7 @@
  %{mfp64:%{msingle-float:%emay not use both -mfp64 and -msingle-float}} \
  %{mfp64:%{m4650:%emay not use both -mfp64 and -m4650}} \
  %{mint64|mlong64|mlong32:-mexplicit-type-size }\
@@ -2030,7 +1997,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  %{mgp32: %{mfp64:%emay not use both -mgp32 and -mfp64} %{!mfp32: -mfp32}} \
  %{G*} %{EB:-meb} %{EL:-mel} %{EB:%{EL:%emay not use both -EB and -EL}} \
  %{pic-none:   -mno-half-pic} \
-@@ -1657,7 +1703,7 @@
+@@ -1657,7 +1701,7 @@
  #define STRUCTURE_SIZE_BOUNDARY 8
  
  /* There is no point aligning anything to a rounder boundary than this.  */
@@ -2039,7 +2006,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  /* Set this nonzero if move instructions will actually fail to work
     when given unaligned data.  */
-@@ -1792,20 +1838,20 @@
+@@ -1792,20 +1836,20 @@
     address reg ($31) was stored.  This is needed for C++ exception
     handling.  */
  
@@ -2063,7 +2030,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  }
  
  
-@@ -1822,7 +1868,8 @@
+@@ -1822,7 +1866,8 @@
    0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1,			\
    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,			\
    1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,			\
@@ -2073,7 +2040,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  }
  
  /* Like `CALL_USED_REGISTERS' but used to overcome a historical
-@@ -1842,7 +1889,8 @@
+@@ -1842,7 +1887,8 @@
    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,			\
    1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,			\
    /* Others.  */                                                        \
@@ -2083,7 +2050,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  }
  
  /* Internal macros to classify a register number as to whether it's a
-@@ -1863,6 +1911,10 @@
+@@ -1863,6 +1909,10 @@
  #define MD_REG_LAST  66
  #define MD_REG_NUM   (MD_REG_LAST - MD_REG_FIRST + 1)
  
@@ -2094,7 +2061,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  #define ST_REG_FIRST 67
  #define ST_REG_LAST  74
  #define ST_REG_NUM   (ST_REG_LAST - ST_REG_FIRST + 1)
-@@ -1873,6 +1925,9 @@
+@@ -1873,6 +1923,9 @@
  #define HI_REGNUM	(MD_REG_FIRST + 0)
  #define LO_REGNUM	(MD_REG_FIRST + 1)
  #define HILO_REGNUM	(MD_REG_FIRST + 2)
@@ -2104,7 +2071,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  /* FPSW_REGNUM is the single condition code used if mips_isa < 4.  If
     mips_isa >= 4, it should not be used, and an arbitrary ST_REG
-@@ -1887,6 +1942,8 @@
+@@ -1887,6 +1940,8 @@
    ((unsigned int) ((int) (REGNO) - FP_REG_FIRST) < FP_REG_NUM)
  #define MD_REG_P(REGNO) \
    ((unsigned int) ((int) (REGNO) - MD_REG_FIRST) < MD_REG_NUM)
@@ -2113,7 +2080,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  #define ST_REG_P(REGNO) \
    ((unsigned int) ((int) (REGNO) - ST_REG_FIRST) < ST_REG_NUM)
  
-@@ -2053,6 +2110,20 @@
+@@ -2053,6 +2108,20 @@
    LO_AND_GR_REGS,
    HILO_AND_GR_REGS,
    HI_AND_FP_REGS,
@@ -2134,7 +2101,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
    ST_REGS,			/* status registers (fp status) */
    ALL_REGS,			/* all registers */
    LIM_REG_CLASSES		/* max value + 1 */
-@@ -2083,6 +2154,20 @@
+@@ -2083,6 +2152,20 @@
    "LO_AND_GR_REGS",							\
    "HILO_AND_GR_REGS",							\
    "HI_AND_FP_REGS",							\
@@ -2155,7 +2122,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
    "ST_REGS",								\
    "ALL_REGS"								\
  }
-@@ -2101,7 +2186,7 @@
+@@ -2101,7 +2184,7 @@
  #define REG_CLASS_CONTENTS						\
  {									\
    { 0x00000000, 0x00000000, 0x00000000 },	/* no registers */	\
@@ -2164,7 +2131,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
    { 0x000300fc, 0x00000000, 0x00000000 },	/* mips16 registers */	\
    { 0x01000000, 0x00000000, 0x00000000 },	/* mips16 T register */	\
    { 0x010300fc, 0x00000000, 0x00000000 },	/* mips16 and T regs */ \
-@@ -2115,8 +2200,24 @@
+@@ -2115,8 +2198,24 @@
    { 0xffffffff, 0x00000000, 0x00000002 },				\
    { 0xffffffff, 0x00000000, 0x00000004 },				\
    { 0x00000000, 0xffffffff, 0x00000001 },				\
@@ -2190,7 +2157,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  }
  
  
-@@ -2165,7 +2266,8 @@
+@@ -2165,7 +2264,8 @@
    16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,	\
    32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,	\
    48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63,	\
@@ -2200,7 +2167,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  }
  
  /* ORDER_REGS_FOR_LOCAL_ALLOC is a macro which permits reg_alloc_order
-@@ -2193,7 +2295,11 @@
+@@ -2193,7 +2293,11 @@
     'x'	Multiply/divide registers
     'a'	HILO_REG
     'z'	FP Status register
@@ -2213,7 +2180,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  extern enum reg_class mips_char_to_class[256];
  
-@@ -2353,7 +2459,7 @@
+@@ -2353,7 +2457,7 @@
  #define CLASS_CANNOT_CHANGE_MODE					\
    (TARGET_BIG_ENDIAN							\
     ? (TARGET_FLOAT64 && ! TARGET_64BIT ? FP_REGS : NO_REGS)		\
@@ -2222,19 +2189,19 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  /* Defines illegal mode changes for CLASS_CANNOT_CHANGE_MODE.  */
  
-@@ -3466,8 +3572,9 @@
+@@ -3466,8 +3570,9 @@
  
  /* Max number of bytes we can move from memory to memory
     in one reasonably fast instruction.  */
 -#define MOVE_MAX (TARGET_64BIT ? 8 : 4)
 -#define MAX_MOVE_MAX 8
 +/* We can do 16 bytes using the r5900's MMI */
-+#define MOVE_MAX (TARGET_MIPS5900 ? (mips_use_128 ? 16 : 8) : (TARGET_64BIT ? 8 : 4))
-+#define MAX_MOVE_MAX (mips_use_128 ? 16 : 8)
++#define MOVE_MAX (TARGET_MIPS5900 ? 16 : (TARGET_64BIT ? 8 : 4))
++#define MAX_MOVE_MAX 16
  
  /* Define this macro as a C expression which is nonzero if
     accessing less than a word of memory (i.e. a `char' or a
-@@ -3760,6 +3867,8 @@
+@@ -3760,6 +3865,8 @@
  	return COSTS_N_INSNS (17);					\
        else if (TUNE_MIPS5000)				\
  	return COSTS_N_INSNS (5);					\
@@ -2243,7 +2210,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
        else								\
  	return COSTS_N_INSNS (10);					\
      }									\
-@@ -3801,6 +3910,8 @@
+@@ -3801,6 +3908,8 @@
        return COSTS_N_INSNS (38);					\
      else if (TUNE_MIPS5000)				\
        return COSTS_N_INSNS (36);					\
@@ -2252,7 +2219,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
      else								\
        return COSTS_N_INSNS (69);					\
  									\
-@@ -3906,10 +4017,14 @@
+@@ -3906,10 +4015,14 @@
     : GR_REG_CLASS_P (FROM) && (TO) == FP_REGS ? 4			\
     : (FROM) == FP_REGS && GR_REG_CLASS_P (TO) ? 4			\
     : (((FROM) == HI_REG || (FROM) == LO_REG				\
@@ -2269,7 +2236,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
        && GR_REG_CLASS_P (FROM)) ? (TARGET_MIPS16 ? 12 : 6)		\
     : (FROM) == ST_REGS && GR_REG_CLASS_P (TO) ? 4			\
     : (FROM) == FP_REGS && (TO) == ST_REGS ? 8				\
-@@ -3943,6 +4058,10 @@
+@@ -3943,6 +4056,10 @@
  #define ADJUST_INSN_LENGTH(INSN, LENGTH) \
    ((LENGTH) = mips_adjust_insn_length ((INSN), (LENGTH)))
  
@@ -2280,7 +2247,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  /* Optionally define this if you have added predicates to
     `MACHINE.c'.  This macro is called within an initializer of an
-@@ -3988,6 +4107,8 @@
+@@ -3988,6 +4105,8 @@
    {"movdi_operand",		{ CONST_INT, CONST_DOUBLE, CONST,	\
  				  SYMBOL_REF, LABEL_REF, SUBREG, REG,	\
  				  MEM, SIGN_EXTEND }},			\
@@ -2289,7 +2256,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
    {"se_register_operand",	{ SUBREG, REG, SIGN_EXTEND }},		\
    {"se_reg_or_0_operand",	{ REG, CONST_INT, CONST_DOUBLE, SUBREG,	\
  				  SIGN_EXTEND }},			\
-@@ -4142,6 +4263,9 @@
+@@ -4142,6 +4261,9 @@
    &mips_reg_names[73][0],						\
    &mips_reg_names[74][0],						\
    &mips_reg_names[75][0],						\
@@ -2299,7 +2266,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  }
  
  /* print-rtl.c can't use REGISTER_NAMES, since it depends on mips.c.
-@@ -4157,7 +4281,8 @@
+@@ -4157,7 +4279,8 @@
    "$f16", "$f17", "$f18", "$f19", "$f20", "$f21", "$f22", "$f23",	\
    "$f24", "$f25", "$f26", "$f27", "$f28", "$f29", "$f30", "$f31",	\
    "hi",   "lo",   "accum","$fcc0","$fcc1","$fcc2","$fcc3","$fcc4",	\
@@ -2309,7 +2276,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  }
  
  /* If defined, a C initializer for an array of structures
-@@ -4410,6 +4535,7 @@
+@@ -4410,6 +4533,7 @@
    } while (0)
  
  /* This says how to define a global common symbol.  */
@@ -2317,7 +2284,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  #define ASM_OUTPUT_ALIGNED_DECL_COMMON(STREAM, DECL, NAME, SIZE, ALIGN) \
    do {									\
-@@ -4428,9 +4554,10 @@
+@@ -4428,9 +4552,10 @@
  	mips_declare_object (STREAM, NAME, "", ":\n\t.space\t%u\n",	\
  	    (SIZE));							\
        }									\
@@ -2331,7 +2298,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
    } while (0)
  
  
-@@ -4542,7 +4669,7 @@
+@@ -4542,7 +4667,7 @@
     to a multiple of 2**LOG bytes.  */
  
  #define ASM_OUTPUT_ALIGN(STREAM,LOG)					\
@@ -2340,7 +2307,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  
  /* This is how to output an assembler line to advance the location
     counter by SIZE bytes.  */
-@@ -4716,6 +4843,15 @@
+@@ -4716,6 +4841,15 @@
     PC relative loads that are out of range.  */
  #define MACHINE_DEPENDENT_REORG(X) machine_dependent_reorg (X)
  
@@ -2356,7 +2323,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
  /* We need to use a special set of functions to handle hard floating
     point code in mips16 mode.  */
  
-@@ -4788,3 +4924,44 @@
+@@ -4788,3 +4922,44 @@
        }									\
    }									\
  while (0)
@@ -2401,9 +2368,9 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h ps2-gcc-3.2.2/gcc/config/mips/mips.h
 +
 +  R5900_BUILTIN_MAX
 +};
-diff -uNr gcc-3.2.2/gcc/config/mips/mips.h~ ps2-gcc-3.2.2/gcc/config/mips/mips.h~
---- gcc-3.2.2/gcc/config/mips/mips.h~	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/gcc/config/mips/mips.h~	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.h~ gcc-3.2.2/gcc/config/mips/mips.h~
+--- orig.gcc-3.2.2/gcc/config/mips/mips.h~	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/mips.h~	2004-11-30 13:33:49.000000000 -0400
 @@ -0,0 +1,4960 @@
 +/* Definitions of target machine for GNU compiler.  MIPS version.
 +   Copyright (C) 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998
@@ -7365,9 +7332,9 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.h~ ps2-gcc-3.2.2/gcc/config/mips/mips.h
 +
 +  R5900_BUILTIN_MAX
 +};
-diff -uNr gcc-3.2.2/gcc/config/mips/mips.md ps2-gcc-3.2.2/gcc/config/mips/mips.md
---- gcc-3.2.2/gcc/config/mips/mips.md	Mon Nov 11 06:57:14 2002
-+++ ps2-gcc-3.2.2/gcc/config/mips/mips.md	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.md gcc-3.2.2/gcc/config/mips/mips.md
+--- orig.gcc-3.2.2/gcc/config/mips/mips.md	2002-11-11 01:57:14.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/mips.md	2004-11-30 13:33:49.000000000 -0400
 @@ -84,11 +84,11 @@
  ;; nop		no operation
  
@@ -8938,10 +8905,10 @@ diff -uNr gcc-3.2.2/gcc/config/mips/mips.md ps2-gcc-3.2.2/gcc/config/mips/mips.m
 +  "psubuw\\t%0,%1,%2"
 +  [(set_attr "type" "mmi")])
 +
-diff -uNr gcc-3.2.2/gcc/config/mips/r5900.h ps2-gcc-3.2.2/gcc/config/mips/r5900.h
---- gcc-3.2.2/gcc/config/mips/r5900.h	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/gcc/config/mips/r5900.h	Sun Feb 13 18:35:49 2005
-@@ -0,0 +1,285 @@
+diff -burN orig.gcc-3.2.2/gcc/config/mips/r5900.h gcc-3.2.2/gcc/config/mips/r5900.h
+--- orig.gcc-3.2.2/gcc/config/mips/r5900.h	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/r5900.h	2004-11-30 13:33:49.000000000 -0400
+@@ -0,0 +1,266 @@
 +/*
 + * Target machine definitions for the Toshiba r5900.
 + *
@@ -9012,8 +8979,6 @@ diff -uNr gcc-3.2.2/gcc/config/mips/r5900.h ps2-gcc-3.2.2/gcc/config/mips/r5900.
 +
 +#undef SUBTARGET_TARGET_OPTIONS
 +#define SUBTARGET_TARGET_OPTIONS					\
-+  { "use-128", &mips_use_128_string,					\
-+      N_("Use 128-bit operations")},					\
 +  { "align128", &mips_align128_string,					\
 +      N_("Use 128-bit alignment")},					\
 +  { "no-align128", &mips_no_align128_string,				\
@@ -9080,7 +9045,7 @@ diff -uNr gcc-3.2.2/gcc/config/mips/r5900.h ps2-gcc-3.2.2/gcc/config/mips/r5900.
 +#define CPP_PREDEFINES "\
 +-D__ELF__ \
 +-Dmips -D_mips -D__mips -D__mips__ \
-+%{!miop: -DR5900 -D_R5900 -D__R5900 -D_EE } \
++%{!miop: -DR5900 -D_R5900 -D__R5900 } \
 +%{miop: -DR3000 -D_3000 -D__3000 } \
 +-DMIPSEL -D_MIPSEL -D__MIPSEL -D__MIPSEL__ \
 +-Acpu(mips) -Amachine(mips) \
@@ -9210,26 +9175,9 @@ diff -uNr gcc-3.2.2/gcc/config/mips/r5900.h ps2-gcc-3.2.2/gcc/config/mips/r5900.
 +	 > (mips_abi == ABI_EABI ? 2 * UNITS_PER_WORD : 16))))
 +
 +#define EH_FRAME_IN_DATA_SECTION 1
-+
-+/*
-+ * This patch is ugly. But it hopefully will put an end to that
-+ * 128-bits alignment madness.
-+ */
-+
-+#undef CONSTANT_ALIGNMENT
-+#define CONSTANT_ALIGNMENT(EXP, ALIGN)                                  \
-+  ((TREE_CODE (EXP) == STRING_CST  || TREE_CODE (EXP) == CONSTRUCTOR)   \
-+   && (ALIGN) < (mips_use_128 ? 128 : 64) ? (mips_use_128 ? 128 : 64) : (ALIGN))
-+
-+#undef DATA_ALIGNMENT
-+#define DATA_ALIGNMENT(TYPE, ALIGN)                                     \
-+  ((((ALIGN) < (mips_use_128 ? 128 : 64))                               \
-+    && (TREE_CODE (TYPE) == ARRAY_TYPE                                  \
-+        || TREE_CODE (TYPE) == UNION_TYPE                               \
-+        || TREE_CODE (TYPE) == RECORD_TYPE)) ? (mips_use_128 ? 128 : 64) : (ALIGN))
-diff -uNr gcc-3.2.2/gcc/config/mips/t-irx ps2-gcc-3.2.2/gcc/config/mips/t-irx
---- gcc-3.2.2/gcc/config/mips/t-irx	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/gcc/config/mips/t-irx	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/t-irx gcc-3.2.2/gcc/config/mips/t-irx
+--- orig.gcc-3.2.2/gcc/config/mips/t-irx	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/t-irx	2004-11-30 13:33:49.000000000 -0400
 @@ -0,0 +1,77 @@
 +CONFIG2_H	= $(srcdir)/config/mips/ecoff.h
 +
@@ -9308,9 +9256,9 @@ diff -uNr gcc-3.2.2/gcc/config/mips/t-irx ps2-gcc-3.2.2/gcc/config/mips/t-irx
 +explow.o: $(CONFIG2_H)
 +recog.o: $(CONFIG2_H)
 +reload.o: $(CONFIG2_H)
-diff -uNr gcc-3.2.2/gcc/config/mips/t-r5900 ps2-gcc-3.2.2/gcc/config/mips/t-r5900
---- gcc-3.2.2/gcc/config/mips/t-r5900	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/gcc/config/mips/t-r5900	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/gcc/config/mips/t-r5900 gcc-3.2.2/gcc/config/mips/t-r5900
+--- orig.gcc-3.2.2/gcc/config/mips/t-r5900	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/t-r5900	2004-11-30 13:33:49.000000000 -0400
 @@ -0,0 +1,56 @@
 +# Suppress building libgcc1.a, since the MIPS compiler port is complete
 +# and does not need anything from libgcc1.a.
@@ -9368,9 +9316,9 @@ diff -uNr gcc-3.2.2/gcc/config/mips/t-r5900 ps2-gcc-3.2.2/gcc/config/mips/t-r590
 +	floattidf floattisf lshrti3 modti3 multi3 negti2 ucmpti2 udivti3 umodti3
 +
 +LIB2FUNCS_TI = $(TIMODE_FUNCS_LIST)
-diff -uNr gcc-3.2.2/gcc/config.gcc ps2-gcc-3.2.2/gcc/config.gcc
---- gcc-3.2.2/gcc/config.gcc	Thu Jan 30 15:03:42 2003
-+++ ps2-gcc-3.2.2/gcc/config.gcc	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/gcc/config.gcc gcc-3.2.2/gcc/config.gcc
+--- orig.gcc-3.2.2/gcc/config.gcc	2003-01-30 10:03:42.000000000 -0400
++++ gcc-3.2.2/gcc/config.gcc	2004-11-30 13:33:49.000000000 -0400
 @@ -1553,6 +1553,10 @@
  		*minwg32msv* | *mingw32*)
  			;;
@@ -9430,9 +9378,9 @@ diff -uNr gcc-3.2.2/gcc/config.gcc ps2-gcc-3.2.2/gcc/config.gcc
  	fi
  fi
 +
-diff -uNr gcc-3.2.2/gcc/fixinc/gnu-regex.c ps2-gcc-3.2.2/gcc/fixinc/gnu-regex.c
---- gcc-3.2.2/gcc/fixinc/gnu-regex.c	Wed Feb 27 01:23:56 2002
-+++ ps2-gcc-3.2.2/gcc/fixinc/gnu-regex.c	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c gcc-3.2.2/gcc/fixinc/gnu-regex.c
+--- orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c	2002-02-26 20:23:56.000000000 -0400
++++ gcc-3.2.2/gcc/fixinc/gnu-regex.c	2004-11-30 13:33:49.000000000 -0400
 @@ -26,6 +26,9 @@
  # include <config.h>
  #endif
@@ -9443,9 +9391,9 @@ diff -uNr gcc-3.2.2/gcc/fixinc/gnu-regex.c ps2-gcc-3.2.2/gcc/fixinc/gnu-regex.c
  /* GCC LOCAL: we don't need NLS here.  */
  #undef ENABLE_NLS
  /* GCC LOCAL: to handle defining alloca.  */
-diff -uNr gcc-3.2.2/gcc/libgcc2-timode.c ps2-gcc-3.2.2/gcc/libgcc2-timode.c
---- gcc-3.2.2/gcc/libgcc2-timode.c	Thu Jan  1 01:00:00 1970
-+++ ps2-gcc-3.2.2/gcc/libgcc2-timode.c	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/gcc/libgcc2-timode.c gcc-3.2.2/gcc/libgcc2-timode.c
+--- orig.gcc-3.2.2/gcc/libgcc2-timode.c	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/libgcc2-timode.c	2004-11-30 13:33:49.000000000 -0400
 @@ -0,0 +1,792 @@
 +/* GCC rutime support routines for TI mode */
 +
@@ -10239,9 +10187,9 @@ diff -uNr gcc-3.2.2/gcc/libgcc2-timode.c ps2-gcc-3.2.2/gcc/libgcc2-timode.c
 +  return (SFtype) df;
 +}
 +#endif
-diff -uNr gcc-3.2.2/gcc/mklibgcc.in ps2-gcc-3.2.2/gcc/mklibgcc.in
---- gcc-3.2.2/gcc/mklibgcc.in	Tue Jan 28 22:57:40 2003
-+++ ps2-gcc-3.2.2/gcc/mklibgcc.in	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/gcc/mklibgcc.in gcc-3.2.2/gcc/mklibgcc.in
+--- orig.gcc-3.2.2/gcc/mklibgcc.in	2003-01-28 17:57:40.000000000 -0400
++++ gcc-3.2.2/gcc/mklibgcc.in	2004-11-30 13:33:49.000000000 -0400
 @@ -232,6 +232,21 @@
    libgcc2_st_objs="$libgcc2_st_objs ${oname}${objext}"
  done
@@ -10264,9 +10212,9 @@ diff -uNr gcc-3.2.2/gcc/mklibgcc.in ps2-gcc-3.2.2/gcc/mklibgcc.in
  # SHLIB_MKMAP
  # SHLIB_MKMAP_OPTS
  # SHLIB_MAPFILES
-diff -uNr gcc-3.2.2/gcc/toplev.c ps2-gcc-3.2.2/gcc/toplev.c
---- gcc-3.2.2/gcc/toplev.c	Sat Nov  2 01:57:23 2002
-+++ ps2-gcc-3.2.2/gcc/toplev.c	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/gcc/toplev.c gcc-3.2.2/gcc/toplev.c
+--- orig.gcc-3.2.2/gcc/toplev.c	2002-11-01 20:57:23.000000000 -0400
++++ gcc-3.2.2/gcc/toplev.c	2004-11-30 13:33:49.000000000 -0400
 @@ -3469,6 +3469,18 @@
  
    convert_to_eh_region_ranges ();
@@ -10286,9 +10234,9 @@ diff -uNr gcc-3.2.2/gcc/toplev.c ps2-gcc-3.2.2/gcc/toplev.c
    /* Shorten branches.  */
    timevar_push (TV_SHORTEN_BRANCH);
    shorten_branches (get_insns ());
-diff -uNr gcc-3.2.2/libstdc++-v3/configure.target ps2-gcc-3.2.2/libstdc++-v3/configure.target
---- gcc-3.2.2/libstdc++-v3/configure.target	Fri Sep  6 20:32:08 2002
-+++ ps2-gcc-3.2.2/libstdc++-v3/configure.target	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/libstdc++-v3/configure.target gcc-3.2.2/libstdc++-v3/configure.target
+--- orig.gcc-3.2.2/libstdc++-v3/configure.target	2002-09-06 15:32:08.000000000 -0300
++++ gcc-3.2.2/libstdc++-v3/configure.target	2004-11-30 13:33:49.000000000 -0400
 @@ -55,6 +55,9 @@
    m68k | m680[246]0)
      cpu_include_dir="config/cpu/m68k"
@@ -10299,9 +10247,9 @@ diff -uNr gcc-3.2.2/libstdc++-v3/configure.target ps2-gcc-3.2.2/libstdc++-v3/con
    powerpc | rs6000)
      cpu_include_dir="config/cpu/powerpc"
      ;;
-diff -uNr gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc ps2-gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc
---- gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	Fri Jun 28 10:22:38 2002
-+++ ps2-gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	Thu Jan 20 00:10:06 2005
+diff -burN orig.gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc
+--- orig.gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	2002-06-28 05:22:38.000000000 -0300
++++ gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	2004-11-30 13:33:49.000000000 -0400
 @@ -46,6 +46,6 @@
  extern "C" void
  __cxa_pure_virtual (void)
