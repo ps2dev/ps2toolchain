@@ -45,13 +45,29 @@
    Then you're done!
 
   ===================
+   OLDER IOP PATCHES
+  ===================
+
+   As there's still a few problems with the patches and irx files, the
+   older iop patches and a script for building them is included. Its
+   fairly simple to install after running the main script:
+
+    **** THIS SCRIPT WILL DELETE YOUR CURRENT IOP TOOLCHAIN!! ****
+
+    ## Make the script executable.
+    chmod a+x ./toolchain-oldiop.sh
+
+    ## Run the script.
+    ./toolchain-oldiop.sh
+
+  ===================
    ABOUT THE PATCHES
   ===================
 
    Here's a brief changelog that I've kept. It probably belongs in the
    actual patches themselves and will end up there eventually...
 
-   binutils-2.14-PS2-20041127.patch:
+   binutils-2.14-PS2-20050120.patch:
     pixel: 20040214 (gruntwork) patch
     mrbrown: 20040307 patch
     ryani: 20040214 patch
@@ -62,7 +78,7 @@
     emoon/pixel/mrbrown: mips-opc.c mfpc fix
     mharris: vu code disassembly fix
 
-   gcc-3.2.2-PS2-20041130.patch:
+   gcc-3.2.2-PS2-20050120.patch:
     pixel: 20040214 (gruntwork) patch
     mrbrown: 20040222 patch
     blackd: 'scei' name fix patch
