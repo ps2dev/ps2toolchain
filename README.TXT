@@ -78,7 +78,7 @@
     emoon/pixel/mrbrown: mips-opc.c mfpc fix
     mharris: vu code disassembly fix
 
-   gcc-3.2.2-PS2-20050120.patch:
+   gcc-3.2.2-PS2-20050213.patch:
     pixel: 20040214 (gruntwork) patch
     mrbrown: 20040222 patch
     blackd: 'scei' name fix patch
