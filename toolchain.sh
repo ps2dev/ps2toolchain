@@ -261,8 +261,8 @@
   $MAKE release || { echo "ERROR INSTALLING PS2SDK"; exit; }
   
   ## Replace newlib's crt0 with the one in ps2sdk.
-  ln -sf $(PS2SDK)/ee/startup/crt0.o $(PS2DEV)/ee/lib/gcc-lib/ee/3.2.2/
-  ln -sf $(PS2SDK)/ee/startup/crt0.o $(PS2DEV)/ee/ee/lib/
+  ln -sf $PS2SDK/ee/startup/crt0.o $PS2DEV/ee/lib/gcc-lib/ee/3.2.2/
+  ln -sf $PS2SDK/ee/startup/crt0.o $PS2DEV/ee/ee/lib/
 
   ## Clean up the result.
   $MAKE clean
