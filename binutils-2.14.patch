@@ -7098,7 +7098,7 @@ diff -uNr binutils-2.14/opcodes/configure.in ps2-binutils-2.14/opcodes/configure
  	bfd_v850ea_arch)	ta="$ta v850-opc.lo v850-dis.lo" ;;
 diff -uNr binutils-2.14/opcodes/disassemble.c ps2-binutils-2.14/opcodes/disassemble.c
 --- binutils-2.14/opcodes/disassemble.c	Tue Apr  1 17:50:30 2003
-+++ ps2-binutils-2.14/opcodes/disassemble.c	Fri Mar 11 10:51:02 2005
++++ ps2-binutils-2.14/opcodes/disassemble.c	Fri Mar 11 10:59:46 2005
 @@ -75,7 +75,6 @@
  #define INCLUDE_SHMEDIA
  #endif
@@ -7107,7 +7107,7 @@ diff -uNr binutils-2.14/opcodes/disassemble.c ps2-binutils-2.14/opcodes/disassem
  disassembler_ftype
  disassembler (abfd)
       bfd *abfd;
-@@ -232,13 +231,17 @@
+@@ -232,12 +231,16 @@
        disassemble = print_insn_mcore;
        break;
  #endif
@@ -7119,13 +7119,12 @@ diff -uNr binutils-2.14/opcodes/disassemble.c ps2-binutils-2.14/opcodes/disassem
  	disassemble = print_insn_big_mips;
        else
  	disassemble = print_insn_little_mips;
-       break;
 +#else
 +	disassemble = print_insn_dvp;
 +#endif
+       break;
  #endif
  #ifdef ARCH_mmix
-     case bfd_arch_mmix:
 diff -uNr binutils-2.14/opcodes/dvp-dis.c ps2-binutils-2.14/opcodes/dvp-dis.c
 --- binutils-2.14/opcodes/dvp-dis.c	Thu Jan  1 01:00:00 1970
 +++ ps2-binutils-2.14/opcodes/dvp-dis.c	Thu Jan 20 00:56:48 2005
