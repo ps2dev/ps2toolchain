@@ -6,6 +6,12 @@
  ## MAIN CONFIGURATION ##
  ########################
 
+  ## Main ps2dev settings.
+  export PS2DEV="/usr/local/ps2dev"
+  export PS2SDK="$PS2DEV/ps2sdk"
+  export CVSROOT=":pserver:anonymous@cvs.ps2dev.org:/home/ps2cvs"
+  export PATH="$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin"
+
   ## Set the directories.
   export SRCDIR="`pwd`"
   export TMPDIR="/tmp/ps2dev"
