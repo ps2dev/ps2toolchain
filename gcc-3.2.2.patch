@@ -258,6 +258,31 @@ diff -uNr gcc-3.2.2/gcc/c-common.c ps2-gcc-3.2.2/gcc/c-common.c
  
    /* Create the widest literal types.  */
    widest_integer_literal_type_node
+diff -uNr gcc-3.2.2/gcc/caller-save.c ps2-gcc-3.2.2/gcc/caller-save.c
+--- gcc-3.2.2/gcc/caller-save.c	Tue Mar  1 12:34:54 2005
++++ ps2-gcc-3.2.2/gcc/caller-save.c	Tue Mar  1 12:35:17 2005
+@@ -50,13 +50,21 @@
+    If that is not possible the save is done one register at a time.  */
+ 
+ static enum machine_mode 
++#if TARGET_MIPS5900
++  regno_save_mode[FIRST_PSEUDO_REGISTER][16 / MIN_UNITS_PER_WORD + 1];
++#else
+   regno_save_mode[FIRST_PSEUDO_REGISTER][MAX_MOVE_MAX / MIN_UNITS_PER_WORD + 1];
++#endif
+ 
+ /* For each hard register, a place on the stack where it can be saved,
+    if needed.  */
+ 
+ static rtx 
++#if TARGET_MIPS5900
++  regno_save_mem[FIRST_PSEUDO_REGISTER][16 / MIN_UNITS_PER_WORD + 1];
++#else
+   regno_save_mem[FIRST_PSEUDO_REGISTER][MAX_MOVE_MAX / MIN_UNITS_PER_WORD + 1];
++#endif
+ 
+ /* We will only make a register eligible for caller-save if it can be
+    saved in its widest mode with a simple SET insn as long as the memory
 diff -uNr gcc-3.2.2/gcc/config/mips/core-mmi.h ps2-gcc-3.2.2/gcc/config/mips/core-mmi.h
 --- gcc-3.2.2/gcc/config/mips/core-mmi.h	Thu Jan  1 01:00:00 1970
 +++ ps2-gcc-3.2.2/gcc/config/mips/core-mmi.h	Thu Jan 20 00:10:05 2005
