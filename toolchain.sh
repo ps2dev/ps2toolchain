@@ -9,7 +9,7 @@
   ## Main ps2dev settings.
   export PS2DEV="/usr/local/ps2dev"
   export PS2SDK="$PS2DEV/ps2sdk"
-  export CVSROOT=":pserver:anonymous@cvs.ps2dev.org:/home/ps2cvs"
+  export CVSROOT=":pserver:anonymous@cvs.ps2dev.org:2401/home/ps2cvs"
   export PATH="$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin"
 
   ## Set the directories.
@@ -22,9 +22,9 @@
   export NEWLIB="newlib-1.10.0"
 
   ## CVS configuration.
-  if [ "`cat ~/.cvspass | grep $CVSROOT`" = "" ]; then
+  if [ "`cat ~/.cvspass | grep $CVSROOT`" == "" ]; then
    echo "THE SECRET PASSWORD IS: anonymous"
-   cvs login
+   cvs -d $CVSROOT login
   fi
 
  ###########################
@@ -221,7 +221,7 @@
   rm -Rf ps2client
 
   ## Check out the latest source.
-  cvs checkout ps2client
+  cvs -d $CVSROOT checkout ps2client
 
   ## Enter the source directory.
   cd ps2client
@@ -246,7 +246,7 @@
   rm -Rf ps2sdk
 
   ## Check out the latest source.
-  cvs checkout ps2sdk
+  cvs -d $CVSROOT checkout ps2sdk
 
   ## Enter the source directory.
   cd ps2sdk
