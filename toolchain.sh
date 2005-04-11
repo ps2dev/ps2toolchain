@@ -61,8 +61,8 @@
   rm -Rf $NEWLIB; tar xfvz $SRCDIR/$NEWLIB.tar.gz
 
   ## Patch the source.
-  cd $BINUTILS; cat $SRCDIR/$BINUTILS.patch | patch -p1; cd ..
-  cd $GCC; cat $SRCDIR/$GCC.patch | patch -p1; cd ..
+  cd $BINUTILS; cat $SRCDIR/$BINUTILS.patch | patch -p0; cd ..
+  cd $GCC; cat $SRCDIR/$GCC.patch | patch -p0; cd ..
   cd $NEWLIB; cat $SRCDIR/$NEWLIB.patch | patch -p1; cd ..
 
  ################################
