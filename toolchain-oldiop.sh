@@ -27,7 +27,7 @@
   wget -c ftp://ftp.gnu.org/pub/gnu/gcc/gcc-2.8.1.tar.gz
 
   ## Remove the current IOP installation.
-  rm -Rf $PS2SDK/iop
+  rm -Rf $PS2DEV/iop
 
  ################################
  ## BUILD AND INSTALL BINUTILS ##
