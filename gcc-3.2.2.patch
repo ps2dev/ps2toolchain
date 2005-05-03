@@ -392,6 +392,28 @@ diff -b -u -r1.1.1.1 -r1.2
  	fi
  fi
 +
+Index: gcc/glimits.h
+===================================================================
+RCS file: /home/ps2cvs/gcc-3.2.2/gcc/glimits.h,v
+retrieving revision 1.1.1.1
+retrieving revision 1.2
+diff -b -u -r1.1.1.1 -r1.2
+--- gcc/glimits.h	1 Dec 2004 04:30:44 -0000	1.1.1.1
++++ gcc/glimits.h	17 Apr 2005 11:51:37 -0000	1.2
+@@ -67,11 +67,11 @@
+ /* Minimum and maximum values a `signed long int' can hold.
+    (Same as `int').  */
+ #ifndef __LONG_MAX__
+-#if defined (__alpha__) || (defined (__sparc__) && defined(__arch64__)) || defined (__sparcv9)
++#if defined (__alpha__) || (defined (__sparc__) && defined(__arch64__)) || defined (__sparcv9) || defined (__R5900)
+ #define __LONG_MAX__ 9223372036854775807L
+ #else
+ #define __LONG_MAX__ 2147483647L
+-#endif /* __alpha__ || sparc64 */
++#endif /* __alpha__ || sparc64 || R5900 */
+ #endif
+ #undef LONG_MIN
+ #define LONG_MIN (-LONG_MAX-1)
 Index: gcc/libgcc2-timode.c
 ===================================================================
 RCS file: gcc/libgcc2-timode.c
