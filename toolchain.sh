@@ -42,6 +42,11 @@
 
   ## Check for wget.
   wget -V || { echo "ERROR: Please make sure you have 'wget' installed."; exit; }
+  
+  ## Check for write permission.
+  mkdir -p $PS2SDK || { echo "ERROR: Please make sure you're root."; exit; }
+  touch $PS2SDK/test-write-perm-$$ || { echo "ERROR: Please make sure you're root."; exit; }
+  rm $PS2SDK/test-write-perm-$$
 
  ################################
  ## DOWNLOAD, UNPACK AND PATCH ##
