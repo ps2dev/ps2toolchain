@@ -14,7 +14,7 @@
 
    Also included are reasonably up-to-date patches for binutils, gcc and
    newlib. The latest versions of these can be found in the official ps2dev
-   cvs repository. Unless you're running into an odd bug you really should
+   svn repository. Unless you're running into an odd bug you really should
    be ok with these patches.
 
   ==================
@@ -39,7 +39,6 @@
     ## PS2DEV SETTINGS
     export PS2DEV="/usr/local/ps2dev"
     export PS2SDK="$PS2DEV/ps2sdk"
-    export CVSROOT=":pserver:anonymous@cvs.ps2dev.org:/home/ps2cvs"
     export PATH="$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin"
 
    Then you're done!
