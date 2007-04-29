@@ -148,9 +148,7 @@
   ## Unpack and patch the gcc source.
   if test $BUILD_GCC ; then
    rm -Rf $GCC; tar xfvz "$SRCDIR/$GCC.tar.gz"
-   cd $GCC; cat "$SRCDIR/$GCC.patch" | $PATCH || { echo "ERROR PATCHING GCC"; exit; }
-   cd ..
-   cd $GCC; cat "$SRCDIR/gcc-restrict.patch" | patch -p1 || { echo "ERROR PATCHING GCC"; exit; }
+   cd $GCC; cat "$SRCDIR/$GCC.patch" | patch -p1 || { echo "ERROR PATCHING GCC"; exit; }
    cd ..
   fi
 

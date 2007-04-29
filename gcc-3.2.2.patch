@@ -1,98 +1,6 @@
-Index: README.PS2
-===================================================================
-RCS file: README.PS2
-diff -N README.PS2
---- /dev/null	1 Jan 1970 00:00:00 -0000
-+++ README.PS2	1 Dec 2004 05:21:34 -0000	1.1
-@@ -0,0 +1,80 @@
-+Apologies to mrbrown, who's README.PS2 this was based on.
-+GCC for Sony Playstation 2
-+http://www.ps2dev.org/
-+BETA 3 Release 3.2.2-20040214-1
-+==
-+
-+This patch contains a port of the GNU Compiler Collection (http://gcc.gnu.org)
-+version 3.2.2 (prerelease) to the Sony Playstation 2.  It supports a C and C++
-+cross-compiler targeting the Emotion Engine (Toshiba MIPS R5900).  It is based
-+off of the port that Cygnus (now Red Hat) created for the original PS2 SDK,
-+and contains a number of changes and updates that mrbrown has incorporated,
-+plus some fixes by me.
-+
-+Unfortunately, there is no ChangeLog in this release.
-+
-+The Playstation 2 Linux kit is NOT supported in this release.  There are a
-+number of issues related to the deployment of this version of GCC in that
-+environment.  This is left as an exercise for the ps2linux folks.
-+
-+You can grab the source to the GCC 3.2.2 release from
-+ftp://ftp.gnu.org/pub/gnu/gcc/gcc-3.2.2.tar.gz or a mirror site.
-+
-+
-+Features
-+--
-+
-+- Basic support for the R5900 and COP1.
-+- Initial support for 128-bit logical/arith operations (pand, pnor, etc.).
-+- Initial support for MMI built-in functions (__builtin_paddb, etc.) and vector
-+  types.
-+- The main "feature" of this release is the port to the 3.2.2 compiler and fixes
-+  to the HILO1 code, allowing re-enabling of double precision emulation and also
-+  C++ global constructor fixes.  This release may fix the 64bit shift bug, but
-+  if that's the case then it's a side effect of another fix. 
-+- Used in conjunction with my binutils-2.13.2.1 patch, you should be able to use
-+  -O0 and -O1 without causing bad code generation.
-+- Alignment in bss sections bug fix.
-+
-+To configure the compiler, you can use one of the following configuration
-+names:
-+
-+        ee, mips64r5900[el], mipsEE[el]
-+
-+If you don't specify the OS portion of the name, -elf is assumed.  Note that
-+even if you leave off the "el", you cannot build for big-endian R5900 (it's
-+explicitly disabled).  I always use "ee".
-+
-+
-+Known Bugs
-+--
-+
-+[ I haven't found any serious codegen bugs yet. Mail to the ps2dev forums if
-+  you find any. ]
-+
-+  If you wish to disable double precision emulation, comment out the text around
-+  DPBIT (and the make target that follows it) in gcc/config/mips/t-r5900. If you
-+  comment this section out and use double precision FP in your code, you WILL
-+  receive link errors when linking with libgcc.  You can use this "feature" as a
-+  tool to find all misuses of float constants and type conversions in your code.
-+  Personally, I had trouble getting libstdc++-v3 to build without double precision
-+  emulation but YMMV.  It should be possible to configure the compiler and libs
-+  to use single precision doubles in place of doubles, however you'd have to make
-+  sure that all your libs are built in this manner.
-+
-+
-+Future Work
-+--
-+
-+  Move over to gcc 3.4, once it's released. gcc 3.4 includes a re-write of the
-+  entire mips back end and it looks a lot cleaner.
-+
-+
-+Contact
-+--
-+
-+  Use the forums at www.ps2dev.org or find me on IRC at #ps2dev on EFnet.
-+
-+--
-+MrHTFord (mrhtford_ps2dev@hotmail.com)
-+Friday 14th February 2004.
-Index: config.sub
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/config.sub,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- config.sub	1 Dec 2004 04:30:24 -0000	1.1.1.1
-+++ config.sub	1 Dec 2004 05:21:34 -0000	1.2
+diff -burN orig.gcc-3.2.2/config.sub gcc-3.2.2/config.sub
+--- orig.gcc-3.2.2/config.sub	2003-01-30 18:32:36.000000000 -0400
++++ gcc-3.2.2/config.sub	2007-04-29 02:59:08.000000000 -0300
 @@ -236,6 +236,7 @@
  	| i370 | i860 | i960 | ia64 \
  	| ip2k \
@@ -147,14 +55,9 @@ diff -b -u -r1.1.1.1 -r1.2
  	# Remember, each alternative MUST END IN *, to match a version number.
  		;;
  	-qnx*)
-Index: configure
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/configure,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- configure	1 Dec 2004 04:30:23 -0000	1.1.1.1
-+++ configure	1 Dec 2004 05:21:34 -0000	1.2
+diff -burN orig.gcc-3.2.2/configure gcc-3.2.2/configure
+--- orig.gcc-3.2.2/configure	2002-06-24 13:14:28.000000000 -0300
++++ gcc-3.2.2/configure	2007-04-29 02:59:08.000000000 -0300
 @@ -89,7 +89,7 @@
  target_alias=NOTARGET
  target_makefile_frag=
@@ -182,14 +85,9 @@ diff -b -u -r1.1.1.1 -r1.2
  
  exit 0
  
-Index: configure.in
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/configure.in,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- configure.in	1 Dec 2004 04:30:23 -0000	1.1.1.1
-+++ configure.in	1 Dec 2004 05:21:34 -0000	1.2
+diff -burN orig.gcc-3.2.2/configure.in gcc-3.2.2/configure.in
+--- orig.gcc-3.2.2/configure.in	2002-07-08 07:00:57.000000000 -0300
++++ gcc-3.2.2/configure.in	2007-04-29 02:59:08.000000000 -0300
 @@ -980,6 +980,9 @@
    mips*-*-linux*)
      noconfigdirs="$noconfigdirs target-libffi"
@@ -200,30 +98,34 @@ diff -b -u -r1.1.1.1 -r1.2
    mips*-*-*)
      noconfigdirs="$noconfigdirs gprof ${libgcj}"
      ;;
-Index: gcc/Makefile.in
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/Makefile.in,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/Makefile.in	1 Dec 2004 04:31:53 -0000	1.1.1.1
-+++ gcc/Makefile.in	1 Dec 2004 05:21:34 -0000	1.2
-@@ -987,6 +987,7 @@
- 	LIB2FUNCS_ST='$(LIB2FUNCS_ST)' \
- 	LIB2ADD='$(LIB2ADD)' \
- 	LIB2ADD_ST='$(LIB2ADD_ST)' \
-+	LIB2FUNCS_TI='$(LIB2FUNCS_TI)' \
- 	LIB2ADDEH='$(LIB2ADDEH)' \
- 	LIB2ADDEHDEP='$(LIB2ADDEHDEP)' \
- 	FPBIT='$(FPBIT)' \
-Index: gcc/c-common.c
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/c-common.c,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/c-common.c	1 Dec 2004 04:31:33 -0000	1.1.1.1
-+++ gcc/c-common.c	1 Dec 2004 05:21:34 -0000	1.2
+diff -burN orig.gcc-3.2.2/gcc/caller-save.c gcc-3.2.2/gcc/caller-save.c
+--- orig.gcc-3.2.2/gcc/caller-save.c	2002-01-01 18:22:25.000000000 -0400
++++ gcc-3.2.2/gcc/caller-save.c	2007-04-29 02:59:08.000000000 -0300
+@@ -50,13 +50,21 @@
+    If that is not possible the save is done one register at a time.  */
+ 
+ static enum machine_mode 
++#if TARGET_MIPS5900
++  regno_save_mode[FIRST_PSEUDO_REGISTER][16 / MIN_UNITS_PER_WORD + 1];
++#else
+   regno_save_mode[FIRST_PSEUDO_REGISTER][MAX_MOVE_MAX / MIN_UNITS_PER_WORD + 1];
++#endif
+ 
+ /* For each hard register, a place on the stack where it can be saved,
+    if needed.  */
+ 
+ static rtx 
++#if TARGET_MIPS5900
++  regno_save_mem[FIRST_PSEUDO_REGISTER][16 / MIN_UNITS_PER_WORD + 1];
++#else
+   regno_save_mem[FIRST_PSEUDO_REGISTER][MAX_MOVE_MAX / MIN_UNITS_PER_WORD + 1];
++#endif
+ 
+ /* We will only make a register eligible for caller-save if it can be
+    saved in its widest mode with a simple SET insn as long as the memory
+diff -burN orig.gcc-3.2.2/gcc/c-common.c gcc-3.2.2/gcc/c-common.c
+--- orig.gcc-3.2.2/gcc/c-common.c	2002-12-01 14:19:08.000000000 -0400
++++ gcc-3.2.2/gcc/c-common.c	2007-04-29 02:59:08.000000000 -0300
 @@ -1336,6 +1336,9 @@
    if (bits <= TYPE_PRECISION (intDI_type_node))
      return unsignedp ? unsigned_intDI_type_node : intDI_type_node;
@@ -295,987 +197,9 @@ diff -b -u -r1.1.1.1 -r1.2
  
    /* Create the widest literal types.  */
    widest_integer_literal_type_node
-Index: gcc/caller-save.c
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/caller-save.c,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/caller-save.c	1 Dec 2004 04:33:08 -0000	1.1.1.1
-+++ gcc/caller-save.c	1 Mar 2005 11:29:39 -0000	1.2
-@@ -50,13 +50,21 @@
-    If that is not possible the save is done one register at a time.  */
- 
- static enum machine_mode 
-+#if TARGET_MIPS5900
-+  regno_save_mode[FIRST_PSEUDO_REGISTER][16 / MIN_UNITS_PER_WORD + 1];
-+#else
-   regno_save_mode[FIRST_PSEUDO_REGISTER][MAX_MOVE_MAX / MIN_UNITS_PER_WORD + 1];
-+#endif
- 
- /* For each hard register, a place on the stack where it can be saved,
-    if needed.  */
- 
- static rtx 
-+#if TARGET_MIPS5900
-+  regno_save_mem[FIRST_PSEUDO_REGISTER][16 / MIN_UNITS_PER_WORD + 1];
-+#else
-   regno_save_mem[FIRST_PSEUDO_REGISTER][MAX_MOVE_MAX / MIN_UNITS_PER_WORD + 1];
-+#endif
- 
- /* We will only make a register eligible for caller-save if it can be
-    saved in its widest mode with a simple SET insn as long as the memory
-Index: gcc/config.gcc
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/config.gcc,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/config.gcc	1 Dec 2004 04:31:41 -0000	1.1.1.1
-+++ gcc/config.gcc	1 Dec 2004 05:21:34 -0000	1.2
-@@ -1553,6 +1553,10 @@
- 		*minwg32msv* | *mingw32*)
- 			;;
- 	esac
-+	if test x$pass1done = xyes && test x$pass2done = x
-+	then
-+		host_to_target_tmake_file=i386/t-mingw32
-+	fi
- 	;;
- i[34567]86-*-uwin*)
- 	tm_file=i386/uwin.h
-@@ -2387,6 +2391,13 @@
- 	esac
- 	tmake_file="t-slibgcc-elf-ver t-linux mips/t-linux"
- 	extra_parts="crtbegin.o crtbeginS.o crtbeginT.o crtend.o crtendS.o"
-+	case $machine in
-+	mips*r5900*-*)			# Linux for r5900 (EE)
-+		tm_file="$tm_file mips/r5900.h"
-+		tmake_file="$tmake_file t-r5900"
-+		extra_headers="core-mmi.h core-vumm.h"
-+		;;
-+	esac
- 	gnu_ld=yes
- 	gas=yes
- 	;;
-@@ -2583,6 +2594,24 @@
- 		use_collect2=yes
- 	fi
- 	;;
-+mips*r5900*-*-elf*)			# MIPS r5900 ELF, either endian
-+	tm_file="dbxelf.h elfos.h mips/r5900.h"
-+	tmake_file=mips/t-r5900
-+	case $machine in
-+	mips*el-*)
-+		tm_file="mips/little.h $tm_file"
-+		;;
-+	esac
-+	gnu_ld=yes
-+	gas=yes
-+	extra_headers="core-mmi.h core-vumm.h"
-+	;;
-+mipsel-*-irx)
-+	tm_file="mips/elfl.h libgloss.h"
-+	tmake_file=mips/t-irx
-+	target_cpu_default="MASK_GAS|MASK_SOFT_FLOAT"
-+	fixincludes=Makefile.in
-+	;;
- mipsel-*-ecoff*)
- 	tm_file=mips/ecoffl.h
- 	if test x$stabs = xyes; then
-@@ -3673,5 +3702,8 @@
- 		host_extra_objs=$extra_host_objs
- 		host_exeext=$exeext
- 		pass2done=yes
-+	else
-+		tmake_file="$tmake_file $host_to_target_tmake_file"
- 	fi
- fi
-+
-Index: gcc/glimits.h
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/glimits.h,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/glimits.h	1 Dec 2004 04:30:44 -0000	1.1.1.1
-+++ gcc/glimits.h	17 Apr 2005 11:51:37 -0000	1.2
-@@ -67,11 +67,11 @@
- /* Minimum and maximum values a `signed long int' can hold.
-    (Same as `int').  */
- #ifndef __LONG_MAX__
--#if defined (__alpha__) || (defined (__sparc__) && defined(__arch64__)) || defined (__sparcv9)
-+#if defined (__alpha__) || (defined (__sparc__) && defined(__arch64__)) || defined (__sparcv9) || defined (__R5900)
- #define __LONG_MAX__ 9223372036854775807L
- #else
- #define __LONG_MAX__ 2147483647L
--#endif /* __alpha__ || sparc64 */
-+#endif /* __alpha__ || sparc64 || R5900 */
- #endif
- #undef LONG_MIN
- #define LONG_MIN (-LONG_MAX-1)
-Index: gcc/libgcc2-timode.c
-===================================================================
-RCS file: gcc/libgcc2-timode.c
-diff -N gcc/libgcc2-timode.c
---- /dev/null	1 Jan 1970 00:00:00 -0000
-+++ gcc/libgcc2-timode.c	1 Dec 2004 05:21:34 -0000	1.1
-@@ -0,0 +1,792 @@
-+/* GCC rutime support routines for TI mode */
-+
-+/* Copyright (C) 2001  Sony Computer Entertainment Inc. 
-+   Copyright 2001  Sony Corportaion.  */
-+
-+/* This file is derived from libgcc2.c and subject to the original 
-+   license of libgcc2.c, as follows. */
-+
-+/* Compile this one with gcc.  */
-+/* Copyright (C) 1989, 92-98, 1999 Free Software Foundation, Inc.
-+
-+This file is part of GNU CC.
-+
-+GNU CC is free software; you can redistribute it and/or modify
-+it under the terms of the GNU General Public License as published by
-+the Free Software Foundation; either version 2, or (at your option)
-+any later version.
-+
-+GNU CC is distributed in the hope that it will be useful,
-+but WITHOUT ANY WARRANTY; without even the implied warranty of
-+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+GNU General Public License for more details.
-+
-+You should have received a copy of the GNU General Public License
-+along with GNU CC; see the file COPYING.  If not, write to
-+the Free Software Foundation, 59 Temple Place - Suite 330,
-+Boston, MA 02111-1307, USA.  */
-+
-+/* As a special exception, if you link this library with other files,
-+   some of which are compiled with GCC, to produce an executable,
-+   this library does not by itself cause the resulting executable
-+   to be covered by the GNU General Public License.
-+   This exception does not however invalidate any other reasons why
-+   the executable file might be covered by the GNU General Public License.  */
-+
-+
-+#include "tconfig.h"
-+
-+/* We disable this when inhibit_libc, so that gcc can still be built without
-+   needing header files first.  */
-+/* ??? This is not a good solution, since prototypes may be required in
-+   some cases for correct code.  See also frame.c.  */
-+
-+#include "machmode.h"
-+#include "defaults.h"
-+
-+#ifndef LIBGCC2_WORDS_BIG_ENDIAN
-+#define LIBGCC2_WORDS_BIG_ENDIAN WORDS_BIG_ENDIAN
-+#endif
-+
-+
-+/* In this file, we are interfacing to calls generated by the compiler 
-+   itself.  These calls pass values into these routines which have very 
-+   specific modes (rather than very specific types), and these 
-+   compiler-generated calls also expect any return values to have very 
-+   specific modes (rather than very specific types).  Thus, we need to 
-+   avoid using regular C language type names in this part of the file
-+   because the sizes for those types can be configured to be anything.
-+   Instead we use the following special type names.  */
-+
-+typedef unsigned int UTItype __attribute__((mode(TI)));
-+typedef          int  TItype __attribute__((mode(TI)));
-+typedef unsigned int UDItype __attribute__((mode(DI)));
-+typedef          int  DItype __attribute__((mode(DI)));
-+typedef unsigned int UQItype __attribute__((mode(QI)));
-+typedef          int  QItype __attribute__((mode(QI)));
-+
-+typedef		float SFtype	__attribute__ ((mode (SF)));
-+typedef		float DFtype	__attribute__ ((mode (DF)));
-+
-+typedef int word_type __attribute__ ((mode (__word__)));
-+
-+/* Make sure that we don't accidentally use any normal C language 
-+   built-in type names in the first part of this file.  Instead we want 
-+   to use *only* the type names defined above.  
-+   The following macro definitions insure that if we *do* accidentally 
-+   use some normal C language built-in type name, we will get a syntax 
-+   error.  */
-+
-+#define char bogus_type
-+#define short bogus_type
-+#define int bogus_type
-+#define long bogus_type
-+#define unsigned bogus_type
-+#define float bogus_type
-+#define double bogus_type
-+
-+
-+#ifndef BITS_PER_UNIT
-+#define BITS_PER_UNIT 8
-+#endif
-+#ifndef DI_TYPE_SIZE
-+#define DI_TYPE_SIZE 64
-+#endif
-+
-+
-+/* TIstructs are pairs of DItype values in the order determined by
-+   LIBGCC2_WORDS_BIG_ENDIAN.  */
-+
-+#if LIBGCC2_WORDS_BIG_ENDIAN
-+struct TIstruct {DItype high, low;};
-+#else
-+struct TIstruct {DItype low, high;};
-+#endif
-+
-+/* We need this union to unpack/pack TImode values, since we don't have
-+   any arithmetic yet.  Incoming TImode parameters are stored into the
-+   `ti' field, and the unpacked result is read from the struct `d'.  */
-+
-+typedef union
-+{
-+  struct TIstruct d;
-+  TItype ti;
-+} TIunion;
-+
-+/*  for  
-+	__fixunsdfti
-+	 __floattidf
-+ */ 
-+#define DI_WORD_SIZE (sizeof (DItype) * BITS_PER_UNIT)
-+#define HIGH_DI_WORD_COEFF (((UTItype) 1) << DI_WORD_SIZE)
-+#define HIGH_DI_HALFWORD_COEFF (((UDItype) 1) << (DI_WORD_SIZE / 2))
-+
-+
-+
-+#if (defined (L_udivti3) || defined (L_divti3) || defined (L_multi3) ||\
-+     defined (L_umodti3) || defined (L_modti3))
-+/* ----------------------------------------------------------------- */
-+/* BEGIN: derived from longlog.h */
-+/* for  
-+	__udivmoddi4
-+	__multi3
-+	__dviti3
-+	__udviti3
-+	__modti3
-+	__umodti3
-+*/
-+
-+#define __ti_B (((UDItype)1) << (DI_TYPE_SIZE / 2))
-+#define __ti_lowpart(t) ((UDItype) (t) % __ti_B)
-+#define __ti_highpart(t) ((UDItype) (t) / __ti_B)
-+
-+#define umul_ppmm_di(w1, w0, u, v) 					\
-+do {									\
-+    UDItype __x0, __x1, __x2, __x3;					\
-+    UDItype __ul, __vl, __uh, __vh;					\
-+									\
-+    __ul = __ti_lowpart (u);						\
-+    __uh = __ti_highpart (u);						\
-+    __vl = __ti_lowpart (v);						\
-+    __vh = __ti_highpart (v);						\
-+									\
-+    __x0 = (UDItype) __ul * __vl;					\
-+    __x1 = (UDItype) __ul * __vh;					\
-+    __x2 = (UDItype) __uh * __vl;					\
-+    __x3 = (UDItype) __uh * __vh;					\
-+									\
-+    __x1 += __ti_highpart (__x0);/* this can't give carry */		\
-+    __x1 += __x2;               /* but this indeed can */		\
-+    if (__x1 < __x2)            /* did we get it? */			\
-+      __x3 += __ti_B;           /* yes, add it in the proper pos. */	\
-+									\
-+    (w1) = __x3 + __ti_highpart (__x1);					\
-+    (w0) = __ti_lowpart (__x1) * __ti_B + __ti_lowpart (__x0);		\
-+} while (0)
-+
-+#define __umulditi3(u, v) \
-+  ({TIunion __w;                                                        \
-+    umul_ppmm_di (__w.d.high, __w.d.low, u, v);                            \
-+    __w.ti; })
-+
-+
-+
-+/* Define this unconditionally, so it can be used for debugging.  */
-+#define udiv_qrnnd_c_di(q, r, n1, n0, d) \
-+  do {                                                                  \
-+    UDItype __d1, __d0, __q1, __q0;                                     \
-+    UDItype __r1, __r0, __m;                                            \
-+    __d1 = __ti_highpart (d);                                           \
-+    __d0 = __ti_lowpart (d);                                            \
-+                                                                        \
-+    __r1 = (n1) % __d1;                                                 \
-+    __q1 = (n1) / __d1;                                                 \
-+    __m = (UDItype) __q1 * __d0;                                        \
-+    __r1 = __r1 * __ti_B | __ti_highpart (n0);                          \
-+    if (__r1 < __m)                                                     \
-+      {                                                                 \
-+        __q1--, __r1 += (d);                                            \
-+        if (__r1 >= (d)) /* i.e. we didn't get carry when adding to __r1 */\
-+          if (__r1 < __m)                                               \
-+            __q1--, __r1 += (d);                                        \
-+      }                                                                 \
-+    __r1 -= __m;                                                        \
-+                                                                        \
-+    __r0 = __r1 % __d1;                                                 \
-+    __q0 = __r1 / __d1;                                                 \
-+    __m = (UDItype) __q0 * __d0;                                        \
-+    __r0 = __r0 * __ti_B | __ti_lowpart (n0);                           \
-+    if (__r0 < __m)                                                     \
-+      {                                                                 \
-+        __q0--, __r0 += (d);                                            \
-+        if (__r0 >= (d))                                                \
-+          if (__r0 < __m)                                               \
-+            __q0--, __r0 += (d);                                        \
-+      }                                                                 \
-+    __r0 -= __m;                                                        \
-+                                                                        \
-+    (q) = (UDItype) __q1 * __ti_B | __q0;                               \
-+    (r) = __r0;                                                         \
-+  } while (0)
-+
-+
-+#define sub_ddmmss_di(sh, sl, ah, al, bh, bl) \
-+  do {                                                                  \
-+    UDItype __x;                                                        \
-+    __x = (al) - (bl);                                                  \
-+    (sh) = (ah) - (bh) - (__x > (al));                                  \
-+    (sl) = __x;                                                         \
-+  } while (0)
-+
-+#define count_leading_zeros_di(count, x) \
-+  do {                                                                  \
-+    UDItype __xr = (x);                                                 \
-+    UDItype __a;                                                        \
-+                                                                        \
-+      {                                                                 \
-+        for (__a = DI_TYPE_SIZE - 8; __a > 0; __a -= 8)                 \
-+          if (((__xr >> __a) & 0xff) != 0)                              \
-+            break;                                                      \
-+      }                                                                 \
-+                                                                        \
-+    (count) = DI_TYPE_SIZE - (__clz_tab[__xr >> __a] + __a);            \
-+  } while (0)
-+
-+
-+
-+/* END: derived from longlog.h */
-+/* ----------------------------------------------------------------- */
-+#endif /* (defined (L_udivti3) || defined (L_divti3) || defined (L_multi3) ||
-+           defined (L_umodti3) || defined (L_modti3)) */
-+
-+
-+#if defined (L_negti2) || defined (L_divti3) || defined (L_modti3)
-+#if defined (L_divti3) || defined (L_modti3)
-+static inline
-+#endif
-+TItype
-+__negti2 (TItype u)
-+{
-+  TIunion w;
-+  TIunion uu;
-+
-+  uu.ti = u;
-+
-+  w.d.low = -uu.d.low;
-+  w.d.high = -uu.d.high - ((UDItype) w.d.low > 0);
-+
-+  return w.ti;
-+}
-+#endif
-+
-+/* Unless shift functions are defined whith full ANSI prototypes,
-+   parameter b will be promoted to int if word_type is smaller than an int.  */
-+#ifdef L_lshrti3
-+TItype
-+__lshrti3 (TItype u, word_type b)
-+{
-+  TIunion w;
-+  word_type bm;
-+  TIunion uu;
-+
-+  if (b == 0)
-+    return u;
-+
-+  uu.ti = u;
-+
-+  bm = (sizeof (DItype) * BITS_PER_UNIT) - b;
-+  if (bm <= 0)
-+    {
-+      w.d.high = 0;
-+      w.d.low = (UDItype)uu.d.high >> -bm;
-+    }
-+  else
-+    {
-+      UDItype carries = (UDItype)uu.d.high << bm;
-+      w.d.high = (UDItype)uu.d.high >> b;
-+      w.d.low = ((UDItype)uu.d.low >> b) | carries;
-+    }
-+
-+  return w.ti;
-+}
-+#endif
-+
-+#ifdef L_ashlti3
-+TItype
-+__ashlti3 (TItype u, word_type b)
-+{
-+  TIunion w;
-+  word_type bm;
-+  TIunion uu;
-+
-+  if (b == 0)
-+    return u;
-+
-+  uu.ti = u;
-+
-+  bm = (sizeof (DItype) * BITS_PER_UNIT) - b;
-+  if (bm <= 0)
-+    {
-+      w.d.low = 0;
-+      w.d.high = (UDItype)uu.d.low << -bm;
-+    }
-+  else
-+    {
-+      UDItype carries = (UDItype)uu.d.low >> bm;
-+      w.d.low = (UDItype)uu.d.low << b;
-+      w.d.high = ((UDItype)uu.d.high << b) | carries;
-+    }
-+
-+  return w.ti;
-+}
-+#endif
-+
-+#ifdef L_ashrti3
-+TItype
-+__ashrti3 (TItype u, word_type b)
-+{
-+  TIunion w;
-+  word_type bm;
-+  TIunion uu;
-+
-+  if (b == 0)
-+    return u;
-+
-+  uu.ti = u;
-+
-+  bm = (sizeof (DItype) * BITS_PER_UNIT) - b;
-+  if (bm <= 0)
-+    {
-+      /* w.d.high = 1..1 or 0..0 */
-+      w.d.high = uu.d.high >> (sizeof (DItype) * BITS_PER_UNIT - 1);
-+      w.d.low = uu.d.high >> -bm;
-+    }
-+  else
-+    {
-+      UDItype carries = (UDItype)uu.d.high << bm;
-+      w.d.high = uu.d.high >> b;
-+      w.d.low = ((UDItype)uu.d.low >> b) | carries;
-+    }
-+
-+  return w.ti;
-+}
-+#endif
-+
-+#ifdef L_ffsti2
-+TItype
-+__ffsti2 (TItype u)
-+{
-+  TIunion uu, w;
-+  uu.ti = u;
-+  w.d.high = 0;
-+  w.d.low = __ffsdi2 (uu.d.low);
-+  if (w.d.low != 0)
-+    return w.ti;
-+  w.d.low = __ffsdi2 (uu.d.high);
-+  if (w.d.low != 0)
-+    {
-+      w.d.low += BITS_PER_UNIT * sizeof (DItype);
-+      return w.ti;
-+    }
-+  return w.ti;
-+}
-+#endif
-+
-+
-+#ifdef L_multi3
-+TItype
-+__multi3 (TItype u, TItype v)
-+{
-+  TIunion w;
-+  TIunion uu, vv;
-+
-+  uu.ti = u,
-+  vv.ti= v;
-+
-+  w.ti = __umulditi3 (uu.d.low, vv.d.low);
-+  w.d.high += ((UDItype) uu.d.low * (UDItype) vv.d.high
-+	       + (UDItype) uu.d.high * (UDItype) vv.d.low);
-+
-+  return w.ti;
-+}
-+#endif
-+
-+#if (defined (L_udivti3) || defined (L_divti3) || \
-+     defined (L_umodti3) || defined (L_modti3))
-+#define L_udivmodti4
-+#endif
-+
-+#ifdef L_udivmodti4
-+static const UQItype __clz_tab[] =
-+{
-+  0,1,2,2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
-+  6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
-+  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
-+  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
-+  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
-+  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
-+  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
-+  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
-+};
-+
-+#if (defined (L_udivti3) || defined (L_divti3) || \
-+     defined (L_umodti3) || defined (L_modti3))
-+static inline
-+#endif
-+UTItype
-+__udivmodti4 (UTItype n, UTItype d, UTItype *rp)
-+{
-+  TIunion ww;
-+  TIunion nn, dd;
-+  TIunion rr;
-+  UDItype d0, d1, n0, n1, n2;
-+  UDItype q0, q1;
-+  UDItype b, bm;
-+
-+  nn.ti = n;
-+  dd.ti = d;
-+
-+  d0 = dd.d.low;
-+  d1 = dd.d.high;
-+  n0 = nn.d.low;
-+  n1 = nn.d.high;
-+
-+
-+  if (d1 == 0)
-+    {
-+      if (d0 > n1)
-+	{
-+	  /* 0q = nn / 0D */
-+
-+	  count_leading_zeros_di (bm, d0);
-+
-+	  if (bm != 0)
-+	    {
-+	      /* Normalize, i.e. make the most significant bit of the
-+		 denominator set.  */
-+
-+	      d0 = d0 << bm;
-+	      n1 = (n1 << bm) | (n0 >> (DI_TYPE_SIZE - bm));
-+	      n0 = n0 << bm;
-+	    }
-+
-+	  udiv_qrnnd_c_di (q0, n0, n1, n0, d0);
-+	  q1 = 0;
-+
-+	  /* Remainder in n0 >> bm.  */
-+	}
-+      else
-+	{
-+	  /* qq = NN / 0d */
-+
-+	  if (d0 == 0)
-+	    d0 = 1 / d0;	/* Divide intentionally by zero.  */
-+
-+	  count_leading_zeros_di (bm, d0);
-+
-+	  if (bm == 0)
-+	    {
-+	      /* From (n1 >= d0) /\ (the most significant bit of d0 is set),
-+		 conclude (the most significant bit of n1 is set) /\ (the
-+		 leading quotient digit q1 = 1).
-+
-+		 This special case is necessary, not an optimization.
-+		 (Shifts counts of DI_TYPE_SIZE are undefined.)  */
-+
-+	      n1 -= d0;
-+	      q1 = 1;
-+	    }
-+	  else
-+	    {
-+	      /* Normalize.  */
-+
-+	      b = DI_TYPE_SIZE - bm;
-+
-+	      d0 = d0 << bm;
-+	      n2 = n1 >> b;
-+	      n1 = (n1 << bm) | (n0 >> b);
-+	      n0 = n0 << bm;
-+
-+	      udiv_qrnnd_c_di (q1, n1, n2, n1, d0);
-+	    }
-+
-+	  /* n1 != d0...  */
-+
-+	  udiv_qrnnd_c_di (q0, n0, n1, n0, d0);
-+
-+	  /* Remainder in n0 >> bm.  */
-+	}
-+
-+      if (rp != 0)
-+	{
-+	  rr.d.low = n0 >> bm;
-+	  rr.d.high = 0;
-+	  *rp = rr.ti;
-+	}
-+    }
-+  else
-+    {
-+      if (d1 > n1)
-+	{
-+	  /* 00 = nn / DD */
-+
-+	  q0 = 0;
-+	  q1 = 0;
-+
-+	  /* Remainder in n1n0.  */
-+	  if (rp != 0)
-+	    {
-+	      rr.d.low = n0;
-+	      rr.d.high = n1;
-+	      *rp = rr.ti;
-+	    }
-+	}
-+      else
-+	{
-+	  /* 0q = NN / dd */
-+
-+	  count_leading_zeros_di (bm, d1);
-+	  if (bm == 0)
-+	    {
-+	      /* From (n1 >= d1) /\ (the most significant bit of d1 is set),
-+		 conclude (the most significant bit of n1 is set) /\ (the
-+		 quotient digit q0 = 0 or 1).
-+
-+		 This special case is necessary, not an optimization.  */
-+
-+	      /* The condition on the next line takes advantage of that
-+		 n1 >= d1 (true due to program flow).  */
-+	      if (n1 > d1 || n0 >= d0)
-+		{
-+		  q0 = 1;
-+		  sub_ddmmss_di (n1, n0, n1, n0, d1, d0);
-+		}
-+	      else
-+		q0 = 0;
-+
-+	      q1 = 0;
-+
-+	      if (rp != 0)
-+		{
-+		  rr.d.low = n0;
-+		  rr.d.high = n1;
-+		  *rp = rr.ti;
-+		}
-+	    }
-+	  else
-+	    {
-+	      UDItype m1, m0;
-+	      /* Normalize.  */
-+
-+	      b = DI_TYPE_SIZE - bm;
-+
-+	      d1 = (d1 << bm) | (d0 >> b);
-+	      d0 = d0 << bm;
-+	      n2 = n1 >> b;
-+	      n1 = (n1 << bm) | (n0 >> b);
-+	      n0 = n0 << bm;
-+
-+	      udiv_qrnnd_c_di (q0, n1, n2, n1, d1);
-+	      umul_ppmm_di (m1, m0, q0, d0);
-+
-+	      if (m1 > n1 || (m1 == n1 && m0 > n0))
-+		{
-+		  q0--;
-+		  sub_ddmmss_di (m1, m0, m1, m0, d1, d0);
-+		}
-+
-+	      q1 = 0;
-+
-+	      /* Remainder in (n1n0 - m1m0) >> bm.  */
-+	      if (rp != 0)
-+		{
-+		  sub_ddmmss_di (n1, n0, n1, n0, m1, m0);
-+		  rr.d.low = (n1 << b) | (n0 >> bm);
-+		  rr.d.high = n1 >> bm;
-+		  *rp = rr.ti;
-+		}
-+	    }
-+	}
-+    }
-+
-+  ww.d.low = q0;
-+  ww.d.high = q1;
-+  return ww.ti;
-+}
-+#endif
-+
-+#ifdef L_divti3
-+UTItype __udivmodti4 ();
-+
-+TItype
-+__divti3 (TItype u, TItype v)
-+{
-+  word_type c = 0;
-+  TIunion uu, vv;
-+  TItype w;
-+
-+  uu.ti = u;
-+  vv.ti = v;
-+
-+  if (uu.d.high < 0)
-+    c = ~c,
-+    uu.ti = __negti2 (uu.ti);
-+  if (vv.d.high < 0)
-+    c = ~c,
-+    vv.ti = __negti2 (vv.ti);
-+
-+  w = __udivmodti4 (uu.ti, vv.ti, (UTItype *) 0);
-+  if (c)
-+    w = __negti2 (w);
-+
-+  return w;
-+}
-+#endif
-+
-+#ifdef L_modti3
-+UTItype __udivmodti4 ();
-+
-+TItype
-+__modti3 (TItype u, TItype v)
-+{
-+  word_type c = 0;
-+  TIunion uu, vv;
-+  TItype w;
-+
-+  uu.ti = u;
-+  vv.ti = v;
-+
-+  if (uu.d.high < 0)
-+    c = ~c,
-+    uu.ti = __negti2 (uu.ti);
-+  if (vv.d.high < 0)
-+    vv.ti = __negti2 (vv.ti);
-+
-+  (void) __udivmodti4 (uu.ti, vv.ti, (UTItype *)&w);
-+  if (c)
-+    w = __negti2 (w);
-+
-+  return w;
-+}
-+#endif
-+
-+#ifdef L_umodti3
-+UTItype __udivmodti4 ();
-+
-+UTItype
-+__umodti3 (UTItype u, UTItype v)
-+{
-+  UTItype w;
-+
-+  (void) __udivmodti4 (u, v, &w);
-+
-+  return w;
-+}
-+#endif
-+
-+
-+#ifdef L_udivti3
-+UTItype __udivmodti4 ();
-+UTItype
-+__udivti3 (UTItype n, UTItype d)
-+{
-+  return __udivmodti4 (n, d, (UTItype *) 0);
-+}
-+#endif
-+
-+#ifdef L_cmpti2
-+word_type
-+__cmpti2 (TItype a, TItype b)
-+{
-+  TIunion au, bu;
-+
-+  au.ti = a, bu.ti = b;
-+
-+  if (au.d.high < bu.d.high)
-+    return 0;
-+  else if (au.d.high > bu.d.high)
-+    return 2;
-+  if ((UDItype) au.d.low < (UDItype) bu.d.low)
-+    return 0;
-+  else if ((UDItype) au.d.low > (UDItype) bu.d.low)
-+    return 2;
-+  return 1;
-+}
-+#endif
-+
-+#ifdef L_ucmpti2
-+word_type
-+__ucmpti2 (UTItype a, UTItype b)
-+{
-+  TIunion au, bu;
-+
-+  au.ti = a, bu.ti = b;
-+
-+  if ((UDItype) au.d.high < (UDItype) bu.d.high)
-+    return 0;
-+  else if ((UDItype) au.d.high > (UDItype) bu.d.high)
-+    return 2;
-+  if ((UDItype) au.d.low < (UDItype) bu.d.low)
-+    return 0;
-+  else if ((UDItype) au.d.low > (UDItype) bu.d.low)
-+    return 2;
-+  return 1;
-+}
-+#endif
-+
-+
-+/*
-+  Followings are not neeeded, because TF or XF mode is not supported. 
-+   __fixunstfti(), __fixtfdi()
-+   __fixunsxfti(), __fixxfti()
-+*/
-+
-+#ifdef L_fixunsdfti
-+TItype
-+__fixunsdfti (DFtype a)
-+{
-+  DFtype b;
-+  UTItype v;
-+
-+  if (a < 0)
-+    return 0;
-+
-+  /* Compute high word of result, as a flonum.  */
-+  b = (a / HIGH_DI_WORD_COEFF);
-+  /* Convert that to fixed (but not to DItype!),
-+     and shift it into the high word.  */
-+  v = (UDItype) b;
-+  v <<= DI_WORD_SIZE;
-+  /* Remove high part from the DFtype, leaving the low part as flonum.  */
-+  a -= (DFtype)v;
-+  /* Convert that to fixed (but not to DItype!) and add it in.
-+     Sometimes A comes out negative.  This is significant, since
-+     A has more bits than a long int does.  */
-+  if (a < 0)
-+    v -= (UDItype) (- a);
-+  else
-+    v += (UDItype) a;
-+  return v;
-+}
-+#endif
-+
-+#ifdef L_fixdfti
-+TItype
-+__fixdfti (DFtype a)
-+{
-+  if (a < 0)
-+    return - __fixunsdfti (-a);
-+  return __fixunsdfti (a);
-+}
-+#endif
-+
-+/*
-+  Followings are not neeeded, because TF or XF mode is not supported. 
-+	__floattixf
-+	__floattitf
-+*/
-+
-+#ifdef L_floattidf
-+DFtype
-+__floattidf (TItype u)
-+{
-+  DFtype d;
-+
-+  d = (DItype) (u >> DI_WORD_SIZE);
-+  d *= HIGH_DI_HALFWORD_COEFF;
-+  d *= HIGH_DI_HALFWORD_COEFF;
-+  d += (UDItype) (u & (HIGH_DI_WORD_COEFF - 1));
-+
-+  return d;
-+}
-+#endif
-+
-+#ifdef L_floattisf
-+SFtype
-+__floattisf (TItype u)
-+{
-+  DFtype df;
-+  df = __floattidf (u);
-+  return (SFtype) df;
-+}
-+#endif
-Index: gcc/mklibgcc.in
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/mklibgcc.in,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/mklibgcc.in	1 Dec 2004 04:32:46 -0000	1.1.1.1
-+++ gcc/mklibgcc.in	1 Dec 2004 05:21:34 -0000	1.2
-@@ -232,6 +232,21 @@
-   libgcc2_st_objs="$libgcc2_st_objs ${oname}${objext}"
- done
- 
-+if [ "$LIB2FUNCS_TI" ]; then
-+  for name in $LIB2FUNCS_TI; do
-+    for ml in $MULTILIBS; do
-+      dir=`echo ${ml} | sed -e 's/;.*$//' -e 's/=/$(EQ)/g'`
-+      flags=`echo ${ml} | sed -e 's/^[^;]*;//' -e 's/@/ -/g'`;
-+      out="libgcc/${dir}/${name}${objext}"
-+  
-+      echo $out: $libgcc2_c_dep
-+      echo "	$gcc_compile" '$(MAYBE_USE_COLLECT2)' $flags -DL$name \
-+        -c '$(srcdir)/libgcc2-timode.c' -o $out
-+    done
-+    libgcc2_objs="$libgcc2_objs ${name}${objext}"
-+  done
-+fi
-+
- # SHLIB_MKMAP
- # SHLIB_MKMAP_OPTS
- # SHLIB_MAPFILES
-Index: gcc/toplev.c
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/toplev.c,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/toplev.c	1 Dec 2004 04:33:07 -0000	1.1.1.1
-+++ gcc/toplev.c	1 Dec 2004 05:21:34 -0000	1.2
-@@ -3469,6 +3469,18 @@
- 
-   convert_to_eh_region_ranges ();
- 
-+#ifdef MACHINE_DEPENDENT_REORG_FINAL
-+  timevar_push (TV_MACH_DEP);
-+  open_dump_file (DFI_mach, decl);
-+
-+  MACHINE_DEPENDENT_REORG_FINAL (insns);
-+
-+  close_dump_file (DFI_mach, print_rtl, insns);
-+  timevar_pop (TV_MACH_DEP);
-+
-+  ggc_collect ();
-+#endif
-+
-   /* Shorten branches.  */
-   timevar_push (TV_SHORTEN_BRANCH);
-   shorten_branches (get_insns ());
-Index: gcc/config/mips/core-mmi.h
-===================================================================
-RCS file: gcc/config/mips/core-mmi.h
-diff -N gcc/config/mips/core-mmi.h
---- /dev/null	1 Jan 1970 00:00:00 -0000
-+++ gcc/config/mips/core-mmi.h	1 Dec 2004 05:21:34 -0000	1.1
+diff -burN orig.gcc-3.2.2/gcc/config/mips/core-mmi.h gcc-3.2.2/gcc/config/mips/core-mmi.h
+--- orig.gcc-3.2.2/gcc/config/mips/core-mmi.h	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/core-mmi.h	2007-04-29 02:59:08.000000000 -0300
 @@ -0,0 +1,104 @@
 +/*
 + * mmi-intrinsics.h - R5900 MMI compiler intrinsics.
@@ -1381,20 +305,14 @@ diff -N gcc/config/mips/core-mmi.h
 +
 +#endif /* __mmi_intrinsics_h */
 +
-Index: gcc/config/mips/core-vumm.h
-===================================================================
-RCS file: gcc/config/mips/core-vumm.h
-diff -N gcc/config/mips/core-vumm.h
---- /dev/null	1 Jan 1970 00:00:00 -0000
-+++ gcc/config/mips/core-vumm.h	1 Dec 2004 05:21:34 -0000	1.1
+diff -burN orig.gcc-3.2.2/gcc/config/mips/core-vumm.h gcc-3.2.2/gcc/config/mips/core-vumm.h
+--- orig.gcc-3.2.2/gcc/config/mips/core-vumm.h	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/core-vumm.h	2007-04-29 02:59:08.000000000 -0300
 @@ -0,0 +1 @@
 +#define __THIS__IS__A__BLANK__FILE__
-Index: gcc/config/mips/crti5900.asm
-===================================================================
-RCS file: gcc/config/mips/crti5900.asm
-diff -N gcc/config/mips/crti5900.asm
---- /dev/null	1 Jan 1970 00:00:00 -0000
-+++ gcc/config/mips/crti5900.asm	1 Dec 2004 05:21:34 -0000	1.1
+diff -burN orig.gcc-3.2.2/gcc/config/mips/crti5900.asm gcc-3.2.2/gcc/config/mips/crti5900.asm
+--- orig.gcc-3.2.2/gcc/config/mips/crti5900.asm	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/crti5900.asm	2007-04-29 02:59:08.000000000 -0300
 @@ -0,0 +1,16 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -1412,12 +330,9 @@ diff -N gcc/config/mips/crti5900.asm
 +_fini:
 +	addu    $sp,$sp,-96
 +	sq      $31,80($sp)
-Index: gcc/config/mips/crtn5900.asm
-===================================================================
-RCS file: gcc/config/mips/crtn5900.asm
-diff -N gcc/config/mips/crtn5900.asm
---- /dev/null	1 Jan 1970 00:00:00 -0000
-+++ gcc/config/mips/crtn5900.asm	1 Dec 2004 05:21:34 -0000	1.1
+diff -burN orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm gcc-3.2.2/gcc/config/mips/crtn5900.asm
+--- orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/crtn5900.asm	2007-04-29 02:59:08.000000000 -0300
 @@ -0,0 +1,12 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -1431,30 +346,9 @@ diff -N gcc/config/mips/crtn5900.asm
 +	lq	$31,80($sp)
 +	addu	$sp,$sp,96
 +	j	$31
-Index: gcc/config/mips/mips-protos.h
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/config/mips/mips-protos.h,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/config/mips/mips-protos.h	1 Dec 2004 04:41:03 -0000	1.1.1.1
-+++ gcc/config/mips/mips-protos.h	1 Dec 2004 05:21:34 -0000	1.2
-@@ -81,6 +81,7 @@
- extern void		gen_conditional_move PARAMS ((rtx *));
- extern void		mips_gen_conditional_trap PARAMS ((rtx *));
- extern void		machine_dependent_reorg PARAMS ((rtx));
-+extern void		machine_dependent_reorg_final PARAMS ((rtx));
- extern int		mips_address_cost PARAMS ((rtx));
- extern void		mips_count_memory_refs PARAMS ((rtx, int));
- extern HOST_WIDE_INT	mips_debugger_offset PARAMS ((rtx, HOST_WIDE_INT));
-Index: gcc/config/mips/mips.c
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/config/mips/mips.c,v
-retrieving revision 1.1.1.1
-retrieving revision 1.3
-diff -b -u -r1.1.1.1 -r1.3
---- gcc/config/mips/mips.c	1 Dec 2004 04:41:05 -0000	1.1.1.1
-+++ gcc/config/mips/mips.c	13 Feb 2005 18:07:08 -0000	1.3
+diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.c gcc-3.2.2/gcc/config/mips/mips.c
+--- orig.gcc-3.2.2/gcc/config/mips/mips.c	2002-07-26 20:23:02.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/mips.c	2007-04-29 02:59:08.000000000 -0300
 @@ -51,6 +51,7 @@
  #include "gstab.h"
  #include "hashtab.h"
@@ -2856,14 +1750,9 @@ diff -b -u -r1.1.1.1 -r1.3
 +  if (TARGET_MIPS5900)
 +    r5900_init_builtins ();
 +}
-Index: gcc/config/mips/mips.h
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/config/mips/mips.h,v
-retrieving revision 1.1.1.1
-retrieving revision 1.3
-diff -b -u -r1.1.1.1 -r1.3
---- gcc/config/mips/mips.h	1 Dec 2004 04:41:06 -0000	1.1.1.1
-+++ gcc/config/mips/mips.h	13 Feb 2005 18:07:08 -0000	1.3
+diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.h gcc-3.2.2/gcc/config/mips/mips.h
+--- orig.gcc-3.2.2/gcc/config/mips/mips.h	2002-04-26 18:32:14.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/mips.h	2007-04-29 02:59:08.000000000 -0300
 @@ -48,6 +48,7 @@
    DELAY_NONE,				/* no delay slot */
    DELAY_LOAD,				/* load from memory delay */
@@ -3415,14 +2304,9 @@ diff -b -u -r1.1.1.1 -r1.3
 +
 +  R5900_BUILTIN_MAX
 +};
-Index: gcc/config/mips/mips.md
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/config/mips/mips.md,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/config/mips/mips.md	1 Dec 2004 04:41:03 -0000	1.1.1.1
-+++ gcc/config/mips/mips.md	1 Dec 2004 05:21:34 -0000	1.2
+diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.md gcc-3.2.2/gcc/config/mips/mips.md
+--- orig.gcc-3.2.2/gcc/config/mips/mips.md	2002-11-11 01:57:14.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/mips.md	2007-04-29 02:59:08.000000000 -0300
 @@ -84,11 +84,11 @@
  ;; nop		no operation
  
@@ -4993,12 +3877,20 @@ diff -b -u -r1.1.1.1 -r1.2
 +  "psubuw\\t%0,%1,%2"
 +  [(set_attr "type" "mmi")])
 +
-Index: gcc/config/mips/r5900.h
-===================================================================
-RCS file: gcc/config/mips/r5900.h
-diff -N gcc/config/mips/r5900.h
---- /dev/null	1 Jan 1970 00:00:00 -0000
-+++ gcc/config/mips/r5900.h	13 Feb 2005 18:07:08 -0000	1.4
+diff -burN orig.gcc-3.2.2/gcc/config/mips/mips-protos.h gcc-3.2.2/gcc/config/mips/mips-protos.h
+--- orig.gcc-3.2.2/gcc/config/mips/mips-protos.h	2002-03-24 04:13:16.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/mips-protos.h	2007-04-29 02:59:08.000000000 -0300
+@@ -81,6 +81,7 @@
+ extern void		gen_conditional_move PARAMS ((rtx *));
+ extern void		mips_gen_conditional_trap PARAMS ((rtx *));
+ extern void		machine_dependent_reorg PARAMS ((rtx));
++extern void		machine_dependent_reorg_final PARAMS ((rtx));
+ extern int		mips_address_cost PARAMS ((rtx));
+ extern void		mips_count_memory_refs PARAMS ((rtx, int));
+ extern HOST_WIDE_INT	mips_debugger_offset PARAMS ((rtx, HOST_WIDE_INT));
+diff -burN orig.gcc-3.2.2/gcc/config/mips/r5900.h gcc-3.2.2/gcc/config/mips/r5900.h
+--- orig.gcc-3.2.2/gcc/config/mips/r5900.h	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/r5900.h	2007-04-29 02:59:08.000000000 -0300
 @@ -0,0 +1,285 @@
 +/*
 + * Target machine definitions for the Toshiba r5900.
@@ -5285,12 +4177,9 @@ diff -N gcc/config/mips/r5900.h
 +    && (TREE_CODE (TYPE) == ARRAY_TYPE                                  \
 +        || TREE_CODE (TYPE) == UNION_TYPE                               \
 +        || TREE_CODE (TYPE) == RECORD_TYPE)) ? (mips_use_128 ? 128 : 64) : (ALIGN))
-Index: gcc/config/mips/t-irx
-===================================================================
-RCS file: gcc/config/mips/t-irx
-diff -N gcc/config/mips/t-irx
---- /dev/null	1 Jan 1970 00:00:00 -0000
-+++ gcc/config/mips/t-irx	1 Dec 2004 05:21:34 -0000	1.1
+diff -burN orig.gcc-3.2.2/gcc/config/mips/t-irx gcc-3.2.2/gcc/config/mips/t-irx
+--- orig.gcc-3.2.2/gcc/config/mips/t-irx	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/t-irx	2007-04-29 02:59:08.000000000 -0300
 @@ -0,0 +1,77 @@
 +CONFIG2_H	= $(srcdir)/config/mips/ecoff.h
 +
@@ -5369,12 +4258,9 @@ diff -N gcc/config/mips/t-irx
 +explow.o: $(CONFIG2_H)
 +recog.o: $(CONFIG2_H)
 +reload.o: $(CONFIG2_H)
-Index: gcc/config/mips/t-r5900
-===================================================================
-RCS file: gcc/config/mips/t-r5900
-diff -N gcc/config/mips/t-r5900
---- /dev/null	1 Jan 1970 00:00:00 -0000
-+++ gcc/config/mips/t-r5900	9 Apr 2005 10:38:01 -0000	1.2
+diff -burN orig.gcc-3.2.2/gcc/config/mips/t-r5900 gcc-3.2.2/gcc/config/mips/t-r5900
+--- orig.gcc-3.2.2/gcc/config/mips/t-r5900	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/config/mips/t-r5900	2007-04-29 02:59:08.000000000 -0300
 @@ -0,0 +1,56 @@
 +# Suppress building libgcc1.a, since the MIPS compiler port is complete
 +# and does not need anything from libgcc1.a.
@@ -5432,14 +4318,175 @@ diff -N gcc/config/mips/t-r5900
 +	_floattidf _floattisf _lshrti3 _modti3 _multi3 _negti2 _ucmpti2 _udivti3 _umodti3
 +
 +LIB2FUNCS_TI = $(TIMODE_FUNCS_LIST)
-Index: gcc/fixinc/gnu-regex.c
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/gcc/fixinc/gnu-regex.c,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- gcc/fixinc/gnu-regex.c	1 Dec 2004 04:41:42 -0000	1.1.1.1
-+++ gcc/fixinc/gnu-regex.c	1 Dec 2004 05:21:34 -0000	1.2
+diff -burN orig.gcc-3.2.2/gcc/config.gcc gcc-3.2.2/gcc/config.gcc
+--- orig.gcc-3.2.2/gcc/config.gcc	2003-01-30 10:03:42.000000000 -0400
++++ gcc-3.2.2/gcc/config.gcc	2007-04-29 02:59:08.000000000 -0300
+@@ -1553,6 +1553,10 @@
+ 		*minwg32msv* | *mingw32*)
+ 			;;
+ 	esac
++	if test x$pass1done = xyes && test x$pass2done = x
++	then
++		host_to_target_tmake_file=i386/t-mingw32
++	fi
+ 	;;
+ i[34567]86-*-uwin*)
+ 	tm_file=i386/uwin.h
+@@ -2387,6 +2391,13 @@
+ 	esac
+ 	tmake_file="t-slibgcc-elf-ver t-linux mips/t-linux"
+ 	extra_parts="crtbegin.o crtbeginS.o crtbeginT.o crtend.o crtendS.o"
++	case $machine in
++	mips*r5900*-*)			# Linux for r5900 (EE)
++		tm_file="$tm_file mips/r5900.h"
++		tmake_file="$tmake_file t-r5900"
++		extra_headers="core-mmi.h core-vumm.h"
++		;;
++	esac
+ 	gnu_ld=yes
+ 	gas=yes
+ 	;;
+@@ -2583,6 +2594,24 @@
+ 		use_collect2=yes
+ 	fi
+ 	;;
++mips*r5900*-*-elf*)			# MIPS r5900 ELF, either endian
++	tm_file="dbxelf.h elfos.h mips/r5900.h"
++	tmake_file=mips/t-r5900
++	case $machine in
++	mips*el-*)
++		tm_file="mips/little.h $tm_file"
++		;;
++	esac
++	gnu_ld=yes
++	gas=yes
++	extra_headers="core-mmi.h core-vumm.h"
++	;;
++mipsel-*-irx)
++	tm_file="mips/elfl.h libgloss.h"
++	tmake_file=mips/t-irx
++	target_cpu_default="MASK_GAS|MASK_SOFT_FLOAT"
++	fixincludes=Makefile.in
++	;;
+ mipsel-*-ecoff*)
+ 	tm_file=mips/ecoffl.h
+ 	if test x$stabs = xyes; then
+@@ -3673,5 +3702,8 @@
+ 		host_extra_objs=$extra_host_objs
+ 		host_exeext=$exeext
+ 		pass2done=yes
++	else
++		tmake_file="$tmake_file $host_to_target_tmake_file"
+ 	fi
+ fi
++
+diff -burN orig.gcc-3.2.2/gcc/cp/decl.c gcc-3.2.2/gcc/cp/decl.c
+--- orig.gcc-3.2.2/gcc/cp/decl.c	2003-01-21 15:00:27.000000000 -0400
++++ gcc-3.2.2/gcc/cp/decl.c	2007-04-29 03:01:20.000000000 -0300
+@@ -458,6 +458,10 @@
+    ? cp_function_chain->bindings		\
+    : scope_chain->bindings)
+ 
++#define set_current_binding_level(x)							\
++   if(cfun && cp_function_chain->bindings) { cp_function_chain->bindings = (x); }	\
++   else { scope_chain->bindings = (x); }
++
+ /* The binding level of the current class, if any.  */
+ 
+ #define class_binding_level scope_chain->class_bindings
+@@ -507,7 +511,7 @@
+      are active.  */
+   memset ((char*) newlevel, 0, sizeof (struct binding_level));
+   newlevel->level_chain = current_binding_level;
+-  current_binding_level = newlevel;
++  set_current_binding_level(newlevel);
+   newlevel->tag_transparent = tag_transparent;
+   newlevel->more_cleanups_ok = 1;
+ 
+@@ -563,7 +567,7 @@
+ #endif /* defined(DEBUG_CP_BINDING_LEVELS) */
+   {
+     register struct binding_level *level = current_binding_level;
+-    current_binding_level = current_binding_level->level_chain;
++    set_current_binding_level(current_binding_level->level_chain);
+     level->level_chain = free_binding_level;
+ #if 0 /* defined(DEBUG_CP_BINDING_LEVELS) */
+     if (level->binding_depth != binding_depth)
+@@ -578,7 +582,9 @@
+ suspend_binding_level ()
+ {
+   if (class_binding_level)
+-    current_binding_level = class_binding_level;
++  {
++    set_current_binding_level(class_binding_level);
++  }
+ 
+   if (global_binding_level)
+     {
+@@ -600,7 +606,7 @@
+     }
+   is_class_level = 0;
+ #endif /* defined(DEBUG_CP_BINDING_LEVELS) */
+-  current_binding_level = current_binding_level->level_chain;
++  set_current_binding_level(current_binding_level->level_chain);
+   find_class_binding_level ();
+ }
+ 
+@@ -613,7 +619,7 @@
+   my_friendly_assert(!class_binding_level, 386);
+   /* Also, resuming a non-directly nested namespace is a no-no.  */
+   my_friendly_assert(b->level_chain == current_binding_level, 386);
+-  current_binding_level = b;
++  set_current_binding_level(b);
+ #if defined(DEBUG_CP_BINDING_LEVELS)
+   b->binding_depth = binding_depth;
+   indent ();
+@@ -4291,9 +4297,9 @@
+   else
+     {
+       b = current_binding_level;
+-      current_binding_level = level;
++      set_current_binding_level(level);
+       x = pushdecl (x);
+-      current_binding_level = b;
++      set_current_binding_level(b);
+     }
+   current_function_decl = function_decl;
+   return x;
+@@ -6536,7 +6542,7 @@
+   current_lang_name = lang_name_c;
+ 
+   current_function_decl = NULL_TREE;
+-  current_binding_level = NULL_BINDING_LEVEL;
++  set_current_binding_level(NULL_BINDING_LEVEL);
+   free_binding_level = NULL_BINDING_LEVEL;
+ 
+   build_common_tree_nodes (flag_signed_char);
+@@ -10122,10 +10128,10 @@
+   if (decl_context == NORMAL && !toplevel_bindings_p ())
+     {
+       struct binding_level *b = current_binding_level;
+-      current_binding_level = b->level_chain;
++      set_current_binding_level(b->level_chain);
+       if (current_binding_level != 0 && toplevel_bindings_p ())
+ 	decl_context = PARM;
+-      current_binding_level = b;
++      set_current_binding_level(b);
+     }
+ 
+   if (name == NULL)
+@@ -13755,7 +13761,7 @@
+      FIXME factor out the non-RTL stuff.  */
+   bl = current_binding_level;
+   init_function_start (decl1, input_filename, lineno);
+-  current_binding_level = bl;
++  set_current_binding_level(bl); 
+ 
+   /* Even though we're inside a function body, we still don't want to
+      call expand_expr to calculate the size of a variable-sized array.
+diff -burN orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c gcc-3.2.2/gcc/fixinc/gnu-regex.c
+--- orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c	2002-02-26 20:23:56.000000000 -0400
++++ gcc-3.2.2/gcc/fixinc/gnu-regex.c	2007-04-29 02:59:08.000000000 -0300
 @@ -26,6 +26,9 @@
  # include <config.h>
  #endif
@@ -5450,14 +4497,893 @@ diff -b -u -r1.1.1.1 -r1.2
  /* GCC LOCAL: we don't need NLS here.  */
  #undef ENABLE_NLS
  /* GCC LOCAL: to handle defining alloca.  */
-Index: libstdc++-v3/configure.target
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/libstdc++-v3/configure.target,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- libstdc++-v3/configure.target	1 Dec 2004 04:43:55 -0000	1.1.1.1
-+++ libstdc++-v3/configure.target	1 Dec 2004 05:21:34 -0000	1.2
+diff -burN orig.gcc-3.2.2/gcc/glimits.h gcc-3.2.2/gcc/glimits.h
+--- orig.gcc-3.2.2/gcc/glimits.h	2001-08-13 21:53:23.000000000 -0300
++++ gcc-3.2.2/gcc/glimits.h	2007-04-29 02:59:08.000000000 -0300
+@@ -67,11 +67,11 @@
+ /* Minimum and maximum values a `signed long int' can hold.
+    (Same as `int').  */
+ #ifndef __LONG_MAX__
+-#if defined (__alpha__) || (defined (__sparc__) && defined(__arch64__)) || defined (__sparcv9)
++#if defined (__alpha__) || (defined (__sparc__) && defined(__arch64__)) || defined (__sparcv9) || defined (__R5900)
+ #define __LONG_MAX__ 9223372036854775807L
+ #else
+ #define __LONG_MAX__ 2147483647L
+-#endif /* __alpha__ || sparc64 */
++#endif /* __alpha__ || sparc64 || R5900 */
+ #endif
+ #undef LONG_MIN
+ #define LONG_MIN (-LONG_MAX-1)
+diff -burN orig.gcc-3.2.2/gcc/libgcc2-timode.c gcc-3.2.2/gcc/libgcc2-timode.c
+--- orig.gcc-3.2.2/gcc/libgcc2-timode.c	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/gcc/libgcc2-timode.c	2007-04-29 02:59:08.000000000 -0300
+@@ -0,0 +1,792 @@
++/* GCC rutime support routines for TI mode */
++
++/* Copyright (C) 2001  Sony Computer Entertainment Inc. 
++   Copyright 2001  Sony Corportaion.  */
++
++/* This file is derived from libgcc2.c and subject to the original 
++   license of libgcc2.c, as follows. */
++
++/* Compile this one with gcc.  */
++/* Copyright (C) 1989, 92-98, 1999 Free Software Foundation, Inc.
++
++This file is part of GNU CC.
++
++GNU CC is free software; you can redistribute it and/or modify
++it under the terms of the GNU General Public License as published by
++the Free Software Foundation; either version 2, or (at your option)
++any later version.
++
++GNU CC is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++GNU General Public License for more details.
++
++You should have received a copy of the GNU General Public License
++along with GNU CC; see the file COPYING.  If not, write to
++the Free Software Foundation, 59 Temple Place - Suite 330,
++Boston, MA 02111-1307, USA.  */
++
++/* As a special exception, if you link this library with other files,
++   some of which are compiled with GCC, to produce an executable,
++   this library does not by itself cause the resulting executable
++   to be covered by the GNU General Public License.
++   This exception does not however invalidate any other reasons why
++   the executable file might be covered by the GNU General Public License.  */
++
++
++#include "tconfig.h"
++
++/* We disable this when inhibit_libc, so that gcc can still be built without
++   needing header files first.  */
++/* ??? This is not a good solution, since prototypes may be required in
++   some cases for correct code.  See also frame.c.  */
++
++#include "machmode.h"
++#include "defaults.h"
++
++#ifndef LIBGCC2_WORDS_BIG_ENDIAN
++#define LIBGCC2_WORDS_BIG_ENDIAN WORDS_BIG_ENDIAN
++#endif
++
++
++/* In this file, we are interfacing to calls generated by the compiler 
++   itself.  These calls pass values into these routines which have very 
++   specific modes (rather than very specific types), and these 
++   compiler-generated calls also expect any return values to have very 
++   specific modes (rather than very specific types).  Thus, we need to 
++   avoid using regular C language type names in this part of the file
++   because the sizes for those types can be configured to be anything.
++   Instead we use the following special type names.  */
++
++typedef unsigned int UTItype __attribute__((mode(TI)));
++typedef          int  TItype __attribute__((mode(TI)));
++typedef unsigned int UDItype __attribute__((mode(DI)));
++typedef          int  DItype __attribute__((mode(DI)));
++typedef unsigned int UQItype __attribute__((mode(QI)));
++typedef          int  QItype __attribute__((mode(QI)));
++
++typedef		float SFtype	__attribute__ ((mode (SF)));
++typedef		float DFtype	__attribute__ ((mode (DF)));
++
++typedef int word_type __attribute__ ((mode (__word__)));
++
++/* Make sure that we don't accidentally use any normal C language 
++   built-in type names in the first part of this file.  Instead we want 
++   to use *only* the type names defined above.  
++   The following macro definitions insure that if we *do* accidentally 
++   use some normal C language built-in type name, we will get a syntax 
++   error.  */
++
++#define char bogus_type
++#define short bogus_type
++#define int bogus_type
++#define long bogus_type
++#define unsigned bogus_type
++#define float bogus_type
++#define double bogus_type
++
++
++#ifndef BITS_PER_UNIT
++#define BITS_PER_UNIT 8
++#endif
++#ifndef DI_TYPE_SIZE
++#define DI_TYPE_SIZE 64
++#endif
++
++
++/* TIstructs are pairs of DItype values in the order determined by
++   LIBGCC2_WORDS_BIG_ENDIAN.  */
++
++#if LIBGCC2_WORDS_BIG_ENDIAN
++struct TIstruct {DItype high, low;};
++#else
++struct TIstruct {DItype low, high;};
++#endif
++
++/* We need this union to unpack/pack TImode values, since we don't have
++   any arithmetic yet.  Incoming TImode parameters are stored into the
++   `ti' field, and the unpacked result is read from the struct `d'.  */
++
++typedef union
++{
++  struct TIstruct d;
++  TItype ti;
++} TIunion;
++
++/*  for  
++	__fixunsdfti
++	 __floattidf
++ */ 
++#define DI_WORD_SIZE (sizeof (DItype) * BITS_PER_UNIT)
++#define HIGH_DI_WORD_COEFF (((UTItype) 1) << DI_WORD_SIZE)
++#define HIGH_DI_HALFWORD_COEFF (((UDItype) 1) << (DI_WORD_SIZE / 2))
++
++
++
++#if (defined (L_udivti3) || defined (L_divti3) || defined (L_multi3) ||\
++     defined (L_umodti3) || defined (L_modti3))
++/* ----------------------------------------------------------------- */
++/* BEGIN: derived from longlog.h */
++/* for  
++	__udivmoddi4
++	__multi3
++	__dviti3
++	__udviti3
++	__modti3
++	__umodti3
++*/
++
++#define __ti_B (((UDItype)1) << (DI_TYPE_SIZE / 2))
++#define __ti_lowpart(t) ((UDItype) (t) % __ti_B)
++#define __ti_highpart(t) ((UDItype) (t) / __ti_B)
++
++#define umul_ppmm_di(w1, w0, u, v) 					\
++do {									\
++    UDItype __x0, __x1, __x2, __x3;					\
++    UDItype __ul, __vl, __uh, __vh;					\
++									\
++    __ul = __ti_lowpart (u);						\
++    __uh = __ti_highpart (u);						\
++    __vl = __ti_lowpart (v);						\
++    __vh = __ti_highpart (v);						\
++									\
++    __x0 = (UDItype) __ul * __vl;					\
++    __x1 = (UDItype) __ul * __vh;					\
++    __x2 = (UDItype) __uh * __vl;					\
++    __x3 = (UDItype) __uh * __vh;					\
++									\
++    __x1 += __ti_highpart (__x0);/* this can't give carry */		\
++    __x1 += __x2;               /* but this indeed can */		\
++    if (__x1 < __x2)            /* did we get it? */			\
++      __x3 += __ti_B;           /* yes, add it in the proper pos. */	\
++									\
++    (w1) = __x3 + __ti_highpart (__x1);					\
++    (w0) = __ti_lowpart (__x1) * __ti_B + __ti_lowpart (__x0);		\
++} while (0)
++
++#define __umulditi3(u, v) \
++  ({TIunion __w;                                                        \
++    umul_ppmm_di (__w.d.high, __w.d.low, u, v);                            \
++    __w.ti; })
++
++
++
++/* Define this unconditionally, so it can be used for debugging.  */
++#define udiv_qrnnd_c_di(q, r, n1, n0, d) \
++  do {                                                                  \
++    UDItype __d1, __d0, __q1, __q0;                                     \
++    UDItype __r1, __r0, __m;                                            \
++    __d1 = __ti_highpart (d);                                           \
++    __d0 = __ti_lowpart (d);                                            \
++                                                                        \
++    __r1 = (n1) % __d1;                                                 \
++    __q1 = (n1) / __d1;                                                 \
++    __m = (UDItype) __q1 * __d0;                                        \
++    __r1 = __r1 * __ti_B | __ti_highpart (n0);                          \
++    if (__r1 < __m)                                                     \
++      {                                                                 \
++        __q1--, __r1 += (d);                                            \
++        if (__r1 >= (d)) /* i.e. we didn't get carry when adding to __r1 */\
++          if (__r1 < __m)                                               \
++            __q1--, __r1 += (d);                                        \
++      }                                                                 \
++    __r1 -= __m;                                                        \
++                                                                        \
++    __r0 = __r1 % __d1;                                                 \
++    __q0 = __r1 / __d1;                                                 \
++    __m = (UDItype) __q0 * __d0;                                        \
++    __r0 = __r0 * __ti_B | __ti_lowpart (n0);                           \
++    if (__r0 < __m)                                                     \
++      {                                                                 \
++        __q0--, __r0 += (d);                                            \
++        if (__r0 >= (d))                                                \
++          if (__r0 < __m)                                               \
++            __q0--, __r0 += (d);                                        \
++      }                                                                 \
++    __r0 -= __m;                                                        \
++                                                                        \
++    (q) = (UDItype) __q1 * __ti_B | __q0;                               \
++    (r) = __r0;                                                         \
++  } while (0)
++
++
++#define sub_ddmmss_di(sh, sl, ah, al, bh, bl) \
++  do {                                                                  \
++    UDItype __x;                                                        \
++    __x = (al) - (bl);                                                  \
++    (sh) = (ah) - (bh) - (__x > (al));                                  \
++    (sl) = __x;                                                         \
++  } while (0)
++
++#define count_leading_zeros_di(count, x) \
++  do {                                                                  \
++    UDItype __xr = (x);                                                 \
++    UDItype __a;                                                        \
++                                                                        \
++      {                                                                 \
++        for (__a = DI_TYPE_SIZE - 8; __a > 0; __a -= 8)                 \
++          if (((__xr >> __a) & 0xff) != 0)                              \
++            break;                                                      \
++      }                                                                 \
++                                                                        \
++    (count) = DI_TYPE_SIZE - (__clz_tab[__xr >> __a] + __a);            \
++  } while (0)
++
++
++
++/* END: derived from longlog.h */
++/* ----------------------------------------------------------------- */
++#endif /* (defined (L_udivti3) || defined (L_divti3) || defined (L_multi3) ||
++           defined (L_umodti3) || defined (L_modti3)) */
++
++
++#if defined (L_negti2) || defined (L_divti3) || defined (L_modti3)
++#if defined (L_divti3) || defined (L_modti3)
++static inline
++#endif
++TItype
++__negti2 (TItype u)
++{
++  TIunion w;
++  TIunion uu;
++
++  uu.ti = u;
++
++  w.d.low = -uu.d.low;
++  w.d.high = -uu.d.high - ((UDItype) w.d.low > 0);
++
++  return w.ti;
++}
++#endif
++
++/* Unless shift functions are defined whith full ANSI prototypes,
++   parameter b will be promoted to int if word_type is smaller than an int.  */
++#ifdef L_lshrti3
++TItype
++__lshrti3 (TItype u, word_type b)
++{
++  TIunion w;
++  word_type bm;
++  TIunion uu;
++
++  if (b == 0)
++    return u;
++
++  uu.ti = u;
++
++  bm = (sizeof (DItype) * BITS_PER_UNIT) - b;
++  if (bm <= 0)
++    {
++      w.d.high = 0;
++      w.d.low = (UDItype)uu.d.high >> -bm;
++    }
++  else
++    {
++      UDItype carries = (UDItype)uu.d.high << bm;
++      w.d.high = (UDItype)uu.d.high >> b;
++      w.d.low = ((UDItype)uu.d.low >> b) | carries;
++    }
++
++  return w.ti;
++}
++#endif
++
++#ifdef L_ashlti3
++TItype
++__ashlti3 (TItype u, word_type b)
++{
++  TIunion w;
++  word_type bm;
++  TIunion uu;
++
++  if (b == 0)
++    return u;
++
++  uu.ti = u;
++
++  bm = (sizeof (DItype) * BITS_PER_UNIT) - b;
++  if (bm <= 0)
++    {
++      w.d.low = 0;
++      w.d.high = (UDItype)uu.d.low << -bm;
++    }
++  else
++    {
++      UDItype carries = (UDItype)uu.d.low >> bm;
++      w.d.low = (UDItype)uu.d.low << b;
++      w.d.high = ((UDItype)uu.d.high << b) | carries;
++    }
++
++  return w.ti;
++}
++#endif
++
++#ifdef L_ashrti3
++TItype
++__ashrti3 (TItype u, word_type b)
++{
++  TIunion w;
++  word_type bm;
++  TIunion uu;
++
++  if (b == 0)
++    return u;
++
++  uu.ti = u;
++
++  bm = (sizeof (DItype) * BITS_PER_UNIT) - b;
++  if (bm <= 0)
++    {
++      /* w.d.high = 1..1 or 0..0 */
++      w.d.high = uu.d.high >> (sizeof (DItype) * BITS_PER_UNIT - 1);
++      w.d.low = uu.d.high >> -bm;
++    }
++  else
++    {
++      UDItype carries = (UDItype)uu.d.high << bm;
++      w.d.high = uu.d.high >> b;
++      w.d.low = ((UDItype)uu.d.low >> b) | carries;
++    }
++
++  return w.ti;
++}
++#endif
++
++#ifdef L_ffsti2
++TItype
++__ffsti2 (TItype u)
++{
++  TIunion uu, w;
++  uu.ti = u;
++  w.d.high = 0;
++  w.d.low = __ffsdi2 (uu.d.low);
++  if (w.d.low != 0)
++    return w.ti;
++  w.d.low = __ffsdi2 (uu.d.high);
++  if (w.d.low != 0)
++    {
++      w.d.low += BITS_PER_UNIT * sizeof (DItype);
++      return w.ti;
++    }
++  return w.ti;
++}
++#endif
++
++
++#ifdef L_multi3
++TItype
++__multi3 (TItype u, TItype v)
++{
++  TIunion w;
++  TIunion uu, vv;
++
++  uu.ti = u,
++  vv.ti= v;
++
++  w.ti = __umulditi3 (uu.d.low, vv.d.low);
++  w.d.high += ((UDItype) uu.d.low * (UDItype) vv.d.high
++	       + (UDItype) uu.d.high * (UDItype) vv.d.low);
++
++  return w.ti;
++}
++#endif
++
++#if (defined (L_udivti3) || defined (L_divti3) || \
++     defined (L_umodti3) || defined (L_modti3))
++#define L_udivmodti4
++#endif
++
++#ifdef L_udivmodti4
++static const UQItype __clz_tab[] =
++{
++  0,1,2,2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
++  6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,
++  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
++  7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
++  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
++  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
++  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
++  8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
++};
++
++#if (defined (L_udivti3) || defined (L_divti3) || \
++     defined (L_umodti3) || defined (L_modti3))
++static inline
++#endif
++UTItype
++__udivmodti4 (UTItype n, UTItype d, UTItype *rp)
++{
++  TIunion ww;
++  TIunion nn, dd;
++  TIunion rr;
++  UDItype d0, d1, n0, n1, n2;
++  UDItype q0, q1;
++  UDItype b, bm;
++
++  nn.ti = n;
++  dd.ti = d;
++
++  d0 = dd.d.low;
++  d1 = dd.d.high;
++  n0 = nn.d.low;
++  n1 = nn.d.high;
++
++
++  if (d1 == 0)
++    {
++      if (d0 > n1)
++	{
++	  /* 0q = nn / 0D */
++
++	  count_leading_zeros_di (bm, d0);
++
++	  if (bm != 0)
++	    {
++	      /* Normalize, i.e. make the most significant bit of the
++		 denominator set.  */
++
++	      d0 = d0 << bm;
++	      n1 = (n1 << bm) | (n0 >> (DI_TYPE_SIZE - bm));
++	      n0 = n0 << bm;
++	    }
++
++	  udiv_qrnnd_c_di (q0, n0, n1, n0, d0);
++	  q1 = 0;
++
++	  /* Remainder in n0 >> bm.  */
++	}
++      else
++	{
++	  /* qq = NN / 0d */
++
++	  if (d0 == 0)
++	    d0 = 1 / d0;	/* Divide intentionally by zero.  */
++
++	  count_leading_zeros_di (bm, d0);
++
++	  if (bm == 0)
++	    {
++	      /* From (n1 >= d0) /\ (the most significant bit of d0 is set),
++		 conclude (the most significant bit of n1 is set) /\ (the
++		 leading quotient digit q1 = 1).
++
++		 This special case is necessary, not an optimization.
++		 (Shifts counts of DI_TYPE_SIZE are undefined.)  */
++
++	      n1 -= d0;
++	      q1 = 1;
++	    }
++	  else
++	    {
++	      /* Normalize.  */
++
++	      b = DI_TYPE_SIZE - bm;
++
++	      d0 = d0 << bm;
++	      n2 = n1 >> b;
++	      n1 = (n1 << bm) | (n0 >> b);
++	      n0 = n0 << bm;
++
++	      udiv_qrnnd_c_di (q1, n1, n2, n1, d0);
++	    }
++
++	  /* n1 != d0...  */
++
++	  udiv_qrnnd_c_di (q0, n0, n1, n0, d0);
++
++	  /* Remainder in n0 >> bm.  */
++	}
++
++      if (rp != 0)
++	{
++	  rr.d.low = n0 >> bm;
++	  rr.d.high = 0;
++	  *rp = rr.ti;
++	}
++    }
++  else
++    {
++      if (d1 > n1)
++	{
++	  /* 00 = nn / DD */
++
++	  q0 = 0;
++	  q1 = 0;
++
++	  /* Remainder in n1n0.  */
++	  if (rp != 0)
++	    {
++	      rr.d.low = n0;
++	      rr.d.high = n1;
++	      *rp = rr.ti;
++	    }
++	}
++      else
++	{
++	  /* 0q = NN / dd */
++
++	  count_leading_zeros_di (bm, d1);
++	  if (bm == 0)
++	    {
++	      /* From (n1 >= d1) /\ (the most significant bit of d1 is set),
++		 conclude (the most significant bit of n1 is set) /\ (the
++		 quotient digit q0 = 0 or 1).
++
++		 This special case is necessary, not an optimization.  */
++
++	      /* The condition on the next line takes advantage of that
++		 n1 >= d1 (true due to program flow).  */
++	      if (n1 > d1 || n0 >= d0)
++		{
++		  q0 = 1;
++		  sub_ddmmss_di (n1, n0, n1, n0, d1, d0);
++		}
++	      else
++		q0 = 0;
++
++	      q1 = 0;
++
++	      if (rp != 0)
++		{
++		  rr.d.low = n0;
++		  rr.d.high = n1;
++		  *rp = rr.ti;
++		}
++	    }
++	  else
++	    {
++	      UDItype m1, m0;
++	      /* Normalize.  */
++
++	      b = DI_TYPE_SIZE - bm;
++
++	      d1 = (d1 << bm) | (d0 >> b);
++	      d0 = d0 << bm;
++	      n2 = n1 >> b;
++	      n1 = (n1 << bm) | (n0 >> b);
++	      n0 = n0 << bm;
++
++	      udiv_qrnnd_c_di (q0, n1, n2, n1, d1);
++	      umul_ppmm_di (m1, m0, q0, d0);
++
++	      if (m1 > n1 || (m1 == n1 && m0 > n0))
++		{
++		  q0--;
++		  sub_ddmmss_di (m1, m0, m1, m0, d1, d0);
++		}
++
++	      q1 = 0;
++
++	      /* Remainder in (n1n0 - m1m0) >> bm.  */
++	      if (rp != 0)
++		{
++		  sub_ddmmss_di (n1, n0, n1, n0, m1, m0);
++		  rr.d.low = (n1 << b) | (n0 >> bm);
++		  rr.d.high = n1 >> bm;
++		  *rp = rr.ti;
++		}
++	    }
++	}
++    }
++
++  ww.d.low = q0;
++  ww.d.high = q1;
++  return ww.ti;
++}
++#endif
++
++#ifdef L_divti3
++UTItype __udivmodti4 ();
++
++TItype
++__divti3 (TItype u, TItype v)
++{
++  word_type c = 0;
++  TIunion uu, vv;
++  TItype w;
++
++  uu.ti = u;
++  vv.ti = v;
++
++  if (uu.d.high < 0)
++    c = ~c,
++    uu.ti = __negti2 (uu.ti);
++  if (vv.d.high < 0)
++    c = ~c,
++    vv.ti = __negti2 (vv.ti);
++
++  w = __udivmodti4 (uu.ti, vv.ti, (UTItype *) 0);
++  if (c)
++    w = __negti2 (w);
++
++  return w;
++}
++#endif
++
++#ifdef L_modti3
++UTItype __udivmodti4 ();
++
++TItype
++__modti3 (TItype u, TItype v)
++{
++  word_type c = 0;
++  TIunion uu, vv;
++  TItype w;
++
++  uu.ti = u;
++  vv.ti = v;
++
++  if (uu.d.high < 0)
++    c = ~c,
++    uu.ti = __negti2 (uu.ti);
++  if (vv.d.high < 0)
++    vv.ti = __negti2 (vv.ti);
++
++  (void) __udivmodti4 (uu.ti, vv.ti, (UTItype *)&w);
++  if (c)
++    w = __negti2 (w);
++
++  return w;
++}
++#endif
++
++#ifdef L_umodti3
++UTItype __udivmodti4 ();
++
++UTItype
++__umodti3 (UTItype u, UTItype v)
++{
++  UTItype w;
++
++  (void) __udivmodti4 (u, v, &w);
++
++  return w;
++}
++#endif
++
++
++#ifdef L_udivti3
++UTItype __udivmodti4 ();
++UTItype
++__udivti3 (UTItype n, UTItype d)
++{
++  return __udivmodti4 (n, d, (UTItype *) 0);
++}
++#endif
++
++#ifdef L_cmpti2
++word_type
++__cmpti2 (TItype a, TItype b)
++{
++  TIunion au, bu;
++
++  au.ti = a, bu.ti = b;
++
++  if (au.d.high < bu.d.high)
++    return 0;
++  else if (au.d.high > bu.d.high)
++    return 2;
++  if ((UDItype) au.d.low < (UDItype) bu.d.low)
++    return 0;
++  else if ((UDItype) au.d.low > (UDItype) bu.d.low)
++    return 2;
++  return 1;
++}
++#endif
++
++#ifdef L_ucmpti2
++word_type
++__ucmpti2 (UTItype a, UTItype b)
++{
++  TIunion au, bu;
++
++  au.ti = a, bu.ti = b;
++
++  if ((UDItype) au.d.high < (UDItype) bu.d.high)
++    return 0;
++  else if ((UDItype) au.d.high > (UDItype) bu.d.high)
++    return 2;
++  if ((UDItype) au.d.low < (UDItype) bu.d.low)
++    return 0;
++  else if ((UDItype) au.d.low > (UDItype) bu.d.low)
++    return 2;
++  return 1;
++}
++#endif
++
++
++/*
++  Followings are not neeeded, because TF or XF mode is not supported. 
++   __fixunstfti(), __fixtfdi()
++   __fixunsxfti(), __fixxfti()
++*/
++
++#ifdef L_fixunsdfti
++TItype
++__fixunsdfti (DFtype a)
++{
++  DFtype b;
++  UTItype v;
++
++  if (a < 0)
++    return 0;
++
++  /* Compute high word of result, as a flonum.  */
++  b = (a / HIGH_DI_WORD_COEFF);
++  /* Convert that to fixed (but not to DItype!),
++     and shift it into the high word.  */
++  v = (UDItype) b;
++  v <<= DI_WORD_SIZE;
++  /* Remove high part from the DFtype, leaving the low part as flonum.  */
++  a -= (DFtype)v;
++  /* Convert that to fixed (but not to DItype!) and add it in.
++     Sometimes A comes out negative.  This is significant, since
++     A has more bits than a long int does.  */
++  if (a < 0)
++    v -= (UDItype) (- a);
++  else
++    v += (UDItype) a;
++  return v;
++}
++#endif
++
++#ifdef L_fixdfti
++TItype
++__fixdfti (DFtype a)
++{
++  if (a < 0)
++    return - __fixunsdfti (-a);
++  return __fixunsdfti (a);
++}
++#endif
++
++/*
++  Followings are not neeeded, because TF or XF mode is not supported. 
++	__floattixf
++	__floattitf
++*/
++
++#ifdef L_floattidf
++DFtype
++__floattidf (TItype u)
++{
++  DFtype d;
++
++  d = (DItype) (u >> DI_WORD_SIZE);
++  d *= HIGH_DI_HALFWORD_COEFF;
++  d *= HIGH_DI_HALFWORD_COEFF;
++  d += (UDItype) (u & (HIGH_DI_WORD_COEFF - 1));
++
++  return d;
++}
++#endif
++
++#ifdef L_floattisf
++SFtype
++__floattisf (TItype u)
++{
++  DFtype df;
++  df = __floattidf (u);
++  return (SFtype) df;
++}
++#endif
+diff -burN orig.gcc-3.2.2/gcc/Makefile.in gcc-3.2.2/gcc/Makefile.in
+--- orig.gcc-3.2.2/gcc/Makefile.in	2003-01-28 17:54:07.000000000 -0400
++++ gcc-3.2.2/gcc/Makefile.in	2007-04-29 02:59:08.000000000 -0300
+@@ -987,6 +987,7 @@
+ 	LIB2FUNCS_ST='$(LIB2FUNCS_ST)' \
+ 	LIB2ADD='$(LIB2ADD)' \
+ 	LIB2ADD_ST='$(LIB2ADD_ST)' \
++	LIB2FUNCS_TI='$(LIB2FUNCS_TI)' \
+ 	LIB2ADDEH='$(LIB2ADDEH)' \
+ 	LIB2ADDEHDEP='$(LIB2ADDEHDEP)' \
+ 	FPBIT='$(FPBIT)' \
+diff -burN orig.gcc-3.2.2/gcc/mklibgcc.in gcc-3.2.2/gcc/mklibgcc.in
+--- orig.gcc-3.2.2/gcc/mklibgcc.in	2003-01-28 17:57:40.000000000 -0400
++++ gcc-3.2.2/gcc/mklibgcc.in	2007-04-29 02:59:08.000000000 -0300
+@@ -232,6 +232,21 @@
+   libgcc2_st_objs="$libgcc2_st_objs ${oname}${objext}"
+ done
+ 
++if [ "$LIB2FUNCS_TI" ]; then
++  for name in $LIB2FUNCS_TI; do
++    for ml in $MULTILIBS; do
++      dir=`echo ${ml} | sed -e 's/;.*$//' -e 's/=/$(EQ)/g'`
++      flags=`echo ${ml} | sed -e 's/^[^;]*;//' -e 's/@/ -/g'`;
++      out="libgcc/${dir}/${name}${objext}"
++  
++      echo $out: $libgcc2_c_dep
++      echo "	$gcc_compile" '$(MAYBE_USE_COLLECT2)' $flags -DL$name \
++        -c '$(srcdir)/libgcc2-timode.c' -o $out
++    done
++    libgcc2_objs="$libgcc2_objs ${name}${objext}"
++  done
++fi
++
+ # SHLIB_MKMAP
+ # SHLIB_MKMAP_OPTS
+ # SHLIB_MAPFILES
+diff -burN orig.gcc-3.2.2/gcc/toplev.c gcc-3.2.2/gcc/toplev.c
+--- orig.gcc-3.2.2/gcc/toplev.c	2002-11-01 20:57:23.000000000 -0400
++++ gcc-3.2.2/gcc/toplev.c	2007-04-29 02:59:09.000000000 -0300
+@@ -3469,6 +3469,18 @@
+ 
+   convert_to_eh_region_ranges ();
+ 
++#ifdef MACHINE_DEPENDENT_REORG_FINAL
++  timevar_push (TV_MACH_DEP);
++  open_dump_file (DFI_mach, decl);
++
++  MACHINE_DEPENDENT_REORG_FINAL (insns);
++
++  close_dump_file (DFI_mach, print_rtl, insns);
++  timevar_pop (TV_MACH_DEP);
++
++  ggc_collect ();
++#endif
++
+   /* Shorten branches.  */
+   timevar_push (TV_SHORTEN_BRANCH);
+   shorten_branches (get_insns ());
+diff -burN orig.gcc-3.2.2/include/obstack.h gcc-3.2.2/include/obstack.h
+--- orig.gcc-3.2.2/include/obstack.h	2001-03-14 15:44:38.000000000 -0400
++++ gcc-3.2.2/include/obstack.h	2007-04-29 02:59:09.000000000 -0300
+@@ -423,7 +423,8 @@
+ ({ struct obstack *__o = (OBSTACK);					\
+    if (__o->next_free + sizeof (void *) > __o->chunk_limit)		\
+      _obstack_newchunk (__o, sizeof (void *));				\
+-   *((void **)__o->next_free)++ = ((void *)datum);			\
++   *((void **)__o->next_free) = ((void *)datum);			\
++   __o->next_free += sizeof(void *);					\
+    (void) 0; })
+ 
+ # define obstack_int_grow(OBSTACK,datum)				\
+diff -burN orig.gcc-3.2.2/libstdc++-v3/configure.target gcc-3.2.2/libstdc++-v3/configure.target
+--- orig.gcc-3.2.2/libstdc++-v3/configure.target	2002-09-06 15:32:08.000000000 -0300
++++ gcc-3.2.2/libstdc++-v3/configure.target	2007-04-29 02:59:09.000000000 -0300
 @@ -55,6 +55,9 @@
    m68k | m680[246]0)
      cpu_include_dir="config/cpu/m68k"
@@ -5468,14 +5394,9 @@ diff -b -u -r1.1.1.1 -r1.2
    powerpc | rs6000)
      cpu_include_dir="config/cpu/powerpc"
      ;;
-Index: libstdc++-v3/libsupc++/pure.cc
-===================================================================
-RCS file: /home/ps2cvs/gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc,v
-retrieving revision 1.1.1.1
-retrieving revision 1.2
-diff -b -u -r1.1.1.1 -r1.2
---- libstdc++-v3/libsupc++/pure.cc	1 Dec 2004 04:44:20 -0000	1.1.1.1
-+++ libstdc++-v3/libsupc++/pure.cc	1 Dec 2004 05:21:34 -0000	1.2
+diff -burN orig.gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc
+--- orig.gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	2002-06-28 05:22:38.000000000 -0300
++++ gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	2007-04-29 02:59:09.000000000 -0300
 @@ -46,6 +46,6 @@
  extern "C" void
  __cxa_pure_virtual (void)
@@ -5484,3 +5405,87 @@ diff -b -u -r1.1.1.1 -r1.2
 +//  writestr ("pure virtual method called\n");
    std::terminate ();
  }
+diff -burN orig.gcc-3.2.2/README.PS2 gcc-3.2.2/README.PS2
+--- orig.gcc-3.2.2/README.PS2	1969-12-31 20:00:00.000000000 -0400
++++ gcc-3.2.2/README.PS2	2007-04-29 02:59:09.000000000 -0300
+@@ -0,0 +1,80 @@
++Apologies to mrbrown, who's README.PS2 this was based on.
++GCC for Sony Playstation 2
++http://www.ps2dev.org/
++BETA 3 Release 3.2.2-20040214-1
++==
++
++This patch contains a port of the GNU Compiler Collection (http://gcc.gnu.org)
++version 3.2.2 (prerelease) to the Sony Playstation 2.  It supports a C and C++
++cross-compiler targeting the Emotion Engine (Toshiba MIPS R5900).  It is based
++off of the port that Cygnus (now Red Hat) created for the original PS2 SDK,
++and contains a number of changes and updates that mrbrown has incorporated,
++plus some fixes by me.
++
++Unfortunately, there is no ChangeLog in this release.
++
++The Playstation 2 Linux kit is NOT supported in this release.  There are a
++number of issues related to the deployment of this version of GCC in that
++environment.  This is left as an exercise for the ps2linux folks.
++
++You can grab the source to the GCC 3.2.2 release from
++ftp://ftp.gnu.org/pub/gnu/gcc/gcc-3.2.2.tar.gz or a mirror site.
++
++
++Features
++--
++
++- Basic support for the R5900 and COP1.
++- Initial support for 128-bit logical/arith operations (pand, pnor, etc.).
++- Initial support for MMI built-in functions (__builtin_paddb, etc.) and vector
++  types.
++- The main "feature" of this release is the port to the 3.2.2 compiler and fixes
++  to the HILO1 code, allowing re-enabling of double precision emulation and also
++  C++ global constructor fixes.  This release may fix the 64bit shift bug, but
++  if that's the case then it's a side effect of another fix. 
++- Used in conjunction with my binutils-2.13.2.1 patch, you should be able to use
++  -O0 and -O1 without causing bad code generation.
++- Alignment in bss sections bug fix.
++
++To configure the compiler, you can use one of the following configuration
++names:
++
++        ee, mips64r5900[el], mipsEE[el]
++
++If you don't specify the OS portion of the name, -elf is assumed.  Note that
++even if you leave off the "el", you cannot build for big-endian R5900 (it's
++explicitly disabled).  I always use "ee".
++
++
++Known Bugs
++--
++
++[ I haven't found any serious codegen bugs yet. Mail to the ps2dev forums if
++  you find any. ]
++
++  If you wish to disable double precision emulation, comment out the text around
++  DPBIT (and the make target that follows it) in gcc/config/mips/t-r5900. If you
++  comment this section out and use double precision FP in your code, you WILL
++  receive link errors when linking with libgcc.  You can use this "feature" as a
++  tool to find all misuses of float constants and type conversions in your code.
++  Personally, I had trouble getting libstdc++-v3 to build without double precision
++  emulation but YMMV.  It should be possible to configure the compiler and libs
++  to use single precision doubles in place of doubles, however you'd have to make
++  sure that all your libs are built in this manner.
++
++
++Future Work
++--
++
++  Move over to gcc 3.4, once it's released. gcc 3.4 includes a re-write of the
++  entire mips back end and it looks a lot cleaner.
++
++
++Contact
++--
++
++  Use the forums at www.ps2dev.org or find me on IRC at #ps2dev on EFnet.
++
++--
++MrHTFord (mrhtford_ps2dev@hotmail.com)
++Friday 14th February 2004.
