@@ -1,6 +1,6 @@
 diff -burN orig.gcc-3.2.2/config.sub gcc-3.2.2/config.sub
 --- orig.gcc-3.2.2/config.sub	2003-01-30 18:32:36.000000000 -0400
-+++ gcc-3.2.2/config.sub	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/config.sub	2007-04-29 05:10:04.000000000 -0300
 @@ -236,6 +236,7 @@
  	| i370 | i860 | i960 | ia64 \
  	| ip2k \
@@ -57,7 +57,7 @@ diff -burN orig.gcc-3.2.2/config.sub gcc-3.2.2/config.sub
  	-qnx*)
 diff -burN orig.gcc-3.2.2/configure gcc-3.2.2/configure
 --- orig.gcc-3.2.2/configure	2002-06-24 13:14:28.000000000 -0300
-+++ gcc-3.2.2/configure	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/configure	2007-04-29 05:10:04.000000000 -0300
 @@ -89,7 +89,7 @@
  target_alias=NOTARGET
  target_makefile_frag=
@@ -87,7 +87,7 @@ diff -burN orig.gcc-3.2.2/configure gcc-3.2.2/configure
  
 diff -burN orig.gcc-3.2.2/configure.in gcc-3.2.2/configure.in
 --- orig.gcc-3.2.2/configure.in	2002-07-08 07:00:57.000000000 -0300
-+++ gcc-3.2.2/configure.in	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/configure.in	2007-04-29 05:10:04.000000000 -0300
 @@ -980,6 +980,9 @@
    mips*-*-linux*)
      noconfigdirs="$noconfigdirs target-libffi"
@@ -100,7 +100,7 @@ diff -burN orig.gcc-3.2.2/configure.in gcc-3.2.2/configure.in
      ;;
 diff -burN orig.gcc-3.2.2/gcc/caller-save.c gcc-3.2.2/gcc/caller-save.c
 --- orig.gcc-3.2.2/gcc/caller-save.c	2002-01-01 18:22:25.000000000 -0400
-+++ gcc-3.2.2/gcc/caller-save.c	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/caller-save.c	2007-04-29 05:10:04.000000000 -0300
 @@ -50,13 +50,21 @@
     If that is not possible the save is done one register at a time.  */
  
@@ -125,7 +125,7 @@ diff -burN orig.gcc-3.2.2/gcc/caller-save.c gcc-3.2.2/gcc/caller-save.c
     saved in its widest mode with a simple SET insn as long as the memory
 diff -burN orig.gcc-3.2.2/gcc/c-common.c gcc-3.2.2/gcc/c-common.c
 --- orig.gcc-3.2.2/gcc/c-common.c	2002-12-01 14:19:08.000000000 -0400
-+++ gcc-3.2.2/gcc/c-common.c	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/c-common.c	2007-04-29 05:10:04.000000000 -0300
 @@ -1336,6 +1336,9 @@
    if (bits <= TYPE_PRECISION (intDI_type_node))
      return unsignedp ? unsigned_intDI_type_node : intDI_type_node;
@@ -199,7 +199,7 @@ diff -burN orig.gcc-3.2.2/gcc/c-common.c gcc-3.2.2/gcc/c-common.c
    widest_integer_literal_type_node
 diff -burN orig.gcc-3.2.2/gcc/config/mips/core-mmi.h gcc-3.2.2/gcc/config/mips/core-mmi.h
 --- orig.gcc-3.2.2/gcc/config/mips/core-mmi.h	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/core-mmi.h	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/core-mmi.h	2007-04-29 05:10:04.000000000 -0300
 @@ -0,0 +1,104 @@
 +/*
 + * mmi-intrinsics.h - R5900 MMI compiler intrinsics.
@@ -307,12 +307,12 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/core-mmi.h gcc-3.2.2/gcc/config/mips/c
 +
 diff -burN orig.gcc-3.2.2/gcc/config/mips/core-vumm.h gcc-3.2.2/gcc/config/mips/core-vumm.h
 --- orig.gcc-3.2.2/gcc/config/mips/core-vumm.h	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/core-vumm.h	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/core-vumm.h	2007-04-29 05:10:04.000000000 -0300
 @@ -0,0 +1 @@
 +#define __THIS__IS__A__BLANK__FILE__
 diff -burN orig.gcc-3.2.2/gcc/config/mips/crti5900.asm gcc-3.2.2/gcc/config/mips/crti5900.asm
 --- orig.gcc-3.2.2/gcc/config/mips/crti5900.asm	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/crti5900.asm	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/crti5900.asm	2007-04-29 05:10:04.000000000 -0300
 @@ -0,0 +1,16 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -332,7 +332,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/crti5900.asm gcc-3.2.2/gcc/config/mips
 +	sq      $31,80($sp)
 diff -burN orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm gcc-3.2.2/gcc/config/mips/crtn5900.asm
 --- orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/crtn5900.asm	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/crtn5900.asm	2007-04-29 05:10:04.000000000 -0300
 @@ -0,0 +1,12 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -348,7 +348,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/crtn5900.asm gcc-3.2.2/gcc/config/mips
 +	j	$31
 diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.c gcc-3.2.2/gcc/config/mips/mips.c
 --- orig.gcc-3.2.2/gcc/config/mips/mips.c	2002-07-26 20:23:02.000000000 -0300
-+++ gcc-3.2.2/gcc/config/mips/mips.c	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/mips.c	2007-04-29 05:10:04.000000000 -0300
 @@ -51,6 +51,7 @@
  #include "gstab.h"
  #include "hashtab.h"
@@ -1752,7 +1752,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.c gcc-3.2.2/gcc/config/mips/mips.
 +}
 diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.h gcc-3.2.2/gcc/config/mips/mips.h
 --- orig.gcc-3.2.2/gcc/config/mips/mips.h	2002-04-26 18:32:14.000000000 -0300
-+++ gcc-3.2.2/gcc/config/mips/mips.h	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/mips.h	2007-04-29 05:10:04.000000000 -0300
 @@ -48,6 +48,7 @@
    DELAY_NONE,				/* no delay slot */
    DELAY_LOAD,				/* load from memory delay */
@@ -2306,7 +2306,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.h gcc-3.2.2/gcc/config/mips/mips.
 +};
 diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.md gcc-3.2.2/gcc/config/mips/mips.md
 --- orig.gcc-3.2.2/gcc/config/mips/mips.md	2002-11-11 01:57:14.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/mips.md	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/mips.md	2007-04-29 05:10:04.000000000 -0300
 @@ -84,11 +84,11 @@
  ;; nop		no operation
  
@@ -3879,7 +3879,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/mips.md gcc-3.2.2/gcc/config/mips/mips
 +
 diff -burN orig.gcc-3.2.2/gcc/config/mips/mips-protos.h gcc-3.2.2/gcc/config/mips/mips-protos.h
 --- orig.gcc-3.2.2/gcc/config/mips/mips-protos.h	2002-03-24 04:13:16.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/mips-protos.h	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/mips-protos.h	2007-04-29 05:10:04.000000000 -0300
 @@ -81,6 +81,7 @@
  extern void		gen_conditional_move PARAMS ((rtx *));
  extern void		mips_gen_conditional_trap PARAMS ((rtx *));
@@ -3890,7 +3890,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/mips-protos.h gcc-3.2.2/gcc/config/mip
  extern HOST_WIDE_INT	mips_debugger_offset PARAMS ((rtx, HOST_WIDE_INT));
 diff -burN orig.gcc-3.2.2/gcc/config/mips/r5900.h gcc-3.2.2/gcc/config/mips/r5900.h
 --- orig.gcc-3.2.2/gcc/config/mips/r5900.h	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/r5900.h	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/r5900.h	2007-04-29 05:10:04.000000000 -0300
 @@ -0,0 +1,285 @@
 +/*
 + * Target machine definitions for the Toshiba r5900.
@@ -4179,7 +4179,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/r5900.h gcc-3.2.2/gcc/config/mips/r590
 +        || TREE_CODE (TYPE) == RECORD_TYPE)) ? (mips_use_128 ? 128 : 64) : (ALIGN))
 diff -burN orig.gcc-3.2.2/gcc/config/mips/t-irx gcc-3.2.2/gcc/config/mips/t-irx
 --- orig.gcc-3.2.2/gcc/config/mips/t-irx	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/t-irx	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/t-irx	2007-04-29 05:10:04.000000000 -0300
 @@ -0,0 +1,77 @@
 +CONFIG2_H	= $(srcdir)/config/mips/ecoff.h
 +
@@ -4260,7 +4260,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/t-irx gcc-3.2.2/gcc/config/mips/t-irx
 +reload.o: $(CONFIG2_H)
 diff -burN orig.gcc-3.2.2/gcc/config/mips/t-r5900 gcc-3.2.2/gcc/config/mips/t-r5900
 --- orig.gcc-3.2.2/gcc/config/mips/t-r5900	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/config/mips/t-r5900	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config/mips/t-r5900	2007-04-29 05:10:04.000000000 -0300
 @@ -0,0 +1,56 @@
 +# Suppress building libgcc1.a, since the MIPS compiler port is complete
 +# and does not need anything from libgcc1.a.
@@ -4320,7 +4320,7 @@ diff -burN orig.gcc-3.2.2/gcc/config/mips/t-r5900 gcc-3.2.2/gcc/config/mips/t-r5
 +LIB2FUNCS_TI = $(TIMODE_FUNCS_LIST)
 diff -burN orig.gcc-3.2.2/gcc/config.gcc gcc-3.2.2/gcc/config.gcc
 --- orig.gcc-3.2.2/gcc/config.gcc	2003-01-30 10:03:42.000000000 -0400
-+++ gcc-3.2.2/gcc/config.gcc	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/config.gcc	2007-04-29 05:10:04.000000000 -0300
 @@ -1553,6 +1553,10 @@
  		*minwg32msv* | *mingw32*)
  			;;
@@ -4382,7 +4382,7 @@ diff -burN orig.gcc-3.2.2/gcc/config.gcc gcc-3.2.2/gcc/config.gcc
 +
 diff -burN orig.gcc-3.2.2/gcc/cp/decl.c gcc-3.2.2/gcc/cp/decl.c
 --- orig.gcc-3.2.2/gcc/cp/decl.c	2003-01-21 15:00:27.000000000 -0400
-+++ gcc-3.2.2/gcc/cp/decl.c	2007-04-29 03:01:20.000000000 -0300
++++ gcc-3.2.2/gcc/cp/decl.c	2007-04-29 05:10:05.000000000 -0300
 @@ -458,6 +458,10 @@
     ? cp_function_chain->bindings		\
     : scope_chain->bindings)
@@ -4486,7 +4486,7 @@ diff -burN orig.gcc-3.2.2/gcc/cp/decl.c gcc-3.2.2/gcc/cp/decl.c
       call expand_expr to calculate the size of a variable-sized array.
 diff -burN orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c gcc-3.2.2/gcc/fixinc/gnu-regex.c
 --- orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c	2002-02-26 20:23:56.000000000 -0400
-+++ gcc-3.2.2/gcc/fixinc/gnu-regex.c	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/fixinc/gnu-regex.c	2007-04-29 05:10:05.000000000 -0300
 @@ -26,6 +26,9 @@
  # include <config.h>
  #endif
@@ -4499,7 +4499,7 @@ diff -burN orig.gcc-3.2.2/gcc/fixinc/gnu-regex.c gcc-3.2.2/gcc/fixinc/gnu-regex.
  /* GCC LOCAL: to handle defining alloca.  */
 diff -burN orig.gcc-3.2.2/gcc/glimits.h gcc-3.2.2/gcc/glimits.h
 --- orig.gcc-3.2.2/gcc/glimits.h	2001-08-13 21:53:23.000000000 -0300
-+++ gcc-3.2.2/gcc/glimits.h	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/glimits.h	2007-04-29 05:10:05.000000000 -0300
 @@ -67,11 +67,11 @@
  /* Minimum and maximum values a `signed long int' can hold.
     (Same as `int').  */
@@ -4514,9 +4514,31 @@ diff -burN orig.gcc-3.2.2/gcc/glimits.h gcc-3.2.2/gcc/glimits.h
  #endif
  #undef LONG_MIN
  #define LONG_MIN (-LONG_MAX-1)
+diff -burN orig.gcc-3.2.2/gcc/integrate.c gcc-3.2.2/gcc/integrate.c
+--- orig.gcc-3.2.2/gcc/integrate.c	2003-02-03 16:56:29.000000000 -0400
++++ gcc-3.2.2/gcc/integrate.c	2007-04-29 05:12:29.000000000 -0300
+@@ -358,12 +358,18 @@
+   /* Copy the declaration.  */
+   if (TREE_CODE (decl) == PARM_DECL || TREE_CODE (decl) == RESULT_DECL)
+     {
++      tree type;
++      type = TREE_TYPE(decl);
++
+       /* For a parameter, we must make an equivalent VAR_DECL, not a
+ 	 new PARM_DECL.  */
+       copy = build_decl (VAR_DECL, DECL_NAME (decl), TREE_TYPE (decl));
+       TREE_ADDRESSABLE (copy) = TREE_ADDRESSABLE (decl);
+       TREE_READONLY (copy) = TREE_READONLY (decl);
+       TREE_THIS_VOLATILE (copy) = TREE_THIS_VOLATILE (decl);
++
++      if (TYPE_RESTRICT(type))
++        DECL_POINTER_ALIAS_SET (copy) = -2;
+     }
+   else
+     {
 diff -burN orig.gcc-3.2.2/gcc/libgcc2-timode.c gcc-3.2.2/gcc/libgcc2-timode.c
 --- orig.gcc-3.2.2/gcc/libgcc2-timode.c	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/gcc/libgcc2-timode.c	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/libgcc2-timode.c	2007-04-29 05:10:05.000000000 -0300
 @@ -0,0 +1,792 @@
 +/* GCC rutime support routines for TI mode */
 +
@@ -5312,7 +5334,7 @@ diff -burN orig.gcc-3.2.2/gcc/libgcc2-timode.c gcc-3.2.2/gcc/libgcc2-timode.c
 +#endif
 diff -burN orig.gcc-3.2.2/gcc/Makefile.in gcc-3.2.2/gcc/Makefile.in
 --- orig.gcc-3.2.2/gcc/Makefile.in	2003-01-28 17:54:07.000000000 -0400
-+++ gcc-3.2.2/gcc/Makefile.in	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/Makefile.in	2007-04-29 05:10:05.000000000 -0300
 @@ -987,6 +987,7 @@
  	LIB2FUNCS_ST='$(LIB2FUNCS_ST)' \
  	LIB2ADD='$(LIB2ADD)' \
@@ -5323,7 +5345,7 @@ diff -burN orig.gcc-3.2.2/gcc/Makefile.in gcc-3.2.2/gcc/Makefile.in
  	FPBIT='$(FPBIT)' \
 diff -burN orig.gcc-3.2.2/gcc/mklibgcc.in gcc-3.2.2/gcc/mklibgcc.in
 --- orig.gcc-3.2.2/gcc/mklibgcc.in	2003-01-28 17:57:40.000000000 -0400
-+++ gcc-3.2.2/gcc/mklibgcc.in	2007-04-29 02:59:08.000000000 -0300
++++ gcc-3.2.2/gcc/mklibgcc.in	2007-04-29 05:10:05.000000000 -0300
 @@ -232,6 +232,21 @@
    libgcc2_st_objs="$libgcc2_st_objs ${oname}${objext}"
  done
@@ -5348,7 +5370,7 @@ diff -burN orig.gcc-3.2.2/gcc/mklibgcc.in gcc-3.2.2/gcc/mklibgcc.in
  # SHLIB_MAPFILES
 diff -burN orig.gcc-3.2.2/gcc/toplev.c gcc-3.2.2/gcc/toplev.c
 --- orig.gcc-3.2.2/gcc/toplev.c	2002-11-01 20:57:23.000000000 -0400
-+++ gcc-3.2.2/gcc/toplev.c	2007-04-29 02:59:09.000000000 -0300
++++ gcc-3.2.2/gcc/toplev.c	2007-04-29 05:10:05.000000000 -0300
 @@ -3469,6 +3469,18 @@
  
    convert_to_eh_region_ranges ();
@@ -5370,7 +5392,7 @@ diff -burN orig.gcc-3.2.2/gcc/toplev.c gcc-3.2.2/gcc/toplev.c
    shorten_branches (get_insns ());
 diff -burN orig.gcc-3.2.2/include/obstack.h gcc-3.2.2/include/obstack.h
 --- orig.gcc-3.2.2/include/obstack.h	2001-03-14 15:44:38.000000000 -0400
-+++ gcc-3.2.2/include/obstack.h	2007-04-29 02:59:09.000000000 -0300
++++ gcc-3.2.2/include/obstack.h	2007-04-29 05:10:05.000000000 -0300
 @@ -423,7 +423,8 @@
  ({ struct obstack *__o = (OBSTACK);					\
     if (__o->next_free + sizeof (void *) > __o->chunk_limit)		\
@@ -5383,7 +5405,7 @@ diff -burN orig.gcc-3.2.2/include/obstack.h gcc-3.2.2/include/obstack.h
  # define obstack_int_grow(OBSTACK,datum)				\
 diff -burN orig.gcc-3.2.2/libstdc++-v3/configure.target gcc-3.2.2/libstdc++-v3/configure.target
 --- orig.gcc-3.2.2/libstdc++-v3/configure.target	2002-09-06 15:32:08.000000000 -0300
-+++ gcc-3.2.2/libstdc++-v3/configure.target	2007-04-29 02:59:09.000000000 -0300
++++ gcc-3.2.2/libstdc++-v3/configure.target	2007-04-29 05:10:05.000000000 -0300
 @@ -55,6 +55,9 @@
    m68k | m680[246]0)
      cpu_include_dir="config/cpu/m68k"
@@ -5396,7 +5418,7 @@ diff -burN orig.gcc-3.2.2/libstdc++-v3/configure.target gcc-3.2.2/libstdc++-v3/c
      ;;
 diff -burN orig.gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc
 --- orig.gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	2002-06-28 05:22:38.000000000 -0300
-+++ gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	2007-04-29 02:59:09.000000000 -0300
++++ gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc	2007-04-29 05:10:05.000000000 -0300
 @@ -46,6 +46,6 @@
  extern "C" void
  __cxa_pure_virtual (void)
@@ -5407,7 +5429,7 @@ diff -burN orig.gcc-3.2.2/libstdc++-v3/libsupc++/pure.cc gcc-3.2.2/libstdc++-v3/
  }
 diff -burN orig.gcc-3.2.2/README.PS2 gcc-3.2.2/README.PS2
 --- orig.gcc-3.2.2/README.PS2	1969-12-31 20:00:00.000000000 -0400
-+++ gcc-3.2.2/README.PS2	2007-04-29 02:59:09.000000000 -0300
++++ gcc-3.2.2/README.PS2	2007-04-29 05:10:05.000000000 -0300
 @@ -0,0 +1,80 @@
 +Apologies to mrbrown, who's README.PS2 this was based on.
 +GCC for Sony Playstation 2
