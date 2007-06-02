@@ -2,9 +2,7 @@
 # newlib-1.10.0.sh by Dan Peori (danpeori@oopo.net)
 
  ## Download the source code.
- if test ! -f "newlib-1.10.0.tar.gz"; then
-  wget ftp://sources.redhat.com/pub/newlib/newlib-1.10.0.tar.gz || { exit 1; }
- fi
+ wget --continue ftp://sources.redhat.com/pub/newlib/newlib-1.10.0.tar.gz || { exit 1; }
 
  ## Unpack the source code.
  rm -Rf newlib-1.10.0 && tar xfvz newlib-1.10.0.tar.gz || { exit 1; }

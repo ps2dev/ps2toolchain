@@ -2,9 +2,7 @@
 # binutils-2.14.sh by Dan Peori (danpeori@oopo.net)
 
  ## Download the source code.
- if test ! -f "binutils-2.14.tar.bz2"; then
-  wget ftp://ftp.gnu.org/pub/gnu/binutils/binutils-2.14.tar.bz2 || { exit 1; }
- fi
+ wget --continue ftp://ftp.gnu.org/pub/gnu/binutils/binutils-2.14.tar.bz2 || { exit 1; }
 
  ## Unpack the source code.
  rm -Rf binutils-2.14 && tar xfvj binutils-2.14.tar.bz2 || { exit 1; }
