@@ -4,6 +4,8 @@
  ## Download the source code.
  if test ! -d "ps2client"; then
   svn export svn://svn.ps2dev.org/ps2/trunk/ps2client || { exit 1; }
+ else
+  svn update ps2client || { exit 1; }
  fi
 
  ## Enter the source directory.
