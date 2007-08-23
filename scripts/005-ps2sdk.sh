@@ -3,7 +3,7 @@
 
  ## Download the source code.
  if test ! -d "ps2sdk"; then
-  svn export svn://svn.ps2dev.org/ps2/trunk/ps2sdk || { exit 1; }
+  svn checkout svn://svn.ps2dev.org/ps2/trunk/ps2sdk || { exit 1; }
  else
   svn update ps2sdk || { exit 1; }
  fi
