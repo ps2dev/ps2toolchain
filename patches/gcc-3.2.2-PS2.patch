@@ -5502,6 +5502,18 @@ diff -burN orig.gcc-3.2.2/gcc/Makefile.in gcc-3.2.2/gcc/Makefile.in
  	LIB2ADDEH='$(LIB2ADDEH)' \
  	LIB2ADDEHDEP='$(LIB2ADDEHDEP)' \
  	FPBIT='$(FPBIT)' \
+diff -burN orig.gcc-3.2.2/gcc/collect2.c gcc-3.2.2/gcc/collect2.c
+--- orig.gcc-3.2.2/gcc/collect2.c	2009-08-19 16:36:00.000000000 -0500
++++ gcc-3.2.2/gcc/collect2.c	2009-08-19 16:36:11.000000000 -0500
+@@ -1587,7 +1587,7 @@
+   if (redir)
+     {
+       /* Open response file.  */
+-      redir_handle = open (redir, O_WRONLY | O_TRUNC | O_CREAT);
++      redir_handle = open (redir, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+ 
+       /* Duplicate the stdout and stderr file handles
+ 	 so they can be restored later.  */
 diff -burN orig.gcc-3.2.2/gcc/mklibgcc.in gcc-3.2.2/gcc/mklibgcc.in
 --- orig.gcc-3.2.2/gcc/mklibgcc.in	2003-01-28 17:57:40.000000000 -0400
 +++ gcc-3.2.2/gcc/mklibgcc.in	2007-07-26 13:04:40.000000000 -0300
