@@ -17,7 +17,7 @@
   mkdir "build-$TARGET" && cd "build-$TARGET" || { exit 1; }
 
   ## Configure the build.
-  ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
+  CFLAGS="-O0" ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
 
   ## Compile and install.
   make clean && make -j 2 && make install && make clean || { exit 1; }
