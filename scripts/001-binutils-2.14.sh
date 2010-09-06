@@ -2,7 +2,7 @@
 # binutils-2.14.sh by Dan Peori (danpeori@oopo.net)
 
  ## Download the source code.
- wget --continue ftp://ftp.gnu.org/pub/gnu/binutils/binutils-2.14.tar.bz2 || { exit 1; }
+ wget --continue http://github.com/downloads/ps2dev/ps2toolchain/binutils-2.14.tar.bz2 || { exit 1; }
 
  ## Unpack the source code.
  rm -Rf binutils-2.14 && tar xfvj binutils-2.14.tar.bz2 || { exit 1; }

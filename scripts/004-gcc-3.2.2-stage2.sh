@@ -2,7 +2,7 @@
 # gcc-3.2.2-stage1.sh by Dan Peori (danpeori@oopo.net)
 
  ## Download the source code.
- wget --continue ftp://ftp.gnu.org/pub/gnu/gcc/gcc-3.2.2/gcc-3.2.2.tar.bz2 || { exit 1; }
+ wget --continue http://github.com/downloads/ps2dev/ps2toolchain/gcc-3.2.2.tar.bz2 || { exit 1; }
 
  ## Unpack the source code.
  rm -Rf gcc-3.2.2 && tar xfvj gcc-3.2.2.tar.bz2 || { exit 1; }
