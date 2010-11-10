@@ -2,7 +2,8 @@
 # binutils-2.14.sh by Dan Peori (danpeori@oopo.net)
 
  ## Download the source code.
- wget --continue http://github.com/downloads/ps2dev/ps2toolchain/binutils-2.14.tar.bz2 || { exit 1; }
+ SOURCE=https://github.com/downloads/ps2dev/ps2toolchain/binutils-2.14.tar.bz2
+ wget --continue --no-check-certificate $SOURCE || { exit 1; }
 
  ## Unpack the source code.
  rm -Rf binutils-2.14 && tar xfvj binutils-2.14.tar.bz2 || { exit 1; }
