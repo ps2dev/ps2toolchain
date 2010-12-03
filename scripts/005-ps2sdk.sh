@@ -9,7 +9,9 @@ unset PS2SDKSRC
  if test ! -d "ps2sdk"; then
   git clone git://github.com/ps2dev/ps2sdk.git && cd ps2sdk || exit 1
  else
-  cd ps2sdk && git pull || exit 1
+  cd ps2sdk &&
+  git fetch origin &&
+  git reset --hard origin/master || exit 1
  fi
 
  ## Build and install.

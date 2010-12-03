@@ -6,7 +6,9 @@
  if test ! -d "ps2client"; then
   git clone git://github.com/ps2dev/ps2client.git && cd ps2client || exit 1
  else
-  cd ps2client && git pull || exit 1
+  cd ps2client &&
+  git fetch origin &&
+  git reset --hard origin/master || exit 1
  fi
 
  ## Build and install.
