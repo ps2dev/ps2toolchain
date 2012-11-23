@@ -4,20 +4,23 @@
  ## Enter the ps2toolchain directory.
  cd "`dirname $0`" || { echo "ERROR: Could not enter the ps2toolchain directory."; exit 1; }
 
+export PS2TOOLCHAIN_ROOT="$PWD"
+export BUILD_DIR=${BUILD_DIR:-$PS2TOOLCHAIN_ROOT/build}
+
  ## Create the build directory.
- mkdir -p build || { echo "ERROR: Could not create the build directory."; exit 1; }
+ mkdir -p "$BUILD_DIR" || { echo "ERROR: Could not create the build directory."; exit 1; }
 
  ## Enter the build directory.
- cd build || { echo "ERROR: Could not enter the build directory."; exit 1; }
+ cd "$BUILD_DIR" || { echo "ERROR: Could not enter the build directory."; exit 1; }
 
  ## Fetch the depend scripts.
- DEPEND_SCRIPTS=(`ls ../depends/*.sh | sort`)
+ DEPEND_SCRIPTS=(`ls "$PS2TOOLCHAIN_ROOT"/depends/*.sh | sort`)
 
  ## Run all the depend scripts.
  for SCRIPT in ${DEPEND_SCRIPTS[@]}; do "$SCRIPT" || { echo "$SCRIPT: Failed."; exit 1; } done
 
  ## Fetch the build scripts.
- BUILD_SCRIPTS=(`ls ../scripts/*.sh | sort`)
+ BUILD_SCRIPTS=(`ls "$PS2TOOLCHAIN_ROOT"/scripts/*.sh | sort`)
 
  ## If specific steps were requested...
  if [ $1 ]; then
