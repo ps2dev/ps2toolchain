@@ -6,6 +6,8 @@
 
 export PS2TOOLCHAIN_ROOT="$PWD"
 export BUILD_DIR=${BUILD_DIR:-$PS2TOOLCHAIN_ROOT/build}
+export DOWNLOAD_DIR=${DOWNLOAD_DIR:-$PS2TOOLCHAIN_ROOT/downloads}
+[ -d "$DOWNLOAD_DIR" -o -L "$DOWNLOAD_DIR" ] || mkdir -p "$DOWNLOAD_DIR"
 
  ## Create the build directory.
  mkdir -p "$BUILD_DIR" || { echo "ERROR: Could not create the build directory."; exit 1; }
