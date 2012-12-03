@@ -9,7 +9,7 @@
      { exit 1; }
 
  ## Unpack the source code.
- rm -Rf newlib-1.10.0 && tar xfvz "$DOWNLOAD_DIR/$fname" || { exit 1; }
+ rm -Rf newlib-1.10.0 && tar xfz "$DOWNLOAD_DIR/$fname" || { exit 1; }
 
  ## Enter the source directory and patch the source code.
  cd newlib-1.10.0 && cat "$PS2TOOLCHAIN_ROOT/patches/"newlib-1.10.0-PS2.patch | patch -p1 || { exit 1; }
@@ -21,4 +21,4 @@
  ../configure --prefix="$PS2DEV/ee" --target="ee" || { exit 1; }
 
  ## Compile and install.
- make clean && CPPFLAGS="-G0" make -j 2 && make install && make clean || { exit 1; }
+ make clean && CPPFLAGS="-G0" make -j 2 && make install DESTDIR="${_DESTDIR}" -C ee/newlib && make clean || { exit 1; }
