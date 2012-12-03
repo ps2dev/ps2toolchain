@@ -9,7 +9,7 @@
      { exit 1; }
 
  ## Unpack the source code.
- rm -Rf gcc-3.2.2 && tar xfvj "$DOWNLOAD_DIR/$fname" || { exit 1; }
+ rm -Rf gcc-3.2.2 && tar xfj "$DOWNLOAD_DIR/$fname" || { exit 1; }
 
  ## Enter the source directory and patch the source code.
  cd gcc-3.2.2 && cat "$PS2TOOLCHAIN_ROOT/patches/"gcc-3.2.2-PS2.patch | patch -p1 || { exit 1; }
@@ -21,4 +21,4 @@
  ../configure --prefix="$PS2DEV/ee" --target="ee" --enable-languages="c,c++" --with-newlib --with-headers="$PS2DEV/ee/ee/include" --enable-cxx-flags="-G0" || { exit 1; }
 
  ## Compile and install.
- make clean && CFLAGS_FOR_TARGET="-G0" make -j 2 && make install && make clean || { exit 1; }
+ make clean && CFLAGS_FOR_TARGET="-G0" make -j 2 && make install DESTDIR="${_DESTDIR}" && make clean || { exit 1; }
