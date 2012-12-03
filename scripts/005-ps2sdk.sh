@@ -21,8 +21,11 @@ export GIT_DIR="$DOWNLOAD_DIR/ps2sdk/.git"
   git reset --hard origin/master || exit 1
 
  ## Build and install.
- make clean && make -j 2 && make release && make clean || { exit 1; }
+ make clean && make -j 2 && \
+PS2SDK="$_DESTDIR$PS2SDK" make release && \
+make clean || { exit 1; }
 
  ## Replace newlib's crt0 with the one in ps2sdk.
- ln -sf "$PS2SDK/ee/startup/crt0.o" "$PS2DEV/ee/lib/gcc-lib/ee/3.2.2/crt0.o" || { exit 1; }
- ln -sf "$PS2SDK/ee/startup/crt0.o" "$PS2DEV/ee/ee/lib/crt0.o" || { exit 1; }
+mkdir -p "$_DESTDIR$PS2DEV/ee/lib/gcc-lib/ee/3.2.2/" "$_DESTDIR$PS2DEV/ee/ee/lib/"
+ ln -sf "$PS2SDK/ee/startup/crt0.o" "$_DESTDIR$PS2DEV/ee/lib/gcc-lib/ee/3.2.2/crt0.o" || { exit 1; }
+ ln -sf "$PS2SDK/ee/startup/crt0.o" "$_DESTDIR$PS2DEV/ee/ee/lib/crt0.o" || { exit 1; }

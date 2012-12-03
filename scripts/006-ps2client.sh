@@ -18,4 +18,4 @@ export GIT_DIR="$DOWNLOAD_DIR/ps2client/.git"
   git reset --hard origin/master || exit 1
 
  ## Build and install.
- make clean && make && make install && make clean || { exit 1; }
+ make clean && make && make install PREFIX="${_DESTDIR}$PS2DEV" && make clean || { exit 1; }
