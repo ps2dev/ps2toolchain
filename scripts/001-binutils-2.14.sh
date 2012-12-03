@@ -9,7 +9,7 @@
      { exit 1; }
 
  ## Unpack the source code.
- rm -Rf binutils-2.14 && tar xfvj "$DOWNLOAD_DIR/$fname" || { exit 1; }
+ rm -Rf binutils-2.14 && tar xfj "$DOWNLOAD_DIR/$fname" || { exit 1; }
 
  ## Enter the source directory and patch the source code.
  cd binutils-2.14 && cat "$PS2TOOLCHAIN_ROOT/patches/"binutils-2.14-PS2.patch | patch -p1 || { exit 1; }
@@ -24,7 +24,7 @@
   CFLAGS="-O0" ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
 
   ## Compile and install.
-  make clean && make -j 2 && make install && make clean || { exit 1; }
+  make clean && make -j 2 && make install prefix="${_DESTDIR}$PS2DEV/$TARGET" && make clean || { exit 1; }
 
   ## Exit the build directory.
   cd .. || { exit 1; }
