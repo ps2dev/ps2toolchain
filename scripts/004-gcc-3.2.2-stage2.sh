@@ -18,7 +18,10 @@
  mkdir build-ee-stage2 && cd build-ee-stage2 || { exit 1; }
 
  ## Configure the build.
- ../configure --prefix="$PS2DEV/ee" --target="ee" --enable-languages="c,c++" --with-newlib --with-headers="$PS2DEV/ee/ee/include" --enable-cxx-flags="-G0" || { exit 1; }
+ ../configure --prefix="$PS2DEV/ee" --target="ee" --enable-languages="c,c++" --with-newlib --enable-cxx-flags="-G0" || { exit 1; }
+ mkdir -p "${_DESTDIR}$PS2DEV/ee/ee/"
+ cp -a "$PS2DEV/ee/ee/include" "${_DESTDIR}$PS2DEV/ee/ee/sys-include"
+ echo "$PS2DEV/ee/ee/include" > "${_DESTDIR}$PS2DEV/ee/ee/sys-include/COPIED"
 
  ## Compile and install.
  make clean && CFLAGS_FOR_TARGET="-G0" make -j 2 && make install DESTDIR="${_DESTDIR}" && make clean || { exit 1; }
