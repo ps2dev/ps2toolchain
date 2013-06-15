@@ -1,6 +1,6 @@
 diff -rupN newlib-1.13.0_ori/config.sub newlib-1.13.0/config.sub
 --- newlib-1.13.0_ori/config.sub	2004-11-16 09:18:39.000000000 +0800
-+++ newlib-1.13.0/config.sub	2013-06-12 16:03:59.430181237 +0800
++++ newlib-1.13.0/config.sub	2013-06-16 03:15:40.101439160 +0800
 @@ -246,6 +246,7 @@ case $basic_machine in
  	| mips64vr4100 | mips64vr4100el \
  	| mips64vr4300 | mips64vr4300el \
@@ -29,7 +29,7 @@ diff -rupN newlib-1.13.0_ori/config.sub newlib-1.13.0/config.sub
  		;;
 diff -rupN newlib-1.13.0_ori/newlib/configure.host newlib-1.13.0/newlib/configure.host
 --- newlib-1.13.0_ori/newlib/configure.host	2004-10-06 03:44:24.000000000 +0800
-+++ newlib-1.13.0/newlib/configure.host	2013-06-12 16:03:59.430181237 +0800
++++ newlib-1.13.0/newlib/configure.host	2013-06-16 03:15:40.105439160 +0800
 @@ -380,6 +380,9 @@ case "${host}" in
    m8*-bug-*)
  	sys_dir=m88kbug
@@ -53,7 +53,7 @@ diff -rupN newlib-1.13.0_ori/newlib/configure.host newlib-1.13.0/newlib/configur
  	# We need every symbol 32-bit aligned, so the invalid
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/aclocal.m4 newlib-1.13.0/newlib/libc/machine/r5900/aclocal.m4
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/aclocal.m4	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/aclocal.m4	2013-06-12 16:03:59.434181237 +0800
++++ newlib-1.13.0/newlib/libc/machine/r5900/aclocal.m4	2013-06-16 03:15:40.105439160 +0800
 @@ -0,0 +1,299 @@
 +dnl aclocal.m4 generated automatically by aclocal 1.4
 +
@@ -356,7 +356,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/aclocal.m4 newlib-1.13.0/
 +
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/configure newlib-1.13.0/newlib/libc/machine/r5900/configure
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/configure	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/configure	2013-06-12 16:03:59.438181237 +0800
++++ newlib-1.13.0/newlib/libc/machine/r5900/configure	2013-06-16 03:15:40.113439161 +0800
 @@ -0,0 +1,1711 @@
 +#! /bin/sh
 +
@@ -2071,7 +2071,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/configure newlib-1.13.0/n
 +
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/configure.in newlib-1.13.0/newlib/libc/machine/r5900/configure.in
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/configure.in	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/configure.in	2013-06-12 16:03:59.442181237 +0800
++++ newlib-1.13.0/newlib/libc/machine/r5900/configure.in	2013-06-16 03:15:40.113439161 +0800
 @@ -0,0 +1,12 @@
 +dnl This is the newlib/libc/machine/mips configure.in file.
 +dnl Process this file with autoconf to produce a configure script.
@@ -2087,7 +2087,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/configure.in newlib-1.13.
 +AC_OUTPUT(Makefile)
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/machine/regdef.h newlib-1.13.0/newlib/libc/machine/r5900/machine/regdef.h
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/machine/regdef.h	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/machine/regdef.h	2013-06-12 16:03:59.442181237 +0800
++++ newlib-1.13.0/newlib/libc/machine/r5900/machine/regdef.h	2013-06-16 03:15:40.117439161 +0800
 @@ -0,0 +1,38 @@
 +/* regdef.h -- define MIPS register names.  */
 +
@@ -2129,7 +2129,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/machine/regdef.h newlib-1
 +#endif /* mips_regdef_h */
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/Makefile.am newlib-1.13.0/newlib/libc/machine/r5900/Makefile.am
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/Makefile.am	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/Makefile.am	2013-06-12 16:03:59.442181237 +0800
++++ newlib-1.13.0/newlib/libc/machine/r5900/Makefile.am	2013-06-16 03:15:40.117439161 +0800
 @@ -0,0 +1,14 @@
 +## Process this file with automake to generate Makefile.in
 +
@@ -2147,7 +2147,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/Makefile.am newlib-1.13.0
 +CONFIG_STATUS_DEPENDENCIES = $(newlib_basedir)/configure.host
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/Makefile.in newlib-1.13.0/newlib/libc/machine/r5900/Makefile.in
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/Makefile.in	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/Makefile.in	2013-06-12 16:03:59.442181237 +0800
++++ newlib-1.13.0/newlib/libc/machine/r5900/Makefile.in	2013-06-16 03:15:40.117439161 +0800
 @@ -0,0 +1,324 @@
 +# Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
 +
@@ -2475,8 +2475,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/Makefile.in newlib-1.13.0
 +.NOEXPORT:
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memchr.S newlib-1.13.0/newlib/libc/machine/r5900/memchr.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/memchr.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/memchr.S	2013-06-12 16:03:59.446181237 +0800
-@@ -0,0 +1,147 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/memchr.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,160 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of memchr using quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -2494,6 +2506,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memchr.S newlib-1.13.0/ne
 +	.globl	memchr
 +	.text
 +	.ent	memchr
++	.weak	memchr
 +memchr:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -2626,8 +2639,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memchr.S newlib-1.13.0/ne
 +	.end	memchr
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memcmp.S newlib-1.13.0/newlib/libc/machine/r5900/memcmp.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/memcmp.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/memcmp.S	2013-06-12 16:03:59.446181237 +0800
-@@ -0,0 +1,113 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/memcmp.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,126 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of memcmp using quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -2645,6 +2670,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memcmp.S newlib-1.13.0/ne
 +	.globl	memcmp
 +	.text
 +	.ent	memcmp
++	.weak	memcmp
 +memcmp:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -2743,8 +2769,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memcmp.S newlib-1.13.0/ne
 +	.end	memcmp
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memcpy.S newlib-1.13.0/newlib/libc/machine/r5900/memcpy.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/memcpy.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/memcpy.S	2013-06-12 16:03:59.446181237 +0800
-@@ -0,0 +1,133 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/memcpy.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,147 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of memcpy using quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -2762,6 +2800,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memcpy.S newlib-1.13.0/ne
 +	.globl	memcpy
 +	.text
 +	.ent	memcpy
++	.weak	memcpy
 +memcpy:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -2864,6 +2903,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memcpy.S newlib-1.13.0/ne
 +	sb	$2,0($3)
 +	.set	noreorder
 +	.set	nomacro
++	nop
 +	bne	$6,$4,$L13
 +	addu	$3,$3,1
 +	.set	macro
@@ -2880,8 +2920,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memcpy.S newlib-1.13.0/ne
 +	.end	memcpy
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memmove.S newlib-1.13.0/newlib/libc/machine/r5900/memmove.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/memmove.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/memmove.S	2013-06-12 16:03:59.446181237 +0800
-@@ -0,0 +1,190 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/memmove.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,205 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of memmove using quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -2899,6 +2951,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memmove.S newlib-1.13.0/n
 +	.globl	memmove
 +	.text
 +	.ent	memmove
++	.weak	memmove
 +memmove:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -2944,6 +2997,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memmove.S newlib-1.13.0/n
 +	addu	$6,$6,-1
 +	.set	noreorder
 +	.set	nomacro
++	nop
 +	bne	$6,$4,$L5
 +	sb	$2,0($3)
 +	.set	macro
@@ -3054,6 +3108,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memmove.S newlib-1.13.0/n
 +	sb	$2,0($3)
 +	.set	noreorder
 +	.set	nomacro
++	nop
 +	bne	$6,$4,$L19
 +	addu	$3,$3,1
 +	.set	macro
@@ -3074,8 +3129,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memmove.S newlib-1.13.0/n
 +
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memset.S newlib-1.13.0/newlib/libc/machine/r5900/memset.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/memset.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/memset.S	2013-06-12 16:03:59.450181237 +0800
-@@ -0,0 +1,137 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/memset.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,155 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of memset using quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -3093,6 +3160,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memset.S newlib-1.13.0/ne
 +	.globl	memset
 +	.text
 +	.ent	memset
++	.weak	memset
 +memset:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -3171,6 +3239,8 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memset.S newlib-1.13.0/ne
 +$L31:
 +	.set	noreorder
 +	.set	nomacro
++	nop
++	nop
 +	beql	$2,$0,$L16
 +	sd	$3,0($7)
 +	.set	macro
@@ -3199,6 +3269,9 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memset.S newlib-1.13.0/ne
 +	addu	$6,$6,-1
 +	.set	noreorder
 +	.set	nomacro
++	nop
++	nop
++	nop
 +	bne	$6,$2,$L20
 +	addu	$3,$3,1
 +	.set	macro
@@ -3215,43 +3288,83 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/memset.S newlib-1.13.0/ne
 +	.end	memset
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/setjmp.S newlib-1.13.0/newlib/libc/machine/r5900/setjmp.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/setjmp.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/setjmp.S	2013-06-12 16:03:59.450181237 +0800
-@@ -0,0 +1,65 @@
-+/* This is a simple version of setjmp and longjmp.
++++ newlib-1.13.0/newlib/libc/machine/r5900/setjmp.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,117 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++# This is a simple version of setjmp and longjmp.
++# Floating point support in.
++*/
 +
-+   This version does NOT save the floating point register, which is
-+   wrong, but I don't know how to cleanly handle machines without a
-+   floating point coprocessor.
++#include "as_reg_compat.h"
 +
-+   Ian Lance Taylor, Cygnus Support, 13 May 1993.  */
-+
-+#ifdef __mips16
-+/* This file contains 32 bit assembly code.  */
-+	.set nomips16
-+#endif
++#define O_S0	0x00
++#define O_S1	0x10
++#define O_S2	0x20
++#define O_S3	0x30
++#define O_S4	0x40
++#define O_S5	0x50
++#define O_S6	0x60
++#define O_S7	0x70
++#define O_FP	0x80
++#define O_SP	0x90
++#define O_RA	0xa0
++#define O_F20   0xb0
++#define O_F21   0xb4
++#define O_F22   0xb8
++#define O_F23   0xbc
++#define O_F24   0xc0
++#define O_F25   0xc4
++#define O_F26   0xc8
++#define O_F27   0xcc
++#define O_F28   0xd0
++#define O_F29   0xd4
++#define O_F30   0xd8
++#define O_F31   0xdc
 +
 +/* int setjmp (jmp_buf);  */
 +	.globl	setjmp
 +	.ent	setjmp
 +setjmp:
 +	.frame	$sp,0,$31
++	
++	sq	$s0, O_S0($a0)
++	sq	$s1, O_S1($a0)
++	sq	$s2, O_S2($a0)
++	sq	$s3, O_S3($a0)
++	sq	$s4, O_S4($a0)
++	sq	$s5, O_S5($a0)
++	sq	$s6, O_S6($a0)
++	sq	$s7, O_S7($a0)
++	sq	$fp, O_FP($a0)
++	sq	$sp, O_SP($a0)
++	sq	$ra, O_RA($a0)
++	
++	swc1    $f20, O_F20($a0)
++	swc1    $f21, O_F21($a0)
++	swc1    $f22, O_F22($a0)
++	swc1    $f23, O_F23($a0)
++	swc1    $f24, O_F24($a0)
++	swc1    $f25, O_F25($a0)
++	swc1    $f26, O_F26($a0)
++	swc1    $f27, O_F27($a0)
++	swc1    $f28, O_F28($a0)
++	swc1    $f29, O_F29($a0)
++	swc1    $f30, O_F30($a0)
++	swc1    $f31, O_F31($a0)
 +
-+	sw	$16,0($4)	/* $s0 */
-+	sw	$17,4($4)	/* $s1 */
-+	sw	$18,8($4)	/* $s2 */
-+	sw	$19,12($4)	/* $s3 */
-+	sw	$20,16($4)	/* $s4 */
-+	sw	$21,20($4)	/* $s5 */
-+	sw	$22,24($4)	/* $s6 */
-+	sw	$23,28($4)	/* $s7 */
-+	sw	$30,32($4)	/* $s8 */
 +
-+	sw	$sp,36($4)
-+	sw	$31,40($4)
++	move	$v0, $0
 +
-+	move	$2,$0
-+
-+	j	$31
++	jr	$ra
 +
 +	.end	setjmp
 +
@@ -3261,31 +3374,55 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/setjmp.S newlib-1.13.0/ne
 +longjmp:
 +	.frame	$sp,0,$31
 +
-+	lw	$16,0($4)	/* $s0 */
-+	lw	$17,4($4)	/* $s1 */
-+	lw	$18,8($4)	/* $s2 */
-+	lw	$19,12($4)	/* $s3 */
-+	lw	$20,16($4)	/* $s4 */
-+	lw	$21,20($4)	/* $s5 */
-+	lw	$22,24($4)	/* $s6 */
-+	lw	$23,28($4)	/* $s7 */
-+	lw	$30,32($4)	/* $s8 */
++	lq	$s0, O_S0($a0)
++	lq	$s1, O_S1($a0)
++	lq	$s2, O_S2($a0)
++	lq	$s3, O_S3($a0)
++	lq	$s4, O_S4($a0)
++	lq	$s5, O_S5($a0)
++	lq	$s6, O_S6($a0)
++	lq	$s7, O_S7($a0)
++	lq	$fp, O_FP($a0)
++	lq	$sp, O_SP($a0)
++	lq	$ra, O_RA($a0)
++	
++	lwc1    $f20, O_F20($a0)
++	lwc1    $f21, O_F21($a0)
++	lwc1    $f22, O_F22($a0)
++	lwc1    $f23, O_F23($a0)
++	lwc1    $f24, O_F24($a0)
++	lwc1    $f25, O_F25($a0)
++	lwc1    $f26, O_F26($a0)
++	lwc1    $f27, O_F27($a0)
++	lwc1    $f28, O_F28($a0)
++	lwc1    $f29, O_F29($a0)
++	lwc1    $f30, O_F30($a0)
++	lwc1    $f31, O_F31($a0)
 +
-+	lw	$sp,36($4)
-+	lw	$31,40($4)
-+
-+	bne	$5,$0,1f
-+	li	$5,1
++	bne	$a0, $0, 1f
++	li	$a0, 1
 +1:
-+	move	$2,$5
++	move	$v0, $a0
 +
-+	j	$31
++	jr	$ra
 +
 +	.end longjmp
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcat.S newlib-1.13.0/newlib/libc/machine/r5900/strcat.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/strcat.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/strcat.S	2013-06-12 16:03:59.450181237 +0800
-@@ -0,0 +1,168 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/strcat.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,184 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of strcat that uses quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -3303,6 +3440,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcat.S newlib-1.13.0/ne
 +	.globl	strcat
 +	.text
 +	.ent	strcat
++	.weak	strcat
 +strcat:
 +	.frame	$sp,32,$31		# vars= 0, regs= 4/0, args= 0, extra= 0
 +	.mask	0x80010000,-16
@@ -3425,9 +3563,12 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcat.S newlib-1.13.0/ne
 +$L9:				
 +$L15:
 +	lb	$2,0($4)
-+	#nop
 +	.set	noreorder
 +	.set	nomacro
++	nop
++	nop
++	nop
++	nop
 +	bnel	$2,$0,$L9
 +	addu	$4,$4,1
 +	.set	macro
@@ -3456,8 +3597,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcat.S newlib-1.13.0/ne
 +
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strchr.S newlib-1.13.0/newlib/libc/machine/r5900/strchr.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/strchr.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/strchr.S	2013-06-12 16:03:59.450181237 +0800
-@@ -0,0 +1,192 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/strchr.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,205 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of strchr that uses quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -3475,6 +3628,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strchr.S newlib-1.13.0/ne
 +	.globl	strchr
 +	.text
 +	.ent	strchr
++	.weak	strchr
 +strchr:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -3535,7 +3689,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strchr.S newlib-1.13.0/ne
 +	pand	$3,$3,$6
 +	dli	$6,0x0101010101010101
 +	pcpyud	$2,$3,$5
-+	or	$2,$2,$3
++	or	$3,$2,$3
 +	.set	noreorder
 +	.set	nomacro
 +	beql	$3,$0,$L16
@@ -3652,8 +3806,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strchr.S newlib-1.13.0/ne
 +	.end	strchr
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcmp.S newlib-1.13.0/newlib/libc/machine/r5900/strcmp.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/strcmp.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/strcmp.S	2013-06-12 16:03:59.454181237 +0800
-@@ -0,0 +1,213 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/strcmp.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,226 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of strcmp using quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -3671,6 +3837,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcmp.S newlib-1.13.0/ne
 +	.globl	strcmp
 +	.text
 +	.ent	strcmp
++	.weak	strcmp
 +strcmp:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -3869,8 +4036,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcmp.S newlib-1.13.0/ne
 +	.end	strcmp
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcpy.S newlib-1.13.0/newlib/libc/machine/r5900/strcpy.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/strcpy.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/strcpy.S	2013-06-12 16:03:59.454181237 +0800
-@@ -0,0 +1,155 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/strcpy.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,169 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of strcpy using quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -3888,6 +4067,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcpy.S newlib-1.13.0/ne
 +	.globl	strcpy
 +	.text
 +	.ent	strcpy
++	.weak	strcpy
 +strcpy:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -4013,6 +4193,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcpy.S newlib-1.13.0/ne
 +	sll	$2,$2,24
 +	.set	noreorder
 +	.set	nomacro
++	nop
 +	bne	$2,$0,$L7
 +	addu	$3,$3,1
 +	.set	macro
@@ -4028,8 +4209,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strcpy.S newlib-1.13.0/ne
 +	.end	strcpy
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strlen.S newlib-1.13.0/newlib/libc/machine/r5900/strlen.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/strlen.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/strlen.S	2013-06-12 16:03:59.454181237 +0800
-@@ -0,0 +1,154 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/strlen.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,176 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of strlen that uses quadword instructions.
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -4047,6 +4240,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strlen.S newlib-1.13.0/ne
 +	.globl	strlen
 +	.text
 +	.ent	strlen
++	.weak	strlen
 +strlen:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -4167,12 +4361,21 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strlen.S newlib-1.13.0/ne
 +		
 +$L9:
 +$L15:
-+	lb	$2,0($4)
-+	#nop
 +	.set	noreorder
 +	.set	nomacro
-+	bnel	$2,$0,$L9
++
++	lb	$2,0($4)
++	#nop
++	beq	$2,$0,1f
 +	addu	$4,$4,1
++
++	lb	$2,0($4)
++	#nop
++	bne	$2,$0,$L9
++	addu	$4,$4,1
++1:
++	subu	$4,$4,1
++
 +	.set	macro
 +	.set	reorder
 +
@@ -4186,8 +4389,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strlen.S newlib-1.13.0/ne
 +	.end	strlen
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncat.S newlib-1.13.0/newlib/libc/machine/r5900/strncat.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/strncat.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/strncat.S	2013-06-12 16:03:59.454181237 +0800
-@@ -0,0 +1,207 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/strncat.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,224 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of strncat that uses quadword instructions. 
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -4205,6 +4420,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncat.S newlib-1.13.0/n
 +	.globl	strncat
 +	.text
 +	.ent	strncat
++	.weak	strncat
 +strncat:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -4337,6 +4553,10 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncat.S newlib-1.13.0/n
 +	lb	$2,0($4)
 +	.set	noreorder
 +	.set	nomacro
++	nop
++	nop
++	nop
++	nop
 +	bnel	$2,$0,$L20
 +	addu	$4,$4,1
 +	.set	macro
@@ -4397,8 +4617,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncat.S newlib-1.13.0/n
 +	.end	strncat
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncmp.S newlib-1.13.0/newlib/libc/machine/r5900/strncmp.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/strncmp.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/strncmp.S	2013-06-12 16:03:59.454181237 +0800
-@@ -0,0 +1,271 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/strncmp.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,284 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of strncmp that uses quadword instructions.
 +
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -4416,6 +4648,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncmp.S newlib-1.13.0/n
 +	.globl	strncmp
 +	.text
 +	.ent	strncmp
++	.weak	strncmp
 +strncmp:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -4672,8 +4905,20 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncmp.S newlib-1.13.0/n
 +	.end	strncmp
 diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncpy.S newlib-1.13.0/newlib/libc/machine/r5900/strncpy.S
 --- newlib-1.13.0_ori/newlib/libc/machine/r5900/strncpy.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/machine/r5900/strncpy.S	2013-06-12 16:03:59.458181238 +0800
-@@ -0,0 +1,209 @@
++++ newlib-1.13.0/newlib/libc/machine/r5900/strncpy.S	2013-06-16 02:59:42.000000000 +0800
+@@ -0,0 +1,224 @@
++/*
++# _____     ___ ____     ___ ____
++#  ____|   |    ____|   |        | |____|
++# |     ___|   |____ ___|    ____| |    \    PS2DEV Open Source Project.
++#-----------------------------------------------------------------------
++# Copyright 2001-2004, ps2dev - http://www.ps2dev.org
++# Licenced under Academic Free License version 2.0
++# Review ps2sdk README & LICENSE files for further details.
++#
++# $Id$
++*/
++
 +/* Assembler version of strncpy using quadword instructions
 +	
 +   Jeff Johnston, Cygnus Solutions, Feb 10/1999.
@@ -4691,6 +4936,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncpy.S newlib-1.13.0/n
 +	.globl	strncpy
 +	.text
 +	.ent	strncpy
++	.weak	strncpy
 +strncpy:
 +	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, extra= 0
 +	.mask	0x00000000,0
@@ -4869,6 +5115,8 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncpy.S newlib-1.13.0/n
 +	addu	$4,$4,1
 +	.set	noreorder
 +	.set	nomacro
++	nop
++	nop
 +	bne	$2,$0,$L16
 +	addu	$6,$6,-1
 +	.set	macro
@@ -4885,7 +5133,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/machine/r5900/strncpy.S newlib-1.13.0/n
 +	.end	strncpy
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/aclocal.m4 newlib-1.13.0/newlib/libc/sys/PlayStation2/aclocal.m4
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/aclocal.m4	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/aclocal.m4	2013-06-12 16:03:59.458181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/aclocal.m4	2013-06-16 03:15:40.137439161 +0800
 @@ -0,0 +1,299 @@
 +dnl aclocal.m4 generated automatically by aclocal 1.4
 +
@@ -5188,7 +5436,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/aclocal.m4 newlib-1.13
 +
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/close.c newlib-1.13.0/newlib/libc/sys/PlayStation2/close.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/close.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/close.c	2013-06-12 16:03:59.458181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/close.c	2013-06-16 03:15:40.137439161 +0800
 @@ -0,0 +1,7 @@
 +
 +int fio_close( int fd );
@@ -5199,7 +5447,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/close.c newlib-1.13.0/
 +}
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/configure newlib-1.13.0/newlib/libc/sys/PlayStation2/configure
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/configure	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/configure	2013-06-12 16:03:59.462181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/configure	2013-06-16 03:15:40.137439161 +0800
 @@ -0,0 +1,1711 @@
 +#! /bin/sh
 +
@@ -6914,7 +7162,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/configure newlib-1.13.
 +
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/configure.in newlib-1.13.0/newlib/libc/sys/PlayStation2/configure.in
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/configure.in	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/configure.in	2013-06-12 16:03:59.462181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/configure.in	2013-06-16 03:15:40.141439161 +0800
 @@ -0,0 +1,12 @@
 +dnl This is the newlib/libc/sys/decstation configure.in file.
 +dnl Process this file with autoconf to produce a configure script.
@@ -6930,7 +7178,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/configure.in newlib-1.
 +AC_OUTPUT(Makefile)
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/crt0.S newlib-1.13.0/newlib/libc/sys/PlayStation2/crt0.S
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/crt0.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/crt0.S	2013-06-12 16:03:59.462181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/crt0.S	2013-06-16 03:15:40.141439161 +0800
 @@ -0,0 +1,67 @@
 +	.set noreorder
 +
@@ -7001,7 +7249,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/crt0.S newlib-1.13.0/n
 +	.align	4
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/dlmalloc-ps2.c newlib-1.13.0/newlib/libc/sys/PlayStation2/dlmalloc-ps2.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/dlmalloc-ps2.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/dlmalloc-ps2.c	2013-06-12 16:03:59.466181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/dlmalloc-ps2.c	2013-06-16 03:15:40.145439161 +0800
 @@ -0,0 +1,5462 @@
 +/*
 +  This is a version (aka dlmalloc) of malloc/free/realloc written by
@@ -12467,7 +12715,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/dlmalloc-ps2.c newlib-
 +}
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/fstat.c newlib-1.13.0/newlib/libc/sys/PlayStation2/fstat.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/fstat.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/fstat.c	2013-06-12 16:03:59.466181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/fstat.c	2013-06-16 03:15:40.145439161 +0800
 @@ -0,0 +1,9 @@
 +#include <sys/stat.h>
 +
@@ -12480,7 +12728,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/fstat.c newlib-1.13.0/
 +}
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/getpid.c newlib-1.13.0/newlib/libc/sys/PlayStation2/getpid.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/getpid.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/getpid.c	2013-06-12 16:03:59.470181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/getpid.c	2013-06-16 03:15:40.145439161 +0800
 @@ -0,0 +1,5 @@
 +
 +int getpid(void)
@@ -12489,7 +12737,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/getpid.c newlib-1.13.0
 +}
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/isatty.c newlib-1.13.0/newlib/libc/sys/PlayStation2/isatty.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/isatty.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/isatty.c	2013-06-12 16:03:59.470181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/isatty.c	2013-06-16 03:15:40.149439161 +0800
 @@ -0,0 +1,5 @@
 +
 +int isatty(int fd)
@@ -12498,7 +12746,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/isatty.c newlib-1.13.0
 +}
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/kill.c newlib-1.13.0/newlib/libc/sys/PlayStation2/kill.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/kill.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/kill.c	2013-06-12 16:03:59.470181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/kill.c	2013-06-16 03:15:40.149439161 +0800
 @@ -0,0 +1,5 @@
 +
 +int kill(int  pid , int  sig )
@@ -12508,7 +12756,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/kill.c newlib-1.13.0/n
 \ No newline at end of file
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/lseek.c newlib-1.13.0/newlib/libc/sys/PlayStation2/lseek.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/lseek.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/lseek.c	2013-06-12 16:03:59.470181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/lseek.c	2013-06-16 03:15:40.149439161 +0800
 @@ -0,0 +1,9 @@
 +#include <sys/types.h>
 +#include <errno.h>
@@ -12521,7 +12769,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/lseek.c newlib-1.13.0/
 +}
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/Makefile.am newlib-1.13.0/newlib/libc/sys/PlayStation2/Makefile.am
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/Makefile.am	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/Makefile.am	2013-06-12 16:03:59.470181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/Makefile.am	2013-06-16 03:15:40.149439161 +0800
 @@ -0,0 +1,18 @@
 +## Process this file with automake to generate Makefile.in
 +
@@ -12543,7 +12791,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/Makefile.am newlib-1.1
 +CONFIG_STATUS_DEPENDENCIES = $(newlib_basedir)/configure.host
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/Makefile.in newlib-1.13.0/newlib/libc/sys/PlayStation2/Makefile.in
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/Makefile.in	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/Makefile.in	2013-06-12 16:03:59.470181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/Makefile.in	2013-06-16 03:15:40.149439161 +0800
 @@ -0,0 +1,325 @@
 +# Makefile.in generated automatically by automake 1.4-p5 from Makefile.am
 +
@@ -12872,7 +13120,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/Makefile.in newlib-1.1
 +.NOEXPORT:
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/open.c newlib-1.13.0/newlib/libc/sys/PlayStation2/open.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/open.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/open.c	2013-06-12 16:03:59.474181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/open.c	2013-06-16 03:15:40.153439161 +0800
 @@ -0,0 +1,7 @@
 +
 +int fio_open( const char *, int  );
@@ -12883,7 +13131,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/open.c newlib-1.13.0/n
 +}
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/read.c newlib-1.13.0/newlib/libc/sys/PlayStation2/read.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/read.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/read.c	2013-06-12 16:03:59.474181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/read.c	2013-06-16 03:15:40.153439161 +0800
 @@ -0,0 +1,7 @@
 +
 +int fio_read( int fd, void *buff, int buff_size );
@@ -12894,7 +13142,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/read.c newlib-1.13.0/n
 +}
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/regs.S newlib-1.13.0/newlib/libc/sys/PlayStation2/regs.S
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/regs.S	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/regs.S	2013-06-12 16:03:59.474181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/regs.S	2013-06-16 03:15:40.153439161 +0800
 @@ -0,0 +1,155 @@
 +/*
 + * regs.S -- standard MIPS register names.
@@ -13053,7 +13301,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/regs.S newlib-1.13.0/n
 +/*> EOF regs.S <*/
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/sbrk.c newlib-1.13.0/newlib/libc/sys/PlayStation2/sbrk.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/sbrk.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/sbrk.c	2013-06-12 16:03:59.474181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/sbrk.c	2013-06-16 03:15:40.153439161 +0800
 @@ -0,0 +1,9 @@
 +#include <errno.h>
 +#include <sys/types.h>
@@ -13066,7 +13314,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/sbrk.c newlib-1.13.0/n
 +}
 diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/write.c newlib-1.13.0/newlib/libc/sys/PlayStation2/write.c
 --- newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/write.c	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/newlib/libc/sys/PlayStation2/write.c	2013-06-12 16:03:59.474181238 +0800
++++ newlib-1.13.0/newlib/libc/sys/PlayStation2/write.c	2013-06-16 03:15:40.153439161 +0800
 @@ -0,0 +1,7 @@
 +
 +int fio_write( int fd, void *buf, int nbytes );
@@ -13077,7 +13325,7 @@ diff -rupN newlib-1.13.0_ori/newlib/libc/sys/PlayStation2/write.c newlib-1.13.0/
 +}
 diff -rupN newlib-1.13.0_ori/README.PS2 newlib-1.13.0/README.PS2
 --- newlib-1.13.0_ori/README.PS2	1970-01-01 07:30:00.000000000 +0730
-+++ newlib-1.13.0/README.PS2	2013-06-15 00:07:37.691936415 +0800
++++ newlib-1.13.0/README.PS2	2013-06-16 03:15:40.153439161 +0800
 @@ -0,0 +1,10 @@
 +16-06-2013 - SP193
 +
