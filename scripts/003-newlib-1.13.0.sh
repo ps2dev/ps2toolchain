@@ -1,6 +1,9 @@
 #!/bin/sh
 # newlib-1.13.0.sh
 
+ # Don't build newlib
+ exit 0
+
  ## Download the source code.
  SOURCE=ftp://sourceware.org/pub/newlib/newlib-1.13.0.tar.gz
  wget --continue --no-check-certificate $SOURCE || { exit 1; }

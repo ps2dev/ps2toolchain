@@ -1,6 +1,9 @@
 #!/bin/sh
 # gcc-3.2.2-stage1.sh by Dan Peori (danpeori@oopo.net)
 
+ ## Newlib build not needed with GCC 4.9
+ exit 0
+
  ## Download the source code.
  SOURCE=https://github.com/downloads/ps2dev/ps2toolchain/gcc-3.2.2.tar.bz2
  wget --continue --no-check-certificate $SOURCE || { exit 1; }
