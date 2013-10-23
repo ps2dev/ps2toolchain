@@ -3,13 +3,16 @@
 
  ## Download the source code.
  SOURCE=https://github.com/downloads/ps2dev/ps2toolchain/gcc-3.2.2.tar.bz2
- wget --continue --no-check-certificate $SOURCE || { exit 1; }
+ fname=`basename "$SOURCE"`
+ [ -f "$DOWNLOAD_DIR/$fname" ] || \
+   wget --continue --no-check-certificate -O "$DOWNLOAD_DIR/$fname" $SOURCE || \
+     { exit 1; }
 
  ## Unpack the source code.
- rm -Rf gcc-3.2.2 && tar xfvj gcc-3.2.2.tar.bz2 || { exit 1; }
+ rm -Rf gcc-3.2.2 && tar xfj "$DOWNLOAD_DIR/$fname" || { exit 1; }
 
  ## Enter the source directory and patch the source code.
- cd gcc-3.2.2 && cat ../../patches/gcc-3.2.2-PS2.patch | patch -p1 || { exit 1; }
+ cd gcc-3.2.2 && cat "$PS2TOOLCHAIN_ROOT/patches/"gcc-3.2.2-PS2.patch | patch -p1 || { exit 1; }
 
  ## For each target...
  for TARGET in "ee" "iop"; do
@@ -21,7 +24,7 @@
   ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c" --with-newlib --without-headers || { exit 1; }
 
   ## Compile and install.
-  make clean && make -j 2 && make install && make clean || { exit 1; }
+  make clean && make -j 2 && make install DESTDIR="${_DESTDIR}" && make clean || { exit 1; }
 
   ## Exit the build directory.
   cd .. || { exit 1; }
