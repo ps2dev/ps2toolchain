@@ -5,7 +5,7 @@
  SOURCE=https://github.com/downloads/ps2dev/ps2toolchain/binutils-2.14.tar.bz2
  wget --continue --no-check-certificate $SOURCE || { exit 1; }
 
- BASENAME=binutils-cvs-20130526
+ BASENAME=binutils-2.24
  FILENAME="$BASENAME.tar.bz2"
  SOURCE="http://kernelloader.cvs.sourceforge.net/viewvc/kernelloader/linux/src/$FILENAME?revision=1.1"
  wget --continue --no-check-certificate -O "$FILENAME" "$SOURCE" || { exit 1; }
@@ -15,7 +15,10 @@
  rm -Rf "$BASENAME" && tar xfvj "$FILENAME" || { exit 1; }
 
  ## Enter the source directory and patch the source code.
- cd "$BASENAME" && cat ../../patches/$BASENAME-PS2.patch | patch -p1 || { exit 1; }
+ cd "$BASENAME" || { exit 1; }
+ if [ -e ../patches/$BASENAME-PS2.patch ]; then
+ 	cat ../../patches/$BASENAME-PS2.patch | patch -p1 || { exit 1; }
+ fi
 
  ## For each target that supports new toolchain...
  for TARGET in "ee"; do
