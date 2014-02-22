@@ -15,8 +15,8 @@
  1) Set up your environment by installing the following software:
 
   gcc, make, patch, subversion, wget, git,
-  automake, autoconf, gzip, tar,
-  libmpfr-dev, libgmp3-dev
+  svn, automake, autoconf, gzip, tar,
+  libmpfr-dev, libgmp3-dev, libmpc-dev
 
  2) Add the following to your login script:
 
