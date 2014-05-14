@@ -6,11 +6,12 @@
  wget --continue --no-check-certificate $SOURCE || { exit 1; }
 
  GCC_VERSION=200583
- rm -Rf gcc-r${GCC_VERSION} || { exit 1; }
- svn checkout -r ${GCC_VERSION} svn://gcc.gnu.org/svn/gcc/trunk "gcc-r${GCC_VERSION}" || { exit 1; }
+ SOURCE2=https://bitbucket.org/AKuHAK/pgen/downloads/gcc-r${GCC_VERSION}.tar.bz2
+ wget --continue --no-check-certificate $SOURCE2 || { exit 1; }
 
  ## Unpack the source code.
  rm -Rf gcc-3.2.2 && tar xfvj gcc-3.2.2.tar.bz2 || { exit 1; }
+ rm -Rf gcc-r${GCC_VERSION} && tar xfvj gcc-r${GCC_VERSION}.tar.bz2|| { exit 1; }
 
  ## Enter the source directory and patch the source code.
  cd "gcc-r${GCC_VERSION}" || { exit 1; }
