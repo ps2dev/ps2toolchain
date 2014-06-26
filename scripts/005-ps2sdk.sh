@@ -14,7 +14,7 @@ unset PS2SDKSRC
   git reset --hard origin/master || exit 1
  fi
 
- ## Build and install.
+ ## Build and install
  make clean && make -j 2 && make release && make clean || { exit 1; }
 
  ## Replace newlib's crt0 with the one in ps2sdk.
