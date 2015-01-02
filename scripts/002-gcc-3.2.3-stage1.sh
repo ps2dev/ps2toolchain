@@ -1,16 +1,18 @@
 #!/bin/sh
-# gcc-3.2.2-stage1.sh by Dan Peori (danpeori@oopo.net)
+# gcc-3.2.3-stage1.sh by uyjulian
 
  ## Download the source code.
- SOURCE=http://ftpmirror.gnu.org/gcc/gcc-3.2.2/gcc-3.2.2.tar.bz2
+ SOURCE=http://ftpmirror.gnu.org/gcc/gcc-3.2.3/gcc-3.2.3.tar.bz2
  wget --continue $SOURCE || { exit 1; }
 
  ## Unpack the source code.
- echo Decompressing GCC. Please wait.
- rm -Rf gcc-3.2.2 && tar xfj gcc-3.2.2.tar.bz2 || { exit 1; }
+ rm -Rf gcc-3.2.3 && tar xfj gcc-3.2.3.tar.bz2 || { exit 1; }
 
  ## Enter the source directory and patch the source code.
- cd gcc-3.2.2 && cat ../../patches/gcc-3.2.2-PS2.patch | patch -p1 || { exit 1; }
+ cd gcc-3.2.3 && cat ../../patches/gcc-3.2.3-PS2.patch | patch -p1 || { exit 1; }
+ 
+ ## Make the configure files
+ autoreconf || { exit 1; }
 
  ## For each target...
  for TARGET in "ee" "iop"; do
