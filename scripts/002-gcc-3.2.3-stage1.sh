@@ -10,7 +10,7 @@
 
  ## Enter the source directory and patch the source code.
  cd gcc-3.2.3 && cat ../../patches/gcc-3.2.3-PS2.patch | patch -p1 || { exit 1; }
- 
+
  ## Make the configure files
  autoreconf || { exit 1; }
 

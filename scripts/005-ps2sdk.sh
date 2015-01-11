@@ -18,5 +18,5 @@ unset PS2SDKSRC
  make clean && make -j 2 && make release && make clean || { exit 1; }
 
  ## Replace newlib's crt0 with the one in ps2sdk.
- ln -sf "$PS2SDK/ee/startup/crt0.o" "$PS2DEV/ee/lib/gcc-lib/ee/3.2.2/crt0.o" || { exit 1; }
+ ln -sf "$PS2SDK/ee/startup/crt0.o" "$PS2DEV/ee/lib/gcc-lib/ee/3.2.3/crt0.o" || { exit 1; }
  ln -sf "$PS2SDK/ee/startup/crt0.o" "$PS2DEV/ee/ee/lib/crt0.o" || { exit 1; }
