@@ -2,15 +2,15 @@
 # newlib-1.10.0.sh by Dan Peori (danpeori@oopo.net)
 
  ## Download the source code.
- SOURCE=ftp://sourceware.org/pub/newlib/newlib-1.10.0.tar.gz
+ SOURCE=ftp://sourceware.org/pub/newlib/newlib-2.2.0.tar.gz
  wget --continue $SOURCE || { exit 1; }
 
  ## Unpack the source code.
  echo Decompressing newlib. Please wait.
- rm -Rf newlib-1.10.0 && tar xfz newlib-1.10.0.tar.gz || { exit 1; }
+ rm -Rf newlib-2.2.0 && tar xfz newlib-2.2.0.tar.gz || { exit 1; }
 
  ## Enter the source directory and patch the source code.
- cd newlib-1.10.0 && cat ../../patches/newlib-1.10.0-PS2.patch | patch -p1 || { exit 1; }
+ cd newlib-2.2.0 && cat ../../patches/newlib-2.2.0-ee-PS2.patch | patch -p1 || { exit 1; }
 
  ## Create and enter the build directory.
  mkdir build-ee && cd build-ee || { exit 1; }
