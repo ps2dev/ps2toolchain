@@ -1,0 +1,159 @@
+diff -burN orig.gcc-4.9.2/config.sub gcc-4.9.2/config.sub
+--- orig.gcc-4.9.2/config.sub	2013-10-01 11:50:56.000000000 -0500
++++ gcc-4.9.2/config.sub	2015-04-04 18:59:12.000000000 -0500
+@@ -755,6 +755,10 @@
+ 		basic_machine=i386-unknown
+ 		os=-vsta
+ 		;;
++	iop)
++		basic_machine=mipsel-scei
++		os=-irx
++		;;
+ 	iris | iris4d)
+ 		basic_machine=mips-sgi
+ 		case $os in
+@@ -1375,6 +1379,7 @@
+ 	      | -storm-chaos* | -tops10* | -tenex* | -tops20* | -its* \
+ 	      | -os2* | -vos* | -palmos* | -uclinux* | -nucleus* \
+ 	      | -morphos* | -superux* | -rtmk* | -rtmk-nova* | -windiss* \
++	      | -irx* \
+ 	      | -powermax* | -dnix* | -nx6 | -nx7 | -sei* | -dragonfly* \
+ 	      | -skyos* | -haiku* | -rdos* | -toppers* | -drops* | -es*)
+ 	# Remember, each alternative MUST END IN *, to match a version number.
+diff -burN orig.gcc-4.9.2/fixincludes/mkfixinc.sh gcc-4.9.2/fixincludes/mkfixinc.sh
+--- orig.gcc-4.9.2/fixincludes/mkfixinc.sh	2012-10-28 16:42:48.000000000 -0500
++++ gcc-4.9.2/fixincludes/mkfixinc.sh	2015-04-04 19:34:34.000000000 -0500
+@@ -15,6 +15,7 @@
+     i?86-*-mingw32* | \
+     x86_64-*-mingw32* | \
+     i?86-*-interix* | \
++    mipsel-scei-irx | \
+     powerpc-*-eabisim* | \
+     powerpc-*-eabi*    | \
+     powerpc-*-rtems*   | \
+diff -burN orig.gcc-4.9.2/gcc/config/mips/mips.h gcc-4.9.2/gcc/config/mips/mips.h
+--- orig.gcc-4.9.2/gcc/config/mips/mips.h	2014-03-04 15:39:50.000000000 -0600
++++ gcc-4.9.2/gcc/config/mips/mips.h	2015-04-04 19:32:14.000000000 -0500
+@@ -1197,6 +1197,7 @@
+ #define LINK_SPEC "\
+ %(endian_spec) \
+ %{G*} %{mips1} %{mips2} %{mips3} %{mips4} %{mips32*} %{mips64*} \
++%{miop:-mmipsirx} \
+ %{shared}"
+ #endif  /* LINK_SPEC defined */
+ 
+@@ -1206,7 +1207,7 @@
+ /* SUBTARGET_CC1_SPEC is passed to the compiler proper.  It may be
+    overridden by subtargets.  */
+ #ifndef SUBTARGET_CC1_SPEC
+-#define SUBTARGET_CC1_SPEC ""
++#define SUBTARGET_CC1_SPEC "%{miop:-march=r3000 -mfp32 -mgp32 -fno-builtin}"
+ #endif
+ 
+ /* CC1_SPEC is the set of arguments to pass to the compiler proper.  */
+diff -burN orig.gcc-4.9.2/gcc/config/mips/mips.opt gcc-4.9.2/gcc/config/mips/mips.opt
+--- orig.gcc-4.9.2/gcc/config/mips/mips.opt	2014-02-21 07:30:47.000000000 -0600
++++ gcc-4.9.2/gcc/config/mips/mips.opt	2015-04-04 19:31:38.000000000 -0500
+@@ -402,3 +402,7 @@
+ 
+ noasmopt
+ Driver
++
++miop
++Target Report Mask(OUTPUTTING_IRX)
++Output IOP IRX file
+diff -burN orig.gcc-4.9.2/gcc/config/mips/t-irx gcc-4.9.2/gcc/config/mips/t-irx
+--- orig.gcc-4.9.2/gcc/config/mips/t-irx	1969-12-31 18:00:00.000000000 -0600
++++ gcc-4.9.2/gcc/config/mips/t-irx	2015-04-04 19:44:33.000000000 -0500
+@@ -0,0 +1,77 @@
++CONFIG2_H	= $(srcdir)/config/mips/mips.h
++
++# Don't run fixproto
++STMP_FIXPROTO =
++
++# Suppress building libgcc1.a, since the MIPS compiler port is complete
++# and does not need anything from libgcc1.a.
++LIBGCC1 =
++CROSS_LIBGCC1 =
++
++# We must build libgcc2.a with -G 0, in case the user wants to link
++# without the $gp register.
++TARGET_LIBGCC2_CFLAGS = -G 0
++
++# We want fine grained libraries, so use the new code to build the
++# floating point emulation libraries.
++FPBIT = fp-bit.c
++DPBIT = dp-bit.c
++
++dp-bit.c: $(srcdir)/config/fp-bit.c
++	echo '#ifdef __MIPSEL__' > dp-bit.c
++	echo '#define FLOAT_BIT_ORDER_MISMATCH' >> dp-bit.c
++	echo '#endif' >> dp-bit.c
++	echo '#define US_SOFTWARE_GOFAST' >> dp-bit.c
++	cat $(srcdir)/config/fp-bit.c >> dp-bit.c
++
++fp-bit.c: $(srcdir)/config/fp-bit.c
++	echo '#define FLOAT' > fp-bit.c
++	echo '#ifdef __MIPSEL__' >> fp-bit.c
++	echo '#define FLOAT_BIT_ORDER_MISMATCH' >> fp-bit.c
++	echo '#endif' >> fp-bit.c
++	echo '#define US_SOFTWARE_GOFAST' >> fp-bit.c
++	cat $(srcdir)/config/fp-bit.c >> fp-bit.c
++
++# Build the libraries for both hard and soft floating point
++
++MULTILIB_OPTIONS =
++MULTILIB_DIRNAMES =
++MULTILIB_MATCHES =
++
++# Library members defined in libgcc2.c.
++# LIB2FUNCS = _muldi3 _divdi3 _moddi3 _udivdi3 _umoddi3 _negdi2 \
++#     _lshrdi3 _ashldi3 _ashrdi3 _ffsdi2 \
++#    _udiv_w_sdiv _udivmoddi4 _cmpdi2 _ucmpdi2 \
++#    __gcc_bcmp _varargs __dummy
++
++
++# Add additional dependencies to recompile selected modules whenever the
++# tm.h file changes.  The files compiled are:
++#
++#	gcc.c		(*_SPEC changes)
++#	toplev.c	(new switches + assembly output changes)
++#	sdbout.c	(debug format changes)
++#	dbxout.c	(debug format changes)
++#	dwarfout.c	(debug format changes)
++#	final.c		(assembly output changes)
++#	varasm.c	(assembly output changes)
++#	cse.c		(cost functions)
++#	insn-output.c	(possible ifdef changes in tm.h)
++#	regclass.c	(fixed/call used register changes)
++#	explow.c	(GO_IF_LEGITIMATE_ADDRESS)
++#	recog.c		(GO_IF_LEGITIMATE_ADDRESS)
++#	reload.c	(GO_IF_LEGITIMATE_ADDRESS)
++
++gcc.o: $(CONFIG2_H)
++toplev.o: $(CONFIG2_H)
++sdbout.o: $(CONFIG2_H)
++dbxout.o: $(CONFIG2_H)
++dwarfout.o: $(CONFIG2_H)
++final.o: $(CONFIG2_H)
++varasm.o: $(CONFIG2_H)
++cse.o: $(CONFIG2_H)
++insn-output.o: $(CONFIG2_H)
++regclass.o: $(CONFIG2_H)
++explow.o: $(CONFIG2_H)
++recog.o: $(CONFIG2_H)
++reload.o: $(CONFIG2_H)
+diff -burN orig.gcc-4.9.2/gcc/config.gcc gcc-4.9.2/gcc/config.gcc
+--- orig.gcc-4.9.2/gcc/config.gcc	2014-09-17 09:16:02.000000000 -0500
++++ gcc-4.9.2/gcc/config.gcc	2015-04-04 20:02:24.000000000 -0500
+@@ -2082,6 +2082,10 @@
+ 	tmake_file="mips/t-elf mips/t-sb1"
+ 	tm_defines="${tm_defines} MIPS_ISA_DEFAULT=64 MIPS_CPU_STRING_DEFAULT=\\\"sb1\\\" MIPS_ABI_DEFAULT=ABI_O64"
+ 	;;
++mipsel-*-irx)
++	tm_file="elfos.h newlib-stdint.h ${tm_file} mips/elf.h"
++	tmake_file="mips/t-irx"
++	;;
+ mips-*-elf* | mipsel-*-elf* | mipsr5900-*-elf* | mipsr5900el-*-elf*)
+ 	tm_file="elfos.h newlib-stdint.h ${tm_file} mips/elf.h"
+ 	tmake_file="mips/t-elf"
