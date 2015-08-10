@@ -1,17 +1,18 @@
 #!/bin/sh
 # gcc-3.2.3-stage1.sh by uyjulian
+# gcc-4.9.3 by AKuHAK
 
  ## Download the source code.
  SOURCE=http://ftpmirror.gnu.org/gcc/gcc-3.2.3/gcc-3.2.3.tar.bz2
- wget --continue --no-check-certificate $SOURCE || { exit 1; }
+ wget --continue $SOURCE || { exit 1; }
 
- GCC_VERSION=200583
- SOURCE2=https://bitbucket.org/AKuHAK/pgen/downloads/gcc-r${GCC_VERSION}.tar.bz2
- wget --continue --no-check-certificate $SOURCE2 || { exit 1; }
+ GCC_VERSION=4.9.3
+ SOURCE2=http://ftpmirror.gnu.org/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.bz2
+ wget --continue $SOURCE2 || { exit 1; }
 
  ## Unpack the source code.
  rm -Rf gcc-3.2.3 && tar xfj gcc-3.2.3.tar.bz2 || { exit 1; }
- rm -Rf gcc-r${GCC_VERSION} && tar xfj gcc-r${GCC_VERSION}.tar.bz2|| { exit 1; }
+ rm -Rf gcc-${GCC_VERSION} && tar xfj gcc-${GCC_VERSION}.tar.bz2|| { exit 1; }
 
  ## Enter the source directory and patch the source code.
  cd gcc-3.2.3 && cat ../../patches/gcc-3.2.3-PS2.patch | patch -p1 || { exit 1; }
@@ -40,7 +41,12 @@
  cd ..
 
  ## Enter the source directory and patch the source code.
- cd "gcc-r${GCC_VERSION}" || { exit 1; }
+ cd "gcc-${GCC_VERSION}" && cat ../../patches/gcc-${GCC_VERSION}-PS2.patch | patch -p1 || { exit 1; }
+
+ # configure.ac was patched, need to update configure.
+ cd libgcc || exit -1
+ autoconf2.64 || exit -1
+ cd .. || exit -1
 
  ## For each target...
  for TARGET in "ee"; do

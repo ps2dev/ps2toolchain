@@ -3,17 +3,16 @@
 
  ## Download the source code.
  SOURCE=http://ftpmirror.gnu.org/binutils/binutils-2.14.tar.bz2
- wget --continue --no-check-certificate $SOURCE || { exit 1; }
+ wget --continue $SOURCE || { exit 1; }
 
- BASENAME=binutils-2.24
- FILENAME="$BASENAME.tar.bz2"
- SOURCE="http://kernelloader.cvs.sourceforge.net/viewvc/kernelloader/linux/src/$FILENAME"
- wget --continue --no-check-certificate -O "$FILENAME" "$SOURCE" || { exit 1; }
+ BIN_VERSION=2.24
+ SOURCE2=http://ftpmirror.gnu.org/binutils/binutils-$BIN_VERSION.tar.bz2
+ wget --continue $SOURCE2 || { exit 1; }
 
  ## Unpack the source code.
  echo Decompressing Binutils. Please wait.
  rm -Rf binutils-2.14 && tar xfj binutils-2.14.tar.bz2 || { exit 1; }
- rm -Rf "$BASENAME" && tar xfj "$FILENAME" || { exit 1; }
+ rm -Rf binutils-$BIN_VERSION && tar xfj binutils-$BIN_VERSION.tar.bz2 || { exit 1; }
 
  ## Enter the source directory and patch the source code.
  cd binutils-2.14 && cat ../../patches/binutils-2.14-PS2.patch | patch -p1 || { exit 1; }
@@ -39,9 +38,9 @@
  cd ..
 
  ## Enter the source directory and patch the source code.
- cd "$BASENAME" || { exit 1; }
- if [ -e ../patches/$BASENAME-PS2.patch ]; then
- 	cat ../../patches/$BASENAME-PS2.patch | patch -p1 || { exit 1; }
+ cd binutils-$BIN_VERSION || { exit 1; }
+ if [ -e ../patches/binutils-$BIN_VERSION-PS2.patch ]; then
+ 	cat ../../patches/binutils-$BIN_VERSION-PS2.patch | patch -p1 || { exit 1; }
  fi
 
  ## For each target that supports new toolchain...

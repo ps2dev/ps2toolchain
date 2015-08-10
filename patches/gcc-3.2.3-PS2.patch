@@ -1,3 +1,14 @@
+--- gcc-3.2.3/gcc/collect2.c	2015-08-09 23:20:13.148618787 +0300
++++ gcc-3.2.3/gcc/collect2.c.new	2015-08-09 23:20:38.908617642 +0300
+@@ -1587,7 +1587,7 @@
+   if (redir)
+     {
+       /* Open response file.  */
+-      redir_handle = open (redir, O_WRONLY | O_TRUNC | O_CREAT);
++      redir_handle = open (redir, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+ 
+       /* Duplicate the stdout and stderr file handles
+ 	 so they can be restored later.  */
 diff -burN orig.gcc-3.2.3/config.sub gcc-3.2.3/config.sub
 --- orig.gcc-3.2.3/config.sub	2003-01-30 16:32:36.000000000 -0600
 +++ gcc-3.2.3/config.sub	2014-12-31 21:00:05.000000000 -0600

@@ -6,7 +6,7 @@
 
  ## Download the source code.
  SOURCE=http://ftpmirror.gnu.org/gcc/gcc-3.2.3/gcc-3.2.3.tar.bz2
- wget --continue --no-check-certificate $SOURCE || { exit 1; }
+ wget --continue $SOURCE || { exit 1; }
 
  ## Unpack the source code.
  rm -Rf gcc-3.2.3 && tar xfj gcc-3.2.3.tar.bz2 || { exit 1; }
