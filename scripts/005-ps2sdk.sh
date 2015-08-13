@@ -15,4 +15,4 @@ unset PS2SDKSRC
  fi
 
  ## Build and install.
- make clean && make -j 2 && make release && make clean || { exit 1; }
+ make clean && make && make release && make clean || { exit 1; }

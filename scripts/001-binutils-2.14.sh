@@ -1,22 +1,22 @@
 #!/bin/sh
 # binutils-2.14.sh by Dan Peori (danpeori@oopo.net)
+# binutils-2.25.1.sh by AKuHAK
 
  ## Download the source code.
- SOURCE=http://ftpmirror.gnu.org/binutils/binutils-2.14.tar.bz2
+ OLD_BIN_VERSION=2.14
+ SOURCE=http://ftpmirror.gnu.org/binutils/binutils-$OLD_BIN_VERSION.tar.bz2
  wget --continue $SOURCE || { exit 1; }
 
- BIN_VERSION=2.24
- SOURCE2=http://ftpmirror.gnu.org/binutils/binutils-$BIN_VERSION.tar.bz2
- wget --continue $SOURCE2 || { exit 1; }
-
  ## Unpack the source code.
- echo Decompressing Binutils. Please wait.
- rm -Rf binutils-2.14 && tar xfj binutils-2.14.tar.bz2 || { exit 1; }
- rm -Rf binutils-$BIN_VERSION && tar xfj binutils-$BIN_VERSION.tar.bz2 || { exit 1; }
+ echo Decompressing Binutils $OLD_BIN_VERSION. Please wait.
+ rm -Rf binutils-$OLD_BIN_VERSION && tar xfj binutils-$OLD_BIN_VERSION.tar.bz2 || { exit 1; }
 
  ## Enter the source directory and patch the source code.
- cd binutils-2.14 && cat ../../patches/binutils-2.14-PS2.patch | patch -p1 || { exit 1; }
+ cd binutils-$OLD_BIN_VERSION && cat ../../patches/binutils-$OLD_BIN_VERSION-PS2.patch | patch -p1 || { exit 1; }
 
+ ## Disables generating documentation (new texinfo does not like the old .texi files)
+ echo "MAKEINFO = :" >> Makefile.in
+  
  ## For each target that only supports old toolchain...
  for TARGET in "iop" "dvp"; do
 
@@ -36,6 +36,15 @@
  done
 
  cd ..
+
+ ## Download the source code.
+ BIN_VERSION=2.25.1
+ SOURCE2=http://ftpmirror.gnu.org/binutils/binutils-$BIN_VERSION.tar.bz2
+ wget --continue $SOURCE2 || { exit 1; }
+
+ ## Unpack the source code.
+ echo Decompressing Binutils $BIN_VERSION. Please wait.
+ rm -Rf binutils-$BIN_VERSION && tar xfj binutils-$BIN_VERSION.tar.bz2 || { exit 1; }
 
  ## Enter the source directory and patch the source code.
  cd binutils-$BIN_VERSION || { exit 1; }
