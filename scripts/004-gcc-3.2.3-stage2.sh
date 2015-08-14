@@ -1,9 +1,6 @@
 #!/bin/sh
 # gcc-3.2.3-stage2.sh by uyjulian
 
- ## Newlib build not needed with GCC 4.9
- exit 0
-
  ## Download the source code.
  SOURCE=http://ftpmirror.gnu.org/gcc/gcc-3.2.3/gcc-3.2.3.tar.bz2
  wget --continue $SOURCE || { exit 1; }
