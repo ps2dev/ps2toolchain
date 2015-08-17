@@ -1,24 +1,31 @@
 #!/bin/sh
 # gcc-3.2.3-stage2.sh by uyjulian
 
+ GCC_VERSION=3.2.3
  ## Download the source code.
- SOURCE=http://ftpmirror.gnu.org/gcc/gcc-3.2.3/gcc-3.2.3.tar.bz2
+ SOURCE=http://ftpmirror.gnu.org/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.bz2
  wget --continue $SOURCE || { exit 1; }
 
  ## Unpack the source code.
- rm -Rf gcc-3.2.3 && tar xfj gcc-3.2.3.tar.bz2 || { exit 1; }
+ echo Decompressing GCC $GCC_VERSION. Please wait.
+ rm -Rf gcc-$GCC_VERSION && tar xfj gcc-$GCC_VERSION.tar.bz2 || { exit 1; }
 
  ## Enter the source directory and patch the source code.
- cd gcc-3.2.3 && cat ../../patches/gcc-3.2.3-PS2.patch | patch -p1 || { exit 1; }
+ cd gcc-$GCC_VERSION || { exit 1; }
+ if [ -e ../../patches/gcc-$GCC_VERSION-PS2.patch ]; then
+ 	cat ../../patches/gcc-$GCC_VERSION-PS2.patch | patch -p1 || { exit 1; }
+ fi
 
- ## Make the configure files.
+ ## Make the configure files
  autoreconf || { exit 1; }
 
+ TARGET="ee"
  ## Create and enter the build directory.
- mkdir build-ee-stage2 && cd build-ee-stage2 || { exit 1; }
+ mkdir build-$TARGET-stage2 && cd build-$TARGET-stage2 || { exit 1; }
 
  ## Configure the build.
- ../configure --prefix="$PS2DEV/ee" --target="ee" --enable-languages="c,c++" --with-newlib --with-headers="$PS2DEV/ee/ee/include" || { exit 1; }
+ ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c,c++" --with-newlib --with-headers="$PS2DEV/$TARGET/$TARGET/include" || { exit 1; }
 
  ## Compile and install.
  make clean && make -j 2 && make install && make clean || { exit 1; }
+

@@ -1,15 +1,20 @@
 #!/bin/sh
-# gcc-3.2.3-stage1.sh by uyjulian
+# gcc-3.2.3-stage1.sh by AKuHAK
 
+ GCC_VERSION=3.2.3
  ## Download the source code.
- SOURCE=http://ftpmirror.gnu.org/gcc/gcc-3.2.3/gcc-3.2.3.tar.bz2
+ SOURCE=http://ftpmirror.gnu.org/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.bz2
  wget --continue $SOURCE || { exit 1; }
 
  ## Unpack the source code.
- rm -Rf gcc-3.2.3 && tar xfj gcc-3.2.3.tar.bz2 || { exit 1; }
+ echo Decompressing GCC $GCC_VERSION. Please wait.
+ rm -Rf gcc-$GCC_VERSION && tar xfj gcc-$GCC_VERSION.tar.bz2 || { exit 1; }
 
  ## Enter the source directory and patch the source code.
- cd gcc-3.2.3 && cat ../../patches/gcc-3.2.3-PS2.patch | patch -p1 || { exit 1; }
+ cd gcc-$GCC_VERSION || { exit 1; }
+ if [ -e ../../patches/gcc-$GCC_VERSION-PS2.patch ]; then
+ 	cat ../../patches/gcc-$GCC_VERSION-PS2.patch | patch -p1 || { exit 1; }
+ fi
 
  ## Make the configure files
  autoreconf || { exit 1; }
@@ -18,7 +23,7 @@
  for TARGET in "ee" "iop"; do
 
   ## Create and enter the build directory.
-  mkdir "build-$TARGET-stage1" && cd "build-$TARGET-stage1" || { exit 1; }
+  mkdir build-$TARGET-stage1 && cd build-$TARGET-stage1 || { exit 1; }
 
   ## Configure the build.
   ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c" --with-newlib --without-headers || { exit 1; }
@@ -31,3 +36,4 @@
 
  ## End target.
  done
+
