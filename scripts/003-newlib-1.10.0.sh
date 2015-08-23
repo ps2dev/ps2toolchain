@@ -1,5 +1,5 @@
 #!/bin/sh
-# newlib-$NEWLIB_VERSION.sh by Dan Peori (danpeori@oopo.net)
+# newlib-1.10.0.sh by Dan Peori (danpeori@oopo.net)
 
  NEWLIB_VERSION=1.10.0
  ## Download the source code.
