@@ -11,6 +11,7 @@
 
  ## Enter the source directory and patch the source code.
  cd binutils-2.14 && cat ../../patches/binutils-2.14-PS2.patch | patch -p1 || { exit 1; }
+ cat ../../patches/binutils-2.14-disable-makeinfo-when-texinfo-is-too-new.patch | patch -p0 || { exit 1; }
 
  ## For each target...
  for TARGET in "ee" "iop" "dvp"; do
