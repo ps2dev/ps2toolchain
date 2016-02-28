@@ -21,12 +21,16 @@
 
  ## For each target...
  for TARGET in "ee" "iop"; do
-
   ## Create and enter the build directory.
   mkdir build-$TARGET-stage1 && cd build-$TARGET-stage1 || { exit 1; }
 
   ## Configure the build.
-  ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c" --with-newlib --without-headers || { exit 1; }
+  # Apple needs to pretend to be linux
+  if [ "$(uname)" == "Darwin" ]; then
+    ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --build=i386-linux-gnu --host=i386-linux-gnu --enable-languages="c" --with-newlib --without-headers || { exit 1; }
+  else
+    ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c" --with-newlib --without-headers || { exit 1; }
+  fi
 
   ## Compile and install.
   make clean && make -j 2 && make install && make clean || { exit 1; }
