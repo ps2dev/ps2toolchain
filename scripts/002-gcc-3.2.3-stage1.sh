@@ -33,7 +33,7 @@
   fi
 
   ## Compile and install.
-  make clean && make -j 2 && make install && make clean || { exit 1; }
+  make clean && make -j $(nproc) && make install && make clean || { exit 1; }
 
   ## Exit the build directory.
   cd .. || { exit 1; }
