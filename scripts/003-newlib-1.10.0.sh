@@ -24,5 +24,5 @@
  ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
 
  ## Compile and install.
- make clean && CPPFLAGS="-G0" make -j 2 && make install && make clean || { exit 1; }
+ make clean && CPPFLAGS="-G0" make -j $(nproc) && make install && make clean || { exit 1; }
 
