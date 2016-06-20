@@ -19,16 +19,26 @@
  ## Make the configure files
  autoreconf || { exit 1; }
 
+ ## Apple needs to pretend to be linux
+ if [ "$(uname)" == "Darwin" ]; then
+ 	TARG_XTRA_OPTS="--build=i386-linux-gnu --host=i386-linux-gnu --enable-cxx-flags=-G0"
+ else
+ 	TARG_XTRA_OPTS=""
+ fi
+
+ ## OS Windows doesn't properly work with multi-core processors
+ if [ $(uname) == MINGW32_NT* ]; then
+ 	PROC_NR=2
+ else
+ 	PROC_NR=$(nproc)
+ fi
+
  TARGET="ee"
  ## Create and enter the build directory.
  mkdir build-$TARGET-stage2 && cd build-$TARGET-stage2 || { exit 1; }
 
  ## Configure the build.
-if [ "$(uname)" == "Darwin" ]; then
-  ../configure --prefix="$PS2DEV/ee" --target="ee" --build=i386-linux-gnu --host=i386-linux-gnu --enable-languages="c,c++" --with-newlib --with-headers="$PS2DEV/ee/ee/include" --enable-cxx-flags="-G0" || { exit 1; }
-else
-  ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c,c++" --with-newlib --with-headers="$PS2DEV/$TARGET/$TARGET/include" || { exit 1; }
-fi
+ ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c,c++" --with-newlib --with-headers="$PS2DEV/$TARGET/$TARGET/include" $TARG_XTRA_OPTS || { exit 1; }
 
  ## Compile and install.
- make clean && make -j $(nproc) && make install && make clean || { exit 1; }
+ make clean && make -j $PROC_NR && make install && make clean || { exit 1; }

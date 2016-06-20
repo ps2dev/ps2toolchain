@@ -16,6 +16,13 @@
  	cat ../../patches/newlib-$NEWLIB_VERSION-PS2.patch | patch -p1 || { exit 1; }
  fi
 
+ ## OS Windows doesn't properly work with multi-core processors
+ if [ $(uname) == MINGW32_NT* ]; then
+ 	PROC_NR=2
+ else
+ 	PROC_NR=$(nproc)
+ fi
+
  TARGET="ee"
  ## Create and enter the build directory.
  mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
@@ -24,5 +31,4 @@
  ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
 
  ## Compile and install.
- make clean && CPPFLAGS="-G0" make -j $(nproc) && make install && make clean || { exit 1; }
-
+ make clean && make -j $PROC_NR && make install && make clean || { exit 1; }
