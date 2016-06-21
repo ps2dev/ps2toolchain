@@ -19,21 +19,31 @@
  ## Make the configure files
  autoreconf || { exit 1; }
 
+ ## Apple needs to pretend to be linux
+ OSVER=$(uname)
+ if [ ${OSVER:0:6} == Darwin ]; then
+ 	TARG_XTRA_OPTS="--build=i386-linux-gnu --host=i386-linux-gnu"
+ else
+ 	TARG_XTRA_OPTS=""
+ fi
+
+ ## OS Windows doesn't properly work with multi-core processors
+ if [ ${OSVER:0:10} == MINGW32_NT ]; then
+ 	PROC_NR=2
+ else
+ 	PROC_NR=$(nproc)
+ fi
+
  ## For each target...
  for TARGET in "ee" "iop"; do
   ## Create and enter the build directory.
   mkdir build-$TARGET-stage1 && cd build-$TARGET-stage1 || { exit 1; }
 
   ## Configure the build.
-  # Apple needs to pretend to be linux
-  if [ "$(uname)" == "Darwin" ]; then
-    ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --build=i386-linux-gnu --host=i386-linux-gnu --enable-languages="c" --with-newlib --without-headers || { exit 1; }
-  else
-    ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c" --with-newlib --without-headers || { exit 1; }
-  fi
+  ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c" --with-newlib --without-headers $TARG_XTRA_OPTS || { exit 1; }
 
   ## Compile and install.
-  make clean && make -j $(nproc) && make install && make clean || { exit 1; }
+  make clean && make -j $PROC_NR && make install && make clean || { exit 1; }
 
   ## Exit the build directory.
   cd .. || { exit 1; }
