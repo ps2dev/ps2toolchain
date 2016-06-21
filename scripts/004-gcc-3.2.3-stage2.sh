@@ -20,14 +20,16 @@
  autoreconf || { exit 1; }
 
  ## Apple needs to pretend to be linux
- if [ "$(uname)" == "Darwin" ]; then
+ OSVER=$(uname)
+ if [ ${OSVER:0:6} == Darwin ]; then
  	TARG_XTRA_OPTS="--build=i386-linux-gnu --host=i386-linux-gnu --enable-cxx-flags=-G0"
  else
  	TARG_XTRA_OPTS=""
  fi
 
  ## OS Windows doesn't properly work with multi-core processors
- if [ $(uname) == MINGW32_NT* ]; then
+ OSVER=$(uname)
+ if [ ${OSVER:0:10} == MINGW32_NT ]; then
  	PROC_NR=2
  else
  	PROC_NR=$(nproc)

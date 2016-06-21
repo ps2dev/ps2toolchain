@@ -18,7 +18,8 @@
  cat ../../patches/binutils-$BINUTILS_VERSION-disable-makeinfo-when-texinfo-is-too-new.patch | patch -p0 || { exit 1; }
 
  ## OS Windows doesn't properly work with multi-core processors
- if [ $(uname) == MINGW32_NT* ]; then
+ OSVER=$(uname)
+ if [ ${OSVER:0:10} == MINGW32_NT ]; then
  	PROC_NR=2
  else
  	PROC_NR=$(nproc)
