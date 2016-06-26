@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # ps2sdk.sh by Dan Peori (danpeori@oopo.net)
 # changed to use Git by Mathias Lafeldt <misfire@debugon.org>
 
@@ -14,7 +14,8 @@ unset PS2SDKSRC
   git reset --hard origin/master || exit 1
  fi
 
- ## OS Windows doesn't properly work with multi-core processors
+ ## Determine the maximum number of processes that Make can work with.
+ ## MinGW's Make doesn't work properly with multi-core processors.
  OSVER=$(uname)
  if [ ${OSVER:0:10} == MINGW32_NT ]; then
  	PROC_NR=2

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # ps2client.sh by Dan Peori (danpeori@oopo.net)
 # changed to use Git by Mathias Lafeldt <misfire@debugon.org>
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # binutils-2.14.sh by Dan Peori (danpeori@oopo.net)
 
  BINUTILS_VERSION=2.14
@@ -17,7 +17,8 @@
  fi
  cat ../../patches/binutils-$BINUTILS_VERSION-disable-makeinfo-when-texinfo-is-too-new.patch | patch -p0 || { exit 1; }
 
- ## OS Windows doesn't properly work with multi-core processors
+ ## Determine the maximum number of processes that Make can work with.
+ ## MinGW's Make doesn't work properly with multi-core processors.
  OSVER=$(uname)
  if [ ${OSVER:0:10} == MINGW32_NT ]; then
  	PROC_NR=2
@@ -32,7 +33,7 @@
   mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
 
   ## Configure the build.
-  CFLAGS="-O0" ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
+  ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
 
   ## Compile and install.
   make clean && make -j $PROC_NR && make install && make clean || { exit 1; }

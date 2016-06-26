@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 # gcc-3.2.3-stage1.sh by AKuHAK
+# Based on gcc-3.2.2-stage1.sh by Dan Peori (danpeori@oopo.net)
 
  GCC_VERSION=3.2.3
  ## Download the source code.
@@ -16,18 +17,16 @@
  	cat ../../patches/gcc-$GCC_VERSION-PS2.patch | patch -p1 || { exit 1; }
  fi
 
- ## Make the configure files
- autoreconf || { exit 1; }
-
- ## Apple needs to pretend to be linux
  OSVER=$(uname)
+ ## Apple needs to pretend to be linux
  if [ ${OSVER:0:6} == Darwin ]; then
  	TARG_XTRA_OPTS="--build=i386-linux-gnu --host=i386-linux-gnu"
  else
  	TARG_XTRA_OPTS=""
  fi
 
- ## OS Windows doesn't properly work with multi-core processors
+ ## Determine the maximum number of processes that Make can work with.
+ ## MinGW's Make doesn't work properly with multi-core processors.
  if [ ${OSVER:0:10} == MINGW32_NT ]; then
  	PROC_NR=2
  else
@@ -50,4 +49,3 @@
 
  ## End target.
  done
-
