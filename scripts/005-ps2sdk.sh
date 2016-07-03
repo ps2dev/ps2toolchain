@@ -10,7 +10,7 @@ unset PS2SDKSRC
   git clone https://github.com/ps2dev/ps2sdk && cd ps2sdk || exit 1
  else
   cd ps2sdk &&
-  git fetch origin &&
+  git pull && git fetch origin &&
   git reset --hard origin/master || exit 1
  fi
 

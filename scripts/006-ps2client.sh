@@ -7,7 +7,7 @@
   git clone https://github.com/ps2dev/ps2client && cd ps2client || exit 1
  else
   cd ps2client &&
-  git fetch origin &&
+  git pull && git fetch origin &&
   git reset --hard origin/master || exit 1
  fi
 
