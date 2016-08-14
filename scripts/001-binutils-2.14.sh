@@ -33,7 +33,11 @@
   mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
 
   ## Configure the build.
-  ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
+  if [ ${OSVER:0:6} == Darwin ]; then
+    CC=/usr/bin/gcc CXX=/usr/bin/g++ LD=/usr/bin/ld CFLAGS="-O0 -ansi -Wno-implicit-int -Wno-return-type" ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
+  else
+    ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
+  fi
 
   ## Compile and install.
   make clean && make -j $PROC_NR && make install && make clean || { exit 1; }
