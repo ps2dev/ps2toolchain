@@ -39,7 +39,11 @@
   mkdir build-$TARGET-stage1 && cd build-$TARGET-stage1 || { exit 1; }
 
   ## Configure the build.
-  ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c" --with-newlib --without-headers $TARG_XTRA_OPTS || { exit 1; }
+  if [ ${OSVER:0:6} == Darwin ]; then
+    CC=/usr/bin/gcc CXX=/usr/bin/g++ LD=/usr/bin/ld CFLAGS="-O0 -ansi -Wno-implicit-int -Wno-return-type" ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c" --with-newlib --without-headers $TARG_XTRA_OPTS || { exit 1; }
+  else
+    ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" --enable-languages="c" --with-newlib --without-headers $TARG_XTRA_OPTS || { exit 1; }
+  fi
 
   ## Compile and install.
   make clean && make -j $PROC_NR && make install && make clean || { exit 1; }
