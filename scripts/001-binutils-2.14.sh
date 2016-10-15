@@ -40,7 +40,7 @@
   fi
 
   ## Compile and install.
-  make clean && make -j $PROC_NR && make install && make clean || { exit 1; }
+  make clean && make -j $PROC_NR CFLAGS="$CFLAGS -D_FORTIFY_SOURCE=0" && make install && make clean || { exit 1; }
 
   ## Exit the build directory.
   cd .. || { exit 1; }
