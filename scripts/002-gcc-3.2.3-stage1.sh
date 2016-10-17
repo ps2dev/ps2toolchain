@@ -25,14 +25,6 @@
  	TARG_XTRA_OPTS=""
  fi
 
- ## Determine the maximum number of processes that Make can work with.
- ## MinGW's Make doesn't work properly with multi-core processors.
- if [ ${OSVER:0:10} == MINGW32_NT ]; then
- 	PROC_NR=2
- else
- 	PROC_NR=$(nproc)
- fi
-
  ## For each target...
  for TARGET in "ee" "iop"; do
   ## Create and enter the build directory.

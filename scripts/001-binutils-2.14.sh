@@ -17,15 +17,6 @@
  fi
  cat ../../patches/binutils-$BINUTILS_VERSION-disable-makeinfo-when-texinfo-is-too-new.patch | patch -p0 || { exit 1; }
 
- ## Determine the maximum number of processes that Make can work with.
- ## MinGW's Make doesn't work properly with multi-core processors.
- OSVER=$(uname)
- if [ ${OSVER:0:10} == MINGW32_NT ]; then
- 	PROC_NR=2
- else
- 	PROC_NR=$(nproc)
- fi
-
  ## For each target...
  for TARGET in "ee" "iop" "dvp"; do
 

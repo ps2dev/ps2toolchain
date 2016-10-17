@@ -1,5 +1,6 @@
 #!/bin/bash
 # toolchain.sh by Dan Peori (danpeori@oopo.net)
+# updated by Caio Oliveira <caiooliveirafarias0@gmail.com>
 
  ## Enter the ps2toolchain directory.
  cd "`dirname $0`" || { echo "ERROR: Could not enter the ps2toolchain directory."; exit 1; }
@@ -9,6 +10,11 @@
 
  ## Enter the build directory.
  cd build || { echo "ERROR: Could not enter the build directory."; exit 1; }
+
+ ## Determine the maximum number of processes that Make can work with.
+ ## MinGW's Make doesn't work properly with multi-core processors.
+ OSVER=$(uname)
+ if [ ${OSVER:0:10} == MINGW32_NT ]; then export PROC_NR=2; else export PROC_NR=$(nproc); fi
 
  ## Fetch the depend scripts.
  DEPEND_SCRIPTS=(`ls ../depends/*.sh | sort`)

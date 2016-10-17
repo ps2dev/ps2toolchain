@@ -16,15 +16,6 @@
  	cat ../../patches/newlib-$NEWLIB_VERSION-PS2.patch | patch -p1 || { exit 1; }
  fi
 
- ## Determine the maximum number of processes that Make can work with.
- ## MinGW's Make doesn't work properly with multi-core processors.
- OSVER=$(uname)
- if [ ${OSVER:0:10} == MINGW32_NT ]; then
- 	PROC_NR=2
- else
- 	PROC_NR=$(nproc)
- fi
-
  TARGET="ee"
  ## Create and enter the build directory.
  mkdir build-$TARGET && cd build-$TARGET || { exit 1; }

@@ -25,13 +25,6 @@
  	TARG_XTRA_OPTS=""
  fi
 
- ## OS Windows doesn't properly work with multi-core processors
- if [ ${OSVER:0:10} == MINGW32_NT ]; then
- 	PROC_NR=2
- else
- 	PROC_NR=$(nproc)
- fi
-
  TARGET="ee"
  ## Create and enter the build directory.
  mkdir build-$TARGET-stage2 && cd build-$TARGET-stage2 || { exit 1; }

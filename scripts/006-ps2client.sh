@@ -12,4 +12,4 @@
  fi
 
  ## Build and install.
- make clean && make && make install && make clean || { exit 1; }
+ make clean && make -j $PROC_NR && make install && make clean || { exit 1; }

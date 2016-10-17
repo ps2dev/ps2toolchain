@@ -14,15 +14,6 @@ unset PS2SDKSRC
   git reset --hard origin/master || exit 1
  fi
 
- ## Determine the maximum number of processes that Make can work with.
- ## MinGW's Make doesn't work properly with multi-core processors.
- OSVER=$(uname)
- if [ ${OSVER:0:10} == MINGW32_NT ]; then
- 	PROC_NR=2
- else
- 	PROC_NR=$(nproc)
- fi
-
  ## Build and install
  make clean && make -j $PROC_NR && make install && make clean || { exit 1; }
 
