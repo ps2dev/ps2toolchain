@@ -1,4 +1,7 @@
+PS2Toolchain
+============
 
+```
  ==================
  What does this do?
  ==================
@@ -13,7 +16,7 @@
 
  1) Set up your environment by installing the following software:
 
-  gcc, make, patch, subversion, wget
+  autoreconf, gcc, git, make, patch, wget
 
  2) Add the following to your login script:
 

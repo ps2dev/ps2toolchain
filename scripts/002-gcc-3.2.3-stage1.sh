@@ -2,32 +2,36 @@
 # gcc-3.2.3-stage1.sh by AKuHAK
 # Based on gcc-3.2.2-stage1.sh by Dan Peori (danpeori@oopo.net)
 
- GCC_VERSION=3.2.3
+GCC_VERSION=3.2.3
+SOURCE=http://ftpmirror.gnu.org/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.bz2
+
  ## Download the source code.
- SOURCE=http://ftpmirror.gnu.org/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.bz2
+ echo "Downloading gcc-$GCC_VERSION source code."
  wget --continue $SOURCE || { exit 1; }
 
  ## Unpack the source code.
- echo Decompressing GCC $GCC_VERSION. Please wait.
+ echo "Decompressing gcc-$GCC_VERSION."
  rm -Rf gcc-$GCC_VERSION && tar xfj gcc-$GCC_VERSION.tar.bz2 || { exit 1; }
 
  ## Enter the source directory and patch the source code.
  cd gcc-$GCC_VERSION || { exit 1; }
  if [ -e ../../patches/gcc-$GCC_VERSION-PS2.patch ]; then
- 	cat ../../patches/gcc-$GCC_VERSION-PS2.patch | patch -p1 || { exit 1; }
+   cat ../../patches/gcc-$GCC_VERSION-PS2.patch | patch -p1 || { exit 1; }
  fi
 
- OSVER=$(uname)
  ## Apple needs to pretend to be linux
+ OSVER=$(uname)
  if [ ${OSVER:0:6} == Darwin ]; then
- 	TARG_XTRA_OPTS="--build=i386-linux-gnu --host=i386-linux-gnu"
+   TARG_XTRA_OPTS="--build=i386-linux-gnu --host=i386-linux-gnu"
  else
- 	TARG_XTRA_OPTS=""
+   TARG_XTRA_OPTS=""
  fi
 
  ## For each target...
  for TARGET in "ee" "iop"; do
+
   ## Create and enter the build directory.
+  echo "Building gcc-$TARGET-stage1..."
   mkdir build-$TARGET-stage1 && cd build-$TARGET-stage1 || { exit 1; }
 
   ## Configure the build.
