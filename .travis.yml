@@ -1,0 +1,4 @@
+sudo: required
+language: c
+script:
+- sudo ./toolchain-sudo.sh

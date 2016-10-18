@@ -10,6 +10,17 @@
  ## Enter the build directory.
  cd build || { echo "ERROR: Could not enter the build directory."; exit 1; }
 
+ ## Determine the maximum number of processes that Make can work with.
+ ## MinGW's Make doesn't work properly with multi-core processors.
+ OSVER=$(uname)
+ if [ ${OSVER:0:10} == MINGW32_NT ]; then
+  export PROC_NR=2
+ elif [ ${OSVER:0:6} == Darwin ]; then
+  export PROC_NR=$(sysctl -n hw.ncpu)
+ else
+  export PROC_NR=$(nproc)
+ fi
+
  ## Fetch the depend scripts.
  DEPEND_SCRIPTS=(`ls ../depends/*.sh | sort`)
 

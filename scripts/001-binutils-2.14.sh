@@ -1,35 +1,29 @@
 #!/bin/bash
 # binutils-2.14.sh by Dan Peori (danpeori@oopo.net)
 
- BINUTILS_VERSION=2.14
+BINUTILS_VERSION=2.14
+SOURCE=http://ftpmirror.gnu.org/binutils/binutils-$BINUTILS_VERSION.tar.bz2
+
  ## Download the source code.
- SOURCE=http://ftpmirror.gnu.org/binutils/binutils-$BINUTILS_VERSION.tar.bz2
+ echo "Downloading binutils-$BINUTILS_VERSION source code."
  wget --continue $SOURCE || { exit 1; }
 
  ## Unpack the source code.
- echo Decompressing Binutils $BINUTILS_VERSION. Please wait.
+ echo "Decompressing binutils-$BINUTILS_VERSION."
  rm -Rf binutils-$BINUTILS_VERSION && tar xfj binutils-$BINUTILS_VERSION.tar.bz2 || { exit 1; }
 
  ## Enter the source directory and patch the source code.
  cd binutils-$BINUTILS_VERSION || { exit 1; }
  if [ -e ../../patches/binutils-$BINUTILS_VERSION-PS2.patch ]; then
- 	cat ../../patches/binutils-$BINUTILS_VERSION-PS2.patch | patch -p1 || { exit 1; }
+   cat ../../patches/binutils-$BINUTILS_VERSION-PS2.patch | patch -p1 || { exit 1; }
  fi
  cat ../../patches/binutils-$BINUTILS_VERSION-disable-makeinfo-when-texinfo-is-too-new.patch | patch -p0 || { exit 1; }
-
- ## Determine the maximum number of processes that Make can work with.
- ## MinGW's Make doesn't work properly with multi-core processors.
- OSVER=$(uname)
- if [ ${OSVER:0:10} == MINGW32_NT ]; then
- 	PROC_NR=2
- else
- 	PROC_NR=$(nproc)
- fi
 
  ## For each target...
  for TARGET in "ee" "iop" "dvp"; do
 
   ## Create and enter the build directory.
+  echo "Building binutils-$TARGET..."
   mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
 
   ## Configure the build.
