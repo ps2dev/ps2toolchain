@@ -29,6 +29,8 @@
  ## MinGW's Make doesn't work properly with multi-core processors.
  if [ ${OSVER:0:10} == MINGW32_NT ]; then
  	PROC_NR=2
+ elif [ ${OSVER:0:6} == Darwin ]; then
+ 	PROC_NR=$(sysctl -n hw.ncpu)
  else
  	PROC_NR=$(nproc)
  fi
