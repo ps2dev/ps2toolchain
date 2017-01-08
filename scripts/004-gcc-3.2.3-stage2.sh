@@ -22,7 +22,7 @@
  if [ ${OSVER:0:6} == Darwin ]; then
  	TARG_XTRA_OPTS="--build=i386-linux-gnu --host=i386-linux-gnu --enable-cxx-flags=-G0"
  else
- 	TARG_XTRA_OPTS=""
+ 	TARG_XTRA_OPTS="--enable-cxx-flags=-G0"
  fi
 
  ## OS Windows doesn't properly work with multi-core processors
