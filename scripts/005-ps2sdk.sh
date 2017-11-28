@@ -1,5 +1,5 @@
 #!/bin/bash
-# ps2sdk.sh by Dan Peori (danpeori@oopo.net)
+# ps2sdk.sh by Naomi Peori (naomi@peori.ca)
 # changed to use Git by Mathias Lafeldt <misfire@debugon.org>
 
 # make sure ps2sdk's makefile does not use it

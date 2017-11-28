@@ -1,5 +1,5 @@
 #!/bin/bash
-# toolchain-sudo.sh by Dan Peori (danpeori@oopo.net)
+# toolchain-sudo.sh by Naomi Peori (naomi@peori.ca)
 
 ## Enter the ps2toolchain directory.
 cd "`dirname $0`" || { echo "ERROR: Could not enter the ps2toolchain directory."; exit 1; }

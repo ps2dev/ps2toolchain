@@ -1,5 +1,5 @@
 #!/bin/bash
-# binutils-2.14.sh by Dan Peori (danpeori@oopo.net)
+# binutils-2.14.sh by Naomi Peori (naomi@peori.ca)
 
 BINUTILS_VERSION=2.14
 ## Download the source code.

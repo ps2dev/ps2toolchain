@@ -1,5 +1,5 @@
 #!/bin/sh
-# check-pspdev.sh by Dan Peori (danpeori@oopo.net)
+# check-pspdev.sh by Naomi Peori (naomi@peori.ca)
 
 ## Check if $PS2DEV is set.
 if test ! $PS2DEV; then { echo "ERROR: Set \$PS2DEV before continuing."; exit 1; } fi

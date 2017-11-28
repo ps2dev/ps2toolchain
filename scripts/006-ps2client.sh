@@ -1,5 +1,5 @@
 #!/bin/bash
-# ps2client.sh by Dan Peori (danpeori@oopo.net)
+# ps2client.sh by Naomi Peori (naomi@peori.ca)
 # changed to use Git by Mathias Lafeldt <misfire@debugon.org>
 
 ## Download the source code.

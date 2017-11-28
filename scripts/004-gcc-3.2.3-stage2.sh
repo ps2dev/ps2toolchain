@@ -1,6 +1,6 @@
 #!/bin/bash
 # gcc-3.2.3-stage2.sh by uyjulian
-# Based on gcc-3.2.2-stage2.sh by Dan Peori (danpeori@oopo.net)
+# Based on gcc-3.2.2-stage2.sh by Naomi Peori (naomi@peori.ca)
 
 GCC_VERSION=3.2.3
 ## Download the source code.
