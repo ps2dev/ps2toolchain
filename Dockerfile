@@ -1,12 +1,12 @@
 FROM ubuntu:12.04
 
-ENV TOOLCHAIN_VERSION master
-
 ENV PS2DEV /ps2dev
 ENV PS2SDK $PS2DEV/ps2sdk
 ENV PATH   $PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
 
 ENV DEBIAN_FRONTEND noninteractive
+
+COPY . /toolchain
 
 RUN apt-get update \
     && apt-get upgrade -y \
@@ -22,7 +22,6 @@ RUN apt-get update \
         wget \
         zip \
         zlib1g-dev \
-    && git clone git://github.com/ps2dev/ps2toolchain.git -b $TOOLCHAIN_VERSION /toolchain \
     && cd /toolchain \
     && ./toolchain.sh 1 \
     && ./toolchain.sh 2 \
