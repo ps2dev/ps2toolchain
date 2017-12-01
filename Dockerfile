@@ -1,5 +1,7 @@
 FROM ubuntu:12.04
 
+LABEL authors="mathias.lafeldt@gmail.com, akuhak@gmail.com"
+
 ENV PS2DEV /ps2dev
 ENV PS2SDK $PS2DEV/ps2sdk
 ENV PATH   $PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
