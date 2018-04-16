@@ -4050,7 +4050,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips-protos.h gcc-3.2.3-new/gcc/config/mip
 diff -rupNb gcc-3.2.3/gcc/config/mips/r5900.h gcc-3.2.3-new/gcc/config/mips/r5900.h
 --- gcc-3.2.3/gcc/config/mips/r5900.h	1970-01-01 07:30:00.000000000 +0730
 +++ gcc-3.2.3-new/gcc/config/mips/r5900.h	2016-07-02 09:25:57.521368595 +0800
-@@ -0,0 +1,285 @@
+@@ -0,0 +1,287 @@
 +/*
 + * Target machine definitions for the Toshiba r5900.
 + *
@@ -4083,6 +4083,8 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/r5900.h gcc-3.2.3-new/gcc/config/mips/r590
 +
 +#undef MACHINE_TYPE
 +#define MACHINE_TYPE "(MIPSel R5900 ELF)"
++
++#define LIB_SPEC "-L/usr/local/ps2dev/ps2sdk/ee/lib /usr/local/ps2dev/ps2sdk/ee/lib/libc.a -lkernel -lc -lg -lm"
 +
 +/*
 + I started doing some macro fixes, but as we plan to use 3.4 soon I'm not risking changing stuff I'm not
