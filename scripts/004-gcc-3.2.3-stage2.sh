@@ -4,7 +4,7 @@
 
 GCC_VERSION=3.2.3
 ## Download the source code.
-SOURCE=http://ftpmirror.gnu.org/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.bz2
+SOURCE=https://ftpmirror.gnu.org/gcc/gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.bz2
 wget --continue $SOURCE || { exit 1; }
 
 ## Unpack the source code.

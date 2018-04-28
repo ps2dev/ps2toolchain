@@ -3,7 +3,7 @@
 
 BINUTILS_VERSION=2.14
 ## Download the source code.
-SOURCE=http://ftpmirror.gnu.org/binutils/binutils-$BINUTILS_VERSION.tar.bz2
+SOURCE=https://ftpmirror.gnu.org/binutils/binutils-$BINUTILS_VERSION.tar.bz2
 wget --continue $SOURCE || { exit 1; }
 
 ## Unpack the source code.
