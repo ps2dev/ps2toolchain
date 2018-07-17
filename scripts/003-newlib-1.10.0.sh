@@ -35,4 +35,4 @@ mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
 ../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
 
 ## Compile and install.
-make clean && make -j $PROC_NR && make install && make clean || { exit 1; }
+make clean && CPPFLAGS="-G0" make -j $PROC_NR && make install && make clean || { exit 1; }
