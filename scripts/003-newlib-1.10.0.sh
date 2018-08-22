@@ -17,10 +17,9 @@ if [ -e ../../patches/newlib-$NEWLIB_VERSION-PS2.patch ]; then
 fi
 
 ## Determine the maximum number of processes that Make can work with.
-## MinGW's Make doesn't work properly with multi-core processors.
 OSVER=$(uname)
 if [ ${OSVER:0:10} == MINGW32_NT ]; then
-	PROC_NR=2
+	PROC_NR=$NUMBER_OF_PROCESSORS
 elif [ ${OSVER:0:6} == Darwin ]; then
 	PROC_NR=$(sysctl -n hw.ncpu)
 else
