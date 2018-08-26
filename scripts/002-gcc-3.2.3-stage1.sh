@@ -26,14 +26,15 @@ else
 fi
 
 ## Determine the maximum number of processes that Make can work with.
-## MinGW's Make doesn't work properly with multi-core processors.
 if [ ${OSVER:0:10} == MINGW32_NT ]; then
-	PROC_NR=2
+	PROC_NR=$NUMBER_OF_PROCESSORS
 elif [ ${OSVER:0:6} == Darwin ]; then
 	PROC_NR=$(sysctl -n hw.ncpu)
 else
 	PROC_NR=$(nproc)
 fi
+
+echo "Building with $PROC_NR jobs"
 
 ## For each target...
 for TARGET in "ee" "iop"; do

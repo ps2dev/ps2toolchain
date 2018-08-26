@@ -16,17 +16,19 @@ if [ -e ../../patches/binutils-$BINUTILS_VERSION-PS2.patch ]; then
 	cat ../../patches/binutils-$BINUTILS_VERSION-PS2.patch | patch -p1 || { exit 1; }
 fi
 cat ../../patches/binutils-$BINUTILS_VERSION-disable-makeinfo-when-texinfo-is-too-new.patch | patch -p0 || { exit 1; }
+cat ../../patches/binutils-gas.patch | patch -p0 || { exit 1; }
 
 ## Determine the maximum number of processes that Make can work with.
-## MinGW's Make doesn't work properly with multi-core processors.
 OSVER=$(uname)
 if [ ${OSVER:0:10} == MINGW32_NT ]; then
-	PROC_NR=2
+	PROC_NR=$NUMBER_OF_PROCESSORS
 elif [ ${OSVER:0:6} == Darwin ]; then
 	PROC_NR=$(sysctl -n hw.ncpu)
 else
 	PROC_NR=$(nproc)
 fi
+
+echo "Building with $PROC_NR jobs"
 
 ## For each target...
 for TARGET in "ee" "iop" "dvp"; do

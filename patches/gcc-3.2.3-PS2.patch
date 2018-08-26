@@ -4050,7 +4050,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips-protos.h gcc-3.2.3-new/gcc/config/mip
 diff -rupNb gcc-3.2.3/gcc/config/mips/r5900.h gcc-3.2.3-new/gcc/config/mips/r5900.h
 --- gcc-3.2.3/gcc/config/mips/r5900.h	1970-01-01 07:30:00.000000000 +0730
 +++ gcc-3.2.3-new/gcc/config/mips/r5900.h	2016-07-02 09:25:57.521368595 +0800
-@@ -0,0 +1,285 @@
+@@ -0,0 +1,287 @@
 +/*
 + * Target machine definitions for the Toshiba r5900.
 + *
@@ -4083,6 +4083,8 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/r5900.h gcc-3.2.3-new/gcc/config/mips/r590
 +
 +#undef MACHINE_TYPE
 +#define MACHINE_TYPE "(MIPSel R5900 ELF)"
++
++#define LIB_SPEC "-lps2sdkc -lkernel -lc -lg -lm"
 +
 +/*
 + I started doing some macro fixes, but as we plan to use 3.4 soon I'm not risking changing stuff I'm not
@@ -4539,6 +4541,27 @@ diff -rupNb gcc-3.2.3/gcc/config.gcc gcc-3.2.3-new/gcc/config.gcc
  	fi
  fi
 +
+diff -rupNb gcc-3.2.3/gcc/cp/cfns.h gcc-3.2.3-new/gcc/cp/cfns.h
+--- gcc-3.2.3/gcc/cp/cfns.h 2000-04-04 13:46:23.000000000 -0700
++++ gcc-3.2.3-new/gcc/cp/cfns.h 2018-08-02 17:24:35.000000000 -0700
+@@ -5,7 +5,7 @@ __inline
+ #endif
+ static unsigned int hash PARAMS ((const char *, unsigned int));
+ #ifdef __GNUC__
+-__inline
++static
+ #endif
+ const char * libc_name_p PARAMS ((const char *, unsigned int));
+ /* maximum key range = 1020, duplicates = 1 */
+@@ -70,7 +70,7 @@ hash (str, len)
+ }
+ 
+ #ifdef __GNUC__
+-__inline
++static
+ #endif
+ const char *
+ libc_name_p (str, len)
 diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
 --- gcc-3.2.3/gcc/cp/decl.c	2003-03-18 07:16:55.000000000 +0800
 +++ gcc-3.2.3-new/gcc/cp/decl.c	2016-07-02 09:25:57.525368595 +0800
