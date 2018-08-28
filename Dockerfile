@@ -28,7 +28,7 @@ RUN apt-get update \
         zlib1g-dev \
     && cd /toolchain \
     && git checkout -qf $TOOLCHAIN_VERSION \
-    && ./toolchain.sh 
+    && ./toolchain.sh \
     && rm -rf \
         /ps2dev/test.tmp \
         /toolchain \
