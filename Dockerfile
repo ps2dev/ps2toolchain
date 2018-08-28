@@ -36,3 +36,5 @@ RUN apt-get update \
 
 WORKDIR /src
 CMD ["/bin/bash"]
+ENV GSKIT $PS2DEV/gsKit
+
