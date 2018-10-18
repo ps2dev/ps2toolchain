@@ -24,6 +24,9 @@ else
 	PROC_NR=$(nproc)
 fi
 
+# Workaround 2018/10/18: unset PROC_NR (use -j only) as the ps2toolchain's Makefiles do not have dependencies set up properly.
+unset PROC_NR
+
 ## Build and install
 make clean && make -j $PROC_NR && make install && make clean || { exit 1; }
 
