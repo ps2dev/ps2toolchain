@@ -26,6 +26,7 @@ RUN apt-get update \
         wget \
         zip \
         zlib1g-dev \
+        gawk \
     && cd /toolchain \
     && git checkout -qf $TOOLCHAIN_VERSION \
     && ./toolchain.sh \
