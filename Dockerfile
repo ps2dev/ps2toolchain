@@ -32,7 +32,7 @@ RUN apt-get update \
     && ./toolchain.sh \
     && rm -rf \
         /ps2dev/test.tmp \
-        /toolchain \
+        /toolchain/build \
         /var/lib/apt/lists/*
 
 WORKDIR /src
