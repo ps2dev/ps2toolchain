@@ -3,7 +3,7 @@
 
 NEWLIB_VERSION=1.10.0
 ## Download the source code.
-SOURCE=ftp://sourceware.org/pub/newlib/newlib-$NEWLIB_VERSION.tar.gz
+SOURCE=http://mirrors.kernel.org/sourceware/newlib/newlib-1.11.0.tar.gz
 wget --continue $SOURCE || { exit 1; }
 
 ## Unpack the source code.
