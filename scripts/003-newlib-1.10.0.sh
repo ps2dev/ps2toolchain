@@ -31,7 +31,7 @@ TARGET="ee"
 mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
 
 ## Configure the build.
-../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
+../configure --quiet --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
 
 ## Compile and install.
-make clean && CPPFLAGS="-G0" make -j $PROC_NR && make install && make clean || { exit 1; }
+make --quiet clean && CPPFLAGS="-G0" make --quiet -j $PROC_NR && make --quiet install && make --quiet clean || { exit 1; }
