@@ -12,4 +12,4 @@ else
 fi
 
 ## Build and install.
-make clean && make && make install && make clean || { exit 1; }
+make --quiet clean && make --quiet && make --quiet install && make --quiet clean || { exit 1; }
