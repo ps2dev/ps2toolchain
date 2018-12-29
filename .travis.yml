@@ -1,0 +1,19 @@
+# xenial is bundled with gcc v5, which is fastest version for building modern toolchains
+dist: xenial
+
+sudo: required
+
+install:
+- sudo apt-get install -yqqq patch wget make git libc6-dev zlib1g zlib1g-dev libucl1 libucl-dev
+
+before_script:
+- export PS2DEV=~/ps2dev
+- export PS2SDK=${PS2DEV}/ps2sdk
+- export PATH=${PATH}:${PS2DEV}/bin:${PS2DEV}/ee/bin:${PS2DEV}/iop/bin:${PS2DEV}/dvp/bin:${PS2SDK}/bin
+- echo $(nproc)
+
+script:
+- bash ./toolchain.sh 1
+- bash ./toolchain.sh 2
+- bash ./toolchain.sh 3
+- bash ./toolchain.sh 4
