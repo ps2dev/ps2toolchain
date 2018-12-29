@@ -1,41 +1,26 @@
-FROM ubuntu:12.04
+FROM alpine:latest
 
-LABEL authors="mathias.lafeldt@gmail.com, akuhak@gmail.com"
+LABEL authors="Maximus32, akuhak@gmail.com"
 
-ENV PS2DEV /ps2dev
+ENV PS2DEV /usr/local/ps2dev
 ENV PS2SDK $PS2DEV/ps2sdk
 ENV PATH   $PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
 
-ENV TOOLCHAIN_VERSION master
+COPY . /src
 
-ENV DEBIAN_FRONTEND noninteractive
-
-COPY . /toolchain
-
-RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt-get install -y \
-        autoconf \
-        bzip2 \
-        gcc \
-        git \
-        libucl-dev \
-        make \
-        patch \
-        vim \
-        wget \
-        zip \
-        zlib1g-dev \
-        gawk \
-    && cd /toolchain \
-    && git checkout -qf $TOOLCHAIN_VERSION \
-    && ./toolchain.sh \
-    && rm -rf \
-        /ps2dev/test.tmp \
-        /toolchain/build \
-        /var/lib/apt/lists/*
+RUN \
+  apk add --no-cache make bash && \
+  apk add --no-cache --virtual .build-deps bash gcc musl-dev git make patch wget && \
+  cd /src && \
+  ./toolchain.sh 1 && \
+  ./toolchain.sh 2 && \
+  ./toolchain.sh 3 && \
+  ./toolchain.sh 4 && \
+  apk del .build-deps && \
+  rm -rf \
+    /src/* \
+    /tmp/*
 
 WORKDIR /src
-CMD ["/bin/bash"]
-ENV GSKIT $PS2DEV/gsKit
+
 
