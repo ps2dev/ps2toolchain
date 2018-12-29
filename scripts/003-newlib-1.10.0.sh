@@ -3,7 +3,7 @@
 
 NEWLIB_VERSION=1.10.0
 ## Download the source code.
-SOURCE=ftp://sourceware.org/pub/newlib/newlib-$NEWLIB_VERSION.tar.gz
+SOURCE=http://mirrors.kernel.org/sourceware/newlib/newlib-$NEWLIB_VERSION.tar.gz
 wget --continue $SOURCE || { exit 1; }
 
 ## Unpack the source code.
@@ -31,7 +31,7 @@ TARGET="ee"
 mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
 
 ## Configure the build.
-../configure --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
+../configure --quiet --prefix="$PS2DEV/$TARGET" --target="$TARGET" || { exit 1; }
 
 ## Compile and install.
-make clean && CPPFLAGS="-G0" make -j $PROC_NR && make install && make clean || { exit 1; }
+make --quiet clean && CPPFLAGS="-G0" make --quiet -j $PROC_NR && make --quiet install && make --quiet clean || { exit 1; }
