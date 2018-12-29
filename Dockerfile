@@ -6,11 +6,11 @@ ENV PS2DEV /usr/local/ps2dev
 ENV PS2SDK $PS2DEV/ps2sdk
 ENV PATH   $PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
 
-COPY . /src
+COPY . /toolchain
 
 RUN \
-  apk add --no-cache make bash && \
-  apk add --no-cache --virtual .build-deps bash gcc musl-dev git make patch wget && \
+  apk add --no-cache make bash gawk wget git make patch && \
+  apk add --no-cache --virtual .build-deps bash gcc musl-dev && \
   cd /src && \
   ./toolchain.sh 1 && \
   ./toolchain.sh 2 && \
@@ -18,9 +18,7 @@ RUN \
   ./toolchain.sh 4 && \
   apk del .build-deps && \
   rm -rf \
-    /src/* \
+    /toolchain/build/* \
     /tmp/*
 
 WORKDIR /src
-
-
