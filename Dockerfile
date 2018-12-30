@@ -9,8 +9,8 @@ ENV PATH   $PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2
 COPY . /toolchain
 
 RUN \
-  apk add --no-cache make bash gawk wget git make patch && \
-  apk add --no-cache --virtual .build-deps bash gcc musl-dev && \
+  apk add make bash gawk wget git make patch && \
+  apk add --no-cache --virtual .build-deps gcc musl-dev && \
   cd /src && \
   ./toolchain.sh 1 && \
   ./toolchain.sh 2 && \
