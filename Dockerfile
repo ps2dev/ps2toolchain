@@ -16,6 +16,7 @@ RUN apt-get update &&\
   ./toolchain.sh 2 && \
   ./toolchain.sh 3 && \
   ./toolchain.sh 4 && \
+  ./toolchain.sh 5 && \
   rm -rf /var/lib/apt/lists/* &&\
   rm -rf \
     /toolchain/build/* \
