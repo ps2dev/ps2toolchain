@@ -9,8 +9,8 @@ ENV PATH   $PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2
 COPY . /toolchain
 
 RUN apt-get update &&\
-  apt-get install -yqqq make bash gawk wget git make patch wget && \
-  apt-get install -yqqq gcc && \
+  apt-get install -yqqq make bash gawk wget git make patch && \
+  apt-get install -yqqq libucl-dev zlib1g-dev zip gcc && \
   cd /toolchain && \
   ./toolchain.sh 1 && \
   ./toolchain.sh 2 && \
