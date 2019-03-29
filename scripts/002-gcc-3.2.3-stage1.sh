@@ -16,7 +16,6 @@ cd gcc-$GCC_VERSION || { exit 1; }
 if [ -e ../../patches/gcc-$GCC_VERSION-PS2.patch ]; then
 	cat ../../patches/gcc-$GCC_VERSION-PS2.patch | patch -p1 || { exit 1; }
 fi
-cat ../../patches/gcc-$GCC_VERSION-disable-warnings.patch | patch -p0 || { exit 1; }
 
 OSVER=$(uname)
 ## Apple needs to pretend to be linux

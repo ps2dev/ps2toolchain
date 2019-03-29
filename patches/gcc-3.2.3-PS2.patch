@@ -1,7 +1,7 @@
-diff -rupNb gcc-3.2.3/config.sub gcc-3.2.3-new/config.sub
---- gcc-3.2.3/config.sub	2003-01-31 06:32:36.000000000 +0800
-+++ gcc-3.2.3-new/config.sub	2016-07-02 09:25:57.505368595 +0800
-@@ -236,6 +236,7 @@ case $basic_machine in
+diff -burN orig.gcc-3.2.3/config.sub gcc-3.2.3/config.sub
+--- orig.gcc-3.2.3/config.sub	2003-01-30 22:32:36.000000000 +0000
++++ gcc-3.2.3/config.sub	2019-03-29 00:44:40.670909628 +0000
+@@ -236,6 +236,7 @@
  	| i370 | i860 | i960 | ia64 \
  	| ip2k \
  	| m32r | m68000 | m68k | m88k | mcore \
@@ -9,7 +9,7 @@ diff -rupNb gcc-3.2.3/config.sub gcc-3.2.3-new/config.sub
  	| mips | mipsbe | mipseb | mipsel | mipsle \
  	| mips16 \
  	| mips64 | mips64el \
-@@ -308,6 +309,7 @@ case $basic_machine in
+@@ -308,6 +309,7 @@
  	| m32r-* \
  	| m68000-* | m680[012346]0-* | m68360-* | m683?2-* | m68k-* \
  	| m88110-* | m88k-* | mcore-* \
@@ -17,7 +17,7 @@ diff -rupNb gcc-3.2.3/config.sub gcc-3.2.3-new/config.sub
  	| mips-* | mipsbe-* | mipseb-* | mipsel-* | mipsle-* \
  	| mips16-* \
  	| mips64-* | mips64el-* \
-@@ -594,6 +596,10 @@ case $basic_machine in
+@@ -594,6 +596,10 @@
  		basic_machine=i386-unknown
  		os=-vsta
  		;;
@@ -28,7 +28,7 @@ diff -rupNb gcc-3.2.3/config.sub gcc-3.2.3-new/config.sub
  	iris | iris4d)
  		basic_machine=mips-sgi
  		case $os in
-@@ -630,6 +636,16 @@ case $basic_machine in
+@@ -630,6 +636,16 @@
  		basic_machine=m68k-atari
  		os=-mint
  		;;
@@ -45,7 +45,7 @@ diff -rupNb gcc-3.2.3/config.sub gcc-3.2.3-new/config.sub
  	mips3*-*)
  		basic_machine=`echo $basic_machine | sed -e 's/mips3/mips64/'`
  		;;
-@@ -1118,7 +1134,8 @@ case $os in
+@@ -1118,7 +1134,8 @@
  	      | -storm-chaos* | -tops10* | -tenex* | -tops20* | -its* \
  	      | -os2* | -vos* | -palmos* | -uclinux* | -nucleus* \
  	      | -morphos* | -superux* | -rtmk* | -rtmk-nova* | -windiss* \
@@ -55,10 +55,10 @@ diff -rupNb gcc-3.2.3/config.sub gcc-3.2.3-new/config.sub
  	# Remember, each alternative MUST END IN *, to match a version number.
  		;;
  	-qnx*)
-diff -rupNb gcc-3.2.3/configure gcc-3.2.3-new/configure
---- gcc-3.2.3/configure	2002-06-25 00:14:28.000000000 +0800
-+++ gcc-3.2.3-new/configure	2016-07-02 09:25:57.509368595 +0800
-@@ -89,7 +89,7 @@ subdirs=
+diff -burN orig.gcc-3.2.3/configure gcc-3.2.3/configure
+--- orig.gcc-3.2.3/configure	2002-06-24 16:14:28.000000000 +0000
++++ gcc-3.2.3/configure	2019-03-29 00:44:40.670909628 +0000
+@@ -89,7 +89,7 @@
  target_alias=NOTARGET
  target_makefile_frag=
  undefs=NOUNDEFS
@@ -67,7 +67,7 @@ diff -rupNb gcc-3.2.3/configure gcc-3.2.3-new/configure
  x11=default
  bindir='${exec_prefix}/bin'
  sbindir='${exec_prefix}/sbin'
-@@ -697,7 +697,7 @@ fi
+@@ -697,7 +697,7 @@
  if test -f skip-this-dir; then
  	# Perform the same cleanup as the trap handler, minus the "exit 1" of course,
  	# and reset the trap handler.
@@ -76,7 +76,7 @@ diff -rupNb gcc-3.2.3/configure gcc-3.2.3-new/configure
  	rm -rf Makefile* ${tmpdir}
  	# Execute the final clean-up actions
  	${config_shell} skip-this-dir
-@@ -1615,7 +1615,7 @@ fi
+@@ -1615,7 +1615,7 @@
  # Perform the same cleanup as the trap handler, minus the "exit 1" of course,
  # and reset the trap handler.
  rm -rf ${tmpdir}
@@ -85,10 +85,10 @@ diff -rupNb gcc-3.2.3/configure gcc-3.2.3-new/configure
  
  exit 0
  
-diff -rupNb gcc-3.2.3/configure.in gcc-3.2.3-new/configure.in
---- gcc-3.2.3/configure.in	2002-07-08 18:00:57.000000000 +0800
-+++ gcc-3.2.3-new/configure.in	2016-07-02 09:25:57.513368595 +0800
-@@ -980,6 +980,9 @@ case "${target}" in
+diff -burN orig.gcc-3.2.3/configure.in gcc-3.2.3/configure.in
+--- orig.gcc-3.2.3/configure.in	2002-07-08 10:00:57.000000000 +0000
++++ gcc-3.2.3/configure.in	2019-03-29 00:44:40.670909628 +0000
+@@ -980,6 +980,9 @@
    mips*-*-linux*)
      noconfigdirs="$noconfigdirs target-libffi"
      ;;
@@ -98,10 +98,10 @@ diff -rupNb gcc-3.2.3/configure.in gcc-3.2.3-new/configure.in
    mips*-*-*)
      noconfigdirs="$noconfigdirs gprof ${libgcj}"
      ;;
-diff -rupNb gcc-3.2.3/gcc/caller-save.c gcc-3.2.3-new/gcc/caller-save.c
---- gcc-3.2.3/gcc/caller-save.c	2002-01-02 06:22:25.000000000 +0800
-+++ gcc-3.2.3-new/gcc/caller-save.c	2016-07-02 09:25:57.513368595 +0800
-@@ -50,13 +50,21 @@ Software Foundation, 59 Temple Place - S
+diff -burN orig.gcc-3.2.3/gcc/caller-save.c gcc-3.2.3/gcc/caller-save.c
+--- orig.gcc-3.2.3/gcc/caller-save.c	2002-01-01 22:22:25.000000000 +0000
++++ gcc-3.2.3/gcc/caller-save.c	2019-03-29 00:44:40.670909628 +0000
+@@ -50,13 +50,21 @@
     If that is not possible the save is done one register at a time.  */
  
  static enum machine_mode 
@@ -123,10 +123,10 @@ diff -rupNb gcc-3.2.3/gcc/caller-save.c gcc-3.2.3-new/gcc/caller-save.c
  
  /* We will only make a register eligible for caller-save if it can be
     saved in its widest mode with a simple SET insn as long as the memory
-diff -rupNb gcc-3.2.3/gcc/c-common.c gcc-3.2.3-new/gcc/c-common.c
---- gcc-3.2.3/gcc/c-common.c	2002-12-02 02:19:08.000000000 +0800
-+++ gcc-3.2.3-new/gcc/c-common.c	2016-07-02 09:25:57.513368595 +0800
-@@ -1336,6 +1336,9 @@ type_for_size (bits, unsignedp)
+diff -burN orig.gcc-3.2.3/gcc/c-common.c gcc-3.2.3/gcc/c-common.c
+--- orig.gcc-3.2.3/gcc/c-common.c	2002-12-01 18:19:08.000000000 +0000
++++ gcc-3.2.3/gcc/c-common.c	2019-03-29 00:44:40.670909628 +0000
+@@ -1336,6 +1336,9 @@
    if (bits <= TYPE_PRECISION (intDI_type_node))
      return unsignedp ? unsigned_intDI_type_node : intDI_type_node;
  
@@ -136,7 +136,7 @@ diff -rupNb gcc-3.2.3/gcc/c-common.c gcc-3.2.3-new/gcc/c-common.c
    return 0;
  }
  
-@@ -1379,10 +1382,8 @@ type_for_mode (mode, unsignedp)
+@@ -1379,10 +1382,8 @@
    if (mode == DImode)
      return unsignedp ? unsigned_intDI_type_node : intDI_type_node;
  
@@ -147,7 +147,7 @@ diff -rupNb gcc-3.2.3/gcc/c-common.c gcc-3.2.3-new/gcc/c-common.c
  
    if (mode == TYPE_MODE (float_type_node))
      return float_type_node;
-@@ -1449,10 +1450,8 @@ unsigned_type (type)
+@@ -1449,10 +1450,8 @@
      return long_long_unsigned_type_node;
    if (type1 == widest_integer_literal_type_node)
      return widest_unsigned_literal_type_node;
@@ -158,7 +158,7 @@ diff -rupNb gcc-3.2.3/gcc/c-common.c gcc-3.2.3-new/gcc/c-common.c
    if (type1 == intDI_type_node)
      return unsigned_intDI_type_node;
    if (type1 == intSI_type_node)
-@@ -1484,10 +1483,8 @@ signed_type (type)
+@@ -1484,10 +1483,8 @@
      return long_long_integer_type_node;
    if (type1 == widest_unsigned_literal_type_node)
      return widest_integer_literal_type_node;
@@ -169,7 +169,7 @@ diff -rupNb gcc-3.2.3/gcc/c-common.c gcc-3.2.3-new/gcc/c-common.c
    if (type1 == unsigned_intDI_type_node)
      return intDI_type_node;
    if (type1 == unsigned_intSI_type_node)
-@@ -1527,10 +1524,8 @@ signed_or_unsigned_type (unsignedp, type
+@@ -1527,10 +1524,8 @@
      return (unsignedp ? widest_unsigned_literal_type_node
  	    : widest_integer_literal_type_node);
  
@@ -180,7 +180,7 @@ diff -rupNb gcc-3.2.3/gcc/c-common.c gcc-3.2.3-new/gcc/c-common.c
    if (TYPE_PRECISION (type) == TYPE_PRECISION (intDI_type_node))
      return unsignedp ? unsigned_intDI_type_node : intDI_type_node;
    if (TYPE_PRECISION (type) == TYPE_PRECISION (intSI_type_node))
-@@ -2576,16 +2571,12 @@ c_common_nodes_and_builtins ()
+@@ -2576,16 +2571,12 @@
    pushdecl (build_decl (TYPE_DECL, NULL_TREE, intHI_type_node));
    pushdecl (build_decl (TYPE_DECL, NULL_TREE, intSI_type_node));
    pushdecl (build_decl (TYPE_DECL, NULL_TREE, intDI_type_node));
@@ -197,10 +197,10 @@ diff -rupNb gcc-3.2.3/gcc/c-common.c gcc-3.2.3-new/gcc/c-common.c
  
    /* Create the widest literal types.  */
    widest_integer_literal_type_node
-diff -rupNb gcc-3.2.3/gcc/collect2.c gcc-3.2.3-new/gcc/collect2.c
---- gcc-3.2.3/gcc/collect2.c	2003-03-31 09:14:02.000000000 +0800
-+++ gcc-3.2.3-new/gcc/collect2.c	2016-07-02 09:25:57.529368595 +0800
-@@ -1587,7 +1587,7 @@ collect_execute (prog, argv, redir)
+diff -burN orig.gcc-3.2.3/gcc/collect2.c gcc-3.2.3/gcc/collect2.c
+--- orig.gcc-3.2.3/gcc/collect2.c	2003-03-31 01:14:02.000000000 +0000
++++ gcc-3.2.3/gcc/collect2.c	2019-03-29 00:44:40.670909628 +0000
+@@ -1587,7 +1587,7 @@
    if (redir)
      {
        /* Open response file.  */
@@ -209,10 +209,10 @@ diff -rupNb gcc-3.2.3/gcc/collect2.c gcc-3.2.3-new/gcc/collect2.c
  
        /* Duplicate the stdout and stderr file handles
  	 so they can be restored later.  */
-diff -rupNb gcc-3.2.3/gcc/config/i386/xm-mingw32.h gcc-3.2.3-new/gcc/config/i386/xm-mingw32.h
---- gcc-3.2.3/gcc/config/i386/xm-mingw32.h	2002-01-11 06:21:39.000000000 +0800
-+++ gcc-3.2.3-new/gcc/config/i386/xm-mingw32.h	2016-07-02 09:25:57.513368595 +0800
-@@ -31,3 +31,143 @@ Boston, MA 02111-1307, USA.  */
+diff -burN orig.gcc-3.2.3/gcc/config/i386/xm-mingw32.h gcc-3.2.3/gcc/config/i386/xm-mingw32.h
+--- orig.gcc-3.2.3/gcc/config/i386/xm-mingw32.h	2002-01-10 22:21:39.000000000 +0000
++++ gcc-3.2.3/gcc/config/i386/xm-mingw32.h	2019-03-29 00:44:40.670909628 +0000
+@@ -31,3 +31,143 @@
  
  #undef PATH_SEPARATOR
  #define PATH_SEPARATOR ';'
@@ -356,9 +356,9 @@ diff -rupNb gcc-3.2.3/gcc/config/i386/xm-mingw32.h gcc-3.2.3-new/gcc/config/i386
 +#   define HOST_WIDEST_INT_PRINT_HEX "0x%lx"
 +# endif /* long long wider than long */
 +#endif /* ! HOST_WIDEST_INT */
-diff -rupNb gcc-3.2.3/gcc/config/mips/core-mmi.h gcc-3.2.3-new/gcc/config/mips/core-mmi.h
---- gcc-3.2.3/gcc/config/mips/core-mmi.h	1970-01-01 07:30:00.000000000 +0730
-+++ gcc-3.2.3-new/gcc/config/mips/core-mmi.h	2016-07-02 09:25:57.513368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/config/mips/core-mmi.h gcc-3.2.3/gcc/config/mips/core-mmi.h
+--- orig.gcc-3.2.3/gcc/config/mips/core-mmi.h	1970-01-01 00:00:00.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/core-mmi.h	2019-03-29 00:44:40.670909628 +0000
 @@ -0,0 +1,104 @@
 +/*
 + * mmi-intrinsics.h - R5900 MMI compiler intrinsics.
@@ -464,14 +464,14 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/core-mmi.h gcc-3.2.3-new/gcc/config/mips/c
 +
 +#endif /* __mmi_intrinsics_h */
 +
-diff -rupNb gcc-3.2.3/gcc/config/mips/core-vumm.h gcc-3.2.3-new/gcc/config/mips/core-vumm.h
---- gcc-3.2.3/gcc/config/mips/core-vumm.h	1970-01-01 07:30:00.000000000 +0730
-+++ gcc-3.2.3-new/gcc/config/mips/core-vumm.h	2016-07-02 09:25:57.513368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/config/mips/core-vumm.h gcc-3.2.3/gcc/config/mips/core-vumm.h
+--- orig.gcc-3.2.3/gcc/config/mips/core-vumm.h	1970-01-01 00:00:00.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/core-vumm.h	2019-03-29 00:44:40.670909628 +0000
 @@ -0,0 +1 @@
 +#define __THIS__IS__A__BLANK__FILE__
-diff -rupNb gcc-3.2.3/gcc/config/mips/crti5900.asm gcc-3.2.3-new/gcc/config/mips/crti5900.asm
---- gcc-3.2.3/gcc/config/mips/crti5900.asm	1970-01-01 07:30:00.000000000 +0730
-+++ gcc-3.2.3-new/gcc/config/mips/crti5900.asm	2016-07-02 09:25:57.513368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/config/mips/crti5900.asm gcc-3.2.3/gcc/config/mips/crti5900.asm
+--- orig.gcc-3.2.3/gcc/config/mips/crti5900.asm	1970-01-01 00:00:00.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/crti5900.asm	2019-03-29 00:44:40.670909628 +0000
 @@ -0,0 +1,16 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -489,9 +489,9 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/crti5900.asm gcc-3.2.3-new/gcc/config/mips
 +_fini:
 +	addu    $sp,$sp,-96
 +	sq      $31,80($sp)
-diff -rupNb gcc-3.2.3/gcc/config/mips/crtn5900.asm gcc-3.2.3-new/gcc/config/mips/crtn5900.asm
---- gcc-3.2.3/gcc/config/mips/crtn5900.asm	1970-01-01 07:30:00.000000000 +0730
-+++ gcc-3.2.3-new/gcc/config/mips/crtn5900.asm	2016-07-02 09:25:57.513368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/config/mips/crtn5900.asm gcc-3.2.3/gcc/config/mips/crtn5900.asm
+--- orig.gcc-3.2.3/gcc/config/mips/crtn5900.asm	1970-01-01 00:00:00.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/crtn5900.asm	2019-03-29 00:44:40.670909628 +0000
 @@ -0,0 +1,12 @@
 +/* 4 slots for argument spill area.  1 for cpreturn, 1 for stack.
 +   Return spill offset of 80.  */
@@ -505,10 +505,10 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/crtn5900.asm gcc-3.2.3-new/gcc/config/mips
 +	lq	$31,80($sp)
 +	addu	$sp,$sp,96
 +	j	$31
-diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.c
---- gcc-3.2.3/gcc/config/mips/mips.c	2003-02-12 23:25:49.000000000 +0800
-+++ gcc-3.2.3-new/gcc/config/mips/mips.c	2016-07-03 09:01:29.812551351 +0800
-@@ -51,6 +51,7 @@ Boston, MA 02111-1307, USA.  */
+diff -burN orig.gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3/gcc/config/mips/mips.c
+--- orig.gcc-3.2.3/gcc/config/mips/mips.c	2003-02-12 15:25:49.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/mips.c	2019-03-29 00:44:40.674909639 +0000
+@@ -51,6 +51,7 @@
  #include "gstab.h"
  #include "hashtab.h"
  #include "debug.h"
@@ -516,7 +516,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  #include "target.h"
  #include "target-def.h"
  
-@@ -102,6 +103,7 @@ static rtx mips_frame_set			PARAMS ((enu
+@@ -102,6 +103,7 @@
  							 int, int));
  static void mips_emit_frame_related_store	PARAMS ((rtx, rtx,
  							 HOST_WIDE_INT));
@@ -524,7 +524,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  static void save_restore_insns			PARAMS ((int, rtx,
  							long, FILE *));
  static void mips16_output_gp_offset		PARAMS ((FILE *, rtx));
-@@ -135,6 +137,23 @@ static int iris6_section_align_1		PARAMS
+@@ -135,6 +137,23 @@
  #endif
  static int mips_adjust_cost			PARAMS ((rtx, rtx, rtx, int));
  
@@ -548,7 +548,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  /* Global variables for machine-dependent things.  */
  
  /* Threshold for data being put into the small data/bss area, instead
-@@ -232,6 +251,8 @@ int mips_isa;
+@@ -232,6 +251,8 @@
  /* which abi to use.  */
  int mips_abi;
  
@@ -557,7 +557,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  /* Strings to hold which cpu and instruction set architecture to use.  */
  const char *mips_cpu_string;	/* for -mcpu=<xxx> */
  const char *mips_arch_string;   /* for -march=<xxx> */
-@@ -253,6 +274,18 @@ const char *mips_no_mips16_string;
+@@ -253,6 +274,18 @@
     set this option if such an option is used.  */
  const char *mips_explicit_type_size_string;
  
@@ -576,7 +576,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  /* Whether we are generating mips16 hard float code.  In mips16 mode
     we always set TARGET_SOFT_FLOAT; this variable is nonzero if
     -msoft-float was not specified by the user, which means that we
-@@ -280,8 +313,11 @@ enum mips_abicalls_type mips_abicalls;
+@@ -280,8 +313,11 @@
     initialized in override_options.  */
  REAL_VALUE_TYPE dfhigh, dflow, sfhigh, sflow;
  
@@ -590,7 +590,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  
  /* Array giving truth value on whether or not a given hard register
     can support a given mode.  */
-@@ -343,7 +379,8 @@ char mips_reg_names[][8] =
+@@ -343,7 +379,8 @@
   "$f16", "$f17", "$f18", "$f19", "$f20", "$f21", "$f22", "$f23",
   "$f24", "$f25", "$f26", "$f27", "$f28", "$f29", "$f30", "$f31",
   "hi",   "lo",   "accum","$fcc0","$fcc1","$fcc2","$fcc3","$fcc4",
@@ -600,7 +600,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  };
  
  /* Mips software names for the registers, used to overwrite the
-@@ -360,7 +397,8 @@ static const char mips_sw_reg_names[][8]
+@@ -360,7 +397,8 @@
    "$f16", "$f17", "$f18", "$f19", "$f20", "$f21", "$f22", "$f23",
    "$f24", "$f25", "$f26", "$f27", "$f28", "$f29", "$f30", "$f31",
    "hi",   "lo",   "accum","$fcc0","$fcc1","$fcc2","$fcc3","$fcc4",
@@ -610,7 +610,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  };
  
  /* Map hard register number to register class */
-@@ -384,7 +422,8 @@ const enum reg_class mips_regno_to_class
+@@ -384,7 +422,8 @@
    FP_REGS,	FP_REGS,	FP_REGS,	FP_REGS,
    HI_REG,	LO_REG,		HILO_REG,	ST_REGS,
    ST_REGS,	ST_REGS,	ST_REGS,	ST_REGS,
@@ -620,7 +620,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  };
  
  /* Map register constraint character to register class.  */
-@@ -479,6 +518,18 @@ enum reg_class mips_char_to_class[256] =
+@@ -479,6 +518,18 @@
  #undef TARGET_SCHED_ADJUST_COST
  #define TARGET_SCHED_ADJUST_COST mips_adjust_cost
  
@@ -639,7 +639,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  struct gcc_target targetm = TARGET_INITIALIZER;
  
  /* Return truth value of whether OP can be used as an operands
-@@ -1111,6 +1162,38 @@ movdi_operand (op, mode)
+@@ -1111,6 +1162,38 @@
  		&& ! mips16_constant (op, mode, 1, 0)));
  }
  
@@ -678,7 +678,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  /* Like register_operand, but when in 64 bit mode also accept a sign
     extend of a 32 bit register, since the value is known to be already
     sign extended.  */
-@@ -1315,6 +1398,7 @@ mips_legitimate_address_p (mode, xinsn,
+@@ -1315,6 +1398,7 @@
       accept (subreg (const_int)) which will fail to reload.  */
    if (CONSTANT_ADDRESS_P (xinsn)
        && ! (mips_split_addresses && mips_check_split (xinsn, mode))
@@ -686,7 +686,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
        && (! TARGET_MIPS16 || mips16_constant (xinsn, mode, 1, 0)))
      return 1;
  
-@@ -1651,7 +1735,7 @@ mips_fill_delay_slot (ret, type, operand
+@@ -1651,7 +1735,7 @@
    if (type == DELAY_LOAD || type == DELAY_FCMP)
      num_nops = 1;
  
@@ -695,7 +695,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
      num_nops = 2;
  
    else
-@@ -1663,6 +1747,7 @@ mips_fill_delay_slot (ret, type, operand
+@@ -1663,6 +1747,7 @@
      next_insn = NEXT_INSN (next_insn);
  
    dslots_load_total += num_nops;
@@ -703,7 +703,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    if (TARGET_DEBUG_F_MODE
        || !optimize
        || type == DELAY_NONE
-@@ -1701,6 +1786,11 @@ mips_fill_delay_slot (ret, type, operand
+@@ -1701,6 +1786,11 @@
        mips_load_reg3 = gen_rtx_REG (SImode, MD_REG_FIRST);
        mips_load_reg4 = gen_rtx_REG (SImode, MD_REG_FIRST+1);
      }
@@ -715,7 +715,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    else
      {
        mips_load_reg3 = 0;
-@@ -1935,6 +2025,15 @@ mips_move_1word (operands, insn, unsigne
+@@ -1935,6 +2025,15 @@
  		    ret = "mflo\t%0";
  		}
  
@@ -731,7 +731,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	      else if (ST_REG_P (regno1) && ISA_HAS_8CC)
  		ret = "li\t%0,1\n\tmovf\t%0,%.,%1";
  
-@@ -1971,6 +2070,16 @@ mips_move_1word (operands, insn, unsigne
+@@ -1971,6 +2070,16 @@
  		}
  	    }
  
@@ -748,7 +748,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	  else if (regno0 == FPSW_REGNUM && ! ISA_HAS_8CC)
  	    {
  	      if (GP_REG_P (regno1))
-@@ -2056,6 +2165,12 @@ mips_move_1word (operands, insn, unsigne
+@@ -2056,6 +2165,12 @@
  		  delay = DELAY_HILO;
  		  ret = "mt%0\t%.";
  		}
@@ -761,7 +761,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	    }
  
  	  else if (GP_REG_P (regno0))
-@@ -2390,6 +2505,20 @@ mips_move_2words (operands, insn)
+@@ -2390,6 +2505,20 @@
  		ret = "mthi\t%M1\n\tmtlo\t%L1";
  	    }
  
@@ -782,7 +782,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	  else if (GP_REG_P (regno0) && MD_REG_P (regno1))
  	    {
  	      delay = DELAY_HILO;
-@@ -2402,6 +2531,18 @@ mips_move_2words (operands, insn)
+@@ -2402,6 +2531,18 @@
  		ret = "mfhi\t%M0\n\tmflo\t%L0";
  	    }
  
@@ -801,7 +801,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	  else if (TARGET_64BIT)
  	    ret = "move\t%0,%1";
  
-@@ -2507,6 +2648,14 @@ mips_move_2words (operands, insn)
+@@ -2507,6 +2648,14 @@
  		      ? "mtlo\t%.\n\tmthi\t%."
  		      : "mt%0\t%.\n");
  	    }
@@ -816,7 +816,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	}
  
        else if (code1 == CONST_INT && GET_MODE (op0) == DImode
-@@ -4015,6 +4164,14 @@ function_arg_advance (cum, mode, type, n
+@@ -4015,6 +4164,14 @@
        cum->gp_reg_found = 1;
        cum->arg_words++;
        break;
@@ -831,7 +831,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
      }
  }
  
-@@ -4135,6 +4292,15 @@ function_arg (cum, mode, type, named)
+@@ -4135,6 +4292,15 @@
        if (! TARGET_64BIT)
  	cum->arg_words += (cum->arg_words & 1);
        regbase = GP_ARG_FIRST;
@@ -847,7 +847,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
      }
  
    if (*arg_words >= (unsigned) MAX_ARGS_IN_REGISTERS)
-@@ -4311,6 +4477,7 @@ function_arg_partial_nregs (cum, mode, t
+@@ -4311,6 +4477,7 @@
       int named ATTRIBUTE_UNUSED;/* != 0 for normal args, == 0 for ... args */
  {
    if ((mode == BLKmode
@@ -855,7 +855,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
         || GET_MODE_CLASS (mode) != MODE_COMPLEX_INT
         || GET_MODE_CLASS (mode) != MODE_COMPLEX_FLOAT)
        && cum->arg_words < (unsigned) MAX_ARGS_IN_REGISTERS
-@@ -4851,6 +5018,14 @@ override_options ()
+@@ -4851,6 +5018,14 @@
      target_flags &= ~((TARGET_DEFAULT) & (MASK_SOFT_FLOAT | MASK_SINGLE_FLOAT));
  #endif
  
@@ -870,7 +870,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    /* Get the architectural level.  */
    if (mips_isa_string == 0)
      mips_isa = MIPS_ISA_DEFAULT;
-@@ -5081,6 +5256,10 @@ override_options ()
+@@ -5081,6 +5256,10 @@
  	}
      }
  
@@ -881,7 +881,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    /* make sure sizes of ints/longs/etc. are ok */
    if (! ISA_HAS_64BIT_REGS)
      {
-@@ -5234,6 +5413,10 @@ override_options ()
+@@ -5234,6 +5413,10 @@
    mips_char_to_class['l'] = LO_REG;
    mips_char_to_class['a'] = HILO_REG;
    mips_char_to_class['x'] = MD_REGS;
@@ -892,7 +892,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    mips_char_to_class['b'] = ALL_REGS;
    mips_char_to_class['y'] = GR_REGS;
    mips_char_to_class['z'] = ST_REGS;
-@@ -5279,6 +5462,10 @@ override_options ()
+@@ -5279,6 +5462,10 @@
  			|| FP_REG_P (regno));
  	    }
  
@@ -903,7 +903,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	  else if (GP_REG_P (regno))
  	    temp = ((regno & 1) == 0 || size <= UNITS_PER_WORD);
  
-@@ -5302,6 +5489,12 @@ override_options ()
+@@ -5302,6 +5489,12 @@
  			|| (regno == MD_REG_FIRST
  			    && size == 2 * UNITS_PER_WORD)));
  
@@ -916,7 +916,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	  else
  	    temp = 0;
  
-@@ -5311,9 +5504,18 @@ override_options ()
+@@ -5311,9 +5504,18 @@
  
    /* Save GPR registers in word_mode sized hunks.  word_mode hasn't been
       initialized yet, so we can't use that here.  */
@@ -936,7 +936,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    if (TARGET_64BIT && !TARGET_MIPS16)
      {
        if (align_loops == 0)
-@@ -5324,6 +5526,21 @@ override_options ()
+@@ -5324,6 +5526,21 @@
  	align_functions = 8;
      }
  
@@ -958,7 +958,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    /* Register global variables with the garbage collector.  */
    mips_add_gc_roots ();
  }
-@@ -5425,6 +5642,7 @@ mips_debugger_offset (addr, offset)
+@@ -5425,6 +5642,7 @@
     'M'  print high-order register of double-word register operand.
     'C'  print part of opcode for a branch condition.
     'F'  print part of opcode for a floating-point branch condition.
@@ -966,7 +966,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
     'N'  print part of opcode for a branch condition, inverted.
     'W'  print part of opcode for a floating-point branch condition, inverted.
     'S'  X is CODE_LABEL, print with prefix of "LS" (for embedded switch).
-@@ -5649,7 +5867,17 @@ print_operand (file, op, letter)
+@@ -5649,7 +5867,17 @@
        default:
  	abort_with_insn (op, "PRINT_OPERAND, invalid insn for %%W");
        }
@@ -984,7 +984,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    else if (letter == 'S')
      {
        char buffer[100];
-@@ -5673,6 +5901,16 @@ print_operand (file, op, letter)
+@@ -5673,6 +5901,16 @@
  	fprintf (file, "%s,", reg_names[regnum]);
      }
  
@@ -1001,7 +1001,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    else if (code == REG || code == SUBREG)
      {
        register int regnum;
-@@ -6144,8 +6382,7 @@ final_prescan_insn (insn, opvec, noperan
+@@ -6144,8 +6382,7 @@
  	  || (mips_load_reg != 0 && reg_mentioned_p (mips_load_reg,  pattern))
  	  || (mips_load_reg2 != 0 && reg_mentioned_p (mips_load_reg2, pattern))
  	  || (mips_load_reg3 != 0 && reg_mentioned_p (mips_load_reg3, pattern))
@@ -1011,7 +1011,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	fputs ("\t#nop\n", asm_out_file);
  
        else
-@@ -6343,6 +6580,27 @@ mips_declare_object (stream, name, init_
+@@ -6343,6 +6580,27 @@
      }
  }
  
@@ -1039,7 +1039,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  /* Return the bytes needed to compute the frame pointer from the current
     stack pointer.
  
-@@ -6455,7 +6713,7 @@ compute_frame_size (size)
+@@ -6455,7 +6713,7 @@
  		  || (GET_MODE_SIZE (DECL_MODE (DECL_RESULT (current_function_decl)))
  		      <= 4))))
  	{
@@ -1048,7 +1048,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	  mask |= 1L << (regno - GP_REG_FIRST);
  
  	  /* The entry and exit pseudo instructions can not save $17
-@@ -6479,7 +6737,7 @@ compute_frame_size (size)
+@@ -6479,7 +6737,7 @@
  	  regno = EH_RETURN_DATA_REGNO (i);
  	  if (regno == INVALID_REGNUM)
  	    break;
@@ -1057,7 +1057,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	  mask |= 1L << (regno - GP_REG_FIRST);
  	}
      }
-@@ -6561,9 +6819,9 @@ compute_frame_size (size)
+@@ -6561,9 +6819,9 @@
           top of the stack.  */
        if (! mips_entry)
  	offset = (args_size + extra_size + var_size
@@ -1069,7 +1069,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  
        current_frame_info.gp_sp_offset = offset;
        current_frame_info.gp_save_offset = offset - total_size;
-@@ -6699,6 +6957,24 @@ mips_emit_frame_related_store (mem, reg,
+@@ -6699,6 +6957,24 @@
    mips_annotate_frame_insn (emit_move_insn (mem, reg), dwarf_expr);
  }
  
@@ -1094,7 +1094,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  static void
  save_restore_insns (store_p, large_reg, large_offset, file)
       int store_p;	/* true if this is prologue */
-@@ -6735,6 +7011,47 @@ save_restore_insns (store_p, large_reg,
+@@ -6735,6 +7011,47 @@
       need a nop in the epilog if at least one register is reloaded in
       addition to return address.  */
  
@@ -1142,7 +1142,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    /* Save GP registers if needed.  */
    if (mask)
      {
-@@ -6747,7 +7064,7 @@ save_restore_insns (store_p, large_reg,
+@@ -6747,7 +7064,7 @@
        gp_offset = current_frame_info.gp_sp_offset;
        end_offset
  	= gp_offset - (current_frame_info.gp_reg_size
@@ -1151,7 +1151,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  
        if (gp_offset < 0 || end_offset < 0)
  	internal_error
-@@ -6810,7 +7127,8 @@ save_restore_insns (store_p, large_reg,
+@@ -6810,7 +7127,8 @@
  	      {
  		rtx reg_rtx;
  		rtx mem_rtx
@@ -1161,7 +1161,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  			     gen_rtx (PLUS, Pmode, base_reg_rtx,
  				      GEN_INT (gp_offset - base_offset)));
  
-@@ -6821,23 +7139,24 @@ save_restore_insns (store_p, large_reg,
+@@ -6821,23 +7139,24 @@
                     $31, so we load $7 instead, and work things out
                     in mips_expand_epilogue.  */
  		if (TARGET_MIPS16 && ! store_p && regno == GP_REG_FIRST + 31)
@@ -1191,7 +1191,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  
  		if (store_p)
  		  mips_emit_frame_related_store (mem_rtx, reg_rtx, gp_offset);
-@@ -6847,7 +7166,7 @@ save_restore_insns (store_p, large_reg,
+@@ -6847,7 +7166,7 @@
  		    if (TARGET_MIPS16
  			&& regno != GP_REG_FIRST + 31
  			&& ! M16_REG_P (regno))
@@ -1200,7 +1200,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  				      reg_rtx);
  		  }
  	      }
-@@ -6889,13 +7208,13 @@ save_restore_insns (store_p, large_reg,
+@@ -6889,13 +7208,13 @@
  		  fprintf (file, "\tmove\t%s,%s\n",
  			   reg_names[regno], reg_names[r]);
  	      }
@@ -1216,7 +1216,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	  }
      }
    else
-@@ -6920,13 +7239,13 @@ save_restore_insns (store_p, large_reg,
+@@ -6920,13 +7239,13 @@
  	base_reg_rtx = stack_pointer_rtx, base_offset  = 0;
  
        else if (base_reg_rtx != 0
@@ -1234,7 +1234,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	{
  	  base_reg_rtx = gen_rtx_REG (Pmode, MIPS_TEMP2_REGNUM);
  	  base_offset = large_offset;
-@@ -7358,10 +7677,10 @@ mips_expand_prologue ()
+@@ -7358,10 +7677,10 @@
  	{
  	  if (offset != 0)
  	    ptr = gen_rtx (PLUS, Pmode, stack_pointer_rtx, GEN_INT (offset));
@@ -1248,7 +1248,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	}
      }
  
-@@ -7406,7 +7725,8 @@ mips_expand_prologue ()
+@@ -7406,7 +7725,8 @@
  	 moment.  */
        if (TARGET_MIPS16 && BITSET_P (current_frame_info.mask, 18))
  	{
@@ -1258,7 +1258,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  	  long gp_offset, base_offset;
  
  	  gp_offset = current_frame_info.gp_sp_offset;
-@@ -7422,8 +7742,9 @@ mips_expand_prologue ()
+@@ -7422,8 +7742,9 @@
  	    base_offset = 0;
  	  start_sequence ();
  	  emit_move_insn (reg_rtx,
@@ -1270,7 +1270,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  				   gen_rtx (PLUS, Pmode, stack_pointer_rtx,
  					    GEN_INT (gp_offset
  						     - base_offset))),
-@@ -8153,6 +8474,11 @@ function_arg_pass_by_reference (cum, mod
+@@ -8153,6 +8474,11 @@
    if (type == NULL_TREE || mode == DImode || mode == DFmode)
      return 0;
  
@@ -1282,7 +1282,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    size = int_size_in_bytes (type);
    return size == -1 || size > UNITS_PER_WORD;
  }
-@@ -8213,15 +8539,30 @@ mips_secondary_reload_class (class, mode
+@@ -8213,15 +8539,30 @@
  	     && gp_reg_p
  	     && GET_MODE_SIZE (mode) <= GET_MODE_SIZE (SImode))
  	    ? NO_REGS : gr_regs);
@@ -1314,7 +1314,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
      {
        if (TARGET_MIPS16 && in_p)
  	{
-@@ -8230,7 +8571,8 @@ mips_secondary_reload_class (class, mode
+@@ -8230,7 +8571,8 @@
  	}
        return gp_reg_p ? NO_REGS : gr_regs;
      }
@@ -1324,7 +1324,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
      {
        if (TARGET_MIPS16 && ! in_p)
  	{
-@@ -9386,6 +9728,11 @@ machine_dependent_reorg (first)
+@@ -9386,6 +9728,11 @@
    rtx insn;
    struct constant *constants;
  
@@ -1336,7 +1336,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
    if (! TARGET_MIPS16)
      return;
  
-@@ -9578,6 +9925,205 @@ machine_dependent_reorg (first)
+@@ -9578,6 +9925,205 @@
       constant table, but we have no way to prevent that.  */
  }
  
@@ -1542,7 +1542,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
  /* Return nonzero if X is a SIGN or ZERO extend operator.  */
  int
  extend_operator (x, mode)
-@@ -9978,6 +10524,8 @@ mips_parse_cpu (cpu_string)
+@@ -9978,6 +10524,8 @@
      case '5':
        if (!strcmp (p, "5000") || !strcmp (p, "5k") || !strcmp (p, "5K"))
  	cpu = PROCESSOR_R5000;
@@ -1551,7 +1551,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
        else if (!strcmp (p, "5kc") || !strcmp (p, "5Kc") )
            cpu = PROCESSOR_R5KC;
        break;
-@@ -10102,7 +10650,10 @@ mips_hard_regno_nregs (regno, mode)
+@@ -10102,7 +10650,10 @@
      int regno;
      enum machine_mode mode;
  {
@@ -1563,7 +1563,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
      return ((GET_MODE_SIZE (mode) + UNITS_PER_WORD - 1) / UNITS_PER_WORD);
    else
      return ((GET_MODE_SIZE (mode) + UNITS_PER_FPREG - 1) / UNITS_PER_FPREG);
-@@ -10268,3 +10819,345 @@ iris6_asm_file_end (stream)
+@@ -10268,3 +10819,345 @@
    mips_asm_file_end (stream);
  }
  #endif /* TARGET_IRIX6 */
@@ -1909,10 +1909,10 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.c gcc-3.2.3-new/gcc/config/mips/mips.
 +  if (TARGET_MIPS5900)
 +    r5900_init_builtins ();
 +}
-diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.h
---- gcc-3.2.3/gcc/config/mips/mips.h	2003-02-12 23:25:48.000000000 +0800
-+++ gcc-3.2.3-new/gcc/config/mips/mips.h	2016-07-02 09:25:57.517368595 +0800
-@@ -48,6 +48,7 @@ enum delay_type {
+diff -burN orig.gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3/gcc/config/mips/mips.h
+--- orig.gcc-3.2.3/gcc/config/mips/mips.h	2003-02-12 15:25:48.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/mips.h	2019-03-29 00:44:40.674909639 +0000
+@@ -48,6 +48,7 @@
    DELAY_NONE,				/* no delay slot */
    DELAY_LOAD,				/* load from memory delay */
    DELAY_HILO,				/* move from/to hi/lo registers */
@@ -1920,7 +1920,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
    DELAY_FCMP				/* delay after doing c.<xx>.{d,s} */
  };
  
-@@ -67,6 +68,7 @@ enum processor_type {
+@@ -67,6 +68,7 @@
    PROCESSOR_R4600,
    PROCESSOR_R4650,
    PROCESSOR_R5000,
@@ -1928,7 +1928,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
    PROCESSOR_R8000,
    PROCESSOR_R4KC,
    PROCESSOR_R5KC,
-@@ -146,6 +148,7 @@ extern int mips_isa;			/* architectural
+@@ -146,6 +148,7 @@
  extern int mips16;			/* whether generating mips16 code */
  extern int mips16_hard_float;		/* mips16 without -msoft-float */
  extern int mips_entry;			/* generate entry/exit for mips16 */
@@ -1936,7 +1936,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  extern const char *mips_cpu_string;	/* for -mcpu=<xxx> */
  extern const char *mips_arch_string;    /* for -march=<xxx> */
  extern const char *mips_tune_string;    /* for -mtune=<xxx> */
-@@ -155,6 +158,11 @@ extern const char *mips_entry_string;	/*
+@@ -155,6 +158,11 @@
  extern const char *mips_no_mips16_string;/* for -mno-mips16 */
  extern const char *mips_explicit_type_size_string;/* for -mexplicit-type-size */
  extern const char *mips_cache_flush_func;/* for -mflush-func= and -mno-flush-func */
@@ -1948,7 +1948,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  extern int mips_split_addresses;	/* perform high/lo_sum support */
  extern int dslots_load_total;		/* total # load related delay slots */
  extern int dslots_load_filled;		/* # filled load delay slots */
-@@ -175,6 +183,8 @@ extern void		rdata_section PARAMS ((void
+@@ -175,6 +183,8 @@
  extern void		sdata_section PARAMS ((void));
  extern void		sbss_section PARAMS ((void));
  
@@ -1957,7 +1957,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  /* Stubs for half-pic support if not OSF/1 reference platform.  */
  
  #ifndef HALF_PIC_P
-@@ -232,6 +242,10 @@ extern void		sbss_section PARAMS ((void)
+@@ -232,6 +242,10 @@
  					   consts in rodata */
  #define MASK_NO_FUSED_MADD 0x01000000   /* Don't generate floating point
  					   multiply-add operations.  */
@@ -1968,7 +1968,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  					/* Debug switches, not documented */
  #define MASK_DEBUG	0		/* unused */
-@@ -327,6 +341,16 @@ extern void		sbss_section PARAMS ((void)
+@@ -327,6 +341,16 @@
  #define TARGET_NO_CHECK_ZERO_DIV (target_flags & MASK_NO_CHECK_ZERO_DIV)
  #define TARGET_CHECK_RANGE_DIV  (target_flags & MASK_CHECK_RANGE_DIV)
  
@@ -1985,7 +1985,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  /* This is true if we must enable the assembly language file switching
     code.  */
  
-@@ -346,6 +370,7 @@ extern void		sbss_section PARAMS ((void)
+@@ -346,6 +370,7 @@
  #define TARGET_MIPS4000             (mips_arch == PROCESSOR_R4000)
  #define TARGET_MIPS4100             (mips_arch == PROCESSOR_R4100)
  #define TARGET_MIPS4300             (mips_arch == PROCESSOR_R4300)
@@ -1993,7 +1993,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  #define TARGET_MIPS4KC              (mips_arch == PROCESSOR_R4KC)
  #define TARGET_MIPS5KC              (mips_arch == PROCESSOR_R5KC)
  
-@@ -354,6 +379,7 @@ extern void		sbss_section PARAMS ((void)
+@@ -354,6 +379,7 @@
  #define TUNE_MIPS3900               (mips_tune == PROCESSOR_R3900)
  #define TUNE_MIPS4000               (mips_tune == PROCESSOR_R4000)
  #define TUNE_MIPS5000               (mips_tune == PROCESSOR_R5000)
@@ -2001,7 +2001,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  #define TUNE_MIPS6000               (mips_tune == PROCESSOR_R6000)
  
  /* Macro to define tables used to set the flags.
-@@ -464,6 +490,18 @@ extern void		sbss_section PARAMS ((void)
+@@ -464,6 +490,18 @@
       N_("Optimize for 3900")},						\
    {"4650",		  0,                    			\
       N_("Optimize for 4650")},						\
@@ -2020,7 +2020,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
    {"check-zero-division",-MASK_NO_CHECK_ZERO_DIV,			\
       N_("Trap on integer divide by zero")},				\
    {"no-check-zero-division", MASK_NO_CHECK_ZERO_DIV,			\
-@@ -472,6 +510,8 @@ extern void		sbss_section PARAMS ((void)
+@@ -472,6 +510,8 @@
       N_("Trap on integer divide overflow")},				\
    {"no-check-range-division",-MASK_CHECK_RANGE_DIV,			\
       N_("Don't trap on integer divide overflow")},			\
@@ -2029,7 +2029,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
    {"debug",		  MASK_DEBUG,					\
       NULL},								\
    {"debuga",		  MASK_DEBUG_A,					\
-@@ -604,6 +644,8 @@ extern void		sbss_section PARAMS ((void)
+@@ -604,6 +644,8 @@
        N_("Don't call any cache flush functions")},			\
    { "flush-func=", &mips_cache_flush_func,				\
        N_("Specify cache flush function")},				\
@@ -2038,7 +2038,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  }
  
  /* This is meant to be redefined in the host dependent files.  */
-@@ -613,6 +655,7 @@ extern void		sbss_section PARAMS ((void)
+@@ -613,6 +655,7 @@
  
  /* Generate three-operand multiply instructions for SImode.  */
  #define GENERATE_MULT3_SI       ((TARGET_MIPS3900                       \
@@ -2046,7 +2046,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
                                    || mips_isa == 32                     \
                                    || mips_isa == 64)                    \
                                   && !TARGET_MIPS16)
-@@ -644,7 +687,7 @@ extern void		sbss_section PARAMS ((void)
+@@ -644,7 +687,7 @@
  				 || mips_isa == 64)
  
  /* ISA has just the integer condition move instructions (movn,movz) */
@@ -2055,7 +2055,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  
  
-@@ -847,7 +890,7 @@ while (0)
+@@ -847,7 +890,7 @@
  /* GAS_ASM_SPEC is passed when using gas, rather than the MIPS
     assembler.  */
  
@@ -2064,7 +2064,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  
  extern int mips_abi;
-@@ -964,7 +1007,7 @@ extern int mips_abi;
+@@ -964,7 +1007,7 @@
  #ifndef LINK_SPEC
  #define LINK_SPEC "\
  %(endian_spec) \
@@ -2073,7 +2073,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  %{bestGnum} %{shared} %{non_shared}"
  #endif  /* LINK_SPEC defined */
  
-@@ -984,7 +1027,9 @@ extern int mips_abi;
+@@ -984,7 +1027,9 @@
  %{m3900:-march=r3900 -mips1 -mfp32 -mgp32 \
  %n`-m3900' is deprecated. Use `-march=r3900' instead.\n} \
  %{m4650:-march=r4650 -mmad -msingle-float \
@@ -2084,7 +2084,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  #endif
  
  /* CC1_SPEC is the set of arguments to pass to the compiler proper.  */
-@@ -1003,6 +1048,7 @@ extern int mips_abi;
+@@ -1003,6 +1048,7 @@
  %{mfp64:%{msingle-float:%emay not use both -mfp64 and -msingle-float}} \
  %{mfp64:%{m4650:%emay not use both -mfp64 and -m4650}} \
  %{mint64|mlong64|mlong32:-mexplicit-type-size }\
@@ -2092,7 +2092,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  %{mgp32: %{mfp64:%emay not use both -mgp32 and -mfp64} %{!mfp32: -mfp32}} \
  %{G*} %{EB:-meb} %{EL:-mel} %{EB:%{EL:%emay not use both -EB and -EL}} \
  %{pic-none:   -mno-half-pic} \
-@@ -1661,7 +1707,7 @@ do {							\
+@@ -1661,7 +1707,7 @@
  #define STRUCTURE_SIZE_BOUNDARY 8
  
  /* There is no point aligning anything to a rounder boundary than this.  */
@@ -2101,7 +2101,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  /* Set this nonzero if move instructions will actually fail to work
     when given unaligned data.  */
-@@ -1796,20 +1842,20 @@ do {							\
+@@ -1796,20 +1842,20 @@
     address reg ($31) was stored.  This is needed for C++ exception
     handling.  */
  
@@ -2125,7 +2125,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  }
  
  
-@@ -1826,7 +1872,8 @@ do {							\
+@@ -1826,7 +1872,8 @@
    0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1,			\
    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,			\
    1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,			\
@@ -2135,7 +2135,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  }
  
  /* Like `CALL_USED_REGISTERS' but used to overcome a historical
-@@ -1846,7 +1893,8 @@ do {							\
+@@ -1846,7 +1893,8 @@
    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,			\
    1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,			\
    /* Others.  */                                                        \
@@ -2145,7 +2145,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  }
  
  /* Internal macros to classify a register number as to whether it's a
-@@ -1867,6 +1915,10 @@ do {							\
+@@ -1867,6 +1915,10 @@
  #define MD_REG_LAST  66
  #define MD_REG_NUM   (MD_REG_LAST - MD_REG_FIRST + 1)
  
@@ -2156,7 +2156,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  #define ST_REG_FIRST 67
  #define ST_REG_LAST  74
  #define ST_REG_NUM   (ST_REG_LAST - ST_REG_FIRST + 1)
-@@ -1877,6 +1929,9 @@ do {							\
+@@ -1877,6 +1929,9 @@
  #define HI_REGNUM	(MD_REG_FIRST + 0)
  #define LO_REGNUM	(MD_REG_FIRST + 1)
  #define HILO_REGNUM	(MD_REG_FIRST + 2)
@@ -2166,7 +2166,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  /* FPSW_REGNUM is the single condition code used if mips_isa < 4.  If
     mips_isa >= 4, it should not be used, and an arbitrary ST_REG
-@@ -1891,6 +1946,8 @@ do {							\
+@@ -1891,6 +1946,8 @@
    ((unsigned int) ((int) (REGNO) - FP_REG_FIRST) < FP_REG_NUM)
  #define MD_REG_P(REGNO) \
    ((unsigned int) ((int) (REGNO) - MD_REG_FIRST) < MD_REG_NUM)
@@ -2175,7 +2175,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  #define ST_REG_P(REGNO) \
    ((unsigned int) ((int) (REGNO) - ST_REG_FIRST) < ST_REG_NUM)
  
-@@ -2057,6 +2114,20 @@ enum reg_class
+@@ -2057,6 +2114,20 @@
    LO_AND_GR_REGS,
    HILO_AND_GR_REGS,
    HI_AND_FP_REGS,
@@ -2196,7 +2196,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
    ST_REGS,			/* status registers (fp status) */
    ALL_REGS,			/* all registers */
    LIM_REG_CLASSES		/* max value + 1 */
-@@ -2087,6 +2158,20 @@ enum reg_class
+@@ -2087,6 +2158,20 @@
    "LO_AND_GR_REGS",							\
    "HILO_AND_GR_REGS",							\
    "HI_AND_FP_REGS",							\
@@ -2217,7 +2217,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
    "ST_REGS",								\
    "ALL_REGS"								\
  }
-@@ -2105,7 +2190,7 @@ enum reg_class
+@@ -2105,7 +2190,7 @@
  #define REG_CLASS_CONTENTS						\
  {									\
    { 0x00000000, 0x00000000, 0x00000000 },	/* no registers */	\
@@ -2226,7 +2226,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
    { 0x000300fc, 0x00000000, 0x00000000 },	/* mips16 registers */	\
    { 0x01000000, 0x00000000, 0x00000000 },	/* mips16 T register */	\
    { 0x010300fc, 0x00000000, 0x00000000 },	/* mips16 and T regs */ \
-@@ -2119,8 +2204,24 @@ enum reg_class
+@@ -2119,8 +2204,24 @@
    { 0xffffffff, 0x00000000, 0x00000002 },				\
    { 0xffffffff, 0x00000000, 0x00000004 },				\
    { 0x00000000, 0xffffffff, 0x00000001 },				\
@@ -2252,7 +2252,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  }
  
  
-@@ -2169,7 +2270,8 @@ extern const enum reg_class mips_regno_t
+@@ -2169,7 +2270,8 @@
    16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,	\
    32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47,	\
    48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63,	\
@@ -2262,7 +2262,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  }
  
  /* ORDER_REGS_FOR_LOCAL_ALLOC is a macro which permits reg_alloc_order
-@@ -2197,7 +2299,11 @@ extern const enum reg_class mips_regno_t
+@@ -2197,7 +2299,11 @@
     'x'	Multiply/divide registers
     'a'	HILO_REG
     'z'	FP Status register
@@ -2275,7 +2275,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  extern enum reg_class mips_char_to_class[256];
  
-@@ -2357,7 +2463,7 @@ extern enum reg_class mips_char_to_class
+@@ -2357,7 +2463,7 @@
  #define CLASS_CANNOT_CHANGE_MODE					\
    (TARGET_BIG_ENDIAN							\
     ? (TARGET_FLOAT64 && ! TARGET_64BIT ? FP_REGS : NO_REGS)		\
@@ -2284,7 +2284,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  /* Defines illegal mode changes for CLASS_CANNOT_CHANGE_MODE.  */
  
-@@ -3470,8 +3576,9 @@ while (0)
+@@ -3470,8 +3576,9 @@
  
  /* Max number of bytes we can move from memory to memory
     in one reasonably fast instruction.  */
@@ -2296,7 +2296,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  /* Define this macro as a C expression which is nonzero if
     accessing less than a word of memory (i.e. a `char' or a
-@@ -3764,6 +3871,8 @@ while (0)
+@@ -3764,6 +3871,8 @@
  	return COSTS_N_INSNS (17);					\
        else if (TUNE_MIPS5000)				\
  	return COSTS_N_INSNS (5);					\
@@ -2305,7 +2305,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
        else								\
  	return COSTS_N_INSNS (10);					\
      }									\
-@@ -3805,6 +3914,8 @@ while (0)
+@@ -3805,6 +3914,8 @@
        return COSTS_N_INSNS (38);					\
      else if (TUNE_MIPS5000)				\
        return COSTS_N_INSNS (36);					\
@@ -2314,7 +2314,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
      else								\
        return COSTS_N_INSNS (69);					\
  									\
-@@ -3910,10 +4021,14 @@ while (0)
+@@ -3910,10 +4021,14 @@
     : GR_REG_CLASS_P (FROM) && (TO) == FP_REGS ? 4			\
     : (FROM) == FP_REGS && GR_REG_CLASS_P (TO) ? 4			\
     : (((FROM) == HI_REG || (FROM) == LO_REG				\
@@ -2331,7 +2331,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
        && GR_REG_CLASS_P (FROM)) ? (TARGET_MIPS16 ? 12 : 6)		\
     : (FROM) == ST_REGS && GR_REG_CLASS_P (TO) ? 4			\
     : (FROM) == FP_REGS && (TO) == ST_REGS ? 8				\
-@@ -3947,6 +4062,10 @@ while (0)
+@@ -3947,6 +4062,10 @@
  #define ADJUST_INSN_LENGTH(INSN, LENGTH) \
    ((LENGTH) = mips_adjust_insn_length ((INSN), (LENGTH)))
  
@@ -2342,7 +2342,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  /* Optionally define this if you have added predicates to
     `MACHINE.c'.  This macro is called within an initializer of an
-@@ -3992,6 +4111,8 @@ while (0)
+@@ -3992,6 +4111,8 @@
    {"movdi_operand",		{ CONST_INT, CONST_DOUBLE, CONST,	\
  				  SYMBOL_REF, LABEL_REF, SUBREG, REG,	\
  				  MEM, SIGN_EXTEND }},			\
@@ -2351,7 +2351,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
    {"se_register_operand",	{ SUBREG, REG, SIGN_EXTEND }},		\
    {"se_reg_or_0_operand",	{ REG, CONST_INT, CONST_DOUBLE, SUBREG,	\
  				  SIGN_EXTEND }},			\
-@@ -4147,6 +4268,9 @@ while (0)
+@@ -4147,6 +4268,9 @@
    &mips_reg_names[73][0],						\
    &mips_reg_names[74][0],						\
    &mips_reg_names[75][0],						\
@@ -2361,7 +2361,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  }
  
  /* print-rtl.c can't use REGISTER_NAMES, since it depends on mips.c.
-@@ -4162,7 +4286,8 @@ while (0)
+@@ -4162,7 +4286,8 @@
    "$f16", "$f17", "$f18", "$f19", "$f20", "$f21", "$f22", "$f23",	\
    "$f24", "$f25", "$f26", "$f27", "$f28", "$f29", "$f30", "$f31",	\
    "hi",   "lo",   "accum","$fcc0","$fcc1","$fcc2","$fcc3","$fcc4",	\
@@ -2371,7 +2371,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  }
  
  /* If defined, a C initializer for an array of structures
-@@ -4415,6 +4540,7 @@ while (0)
+@@ -4415,6 +4540,7 @@
    } while (0)
  
  /* This says how to define a global common symbol.  */
@@ -2379,7 +2379,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  #define ASM_OUTPUT_ALIGNED_DECL_COMMON(STREAM, DECL, NAME, SIZE, ALIGN) \
    do {									\
-@@ -4433,9 +4559,10 @@ while (0)
+@@ -4433,9 +4559,10 @@
  	mips_declare_object (STREAM, NAME, "", ":\n\t.space\t%u\n",	\
  	    (SIZE));							\
        }									\
@@ -2393,7 +2393,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
    } while (0)
  
  
-@@ -4547,7 +4674,7 @@ do {									\
+@@ -4547,7 +4674,7 @@
     to a multiple of 2**LOG bytes.  */
  
  #define ASM_OUTPUT_ALIGN(STREAM,LOG)					\
@@ -2402,7 +2402,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  
  /* This is how to output an assembler line to advance the location
     counter by SIZE bytes.  */
-@@ -4721,6 +4848,15 @@ while (0)
+@@ -4721,6 +4848,15 @@
     PC relative loads that are out of range.  */
  #define MACHINE_DEPENDENT_REORG(X) machine_dependent_reorg (X)
  
@@ -2418,7 +2418,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
  /* We need to use a special set of functions to handle hard floating
     point code in mips16 mode.  */
  
-@@ -4793,3 +4929,44 @@ do									\
+@@ -4793,3 +4929,44 @@
        }									\
    }									\
  while (0)
@@ -2463,9 +2463,9 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.h gcc-3.2.3-new/gcc/config/mips/mips.
 +
 +  R5900_BUILTIN_MAX
 +};
-diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips.md
---- gcc-3.2.3/gcc/config/mips/mips.md	2003-02-12 23:25:50.000000000 +0800
-+++ gcc-3.2.3-new/gcc/config/mips/mips.md	2016-07-02 09:25:57.521368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3/gcc/config/mips/mips.md
+--- orig.gcc-3.2.3/gcc/config/mips/mips.md	2003-02-12 15:25:50.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/mips.md	2019-03-29 00:44:40.678909650 +0000
 @@ -84,11 +84,11 @@
  ;; nop		no operation
  
@@ -3215,7 +3215,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    if (optimize && find_reg_note (insn, REG_DEAD, operands[1]))
      return \"%(\\
  move\\t%0,%z4\\n\\
-@@ -3103,7 +3390,11 @@ move\\t%0,%z4\\n\\
+@@ -3103,7 +3390,11 @@
  }"
    [(set_attr "type"	"multi")
     (set_attr "mode"	"SI")
@@ -3228,7 +3228,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  
  (define_insn "ffsdi2"
    [(set (match_operand:DI 0 "register_operand" "=&d")
-@@ -3117,6 +3408,38 @@ move\\t%0,%z4\\n\\
+@@ -3117,6 +3408,38 @@
    dslots_jump_filled += 2;
    operands[4] = const0_rtx;
  
@@ -3267,7 +3267,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    if (optimize && find_reg_note (insn, REG_DEAD, operands[1]))
      return \"%(\\
  move\\t%0,%z4\\n\\
-@@ -3139,7 +3462,11 @@ move\\t%0,%z4\\n\\
+@@ -3139,7 +3462,11 @@
  }"
    [(set_attr "type"	"multi")
     (set_attr "mode"	"DI")
@@ -3280,7 +3280,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  
  
  ;;
-@@ -3271,6 +3598,18 @@ move\\t%0,%z4\\n\\
+@@ -3271,6 +3598,18 @@
     (set (subreg:SI (match_dup 0) 4) (not:SI (subreg:SI (match_dup 1) 4)))]
    "")
  
@@ -3299,7 +3299,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  
  ;;
  ;;  ....................
-@@ -3386,6 +3725,17 @@ move\\t%0,%z4\\n\\
+@@ -3386,6 +3725,17 @@
    [(set_attr "type"	"arith")
     (set_attr "mode"	"DI")])
  
@@ -3317,7 +3317,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  (define_expand "iorsi3"
    [(set (match_operand:SI 0 "register_operand" "=d,d")
  	(ior:SI (match_operand:SI 1 "uns_arith_operand" "%d,d")
-@@ -3477,6 +3827,17 @@ move\\t%0,%z4\\n\\
+@@ -3477,6 +3827,17 @@
     (set (subreg:SI (match_dup 0) 4) (ior:SI (subreg:SI (match_dup 1) 4) (subreg:SI (match_dup 2) 4)))]
    "")
  
@@ -3335,7 +3335,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  (define_expand "xorsi3"
    [(set (match_operand:SI 0 "register_operand" "=d,d")
  	(xor:SI (match_operand:SI 1 "uns_arith_operand" "%d,d")
-@@ -3591,6 +3952,17 @@ move\\t%0,%z4\\n\\
+@@ -3591,6 +3952,17 @@
    [(set_attr "type"	"arith")
     (set_attr "mode"	"DI")])
  
@@ -3353,7 +3353,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  (define_insn "*norsi3"
    [(set (match_operand:SI 0 "register_operand" "=d")
  	(and:SI (not:SI (match_operand:SI 1 "register_operand" "d"))
-@@ -3632,6 +4004,18 @@ move\\t%0,%z4\\n\\
+@@ -3632,6 +4004,18 @@
     (set (subreg:SI (match_dup 0) 4) (and:SI (not:SI (subreg:SI (match_dup 1) 4)) (not:SI (subreg:SI (match_dup 2) 4))))]
    "")
  
@@ -3372,7 +3372,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  ;;
  ;;  ....................
  ;;
-@@ -4073,7 +4457,7 @@ move\\t%0,%z4\\n\\
+@@ -4073,7 +4457,7 @@
  
  (define_insn "extendsidi2"
    [(set (match_operand:DI 0 "register_operand" "=d,y,d,*d,d,d")
@@ -3381,7 +3381,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "TARGET_64BIT"
    "* return mips_move_1word (operands, insn, FALSE);"
    [(set_attr "type"	"move,move,move,hilo,load,load")
-@@ -4299,6 +4683,21 @@ move\\t%0,%z4\\n\\
+@@ -4299,6 +4683,21 @@
  {
    rtx xoperands[10];
  
@@ -3403,7 +3403,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    if (which_alternative == 1)
      return \"trunc.w.s %0,%1,%2\";
  
-@@ -4912,6 +5311,86 @@ move\\t%0,%z4\\n\\
+@@ -4912,6 +5311,86 @@
    [(set_attr "type"	"arith")
     (set_attr "mode"	"SI")])
  
@@ -3490,7 +3490,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  ;; 64-bit integer moves
  
  ;; Unlike most other insns, the move insns can't be split with
-@@ -5039,7 +5518,7 @@ move\\t%0,%z4\\n\\
+@@ -5039,7 +5518,7 @@
     (set_attr "length"	"4,8")])
  
  (define_insn "movdi_internal"
@@ -3499,7 +3499,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  	(match_operand:DI 1 "general_operand" "d,iF,R,o,d,d,J,*x,*d"))]
    "!TARGET_64BIT && !TARGET_MIPS16
     && (register_operand (operands[0], DImode)
-@@ -5075,8 +5554,8 @@ move\\t%0,%z4\\n\\
+@@ -5075,8 +5554,8 @@
    "")
  
  (define_insn "movdi_internal2"
@@ -3510,7 +3510,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "TARGET_64BIT && !TARGET_MIPS16
     && (register_operand (operands[0], DImode)
         || se_register_operand (operands[1], DImode)
-@@ -5089,7 +5568,7 @@ move\\t%0,%z4\\n\\
+@@ -5089,7 +5568,7 @@
  
  (define_insn ""
    [(set (match_operand:DI 0 "nonimmediate_operand" "=d,y,d,d,d,d,d,d,R,m,*d")
@@ -3519,7 +3519,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "TARGET_64BIT && TARGET_MIPS16
     && (register_operand (operands[0], DImode)
         || se_register_operand (operands[1], DImode))"
-@@ -5180,7 +5659,7 @@ move\\t%0,%z4\\n\\
+@@ -5180,7 +5659,7 @@
  			      ? REGNO (operands[2]) + 1
  			      : REGNO (operands[2])));
  
@@ -3528,7 +3528,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
      {
        if (GET_CODE (operands[1]) == MEM)
  	{
-@@ -5203,28 +5682,45 @@ move\\t%0,%z4\\n\\
+@@ -5203,28 +5682,45 @@
  	      lo_word = memword;
  	    }
  	  emit_move_insn (scratch, hi_word);
@@ -3576,7 +3576,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
        emit_insn (gen_ashldi3 (operands[0], operands[0], GEN_INT (32)));
        emit_insn (gen_iordi3 (operands[0], operands[0], scratch));
        emit_insn (gen_rtx_UNSPEC (VOIDmode, gen_rtvec (1, operands[1]), 2));
-@@ -5242,7 +5738,7 @@ move\\t%0,%z4\\n\\
+@@ -5242,7 +5738,7 @@
  ;; use a TImode scratch reg.
  
  (define_expand "reload_outdi"
@@ -3585,7 +3585,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  	(match_operand:DI 1 "se_register_operand" "b"))
     (clobber (match_operand:TI 2 "register_operand" "=&d"))]
    "TARGET_64BIT"
-@@ -5250,17 +5746,23 @@ move\\t%0,%z4\\n\\
+@@ -5250,17 +5746,23 @@
  {
    rtx scratch = gen_rtx_REG (DImode, REGNO (operands[2]));
  
@@ -3611,7 +3611,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
      {
        if (GET_CODE (operands[0]) == MEM)
  	{
-@@ -5282,9 +5784,15 @@ move\\t%0,%z4\\n\\
+@@ -5282,9 +5784,15 @@
  	      hi_word = offword;
  	      lo_word = memword;
  	    }
@@ -3627,7 +3627,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  	  emit_move_insn (lo_word, scratch);
  	  emit_insn (gen_rtx_UNSPEC (VOIDmode, gen_rtvec (1, operands[1]), 2));
  	}
-@@ -5294,10 +5802,16 @@ move\\t%0,%z4\\n\\
+@@ -5294,10 +5802,16 @@
  	     and hence we can not directly move from the HILO register
  	     into it.  */
  	  rtx scratch2 = gen_rtx_REG (DImode, REGNO (operands[2]) + 1);
@@ -3644,7 +3644,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  	  emit_insn (gen_ashldi3 (scratch2, scratch2, GEN_INT (32)));
  	  emit_insn (gen_iordi3 (scratch, scratch, scratch2));
  	  emit_insn (gen_movdi (operands[0], scratch));
-@@ -5305,10 +5819,16 @@ move\\t%0,%z4\\n\\
+@@ -5305,10 +5819,16 @@
  	}
        else
  	{
@@ -3661,7 +3661,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  	  emit_insn (gen_ashldi3 (operands[0], operands[0], GEN_INT (32)));
  	  emit_insn (gen_iordi3 (operands[0], operands[0], scratch));
  	  emit_insn (gen_rtx_UNSPEC (VOIDmode, gen_rtvec (1, operands[1]), 2));
-@@ -5468,8 +5988,8 @@ move\\t%0,%z4\\n\\
+@@ -5468,8 +5988,8 @@
  ;; in FP registers (off by default, use -mdebugh to enable).
  
  (define_insn "movsi_internal1"
@@ -3672,7 +3672,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "TARGET_DEBUG_H_MODE && !TARGET_MIPS16
     && (register_operand (operands[0], SImode)
         || register_operand (operands[1], SImode)
-@@ -5480,8 +6000,8 @@ move\\t%0,%z4\\n\\
+@@ -5480,8 +6000,8 @@
     (set_attr "length"	"4,8,4,8,4,8,4,8,4,4,4,4,8,4,8,4,4,4,4")])
  
  (define_insn "movsi_internal2"
@@ -3683,7 +3683,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "!TARGET_DEBUG_H_MODE && !TARGET_MIPS16
     && (register_operand (operands[0], SImode)
         || register_operand (operands[1], SImode)
-@@ -5764,7 +6284,7 @@ move\\t%0,%z4\\n\\
+@@ -5764,7 +6284,7 @@
  
  ;; This insn is for the unspec delay for HILO.
  
@@ -3692,7 +3692,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    [(unspec [(match_operand 0 "register_operand" "=b")] 2 )]
    ""
    ""
-@@ -5937,8 +6457,8 @@ move\\t%0,%z4\\n\\
+@@ -5937,8 +6457,8 @@
  ;; in FP registers (off by default, use -mdebugh to enable).
  
  (define_insn "movhi_internal1"
@@ -3703,7 +3703,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "TARGET_DEBUG_H_MODE && !TARGET_MIPS16
     && (register_operand (operands[0], HImode)
         || register_operand (operands[1], HImode)
-@@ -5949,8 +6469,8 @@ move\\t%0,%z4\\n\\
+@@ -5949,8 +6469,8 @@
     (set_attr "length"	"4,4,4,8,4,8,4,4,4,4,4")])
  
  (define_insn "movhi_internal2"
@@ -3714,7 +3714,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "!TARGET_DEBUG_H_MODE && !TARGET_MIPS16
     && (register_operand (operands[0], HImode)
         || register_operand (operands[1], HImode)
-@@ -5962,7 +6482,7 @@ move\\t%0,%z4\\n\\
+@@ -5962,7 +6482,7 @@
  
  (define_insn ""
    [(set (match_operand:HI 0 "nonimmediate_operand" "=d,y,d,d,d,d,d,R,m,*d")
@@ -3723,7 +3723,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "TARGET_MIPS16
     && (register_operand (operands[0], HImode)
         || register_operand (operands[1], HImode))"
-@@ -6059,8 +6579,8 @@ move\\t%0,%z4\\n\\
+@@ -6059,8 +6579,8 @@
  ;; in FP registers (off by default, use -mdebugh to enable).
  
  (define_insn "movqi_internal1"
@@ -3734,7 +3734,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "TARGET_DEBUG_H_MODE && !TARGET_MIPS16
     && (register_operand (operands[0], QImode)
         || register_operand (operands[1], QImode)
-@@ -6072,7 +6592,7 @@ move\\t%0,%z4\\n\\
+@@ -6072,7 +6592,7 @@
  
  (define_insn "movqi_internal2"
    [(set (match_operand:QI 0 "nonimmediate_operand" "=d,d,d,d,R,m,*d,*z,*x,*d")
@@ -3743,7 +3743,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "!TARGET_DEBUG_H_MODE && !TARGET_MIPS16
     && (register_operand (operands[0], QImode)
         || register_operand (operands[1], QImode)
-@@ -6289,12 +6809,13 @@ move\\t%0,%z4\\n\\
+@@ -6289,12 +6809,13 @@
  ;; This is volatile to make sure that the scheduler won't move any symbol_ref
  ;; uses in front of it.  All symbol_refs implicitly use the gp reg.
  
@@ -3758,7 +3758,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    "%[lui\\t$1,%%hi(%%neg(%%gp_rel(%a0)))\\n\\taddiu\\t$1,$1,%%lo(%%neg(%%gp_rel(%a0)))\\n\\tdaddu\\t$gp,$1,%1%]"
    [(set_attr "type"	"move")
     (set_attr "mode"	"DI")
-@@ -9568,7 +10089,7 @@ ld\\t%2,%1-%S1(%2)\;daddu\\t%2,%2,$31\\n
+@@ -9568,7 +10089,7 @@
  }")
  
  ;; Trivial return.  Make it look like a normal return insn as that
@@ -3767,7 +3767,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  (define_insn "return"
    [(return)]
    "mips_can_use_return_insn ()"
-@@ -9773,6 +10294,37 @@ ld\\t%2,%1-%S1(%2)\;daddu\\t%2,%2,$31\\n
+@@ -9773,6 +10294,37 @@
     (set_attr "mode"	"none")
     (set_attr "length"	"8")])
  
@@ -3805,7 +3805,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  (define_insn "call_internal1"
    [(call (mem (match_operand 0 "call_insn_operand" "ri"))
  	 (match_operand 1 "" "i"))
-@@ -9805,6 +10357,8 @@ ld\\t%2,%1-%S1(%2)\;daddu\\t%2,%2,$31\\n
+@@ -9805,6 +10357,8 @@
      return \"li\\t%^,%0\\n\\tjal\\t%2,%^\";
    else if (CONSTANT_ADDRESS_P (target))
      {
@@ -3814,7 +3814,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
        if (GET_MODE (target) == SImode)
  	return \"la\\t%^,%0\\n\\tjal\\t%2,%^\";
        else
-@@ -10013,6 +10567,8 @@ ld\\t%2,%1-%S1(%2)\;daddu\\t%2,%2,$31\\n
+@@ -10013,6 +10567,8 @@
      return \"li\\t%^,%1\\n\\tjal\\t%3,%^\";
    else if (CONSTANT_ADDRESS_P (target))
      {
@@ -3823,7 +3823,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
        if (GET_MODE (target) == SImode)
  	return \"la\\t%^,%1\\n\\tjal\\t%3,%^\";
        else
-@@ -10148,6 +10704,8 @@ ld\\t%2,%1-%S1(%2)\;daddu\\t%2,%2,$31\\n
+@@ -10148,6 +10704,8 @@
      return \"li\\t%^,%1\\n\\tjal\\t%4,%^\";
    else if (CONSTANT_ADDRESS_P (target))
      {
@@ -3832,7 +3832,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
        if (GET_MODE (target) == SImode)
  	return \"la\\t%^,%1\\n\\tjal\\t%4,%^\";
        else
-@@ -10205,6 +10763,15 @@ ld\\t%2,%1-%S1(%2)\;daddu\\t%2,%2,$31\\n
+@@ -10205,6 +10763,15 @@
    [(set_attr "type"	"nop")
     (set_attr "mode"	"none")])
  
@@ -3848,7 +3848,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
  ;; The MIPS chip does not seem to require stack probes.
  ;;
  ;; (define_expand "probe"
-@@ -10419,6 +10986,11 @@ ld\\t%2,%1-%S1(%2)\;daddu\\t%2,%2,$31\\n
+@@ -10419,6 +10986,11 @@
    "ISA_HAS_CONDMOVE || ISA_HAS_INT_CONDMOVE"
    "
  {
@@ -3860,7 +3860,7 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
    gen_conditional_move (operands);
    DONE;
  }")
-@@ -10720,3 +11292,175 @@ ld\\t%2,%1-%S1(%2)\;daddu\\t%2,%2,$31\\n
+@@ -10720,3 +11292,175 @@
    [(set_attr "type"	"arith")
     (set_attr "mode"	"DI")
     (set_attr "length"	"40")])
@@ -4036,10 +4036,10 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips.md gcc-3.2.3-new/gcc/config/mips/mips
 +  "psubuw\\t%0,%1,%2"
 +  [(set_attr "type" "mmi")])
 +
-diff -rupNb gcc-3.2.3/gcc/config/mips/mips-protos.h gcc-3.2.3-new/gcc/config/mips/mips-protos.h
---- gcc-3.2.3/gcc/config/mips/mips-protos.h	2003-02-12 23:25:45.000000000 +0800
-+++ gcc-3.2.3-new/gcc/config/mips/mips-protos.h	2016-07-02 09:25:57.521368595 +0800
-@@ -82,6 +82,7 @@ extern void		gen_conditional_move PARAMS
+diff -burN orig.gcc-3.2.3/gcc/config/mips/mips-protos.h gcc-3.2.3/gcc/config/mips/mips-protos.h
+--- orig.gcc-3.2.3/gcc/config/mips/mips-protos.h	2003-02-12 15:25:45.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/mips-protos.h	2019-03-29 00:44:40.678909650 +0000
+@@ -82,6 +82,7 @@
  extern void		mips_gen_conditional_trap PARAMS ((rtx *));
  extern void		mips_emit_fcc_reload PARAMS ((rtx, rtx, rtx));
  extern void		machine_dependent_reorg PARAMS ((rtx));
@@ -4047,9 +4047,9 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/mips-protos.h gcc-3.2.3-new/gcc/config/mip
  extern int		mips_address_cost PARAMS ((rtx));
  extern void		mips_count_memory_refs PARAMS ((rtx, int));
  extern HOST_WIDE_INT	mips_debugger_offset PARAMS ((rtx, HOST_WIDE_INT));
-diff -rupNb gcc-3.2.3/gcc/config/mips/r5900.h gcc-3.2.3-new/gcc/config/mips/r5900.h
---- gcc-3.2.3/gcc/config/mips/r5900.h	1970-01-01 07:30:00.000000000 +0730
-+++ gcc-3.2.3-new/gcc/config/mips/r5900.h	2016-07-02 09:25:57.521368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/config/mips/r5900.h gcc-3.2.3/gcc/config/mips/r5900.h
+--- orig.gcc-3.2.3/gcc/config/mips/r5900.h	1970-01-01 00:00:00.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/r5900.h	2019-03-29 00:44:40.678909650 +0000
 @@ -0,0 +1,287 @@
 +/*
 + * Target machine definitions for the Toshiba r5900.
@@ -4338,9 +4338,9 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/r5900.h gcc-3.2.3-new/gcc/config/mips/r590
 +    && (TREE_CODE (TYPE) == ARRAY_TYPE                                  \
 +        || TREE_CODE (TYPE) == UNION_TYPE                               \
 +        || TREE_CODE (TYPE) == RECORD_TYPE)) ? (mips_use_128 ? 128 : 64) : (ALIGN))
-diff -rupNb gcc-3.2.3/gcc/config/mips/t-irx gcc-3.2.3-new/gcc/config/mips/t-irx
---- gcc-3.2.3/gcc/config/mips/t-irx	1970-01-01 07:30:00.000000000 +0730
-+++ gcc-3.2.3-new/gcc/config/mips/t-irx	2016-07-02 09:25:57.521368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/config/mips/t-irx gcc-3.2.3/gcc/config/mips/t-irx
+--- orig.gcc-3.2.3/gcc/config/mips/t-irx	1970-01-01 00:00:00.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/t-irx	2019-03-29 00:44:40.678909650 +0000
 @@ -0,0 +1,77 @@
 +CONFIG2_H	= $(srcdir)/config/mips/ecoff.h
 +
@@ -4419,9 +4419,9 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/t-irx gcc-3.2.3-new/gcc/config/mips/t-irx
 +explow.o: $(CONFIG2_H)
 +recog.o: $(CONFIG2_H)
 +reload.o: $(CONFIG2_H)
-diff -rupNb gcc-3.2.3/gcc/config/mips/t-r5900 gcc-3.2.3-new/gcc/config/mips/t-r5900
---- gcc-3.2.3/gcc/config/mips/t-r5900	1970-01-01 07:30:00.000000000 +0730
-+++ gcc-3.2.3-new/gcc/config/mips/t-r5900	2016-07-02 09:25:57.521368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/config/mips/t-r5900 gcc-3.2.3/gcc/config/mips/t-r5900
+--- orig.gcc-3.2.3/gcc/config/mips/t-r5900	1970-01-01 00:00:00.000000000 +0000
++++ gcc-3.2.3/gcc/config/mips/t-r5900	2019-03-29 00:44:40.678909650 +0000
 @@ -0,0 +1,56 @@
 +# Suppress building libgcc1.a, since the MIPS compiler port is complete
 +# and does not need anything from libgcc1.a.
@@ -4479,10 +4479,10 @@ diff -rupNb gcc-3.2.3/gcc/config/mips/t-r5900 gcc-3.2.3-new/gcc/config/mips/t-r5
 +	_floattidf _floattisf _lshrti3 _modti3 _multi3 _negti2 _ucmpti2 _udivti3 _umodti3
 +
 +LIB2FUNCS_TI = $(TIMODE_FUNCS_LIST)
-diff -rupNb gcc-3.2.3/gcc/config.gcc gcc-3.2.3-new/gcc/config.gcc
---- gcc-3.2.3/gcc/config.gcc	2003-03-01 02:38:19.000000000 +0800
-+++ gcc-3.2.3-new/gcc/config.gcc	2016-07-02 09:25:57.521368595 +0800
-@@ -1553,6 +1553,10 @@ i[34567]86-*-mingw32*)
+diff -burN orig.gcc-3.2.3/gcc/config.gcc gcc-3.2.3/gcc/config.gcc
+--- orig.gcc-3.2.3/gcc/config.gcc	2003-02-28 18:38:19.000000000 +0000
++++ gcc-3.2.3/gcc/config.gcc	2019-03-29 00:44:40.678909650 +0000
+@@ -1553,6 +1553,10 @@
  		*minwg32msv* | *mingw32*)
  			;;
  	esac
@@ -4493,7 +4493,7 @@ diff -rupNb gcc-3.2.3/gcc/config.gcc gcc-3.2.3-new/gcc/config.gcc
  	;;
  i[34567]86-*-uwin*)
  	tm_file=i386/uwin.h
-@@ -2387,6 +2391,13 @@ mips*-*-linux*)				# Linux MIPS, either
+@@ -2387,6 +2391,13 @@
  	esac
  	tmake_file="t-slibgcc-elf-ver t-linux mips/t-linux"
  	extra_parts="crtbegin.o crtbeginS.o crtbeginT.o crtend.o crtendS.o"
@@ -4507,7 +4507,7 @@ diff -rupNb gcc-3.2.3/gcc/config.gcc gcc-3.2.3-new/gcc/config.gcc
  	gnu_ld=yes
  	gas=yes
  	;;
-@@ -2583,6 +2594,24 @@ mips-*-riscos[56789]*)		# Default MIPS R
+@@ -2583,6 +2594,24 @@
  		use_collect2=yes
  	fi
  	;;
@@ -4532,7 +4532,7 @@ diff -rupNb gcc-3.2.3/gcc/config.gcc gcc-3.2.3-new/gcc/config.gcc
  mipsel-*-ecoff*)
  	tm_file=mips/ecoffl.h
  	if test x$stabs = xyes; then
-@@ -3673,5 +3702,8 @@ else
+@@ -3673,5 +3702,8 @@
  		host_extra_objs=$extra_host_objs
  		host_exeext=$exeext
  		pass2done=yes
@@ -4541,10 +4541,10 @@ diff -rupNb gcc-3.2.3/gcc/config.gcc gcc-3.2.3-new/gcc/config.gcc
  	fi
  fi
 +
-diff -rupNb gcc-3.2.3/gcc/cp/cfns.h gcc-3.2.3-new/gcc/cp/cfns.h
---- gcc-3.2.3/gcc/cp/cfns.h 2000-04-04 13:46:23.000000000 -0700
-+++ gcc-3.2.3-new/gcc/cp/cfns.h 2018-08-02 17:24:35.000000000 -0700
-@@ -5,7 +5,7 @@ __inline
+diff -burN orig.gcc-3.2.3/gcc/cp/cfns.h gcc-3.2.3/gcc/cp/cfns.h
+--- orig.gcc-3.2.3/gcc/cp/cfns.h	2000-04-04 20:46:23.000000000 +0000
++++ gcc-3.2.3/gcc/cp/cfns.h	2019-03-29 00:44:40.682909662 +0000
+@@ -5,7 +5,7 @@
  #endif
  static unsigned int hash PARAMS ((const char *, unsigned int));
  #ifdef __GNUC__
@@ -4553,7 +4553,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/cfns.h gcc-3.2.3-new/gcc/cp/cfns.h
  #endif
  const char * libc_name_p PARAMS ((const char *, unsigned int));
  /* maximum key range = 1020, duplicates = 1 */
-@@ -70,7 +70,7 @@ hash (str, len)
+@@ -70,7 +70,7 @@
  }
  
  #ifdef __GNUC__
@@ -4562,10 +4562,10 @@ diff -rupNb gcc-3.2.3/gcc/cp/cfns.h gcc-3.2.3-new/gcc/cp/cfns.h
  #endif
  const char *
  libc_name_p (str, len)
-diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
---- gcc-3.2.3/gcc/cp/decl.c	2003-03-18 07:16:55.000000000 +0800
-+++ gcc-3.2.3-new/gcc/cp/decl.c	2016-07-02 09:25:57.525368595 +0800
-@@ -458,6 +458,10 @@ struct binding_level
+diff -burN orig.gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3/gcc/cp/decl.c
+--- orig.gcc-3.2.3/gcc/cp/decl.c	2003-03-17 23:16:55.000000000 +0000
++++ gcc-3.2.3/gcc/cp/decl.c	2019-03-29 00:44:40.682909662 +0000
+@@ -458,6 +458,10 @@
     ? cp_function_chain->bindings		\
     : scope_chain->bindings)
  
@@ -4576,7 +4576,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
  /* The binding level of the current class, if any.  */
  
  #define class_binding_level scope_chain->class_bindings
-@@ -507,7 +511,7 @@ push_binding_level (newlevel, tag_transp
+@@ -507,7 +511,7 @@
       are active.  */
    memset ((char*) newlevel, 0, sizeof (struct binding_level));
    newlevel->level_chain = current_binding_level;
@@ -4585,7 +4585,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
    newlevel->tag_transparent = tag_transparent;
    newlevel->more_cleanups_ok = 1;
  
-@@ -563,7 +567,7 @@ pop_binding_level ()
+@@ -563,7 +567,7 @@
  #endif /* defined(DEBUG_CP_BINDING_LEVELS) */
    {
      register struct binding_level *level = current_binding_level;
@@ -4594,7 +4594,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
      level->level_chain = free_binding_level;
  #if 0 /* defined(DEBUG_CP_BINDING_LEVELS) */
      if (level->binding_depth != binding_depth)
-@@ -578,7 +582,9 @@ static void
+@@ -578,7 +582,9 @@
  suspend_binding_level ()
  {
    if (class_binding_level)
@@ -4605,7 +4605,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
  
    if (global_binding_level)
      {
-@@ -600,7 +606,7 @@ suspend_binding_level ()
+@@ -600,7 +606,7 @@
      }
    is_class_level = 0;
  #endif /* defined(DEBUG_CP_BINDING_LEVELS) */
@@ -4614,7 +4614,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
    find_class_binding_level ();
  }
  
-@@ -613,7 +619,7 @@ resume_binding_level (b)
+@@ -613,7 +619,7 @@
    my_friendly_assert(!class_binding_level, 386);
    /* Also, resuming a non-directly nested namespace is a no-no.  */
    my_friendly_assert(b->level_chain == current_binding_level, 386);
@@ -4623,7 +4623,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
  #if defined(DEBUG_CP_BINDING_LEVELS)
    b->binding_depth = binding_depth;
    indent ();
-@@ -4291,9 +4297,9 @@ pushdecl_with_scope (x, level)
+@@ -4291,9 +4297,9 @@
    else
      {
        b = current_binding_level;
@@ -4635,7 +4635,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
      }
    current_function_decl = function_decl;
    return x;
-@@ -4540,14 +4546,14 @@ push_using_directive (used)
+@@ -4540,14 +4546,14 @@
      return NULL_TREE;
  
    ancestor = namespace_ancestor (current_decl_namespace (), used);
@@ -4653,7 +4653,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
    return ud;
  }
  
-@@ -6538,7 +6544,7 @@ cxx_init_decl_processing ()
+@@ -6538,7 +6544,7 @@
    current_lang_name = lang_name_c;
  
    current_function_decl = NULL_TREE;
@@ -4662,7 +4662,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
    free_binding_level = NULL_BINDING_LEVEL;
  
    build_common_tree_nodes (flag_signed_char);
-@@ -10124,10 +10130,10 @@ grokdeclarator (declarator, declspecs, d
+@@ -10124,10 +10130,10 @@
    if (decl_context == NORMAL && !toplevel_bindings_p ())
      {
        struct binding_level *b = current_binding_level;
@@ -4675,7 +4675,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
      }
  
    if (name == NULL)
-@@ -13757,7 +13763,7 @@ start_function (declspecs, declarator, a
+@@ -13757,7 +13763,7 @@
       FIXME factor out the non-RTL stuff.  */
    bl = current_binding_level;
    init_function_start (decl1, input_filename, lineno);
@@ -4684,7 +4684,7 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
  
    /* Even though we're inside a function body, we still don't want to
       call expand_expr to calculate the size of a variable-sized array.
-@@ -14309,20 +14315,11 @@ finish_function (flags)
+@@ -14309,20 +14315,11 @@
    if (current_function_return_value)
      {
        tree r = current_function_return_value;
@@ -4707,9 +4707,9 @@ diff -rupNb gcc-3.2.3/gcc/cp/decl.c gcc-3.2.3-new/gcc/cp/decl.c
  	  DECL_ALIGN (r) = DECL_ALIGN (DECL_RESULT (fndecl));
  	  walk_tree_without_duplicates (&DECL_SAVED_TREE (fndecl),
  					nullify_returns_r, r);
-diff -rupNb gcc-3.2.3/gcc/fixinc/gnu-regex.c gcc-3.2.3-new/gcc/fixinc/gnu-regex.c
---- gcc-3.2.3/gcc/fixinc/gnu-regex.c	2002-02-27 08:23:56.000000000 +0800
-+++ gcc-3.2.3-new/gcc/fixinc/gnu-regex.c	2016-07-02 09:25:57.525368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/fixinc/gnu-regex.c gcc-3.2.3/gcc/fixinc/gnu-regex.c
+--- orig.gcc-3.2.3/gcc/fixinc/gnu-regex.c	2002-02-27 00:23:56.000000000 +0000
++++ gcc-3.2.3/gcc/fixinc/gnu-regex.c	2019-03-29 00:44:40.682909662 +0000
 @@ -26,6 +26,9 @@
  # include <config.h>
  #endif
@@ -4720,10 +4720,10 @@ diff -rupNb gcc-3.2.3/gcc/fixinc/gnu-regex.c gcc-3.2.3-new/gcc/fixinc/gnu-regex.
  /* GCC LOCAL: we don't need NLS here.  */
  #undef ENABLE_NLS
  /* GCC LOCAL: to handle defining alloca.  */
-diff -rupNb gcc-3.2.3/gcc/fixinc/mkfixinc.sh gcc-3.2.3-new/gcc/fixinc/mkfixinc.sh
---- gcc-3.2.3/gcc/fixinc/mkfixinc.sh	2002-01-05 12:06:51.000000000 +0800
-+++ gcc-3.2.3-new/gcc/fixinc/mkfixinc.sh	2016-07-02 09:25:57.525368595 +0800
-@@ -80,6 +80,8 @@ case $machine in
+diff -burN orig.gcc-3.2.3/gcc/fixinc/mkfixinc.sh gcc-3.2.3/gcc/fixinc/mkfixinc.sh
+--- orig.gcc-3.2.3/gcc/fixinc/mkfixinc.sh	2002-01-05 04:06:51.000000000 +0000
++++ gcc-3.2.3/gcc/fixinc/mkfixinc.sh	2019-03-29 00:44:40.682909662 +0000
+@@ -80,6 +80,8 @@
      i?86-*-mingw32* | \
      i?86-*-uwin* | \
      mips-sgi-irix5cross64 | \
@@ -4732,9 +4732,9 @@ diff -rupNb gcc-3.2.3/gcc/fixinc/mkfixinc.sh gcc-3.2.3-new/gcc/fixinc/mkfixinc.s
      powerpc-*-eabiaix* | \
      powerpc-*-eabisim* | \
      powerpc-*-eabi*    | \
-diff -rupNb gcc-3.2.3/gcc/glimits.h gcc-3.2.3-new/gcc/glimits.h
---- gcc-3.2.3/gcc/glimits.h	2001-08-14 08:53:23.000000000 +0800
-+++ gcc-3.2.3-new/gcc/glimits.h	2016-07-02 09:25:57.525368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/glimits.h gcc-3.2.3/gcc/glimits.h
+--- orig.gcc-3.2.3/gcc/glimits.h	2001-08-14 00:53:23.000000000 +0000
++++ gcc-3.2.3/gcc/glimits.h	2019-03-29 00:44:40.682909662 +0000
 @@ -67,11 +67,11 @@
  /* Minimum and maximum values a `signed long int' can hold.
     (Same as `int').  */
@@ -4749,10 +4749,10 @@ diff -rupNb gcc-3.2.3/gcc/glimits.h gcc-3.2.3-new/gcc/glimits.h
  #endif
  #undef LONG_MIN
  #define LONG_MIN (-LONG_MAX-1)
-diff -rupNb gcc-3.2.3/gcc/integrate.c gcc-3.2.3-new/gcc/integrate.c
---- gcc-3.2.3/gcc/integrate.c	2003-02-04 04:56:29.000000000 +0800
-+++ gcc-3.2.3-new/gcc/integrate.c	2016-07-02 09:25:57.525368595 +0800
-@@ -358,12 +358,18 @@ copy_decl_for_inlining (decl, from_fn, t
+diff -burN orig.gcc-3.2.3/gcc/integrate.c gcc-3.2.3/gcc/integrate.c
+--- orig.gcc-3.2.3/gcc/integrate.c	2003-02-03 20:56:29.000000000 +0000
++++ gcc-3.2.3/gcc/integrate.c	2019-03-29 00:44:40.682909662 +0000
+@@ -358,12 +358,18 @@
    /* Copy the declaration.  */
    if (TREE_CODE (decl) == PARM_DECL || TREE_CODE (decl) == RESULT_DECL)
      {
@@ -4771,9 +4771,9 @@ diff -rupNb gcc-3.2.3/gcc/integrate.c gcc-3.2.3-new/gcc/integrate.c
      }
    else
      {
-diff -rupNb gcc-3.2.3/gcc/libgcc2-timode.c gcc-3.2.3-new/gcc/libgcc2-timode.c
---- gcc-3.2.3/gcc/libgcc2-timode.c	1970-01-01 07:30:00.000000000 +0730
-+++ gcc-3.2.3-new/gcc/libgcc2-timode.c	2016-07-02 09:25:57.525368595 +0800
+diff -burN orig.gcc-3.2.3/gcc/libgcc2-timode.c gcc-3.2.3/gcc/libgcc2-timode.c
+--- orig.gcc-3.2.3/gcc/libgcc2-timode.c	1970-01-01 00:00:00.000000000 +0000
++++ gcc-3.2.3/gcc/libgcc2-timode.c	2019-03-29 00:44:40.682909662 +0000
 @@ -0,0 +1,792 @@
 +/* GCC rutime support routines for TI mode */
 +
@@ -5567,10 +5567,23 @@ diff -rupNb gcc-3.2.3/gcc/libgcc2-timode.c gcc-3.2.3-new/gcc/libgcc2-timode.c
 +  return (SFtype) df;
 +}
 +#endif
-diff -rupNb gcc-3.2.3/gcc/Makefile.in gcc-3.2.3-new/gcc/Makefile.in
---- gcc-3.2.3/gcc/Makefile.in	2003-01-29 05:54:07.000000000 +0800
-+++ gcc-3.2.3-new/gcc/Makefile.in	2016-07-02 09:25:57.525368595 +0800
-@@ -987,6 +987,7 @@ libgcc.mk: config.status Makefile mklibg
+diff -burN orig.gcc-3.2.3/gcc/Makefile.in gcc-3.2.3/gcc/Makefile.in
+--- orig.gcc-3.2.3/gcc/Makefile.in	2003-01-28 21:54:07.000000000 +0000
++++ gcc-3.2.3/gcc/Makefile.in	2019-03-29 00:44:49.250935197 +0000
+@@ -81,9 +81,9 @@
+ # apply to the back end and the C front end, which may be compiled
+ # with other compilers.  This is partially controlled by configure in
+ # stage1, as not all versions of gcc understand -Wno-long-long.
+-LOOSE_WARN = -W -Wall -Wwrite-strings -Wstrict-prototypes -Wmissing-prototypes
+-STRICT_WARN = -Wtraditional @strict1_warn@
+-STRICT2_WARN = -Wtraditional -pedantic -Wno-long-long
++LOOSE_WARN = -w
++STRICT_WARN = -w
++STRICT2_WARN = -w
+ 
+ # This is how we control whether or not the additional warnings are applied.
+ .-warn = $(STRICT_WARN)
+@@ -987,6 +987,7 @@
  	LIB2FUNCS_ST='$(LIB2FUNCS_ST)' \
  	LIB2ADD='$(LIB2ADD)' \
  	LIB2ADD_ST='$(LIB2ADD_ST)' \
@@ -5578,10 +5591,10 @@ diff -rupNb gcc-3.2.3/gcc/Makefile.in gcc-3.2.3-new/gcc/Makefile.in
  	LIB2ADDEH='$(LIB2ADDEH)' \
  	LIB2ADDEHDEP='$(LIB2ADDEHDEP)' \
  	FPBIT='$(FPBIT)' \
-diff -rupNb gcc-3.2.3/gcc/mklibgcc.in gcc-3.2.3-new/gcc/mklibgcc.in
---- gcc-3.2.3/gcc/mklibgcc.in	2003-01-29 05:57:40.000000000 +0800
-+++ gcc-3.2.3-new/gcc/mklibgcc.in	2016-07-02 09:25:57.529368595 +0800
-@@ -232,6 +232,21 @@ for file in $LIB2ADD_ST; do
+diff -burN orig.gcc-3.2.3/gcc/mklibgcc.in gcc-3.2.3/gcc/mklibgcc.in
+--- orig.gcc-3.2.3/gcc/mklibgcc.in	2003-01-28 21:57:40.000000000 +0000
++++ gcc-3.2.3/gcc/mklibgcc.in	2019-03-29 00:44:40.682909662 +0000
+@@ -232,6 +232,21 @@
    libgcc2_st_objs="$libgcc2_st_objs ${oname}${objext}"
  done
  
@@ -5603,10 +5616,10 @@ diff -rupNb gcc-3.2.3/gcc/mklibgcc.in gcc-3.2.3-new/gcc/mklibgcc.in
  # SHLIB_MKMAP
  # SHLIB_MKMAP_OPTS
  # SHLIB_MAPFILES
-diff -rupNb gcc-3.2.3/gcc/toplev.c gcc-3.2.3-new/gcc/toplev.c
---- gcc-3.2.3/gcc/toplev.c	2003-02-22 13:37:46.000000000 +0800
-+++ gcc-3.2.3-new/gcc/toplev.c	2016-07-02 09:25:57.529368595 +0800
-@@ -3469,6 +3469,18 @@ rest_of_compilation (decl)
+diff -burN orig.gcc-3.2.3/gcc/toplev.c gcc-3.2.3/gcc/toplev.c
+--- orig.gcc-3.2.3/gcc/toplev.c	2003-02-22 05:37:46.000000000 +0000
++++ gcc-3.2.3/gcc/toplev.c	2019-03-29 00:44:40.682909662 +0000
+@@ -3469,6 +3469,18 @@
  
    convert_to_eh_region_ranges ();
  
@@ -5625,10 +5638,10 @@ diff -rupNb gcc-3.2.3/gcc/toplev.c gcc-3.2.3-new/gcc/toplev.c
    /* Shorten branches.  */
    timevar_push (TV_SHORTEN_BRANCH);
    shorten_branches (get_insns ());
-diff -rupNb gcc-3.2.3/include/obstack.h gcc-3.2.3-new/include/obstack.h
---- gcc-3.2.3/include/obstack.h	2001-03-15 03:44:38.000000000 +0800
-+++ gcc-3.2.3-new/include/obstack.h	2016-07-02 09:25:57.529368595 +0800
-@@ -423,7 +423,8 @@ __extension__								\
+diff -burN orig.gcc-3.2.3/include/obstack.h gcc-3.2.3/include/obstack.h
+--- orig.gcc-3.2.3/include/obstack.h	2001-03-14 19:44:38.000000000 +0000
++++ gcc-3.2.3/include/obstack.h	2019-03-29 00:44:40.682909662 +0000
+@@ -423,7 +423,8 @@
  ({ struct obstack *__o = (OBSTACK);					\
     if (__o->next_free + sizeof (void *) > __o->chunk_limit)		\
       _obstack_newchunk (__o, sizeof (void *));				\
@@ -5638,10 +5651,10 @@ diff -rupNb gcc-3.2.3/include/obstack.h gcc-3.2.3-new/include/obstack.h
     (void) 0; })
  
  # define obstack_int_grow(OBSTACK,datum)				\
-diff -rupNb gcc-3.2.3/libstdc++-v3/configure.target gcc-3.2.3-new/libstdc++-v3/configure.target
---- gcc-3.2.3/libstdc++-v3/configure.target	2002-09-07 02:32:08.000000000 +0800
-+++ gcc-3.2.3-new/libstdc++-v3/configure.target	2016-07-02 09:25:57.529368595 +0800
-@@ -55,6 +55,9 @@ case "${target_cpu}" in
+diff -burN orig.gcc-3.2.3/libstdc++-v3/configure.target gcc-3.2.3/libstdc++-v3/configure.target
+--- orig.gcc-3.2.3/libstdc++-v3/configure.target	2002-09-06 18:32:08.000000000 +0000
++++ gcc-3.2.3/libstdc++-v3/configure.target	2019-03-29 00:44:40.682909662 +0000
+@@ -55,6 +55,9 @@
    m68k | m680[246]0)
      cpu_include_dir="config/cpu/m68k"
      ;;
@@ -5651,9 +5664,9 @@ diff -rupNb gcc-3.2.3/libstdc++-v3/configure.target gcc-3.2.3-new/libstdc++-v3/c
    powerpc | rs6000)
      cpu_include_dir="config/cpu/powerpc"
      ;;
-diff -rupNb gcc-3.2.3/libstdc++-v3/libsupc++/pure.cc gcc-3.2.3-new/libstdc++-v3/libsupc++/pure.cc
---- gcc-3.2.3/libstdc++-v3/libsupc++/pure.cc	2002-06-28 16:22:38.000000000 +0800
-+++ gcc-3.2.3-new/libstdc++-v3/libsupc++/pure.cc	2016-07-02 09:25:57.529368595 +0800
+diff -burN orig.gcc-3.2.3/libstdc++-v3/libsupc++/pure.cc gcc-3.2.3/libstdc++-v3/libsupc++/pure.cc
+--- orig.gcc-3.2.3/libstdc++-v3/libsupc++/pure.cc	2002-06-28 08:22:38.000000000 +0000
++++ gcc-3.2.3/libstdc++-v3/libsupc++/pure.cc	2019-03-29 00:44:40.686909675 +0000
 @@ -46,6 +46,6 @@
  extern "C" void
  __cxa_pure_virtual (void)
@@ -5662,9 +5675,9 @@ diff -rupNb gcc-3.2.3/libstdc++-v3/libsupc++/pure.cc gcc-3.2.3-new/libstdc++-v3/
 +//  writestr ("pure virtual method called\n");
    std::terminate ();
  }
-diff -rupNb gcc-3.2.3/README.PS2 gcc-3.2.3-new/README.PS2
---- gcc-3.2.3/README.PS2	1970-01-01 07:30:00.000000000 +0730
-+++ gcc-3.2.3-new/README.PS2	2016-07-02 09:25:57.529368595 +0800
+diff -burN orig.gcc-3.2.3/README.PS2 gcc-3.2.3/README.PS2
+--- orig.gcc-3.2.3/README.PS2	1970-01-01 00:00:00.000000000 +0000
++++ gcc-3.2.3/README.PS2	2019-03-29 00:44:40.686909675 +0000
 @@ -0,0 +1,80 @@
 +Apologies to mrbrown, who's README.PS2 this was based on.
 +GCC for Sony Playstation 2

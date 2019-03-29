@@ -15,8 +15,6 @@ cd binutils-$BINUTILS_VERSION || { exit 1; }
 if [ -e ../../patches/binutils-$BINUTILS_VERSION-PS2.patch ]; then
 	cat ../../patches/binutils-$BINUTILS_VERSION-PS2.patch | patch -p1 || { exit 1; }
 fi
-cat ../../patches/binutils-$BINUTILS_VERSION-disable-makeinfo-when-texinfo-is-too-new.patch | patch -p0 || { exit 1; }
-cat ../../patches/binutils-gas.patch | patch -p0 || { exit 1; }
 
 ## Determine the maximum number of processes that Make can work with.
 OSVER=$(uname)
