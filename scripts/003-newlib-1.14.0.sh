@@ -1,7 +1,7 @@
 #!/bin/bash
-# newlib-1.10.0.sh by Naomi Peori (naomi@peori.ca)
+# newlib-1.14.0.sh by Naomi Peori (naomi@peori.ca)
 
-NEWLIB_VERSION=1.10.0
+NEWLIB_VERSION=1.14.0
 ## Download the source code.
 SOURCE=http://mirrors.kernel.org/sourceware/newlib/newlib-$NEWLIB_VERSION.tar.gz
 wget --continue $SOURCE || { exit 1; }
