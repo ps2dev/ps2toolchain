@@ -6429,41 +6429,14 @@ index 1e45cfcda5..15a97d1b79 100644
  mips*el-*-vxworks*)	targ_emul=elf32elmip ;;
 diff --git a/ld/emulparams/elf32l5900.sh b/ld/emulparams/elf32l5900.sh
 new file mode 100644
-index 0000000000..cdab72fff8
+index 0000000000..6282c1b227
 --- /dev/null
 +++ b/ld/emulparams/elf32l5900.sh
-@@ -0,0 +1,31 @@
-+SCRIPT_NAME=elf
-+OUTPUT_FORMAT="elf32-littlemips"
-+BIG_OUTPUT_FORMAT="elf32-bigmips"
-+LITTLE_OUTPUT_FORMAT="elf32-littlemips"
-+TEXT_START_ADDR=0x100000
-+MAXPAGESIZE=128
-+OTHER_TEXT_SECTIONS='*(.mips16.fn.*) *(.mips16.call.*)'
-+OTHER_GOT_SYMBOLS='
-+  _gp = ALIGN(16) + 0x7ff0;
-+'
-+OTHER_GOT_SECTIONS='
-+  .lit8 : { *(.lit8) }
-+  .lit4 : { *(.lit4) }
-+'
-+TEXT_START_SYMBOLS='_ftext = . ;'
-+DATA_START_SYMBOLS='_fdata = . ;'
-+OTHER_BSS_SYMBOLS='_fbss = .;'
-+EXECUTABLE_SYMBOLS='_DYNAMIC_LINK = 0;'
-+OTHER_SECTIONS='
-+  .gptab.sdata : { *(.gptab.data) *(.gptab.sdata) }
-+  .gptab.sbss : { *(.gptab.bss) *(.gptab.sbss) }
-+  PROVIDE(_heap_size = -1);
-+  PROVIDE(_stack = -1);
-+  PROVIDE(_stack_size = 128 * 1024);
-+'
+@@ -0,0 +1,4 @@
 +ARCH="mips:5900"
-+MACHINE=
-+TEMPLATE_NAME=elf32
-+GENERATE_SHLIB_SCRIPT=yes
-+DYNAMIC_LINK=FALSE
-+EMBEDDED=yes
++OUTPUT_FORMAT="elf32-littlemips"
++SCRIPT_NAME=ps2dev
++TEMPLATE_NAME=generic
 diff --git a/ld/emulparams/mipsirx.sh b/ld/emulparams/mipsirx.sh
 new file mode 100644
 index 0000000000..cfa08c5456
@@ -7171,6 +7144,104 @@ index 0000000000..8b7b721407
 +}
 +
 +EOF
+diff --git a/ld/scripttempl/ps2dev.sc b/ld/scripttempl/ps2dev.sc
+new file mode 100644
+index 0000000000..e776cf7cef
+--- /dev/null
++++ b/ld/scripttempl/ps2dev.sc
+@@ -0,0 +1,92 @@
++cat <<EOF
++OUTPUT_FORMAT("${OUTPUT_FORMAT}","${OUTPUT_FORMAT}","${OUTPUT_FORMAT}")
++OUTPUT_ARCH(${ARCH})
++
++ENTRY(_start);
++
++SECTIONS {
++	.text 0x00100000: {
++		_ftext = . ;
++		*(.text)
++		*(.text.*)
++		*(.gnu.linkonce.t*)
++		KEEP(*(.init))
++		KEEP(*(.fini))
++		QUAD(0)
++	}
++
++	PROVIDE(_etext = .);
++	PROVIDE(etext = .);
++
++	.reginfo : { *(.reginfo) }
++
++	/* Global/static constructors and deconstructors. */
++	.ctors ALIGN(16): {
++		KEEP(*crtbegin*.o(.ctors))
++		KEEP(*(EXCLUDE_FILE(*crtend*.o) .ctors))
++		KEEP(*(SORT(.ctors.*)))
++		KEEP(*(.ctors))
++	}
++	.dtors ALIGN(16): {
++		KEEP(*crtbegin*.o(.dtors))
++		KEEP(*(EXCLUDE_FILE(*crtend*.o) .dtors))
++		KEEP(*(SORT(.dtors.*)))
++		KEEP(*(.dtors))
++	}
++
++	/* Static data.  */
++	.rodata ALIGN(128): {
++		*(.rodata)
++		*(.rodata.*)
++		*(.gnu.linkonce.r*)
++	}
++
++	.data ALIGN(128): {
++		_fdata = . ;
++		*(.data)
++		*(.data.*)
++		*(.gnu.linkonce.d*)
++		SORT(CONSTRUCTORS)
++	}
++
++	.rdata ALIGN(128): { *(.rdata) }
++	.gcc_except_table ALIGN(128): { *(.gcc_except_table) }
++
++	_gp = ALIGN(128) + 0x7ff0;
++	.lit4 ALIGN(128): { *(.lit4) }
++	.lit8 ALIGN(128): { *(.lit8) }
++
++	.sdata ALIGN(128): {
++		*(.sdata)
++		*(.sdata.*)
++		*(.gnu.linkonce.s*)
++	}
++
++	_edata = .;
++	PROVIDE(edata = .);
++
++	/* Uninitialized data.  */
++	.sbss ALIGN(128) : {
++		_fbss = . ;
++		*(.sbss)
++		*(.sbss.*)
++		*(.gnu.linkonce.sb*)
++		*(.scommon)
++	}
++
++	.bss ALIGN(128) : {
++		*(.bss)
++		*(.bss.*)
++		*(.gnu.linkonce.b*)
++		*(COMMON)
++	}
++	_end_bss = .;
++
++	_end = . ;
++	PROVIDE(end = .);
++
++	/* Symbols needed by crt0.s.  */
++	PROVIDE(_heap_size = -1);
++	PROVIDE(_stack = -1);
++	PROVIDE(_stack_size = 128 * 1024);
++}
 diff --git a/opcodes/configure b/opcodes/configure
 index bb079388ae..99691060b6 100755
 --- a/opcodes/configure
