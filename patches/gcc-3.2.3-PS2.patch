@@ -327,9 +327,18 @@ index 6501a2fc422..f4452a806f2 100644
        /* Duplicate the stdout and stderr file handles
  	 so they can be restored later.  */
 diff --git a/gcc/config.gcc b/gcc/config.gcc
-index cd42ff30112..9cb1c9f2880 100644
+index cd42ff30112..0f6881d6713 100644
 --- a/gcc/config.gcc
 +++ b/gcc/config.gcc
+@@ -1535,7 +1535,7 @@ i[34567]86-*-pe | i[34567]86-*-cygwin*)
+ 	fi
+ 	exeext=.exe
+ 	;;
+-i[34567]86-*-mingw32*)
++i[34567]86-*-mingw32* | x86_64-*-mingw32*)
+ 	tm_file=i386/mingw32.h
+ 	float_format=i386
+ 	xm_defines=POSIX
 @@ -1553,6 +1553,10 @@ i[34567]86-*-mingw32*)
  		*minwg32msv* | *mingw32*)
  			;;
@@ -390,13 +399,17 @@ index cd42ff30112..9cb1c9f2880 100644
  fi
 +
 diff --git a/gcc/config/i386/xm-mingw32.h b/gcc/config/i386/xm-mingw32.h
-index 19b102dda00..b566fd929d6 100644
+index 19b102dda00..a8ff73e59ad 100644
 --- a/gcc/config/i386/xm-mingw32.h
 +++ b/gcc/config/i386/xm-mingw32.h
-@@ -31,3 +31,143 @@ Boston, MA 02111-1307, USA.  */
+@@ -31,3 +31,156 @@ Boston, MA 02111-1307, USA.  */
  
  #undef PATH_SEPARATOR
  #define PATH_SEPARATOR ';'
++
++#if !defined CHAR_BIT && defined HAVE_LIMITS_H
++# include <limits.h>
++#endif
 +
 +/* This describes the machine the compiler is hosted on.  */
 +#define HOST_BITS_PER_CHAR  CHAR_BIT
@@ -417,6 +430,10 @@ index 19b102dda00..b566fd929d6 100644
 +# endif /* gcc */
 +#endif
 +#endif /* no long long */
++
++#ifdef __MINGW64__
++# define HOST_BITS_PER_PTR  HOST_BITS_PER_LONGLONG
++#endif
 +
 +/* Find the largest host integer type and set its size and type.  */
 +
@@ -445,6 +462,10 @@ index 19b102dda00..b566fd929d6 100644
 +
 +#ifndef HOST_BITS_PER_WIDE_INT
 +
++#if defined __MINGW64__ && defined HOST_BITS_PER_LONGLONG && HOST_BITS_PER_LONGLONG > HOST_BITS_PER_LONG
++# define HOST_BITS_PER_WIDE_INT HOST_BITS_PER_LONGLONG
++# define HOST_WIDE_INT __int64
++#else
 +# if HOST_BITS_PER_LONG > HOST_BITS_PER_INT
 +#  define HOST_BITS_PER_WIDE_INT HOST_BITS_PER_LONG
 +#  define HOST_WIDE_INT long
@@ -452,6 +473,7 @@ index 19b102dda00..b566fd929d6 100644
 +#  define HOST_BITS_PER_WIDE_INT HOST_BITS_PER_INT
 +#  define HOST_WIDE_INT int
 +# endif
++#endif
 +
 +#endif /* ! HOST_BITS_PER_WIDE_INT */
 +
@@ -4891,6 +4913,51 @@ index c3b83da15f9..e9f034a243e 100644
  #endif
  #undef LONG_MIN
  #define LONG_MIN (-LONG_MAX-1)
+diff --git a/gcc/hwint.h b/gcc/hwint.h
+index 57d7edfadf5..b42df013535 100644
+--- a/gcc/hwint.h
++++ b/gcc/hwint.h
+@@ -9,6 +9,10 @@
+ #ifndef GCC_HWINT_H
+ #define GCC_HWINT_H
+ 
++#if !defined CHAR_BIT && defined HAVE_LIMITS_H
++# include <limits.h>
++#endif
++
+ /* This describes the machine the compiler is hosted on.  */
+ #define HOST_BITS_PER_CHAR  CHAR_BIT
+ #define HOST_BITS_PER_SHORT (CHAR_BIT * SIZEOF_SHORT)
+@@ -29,6 +33,10 @@
+ #endif
+ #endif /* no long long */
+ 
++#ifdef __MINGW64__
++# define HOST_BITS_PER_PTR  HOST_BITS_PER_LONGLONG
++#endif
++
+ /* Find the largest host integer type and set its size and type.  */
+ 
+ /* Use long long on the host if the target has a wider long type than
+@@ -56,6 +64,10 @@
+ 
+ #ifndef HOST_BITS_PER_WIDE_INT
+ 
++#if defined __MINGW64__ && defined HOST_BITS_PER_LONGLONG && HOST_BITS_PER_LONGLONG > HOST_BITS_PER_LONG
++# define HOST_BITS_PER_WIDE_INT HOST_BITS_PER_LONGLONG
++# define HOST_WIDE_INT long long
++#else
+ # if HOST_BITS_PER_LONG > HOST_BITS_PER_INT
+ #  define HOST_BITS_PER_WIDE_INT HOST_BITS_PER_LONG
+ #  define HOST_WIDE_INT long
+@@ -63,6 +75,7 @@
+ #  define HOST_BITS_PER_WIDE_INT HOST_BITS_PER_INT
+ #  define HOST_WIDE_INT int
+ # endif
++#endif
+ 
+ #endif /* ! HOST_BITS_PER_WIDE_INT */
+ 
 diff --git a/gcc/integrate.c b/gcc/integrate.c
 index ce2962d2cce..536d1ba072e 100644
 --- a/gcc/integrate.c
@@ -5775,6 +5842,24 @@ index d86d9f2c426..b09448016b6 100644
     (void) 0; })
  
  # define obstack_int_grow(OBSTACK,datum)				\
+diff --git a/include/splay-tree.h b/include/splay-tree.h
+index 4b7a7bf8c2c..c9212194c65 100644
+--- a/include/splay-tree.h
++++ b/include/splay-tree.h
+@@ -40,8 +40,13 @@ extern "C" {
+    these types, if necessary.  These types should be sufficiently wide
+    that any pointer or scalar can be cast to these types, and then
+    cast back, without loss of precision.  */
++#ifdef __MINGW64__
++typedef unsigned long long int splay_tree_key;
++typedef unsigned long long int splay_tree_value;
++#else
+ typedef unsigned long int splay_tree_key;
+ typedef unsigned long int splay_tree_value;
++#endif
+ 
+ /* Forward declaration for a node in the tree.  */
+ typedef struct splay_tree_node_s *splay_tree_node;
 diff --git a/libstdc++-v3/configure.target b/libstdc++-v3/configure.target
 index 86f6d891caf..0fc4be60bd0 100644
 --- a/libstdc++-v3/configure.target

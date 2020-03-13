@@ -6309,6 +6309,24 @@ index 476c8e3112..2044b9ae5e 100644
       || 0)	/* Please keep this term for easier source merging.  */
  
  /* This is a list of macro expanded instructions.
+diff --git a/include/splay-tree.h b/include/splay-tree.h
+index 86707fc1d2..e77066a3fd 100644
+--- a/include/splay-tree.h
++++ b/include/splay-tree.h
+@@ -44,8 +44,13 @@ extern "C" {
+    these types, if necessary.  These types should be sufficiently wide
+    that any pointer or scalar can be cast to these types, and then
+    cast back, without loss of precision.  */
++#ifdef __MINGW64__
++typedef unsigned long long int splay_tree_key;
++typedef unsigned long long int splay_tree_value;
++#else
+ typedef unsigned long int splay_tree_key;
+ typedef unsigned long int splay_tree_value;
++#endif
+ 
+ /* Forward declaration for a node in the tree.  */
+ typedef struct splay_tree_node_s *splay_tree_node;
 diff --git a/ld/Makefile.am b/ld/Makefile.am
 index 1cee856f48..5fca4294e7 100644
 --- a/ld/Makefile.am

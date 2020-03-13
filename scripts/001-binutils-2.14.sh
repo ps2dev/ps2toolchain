@@ -15,7 +15,6 @@ cd binutils-$BINUTILS_VERSION || { exit 1; }
 if [ -e ../../patches/binutils-$BINUTILS_VERSION-PS2.patch ]; then
 	cat ../../patches/binutils-$BINUTILS_VERSION-PS2.patch | patch -p1 || { exit 1; }
 fi
-cat ../../patches/binutils-$BINUTILS_VERSION-add-64bit-mingw-w64-toolchain-support.patch | patch -p1 || { exit 1; }
 
 OSVER=$(uname)
 if [ ${OSVER:0:10} == MINGW64_NT ]; then
