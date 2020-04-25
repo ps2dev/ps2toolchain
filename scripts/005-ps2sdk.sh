@@ -7,12 +7,13 @@ unset PS2SDKSRC
 
 ## Download the source code.
 if test ! -d "ps2sdk/.git"; then
-	git clone https://github.com/ps2dev/ps2sdk && cd ps2sdk || exit 1
+	git clone https://github.com/ps2dev/ps2sdk && cd ps2sdk || { exit 1; }
 else
-	cd ps2sdk &&
-		git pull && git fetch origin &&
-		git reset --hard origin/master || exit 1
+	cd ps2sdk && git pull && git fetch origin || { exit 1; }
 fi
+
+# We reset to the concrete tag
+git reset --hard v1.0 || { exit 1; }
 
 ## Determine the maximum number of processes that Make can work with.
 #OSVER=$(uname)
