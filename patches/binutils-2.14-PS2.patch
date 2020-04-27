@@ -1,7 +1,29 @@
-diff -burN orig.binutils-2.14/bfd/archures.c binutils-2.14/bfd/archures.c
---- orig.binutils-2.14/bfd/archures.c	2003-04-24 14:36:06.000000000 +0200
-+++ binutils-2.14/bfd/archures.c	2017-03-08 00:37:47.488128372 +0100
-@@ -137,6 +137,7 @@
+diff --git a/Makefile.in b/Makefile.in
+index 561dc7612f..0ec7e3c5bf 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -191,13 +191,13 @@ M4 = `if [ -f $$r/m4/m4 ] ; \
+ 	then echo $$r/m4/m4 ; \
+ 	else echo ${DEFAULT_M4} ; fi`
+ 
+-# For an installed makeinfo, we require it to be from texinfo 4 or
+-# higher, else we use the "missing" dummy.
++# For an installed makeinfo, we require it to be texinfo 4. texinfo >= 5 is more strict
++# and breaks the compilation. Disable makeinfo in that case by using the "missing" dummy.
+ MAKEINFO=@MAKEINFO@
+ USUAL_MAKEINFO = `if [ -f $$r/texinfo/makeinfo/makeinfo ] ; \
+ 	then echo $$r/texinfo/makeinfo/makeinfo ; \
+ 	else if (makeinfo --version \
+-	  | egrep 'texinfo[^0-9]*([1-3][0-9]|[4-9])') >/dev/null 2>&1; \
++	  | egrep 'texinfo[^0-9]*([1-3][0-9]|[4])') >/dev/null 2>&1; \
+         then echo makeinfo; else echo $$s/missing makeinfo; fi; fi`
+ 
+ # This just becomes part of the MAKEINFO definition passed down to
+diff --git a/bfd/archures.c b/bfd/archures.c
+index 3d473c3b8a..2c6cbfca9a 100644
+--- a/bfd/archures.c
++++ b/bfd/archures.c
+@@ -137,6 +137,7 @@ DESCRIPTION
  .#define bfd_mach_mips5000		5000
  .#define bfd_mach_mips5400		5400
  .#define bfd_mach_mips5500		5500
@@ -9,7 +31,7 @@ diff -burN orig.binutils-2.14/bfd/archures.c binutils-2.14/bfd/archures.c
  .#define bfd_mach_mips6000		6000
  .#define bfd_mach_mips8000		8000
  .#define bfd_mach_mips10000		10000
-@@ -147,6 +148,11 @@
+@@ -147,6 +148,11 @@ DESCRIPTION
  .#define bfd_mach_mipsisa32             32
  .#define bfd_mach_mipsisa32r2           33
  .#define bfd_mach_mipsisa64             64
@@ -21,10 +43,11 @@ diff -burN orig.binutils-2.14/bfd/archures.c binutils-2.14/bfd/archures.c
  .  bfd_arch_i386,      {* Intel 386 *}
  .#define bfd_mach_i386_i386 1
  .#define bfd_mach_i386_i8086 2
-diff -burN orig.binutils-2.14/bfd/bfd-in2.h binutils-2.14/bfd/bfd-in2.h
---- orig.binutils-2.14/bfd/bfd-in2.h	2003-05-03 18:06:57.000000000 +0200
-+++ binutils-2.14/bfd/bfd-in2.h	2017-03-08 00:37:47.488128372 +0100
-@@ -1605,6 +1605,7 @@
+diff --git a/bfd/bfd-in2.h b/bfd/bfd-in2.h
+index 9b6b5a3937..3fde2a01eb 100644
+--- a/bfd/bfd-in2.h
++++ b/bfd/bfd-in2.h
+@@ -1605,6 +1605,7 @@ enum bfd_architecture
  #define bfd_mach_mips5000              5000
  #define bfd_mach_mips5400              5400
  #define bfd_mach_mips5500              5500
@@ -32,7 +55,7 @@ diff -burN orig.binutils-2.14/bfd/bfd-in2.h binutils-2.14/bfd/bfd-in2.h
  #define bfd_mach_mips6000              6000
  #define bfd_mach_mips8000              8000
  #define bfd_mach_mips10000             10000
-@@ -1615,6 +1616,11 @@
+@@ -1615,6 +1616,11 @@ enum bfd_architecture
  #define bfd_mach_mipsisa32             32
  #define bfd_mach_mipsisa32r2           33
  #define bfd_mach_mipsisa64             64
@@ -44,7 +67,7 @@ diff -burN orig.binutils-2.14/bfd/bfd-in2.h binutils-2.14/bfd/bfd-in2.h
    bfd_arch_i386,      /* Intel 386 */
  #define bfd_mach_i386_i386 1
  #define bfd_mach_i386_i8086 2
-@@ -2374,6 +2380,7 @@
+@@ -2374,6 +2380,7 @@ to compensate for the borrow when the low bits are added.  */
    BFD_RELOC_MIPS_REL16,
    BFD_RELOC_MIPS_RELGOT,
    BFD_RELOC_MIPS_JALR,
@@ -52,7 +75,7 @@ diff -burN orig.binutils-2.14/bfd/bfd-in2.h binutils-2.14/bfd/bfd-in2.h
  
  /* Fujitsu Frv Relocations.  */
    BFD_RELOC_FRV_LABEL16,
-@@ -2386,6 +2393,21 @@
+@@ -2386,6 +2393,21 @@ to compensate for the borrow when the low bits are added.  */
    BFD_RELOC_FRV_GPRELHI,
    BFD_RELOC_FRV_GPRELLO,
  
@@ -74,10 +97,11 @@ diff -burN orig.binutils-2.14/bfd/bfd-in2.h binutils-2.14/bfd/bfd-in2.h
  
  /* i386/elf relocations  */
    BFD_RELOC_386_GOT32,
-diff -burN orig.binutils-2.14/bfd/config.bfd binutils-2.14/bfd/config.bfd
---- orig.binutils-2.14/bfd/config.bfd	2003-06-02 22:35:20.000000000 +0200
-+++ binutils-2.14/bfd/config.bfd	2017-03-08 00:37:47.488128372 +0100
-@@ -63,6 +63,9 @@
+diff --git a/bfd/config.bfd b/bfd/config.bfd
+index fa2e9ae479..339ed25228 100755
+--- a/bfd/config.bfd
++++ b/bfd/config.bfd
+@@ -63,6 +63,9 @@ z8k*)	         targ_archs=bfd_z8k_arch ;;
  *)	         targ_archs=bfd_${targ_cpu}_arch ;;
  esac
  
@@ -87,7 +111,7 @@ diff -burN orig.binutils-2.14/bfd/config.bfd binutils-2.14/bfd/config.bfd
  
  # WHEN ADDING ENTRIES TO THIS MATRIX:
  #  Make sure that the left side always has two dashes.  Otherwise you
-@@ -323,6 +326,10 @@
+@@ -323,6 +326,10 @@ case "${targ}" in
      targ_defvec=bfd_elf32_frv_vec
      ;;
  
@@ -98,7 +122,7 @@ diff -burN orig.binutils-2.14/bfd/config.bfd binutils-2.14/bfd/config.bfd
  
    h8300*-*-elf)
      targ_defvec=bfd_elf32_h8300_vec
-@@ -781,6 +788,10 @@
+@@ -781,6 +788,10 @@ case "${targ}" in
      targ_defvec=bfd_elf32_bigmips_vec
      targ_selvecs="bfd_elf32_littlemips_vec bfd_elf64_bigmips_vec bfd_elf64_littlemips_vec"
      ;;
@@ -109,10 +133,11 @@ diff -burN orig.binutils-2.14/bfd/config.bfd binutils-2.14/bfd/config.bfd
    mips*-*-none)
      targ_defvec=bfd_elf32_bigmips_vec
      targ_selvecs="bfd_elf32_littlemips_vec bfd_elf64_bigmips_vec bfd_elf64_littlemips_vec"
-diff -burN orig.binutils-2.14/bfd/configure binutils-2.14/bfd/configure
---- orig.binutils-2.14/bfd/configure	2003-06-12 16:25:46.000000000 +0200
-+++ binutils-2.14/bfd/configure	2017-03-08 00:37:47.491461705 +0100
-@@ -6046,6 +6046,8 @@
+diff --git a/bfd/configure b/bfd/configure
+index 5dca0f1944..26532c21cc 100755
+--- a/bfd/configure
++++ b/bfd/configure
+@@ -6046,6 +6046,8 @@ for i in $selvecs ; do
  done
  selvecs="$f"
  
@@ -121,10 +146,11 @@ diff -burN orig.binutils-2.14/bfd/configure binutils-2.14/bfd/configure
  
  # uniq the associated vectors in all the configured targets.
  f=""
-diff -burN orig.binutils-2.14/bfd/configure.in binutils-2.14/bfd/configure.in
---- orig.binutils-2.14/bfd/configure.in	2003-06-12 16:25:46.000000000 +0200
-+++ binutils-2.14/bfd/configure.in	2017-03-08 00:37:47.491461705 +0100
-@@ -508,6 +508,8 @@
+diff --git a/bfd/configure.in b/bfd/configure.in
+index 7774871f96..4300f4ac17 100644
+--- a/bfd/configure.in
++++ b/bfd/configure.in
+@@ -508,6 +508,8 @@ for i in $selvecs ; do
  done
  selvecs="$f"
  
@@ -133,10 +159,11 @@ diff -burN orig.binutils-2.14/bfd/configure.in binutils-2.14/bfd/configure.in
  
  # uniq the associated vectors in all the configured targets.
  f=""
-diff -burN orig.binutils-2.14/bfd/cpu-mips.c binutils-2.14/bfd/cpu-mips.c
---- orig.binutils-2.14/bfd/cpu-mips.c	2002-12-31 08:29:25.000000000 +0100
-+++ binutils-2.14/bfd/cpu-mips.c	2017-03-08 00:37:47.491461705 +0100
-@@ -75,6 +75,7 @@
+diff --git a/bfd/cpu-mips.c b/bfd/cpu-mips.c
+index 13355c5c5a..b0b3220bbb 100644
+--- a/bfd/cpu-mips.c
++++ b/bfd/cpu-mips.c
+@@ -75,6 +75,7 @@ enum
    I_mips5000,
    I_mips5400,
    I_mips5500,
@@ -144,7 +171,7 @@ diff -burN orig.binutils-2.14/bfd/cpu-mips.c binutils-2.14/bfd/cpu-mips.c
    I_mips6000,
    I_mips8000,
    I_mips10000,
-@@ -84,6 +85,10 @@
+@@ -84,6 +85,10 @@ enum
    I_mipsisa32,
    I_mipsisa32r2,
    I_mipsisa64,
@@ -155,7 +182,7 @@ diff -burN orig.binutils-2.14/bfd/cpu-mips.c binutils-2.14/bfd/cpu-mips.c
    I_sb1,
  };
  
-@@ -105,6 +110,7 @@
+@@ -105,6 +110,7 @@ static const bfd_arch_info_type arch_info_struct[] =
    N (64, 64, bfd_mach_mips5000, "mips:5000",      FALSE, NN(I_mips5000)),
    N (64, 64, bfd_mach_mips5400, "mips:5400",      FALSE, NN(I_mips5400)),
    N (64, 64, bfd_mach_mips5500, "mips:5500",      FALSE, NN(I_mips5500)),
@@ -163,7 +190,7 @@ diff -burN orig.binutils-2.14/bfd/cpu-mips.c binutils-2.14/bfd/cpu-mips.c
    N (32, 32, bfd_mach_mips6000, "mips:6000",      FALSE, NN(I_mips6000)),
    N (64, 64, bfd_mach_mips8000, "mips:8000",      FALSE, NN(I_mips8000)),
    N (64, 64, bfd_mach_mips10000,"mips:10000",     FALSE, NN(I_mips10000)),
-@@ -114,6 +120,10 @@
+@@ -114,6 +120,10 @@ static const bfd_arch_info_type arch_info_struct[] =
    N (32, 32, bfd_mach_mipsisa32,  "mips:isa32",   FALSE, NN(I_mipsisa32)),
    N (32, 32, bfd_mach_mipsisa32r2,"mips:isa32r2", FALSE, NN(I_mipsisa32r2)),
    N (64, 64, bfd_mach_mipsisa64,  "mips:isa64",   FALSE, NN(I_mipsisa64)),
@@ -174,10 +201,11 @@ diff -burN orig.binutils-2.14/bfd/cpu-mips.c binutils-2.14/bfd/cpu-mips.c
    N (64, 64, bfd_mach_mips_sb1, "mips:sb1",       FALSE, 0),
  };
  
-diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
---- orig.binutils-2.14/bfd/elf.c	2003-06-02 22:35:20.000000000 +0200
-+++ binutils-2.14/bfd/elf.c	2017-03-08 00:37:47.491461705 +0100
-@@ -2214,7 +2214,7 @@
+diff --git a/bfd/elf.c b/bfd/elf.c
+index 7e1bacd286..145d23f0bd 100644
+--- a/bfd/elf.c
++++ b/bfd/elf.c
+@@ -2214,7 +2214,7 @@ _bfd_elf_make_section_from_phdr (abfd, hdr, index, typename)
    newsect->_raw_size = hdr->p_filesz;
    newsect->filepos = hdr->p_offset;
    newsect->flags |= SEC_HAS_CONTENTS;
@@ -186,7 +214,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
      {
        newsect->flags |= SEC_ALLOC;
        newsect->flags |= SEC_LOAD;
-@@ -2244,7 +2244,7 @@
+@@ -2244,7 +2244,7 @@ _bfd_elf_make_section_from_phdr (abfd, hdr, index, typename)
        newsect->vma = hdr->p_vaddr + hdr->p_filesz;
        newsect->lma = hdr->p_paddr + hdr->p_filesz;
        newsect->_raw_size = hdr->p_memsz - hdr->p_filesz;
@@ -195,7 +223,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  	{
  	  newsect->flags |= SEC_ALLOC;
  	  if (hdr->p_flags & PF_X)
-@@ -3744,7 +3744,7 @@
+@@ -3744,7 +3744,7 @@ assign_file_positions_for_segments (abfd)
        else
  	p->p_paddr = m->sections[0]->lma;
  
@@ -204,7 +232,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  	  && (abfd->flags & D_PAGED) != 0)
  	p->p_align = bed->maxpagesize;
        else if (m->count == 0)
-@@ -3765,7 +3765,7 @@
+@@ -3765,7 +3765,7 @@ assign_file_positions_for_segments (abfd)
  	  p->p_memsz = bed->s->sizeof_ehdr;
  	  if (m->count > 0)
  	    {
@@ -213,7 +241,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  
  	      if (p->p_vaddr < (bfd_vma) off)
  		{
-@@ -3780,7 +3780,7 @@
+@@ -3780,7 +3780,7 @@ assign_file_positions_for_segments (abfd)
  	      if (! m->p_paddr_valid)
  		p->p_paddr -= off;
  	    }
@@ -222,7 +250,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  	    {
  	      filehdr_vaddr = p->p_vaddr;
  	      filehdr_paddr = p->p_paddr;
-@@ -3794,7 +3794,7 @@
+@@ -3794,7 +3794,7 @@ assign_file_positions_for_segments (abfd)
  
  	  if (m->includes_filehdr)
  	    {
@@ -231,7 +259,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  		{
  		  phdrs_vaddr = p->p_vaddr + bed->s->sizeof_ehdr;
  		  phdrs_paddr = p->p_paddr + bed->s->sizeof_ehdr;
-@@ -3812,7 +3812,7 @@
+@@ -3812,7 +3812,7 @@ assign_file_positions_for_segments (abfd)
  		    p->p_paddr -= off - p->p_offset;
  		}
  
@@ -240,7 +268,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  		{
  		  phdrs_vaddr = p->p_vaddr;
  		  phdrs_paddr = p->p_paddr;
-@@ -3825,7 +3825,7 @@
+@@ -3825,7 +3825,7 @@ assign_file_positions_for_segments (abfd)
  	  p->p_memsz += alloc * bed->s->sizeof_phdr;
  	}
  
@@ -249,7 +277,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  	  || (p->p_type == PT_NOTE && bfd_get_format (abfd) == bfd_core))
  	{
  	  if (! m->includes_filehdr && ! m->includes_phdrs)
-@@ -3860,7 +3860,7 @@
+@@ -3860,7 +3860,7 @@ assign_file_positions_for_segments (abfd)
  	      bfd_vma adjust = sec->lma - (p->p_paddr + p->p_memsz);
  
  	      p->p_memsz += adjust;
@@ -258,7 +286,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  		  || (p->p_type == PT_NOTE
  		      && bfd_get_format (abfd) == bfd_core))
  		{
-@@ -3872,7 +3872,7 @@
+@@ -3872,7 +3872,7 @@ assign_file_positions_for_segments (abfd)
  		p->p_filesz += adjust;
  	    }
  
@@ -267,7 +295,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  	    {
  	      bfd_signed_vma adjust;
  
-@@ -3977,7 +3977,8 @@
+@@ -3977,7 +3977,8 @@ Error: First section in segment (%s) starts at 0x%x whereas the segment starts a
  		}
  
  	      if (align > p->p_align
@@ -277,7 +305,7 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  		p->p_align = align;
  	    }
  
-@@ -3998,7 +3999,7 @@
+@@ -3998,7 +3999,7 @@ Error: First section in segment (%s) starts at 0x%x whereas the segment starts a
         m != NULL;
         m = m->next, p++)
      {
@@ -286,10 +314,11 @@ diff -burN orig.binutils-2.14/bfd/elf.c binutils-2.14/bfd/elf.c
  	{
  	  BFD_ASSERT (! m->includes_filehdr && ! m->includes_phdrs);
  	  p->p_offset = m->sections[0]->filepos;
-diff -burN orig.binutils-2.14/bfd/elf32-mips.c binutils-2.14/bfd/elf32-mips.c
---- orig.binutils-2.14/bfd/elf32-mips.c	2003-04-09 04:55:40.000000000 +0200
-+++ binutils-2.14/bfd/elf32-mips.c	2017-03-08 00:37:47.491461705 +0100
-@@ -75,6 +75,8 @@
+diff --git a/bfd/elf32-mips.c b/bfd/elf32-mips.c
+index adf057b40d..d4de4a7427 100644
+--- a/bfd/elf32-mips.c
++++ b/bfd/elf32-mips.c
+@@ -75,6 +75,8 @@ static bfd_reloc_status_type mips16_jump_reloc
    PARAMS ((bfd *, arelent *, asymbol *, PTR, asection *, bfd *, char **));
  static bfd_reloc_status_type mips16_gprel_reloc
    PARAMS ((bfd *, arelent *, asymbol *, PTR, asection *, bfd *, char **));
@@ -298,7 +327,7 @@ diff -burN orig.binutils-2.14/bfd/elf32-mips.c binutils-2.14/bfd/elf32-mips.c
  static bfd_reloc_status_type mips_elf_final_gp
    PARAMS ((bfd *, asymbol *, bfd_boolean, char **, bfd_vma *));
  static bfd_boolean mips_elf_assign_gp
-@@ -603,6 +605,81 @@
+@@ -603,6 +605,81 @@ static reloc_howto_type elf_mips16_gprel_howto =
  	 0x07ff001f,	        /* dst_mask */
  	 FALSE);		/* pcrel_offset */
  
@@ -380,7 +409,7 @@ diff -burN orig.binutils-2.14/bfd/elf32-mips.c binutils-2.14/bfd/elf32-mips.c
  /* GNU extensions for embedded-pic.  */
  /* High 16 bits of symbol value, pc-relative.  */
  static reloc_howto_type elf_mips_gnu_rel_hi16 =
-@@ -1381,6 +1458,58 @@
+@@ -1381,6 +1458,58 @@ mips16_gprel_reloc (abfd, reloc_entry, symbol, data, input_section,
    return ret;
  }
  
@@ -439,7 +468,7 @@ diff -burN orig.binutils-2.14/bfd/elf32-mips.c binutils-2.14/bfd/elf32-mips.c
  /* A mapping from BFD reloc types to MIPS ELF reloc types.  */
  
  struct elf_reloc_map {
-@@ -1451,6 +1580,16 @@
+@@ -1451,6 +1580,16 @@ bfd_elf32_bfd_reloc_type_lookup (abfd, code)
        return &elf_mips16_jump_howto;
      case BFD_RELOC_MIPS16_GPREL:
        return &elf_mips16_gprel_howto;
@@ -456,7 +485,7 @@ diff -burN orig.binutils-2.14/bfd/elf32-mips.c binutils-2.14/bfd/elf32-mips.c
      case BFD_RELOC_VTABLE_INHERIT:
        return &elf_mips_gnu_vtinherit_howto;
      case BFD_RELOC_VTABLE_ENTRY:
-@@ -1481,6 +1620,16 @@
+@@ -1481,6 +1620,16 @@ mips_elf32_rtype_to_howto (r_type, rela_p)
        return &elf_mips16_jump_howto;
      case R_MIPS16_GPREL:
        return &elf_mips16_gprel_howto;
@@ -473,10 +502,11 @@ diff -burN orig.binutils-2.14/bfd/elf32-mips.c binutils-2.14/bfd/elf32-mips.c
      case R_MIPS_GNU_VTINHERIT:
        return &elf_mips_gnu_vtinherit_howto;
      case R_MIPS_GNU_VTENTRY:
-diff -burN orig.binutils-2.14/bfd/elflink.h binutils-2.14/bfd/elflink.h
---- orig.binutils-2.14/bfd/elflink.h	2003-06-02 22:35:21.000000000 +0200
-+++ binutils-2.14/bfd/elflink.h	2017-03-08 00:37:47.494795039 +0100
-@@ -7238,9 +7238,18 @@
+diff --git a/bfd/elflink.h b/bfd/elflink.h
+index 9b7bcff820..ffe02e663e 100644
+--- a/bfd/elflink.h
++++ b/bfd/elflink.h
+@@ -7238,9 +7238,18 @@ elf_link_input_bfd (finfo, input_bfd)
  			 elf_link_output_extsym that this symbol is
  			 used by a reloc.  */
  		      BFD_ASSERT (rh->indx < 0);
@@ -496,7 +526,7 @@ diff -burN orig.binutils-2.14/bfd/elflink.h binutils-2.14/bfd/elflink.h
  
  		      continue;
  		    }
-@@ -7269,7 +7278,8 @@
+@@ -7269,7 +7278,8 @@ elf_link_input_bfd (finfo, input_bfd)
  		      else
  			{
  			  r_symndx = sec->output_section->target_index;
@@ -506,10 +536,11 @@ diff -burN orig.binutils-2.14/bfd/elflink.h binutils-2.14/bfd/elflink.h
  			}
  
  		      /* Adjust the addend according to where the
-diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
---- orig.binutils-2.14/bfd/elfxx-mips.c	2003-06-02 22:35:22.000000000 +0200
-+++ binutils-2.14/bfd/elfxx-mips.c	2017-03-08 00:37:47.494795039 +0100
-@@ -4064,6 +4064,9 @@
+diff --git a/bfd/elfxx-mips.c b/bfd/elfxx-mips.c
+index 9d86f3be47..ecb0df8370 100644
+--- a/bfd/elfxx-mips.c
++++ b/bfd/elfxx-mips.c
+@@ -4064,6 +4064,9 @@ _bfd_elf_mips_mach (flags)
      case E_MIPS_MACH_5500:
        return bfd_mach_mips5500;
  
@@ -519,7 +550,7 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
      case E_MIPS_MACH_SB1:
        return bfd_mach_mips_sb1;
  
-@@ -4379,6 +4382,10 @@
+@@ -4379,6 +4382,10 @@ _bfd_mips_elf_section_from_shdr (abfd, hdr, name)
       probably get away with this.  */
    switch (hdr->sh_type)
      {
@@ -530,7 +561,7 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
      case SHT_MIPS_LIBLIST:
        if (strcmp (name, ".liblist") != 0)
  	return FALSE;
-@@ -4436,6 +4443,15 @@
+@@ -4436,6 +4443,15 @@ _bfd_mips_elf_section_from_shdr (abfd, hdr, name)
  		      sizeof ".MIPS.post_rel" - 1) != 0)
  	return FALSE;
        break;
@@ -546,7 +577,7 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
      default:
        return FALSE;
      }
-@@ -4540,7 +4556,25 @@
+@@ -4540,7 +4556,25 @@ _bfd_mips_elf_fake_sections (abfd, hdr, sec)
  
    name = bfd_get_section_name (abfd, sec);
  
@@ -573,7 +604,7 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
      {
        hdr->sh_type = SHT_MIPS_LIBLIST;
        hdr->sh_info = sec->_raw_size / sizeof (Elf32_Lib);
-@@ -4639,6 +4673,17 @@
+@@ -4639,6 +4673,17 @@ _bfd_mips_elf_fake_sections (abfd, hdr, sec)
        hdr->sh_flags |= SHF_ALLOC;
        hdr->sh_entsize = 8;
      }
@@ -591,7 +622,7 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
  
    /* The generic elf_fake_sections will set up REL_HDR using the
       default kind of relocations.  But, we may actually need both
-@@ -7300,6 +7345,10 @@
+@@ -7300,6 +7345,10 @@ mips_set_isa_flags (abfd)
        val = E_MIPS_ARCH_4 | E_MIPS_MACH_5500;
        break;
  
@@ -602,7 +633,7 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
      case bfd_mach_mips5000:
      case bfd_mach_mips8000:
      case bfd_mach_mips10000:
-@@ -7418,6 +7467,13 @@
+@@ -7418,6 +7467,13 @@ _bfd_mips_elf_final_write_processing (abfd, linker)
  	  (*hdrpp)->sh_link = elf_section_data (sec)->this_idx;
  	  break;
  
@@ -616,7 +647,7 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
  	}
      }
  }
-@@ -9112,6 +9168,7 @@
+@@ -9112,6 +9168,7 @@ static const struct mips_mach_extension mips_mach_extensions[] = {
    { bfd_mach_mips4300, bfd_mach_mips4000 },
    { bfd_mach_mips4100, bfd_mach_mips4000 },
    { bfd_mach_mips4010, bfd_mach_mips4000 },
@@ -624,7 +655,7 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
  
    /* MIPS32 extensions.  */
    { bfd_mach_mipsisa32r2, bfd_mach_mipsisa32 },
-@@ -9276,7 +9333,7 @@
+@@ -9276,7 +9333,7 @@ _bfd_mips_elf_merge_private_bfd_data (ibfd, obfd)
      {
        (*_bfd_error_handler)
  	(_("%s: linking 32-bit code with 64-bit code"),
@@ -633,10 +664,11 @@ diff -burN orig.binutils-2.14/bfd/elfxx-mips.c binutils-2.14/bfd/elfxx-mips.c
        ok = FALSE;
      }
    else if (!mips_mach_extends_p (bfd_get_mach (ibfd), bfd_get_mach (obfd)))
-diff -burN orig.binutils-2.14/bfd/libbfd.h binutils-2.14/bfd/libbfd.h
---- orig.binutils-2.14/bfd/libbfd.h	2003-04-01 17:50:27.000000000 +0200
-+++ binutils-2.14/bfd/libbfd.h	2017-03-08 00:37:47.494795039 +0100
-@@ -872,6 +872,7 @@
+diff --git a/bfd/libbfd.h b/bfd/libbfd.h
+index 9bbdebd218..fdef23cbe4 100644
+--- a/bfd/libbfd.h
++++ b/bfd/libbfd.h
+@@ -872,6 +872,7 @@ static const char *const bfd_reloc_code_real_names[] = { "@@uninitialized@@",
    "BFD_RELOC_MIPS_REL16",
    "BFD_RELOC_MIPS_RELGOT",
    "BFD_RELOC_MIPS_JALR",
@@ -644,7 +676,7 @@ diff -burN orig.binutils-2.14/bfd/libbfd.h binutils-2.14/bfd/libbfd.h
    "BFD_RELOC_FRV_LABEL16",
    "BFD_RELOC_FRV_LABEL24",
    "BFD_RELOC_FRV_LO16",
-@@ -881,6 +882,10 @@
+@@ -881,6 +882,10 @@ static const char *const bfd_reloc_code_real_names[] = { "@@uninitialized@@",
    "BFD_RELOC_FRV_GPREL32",
    "BFD_RELOC_FRV_GPRELHI",
    "BFD_RELOC_FRV_GPRELLO",
@@ -655,10 +687,11 @@ diff -burN orig.binutils-2.14/bfd/libbfd.h binutils-2.14/bfd/libbfd.h
  
    "BFD_RELOC_386_GOT32",
    "BFD_RELOC_386_PLT32",
-diff -burN orig.binutils-2.14/bfd/reloc.c binutils-2.14/bfd/reloc.c
---- orig.binutils-2.14/bfd/reloc.c	2003-04-23 23:09:02.000000000 +0200
-+++ binutils-2.14/bfd/reloc.c	2017-03-08 00:37:47.494795039 +0100
-@@ -2128,6 +2128,8 @@
+diff --git a/bfd/reloc.c b/bfd/reloc.c
+index 6aea881f38..3aa7853847 100644
+--- a/bfd/reloc.c
++++ b/bfd/reloc.c
+@@ -2128,6 +2128,8 @@ ENUMX
    BFD_RELOC_MIPS_RELGOT
  ENUMX
    BFD_RELOC_MIPS_JALR
@@ -667,7 +700,7 @@ diff -burN orig.binutils-2.14/bfd/reloc.c binutils-2.14/bfd/reloc.c
  COMMENT
  ENUM
    BFD_RELOC_FRV_LABEL16
-@@ -2155,6 +2157,27 @@
+@@ -2155,6 +2157,27 @@ ENUMDOC
    MIPS ELF relocations.
  
  COMMENT
@@ -695,10 +728,11 @@ diff -burN orig.binutils-2.14/bfd/reloc.c binutils-2.14/bfd/reloc.c
  
  ENUM
    BFD_RELOC_386_GOT32
-diff -burN orig.binutils-2.14/config.sub binutils-2.14/config.sub
---- orig.binutils-2.14/config.sub	2003-06-02 22:35:43.000000000 +0200
-+++ binutils-2.14/config.sub	2017-03-08 00:37:47.494795039 +0100
-@@ -250,6 +250,7 @@
+diff --git a/config.sub b/config.sub
+index fe4f1edf3c..118a5a30dc 100755
+--- a/config.sub
++++ b/config.sub
+@@ -250,6 +250,7 @@ case $basic_machine in
  	| mipsisa64sb1 | mipsisa64sb1el \
  	| mipsisa64sr71k | mipsisa64sr71kel \
  	| mipstx39 | mipstx39el \
@@ -706,7 +740,7 @@ diff -burN orig.binutils-2.14/config.sub binutils-2.14/config.sub
  	| mn10200 | mn10300 \
  	| msp430 \
  	| ns16k | ns32k \
-@@ -261,7 +262,7 @@
+@@ -261,7 +262,7 @@ case $basic_machine in
  	| sh64 | sh64le \
  	| sparc | sparc64 | sparc86x | sparclet | sparclite | sparcv9 | sparcv9b \
  	| strongarm \
@@ -715,7 +749,7 @@ diff -burN orig.binutils-2.14/config.sub binutils-2.14/config.sub
  	| v850 | v850e \
  	| we32k \
  	| x86 | xscale | xstormy16 | xtensa \
-@@ -322,6 +323,7 @@
+@@ -322,6 +323,7 @@ case $basic_machine in
  	| mipsisa64sb1-* | mipsisa64sb1el-* \
  	| mipsisa64sr71k-* | mipsisa64sr71kel-* \
  	| mipstx39-* | mipstx39el-* \
@@ -723,7 +757,7 @@ diff -burN orig.binutils-2.14/config.sub binutils-2.14/config.sub
  	| msp430-* \
  	| none-* | np1-* | nv1-* | ns16k-* | ns32k-* \
  	| orion-* \
-@@ -635,6 +637,24 @@
+@@ -635,6 +637,24 @@ case $basic_machine in
  		basic_machine=m68k-atari
  		os=-mint
  		;;
@@ -748,7 +782,7 @@ diff -burN orig.binutils-2.14/config.sub binutils-2.14/config.sub
  	mips3*-*)
  		basic_machine=`echo $basic_machine | sed -e 's/mips3/mips64/'`
  		;;
-@@ -1131,7 +1151,7 @@
+@@ -1131,7 +1151,7 @@ case $os in
  	      | -storm-chaos* | -tops10* | -tenex* | -tops20* | -its* \
  	      | -os2* | -vos* | -palmos* | -uclinux* | -nucleus* \
  	      | -morphos* | -superux* | -rtmk* | -rtmk-nova* | -windiss* \
@@ -757,10 +791,11 @@ diff -burN orig.binutils-2.14/config.sub binutils-2.14/config.sub
  	# Remember, each alternative MUST END IN *, to match a version number.
  		;;
  	-qnx*)
-diff -burN orig.binutils-2.14/configure binutils-2.14/configure
---- orig.binutils-2.14/configure	2003-06-02 22:35:43.000000000 +0200
-+++ binutils-2.14/configure	2017-03-08 00:37:47.494795039 +0100
-@@ -1116,6 +1116,9 @@
+diff --git a/configure b/configure
+index b4082420b2..3ddae6ba1f 100755
+--- a/configure
++++ b/configure
+@@ -1116,6 +1116,9 @@ case "${target}" in
    d30v-*-*)
      noconfigdirs="$noconfigdirs ${libgcj}"
      ;;
@@ -770,10 +805,11 @@ diff -burN orig.binutils-2.14/configure binutils-2.14/configure
    fr30-*-elf*)
      noconfigdirs="$noconfigdirs ${libgcj}"
      ;;
-diff -burN orig.binutils-2.14/configure.in binutils-2.14/configure.in
---- orig.binutils-2.14/configure.in	2003-06-12 16:33:14.000000000 +0200
-+++ binutils-2.14/configure.in	2017-03-08 00:37:47.494795039 +0100
-@@ -456,6 +456,9 @@
+diff --git a/configure.in b/configure.in
+index bfa3b2fe99..3011454533 100644
+--- a/configure.in
++++ b/configure.in
+@@ -456,6 +456,9 @@ case "${target}" in
    d30v-*-*)
      noconfigdirs="$noconfigdirs ${libgcj}"
      ;;
@@ -783,9 +819,11 @@ diff -burN orig.binutils-2.14/configure.in binutils-2.14/configure.in
    fr30-*-elf*)
      noconfigdirs="$noconfigdirs ${libgcj}"
      ;;
-diff -burN orig.binutils-2.14/gas/config/tc-dvp.c binutils-2.14/gas/config/tc-dvp.c
---- orig.binutils-2.14/gas/config/tc-dvp.c	1970-01-01 01:00:00.000000000 +0100
-+++ binutils-2.14/gas/config/tc-dvp.c	2017-03-08 00:39:37.884800133 +0100
+diff --git a/gas/config/tc-dvp.c b/gas/config/tc-dvp.c
+new file mode 100644
+index 0000000000..fa1cdbb98c
+--- /dev/null
++++ b/gas/config/tc-dvp.c
 @@ -0,0 +1,3441 @@
 +/* tc-dvp.c -- Assembler for the DVP
 +   Copyright (C) 1997, 1998 Free Software Foundation.
@@ -4228,9 +4266,11 @@ diff -burN orig.binutils-2.14/gas/config/tc-dvp.c binutils-2.14/gas/config/tc-dv
 +{
 +  do_s_func (end_p, VU_LABEL_PREFIX);
 +}
-diff -burN orig.binutils-2.14/gas/config/tc-dvp.h binutils-2.14/gas/config/tc-dvp.h
---- orig.binutils-2.14/gas/config/tc-dvp.h	1970-01-01 01:00:00.000000000 +0100
-+++ binutils-2.14/gas/config/tc-dvp.h	2017-03-08 00:37:47.498128372 +0100
+diff --git a/gas/config/tc-dvp.h b/gas/config/tc-dvp.h
+new file mode 100644
+index 0000000000..dca3e694f1
+--- /dev/null
++++ b/gas/config/tc-dvp.h
 @@ -0,0 +1,105 @@
 +/* tc-dvp.h -- Header file for tc-dvp.c.
 +   Copyright (C) 1997, 1998 Free Software Foundation, Inc.
@@ -4337,10 +4377,11 @@ diff -burN orig.binutils-2.14/gas/config/tc-dvp.h binutils-2.14/gas/config/tc-dv
 +  { ".vubss",	SHT_NOBITS,	SHF_ALLOC + SHF_WRITE		}, \
 +  { ".vudata",	SHT_PROGBITS,	SHF_ALLOC + SHF_WRITE		}, \
 +  { ".vutext",	SHT_PROGBITS,	SHF_ALLOC + SHF_EXECINSTR	},
-diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-mips.c
---- orig.binutils-2.14/gas/config/tc-mips.c	2003-06-02 22:35:25.000000000 +0200
-+++ binutils-2.14/gas/config/tc-mips.c	2017-03-08 00:37:47.498128372 +0100
-@@ -177,6 +177,10 @@
+diff --git a/gas/config/tc-mips.c b/gas/config/tc-mips.c
+index 7e4c8438ca..6019a6b385 100644
+--- a/gas/config/tc-mips.c
++++ b/gas/config/tc-mips.c
+@@ -177,6 +177,10 @@ struct mips_set_options
       is passed but can changed if the assembler code uses .set mipsN.  */
    int gp32;
    int fp32;
@@ -4351,7 +4392,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  };
  
  /* True if -mgp32 was passed.  */
-@@ -191,7 +195,7 @@
+@@ -191,7 +195,7 @@ static int file_mips_fp32 = -1;
  
  static struct mips_set_options mips_opts =
  {
@@ -4360,7 +4401,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  };
  
  /* These variables are filled in with the masks of registers used.
-@@ -323,6 +327,7 @@
+@@ -323,6 +327,7 @@ static int mips_32bitmode = 0;
  #define hilo_interlocks (mips_arch == CPU_R4010                       \
                           || mips_arch == CPU_VR5500                   \
                           || mips_arch == CPU_SB1                      \
@@ -4368,7 +4409,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
                           )
  
  /* Whether the processor uses hardware interlocks to protect reads
-@@ -331,6 +336,7 @@
+@@ -331,6 +336,7 @@ static int mips_32bitmode = 0;
    (mips_opts.isa != ISA_MIPS1  \
     || mips_arch == CPU_VR5400  \
     || mips_arch == CPU_VR5500  \
@@ -4376,7 +4417,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
     || mips_arch == CPU_R3900)
  
  /* As with other "interlocks" this is used by hardware that has FP
-@@ -377,6 +383,12 @@
+@@ -377,6 +383,12 @@ static int mips_any_noreorder;
     an mfhi/mflo instruction is read in the next two instructions.  */
  static int mips_7000_hilo_fix;
  
@@ -4389,7 +4430,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  /* The size of the small data section.  */
  static unsigned int g_switch_value = 8;
  /* Whether the -G option was used.  */
-@@ -952,6 +964,10 @@
+@@ -952,6 +964,10 @@ static int validate_mips_insn
    PARAMS ((const struct mips_opcode *));
  static void show
    PARAMS ((FILE *, const char *, int *, int *));
@@ -4400,7 +4441,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  #ifdef OBJ_ELF
  static int mips_need_elf_addend_fixup
    PARAMS ((fixS *));
-@@ -1184,6 +1200,10 @@
+@@ -1184,6 +1200,10 @@ md_begin ()
    int i = 0;
    int broken = 0;
  
@@ -4411,7 +4452,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
    if (! bfd_set_arch_mach (stdoutput, bfd_arch_mips, mips_arch))
      as_warn (_("Could not set architecture and machine"));
  
-@@ -2142,6 +2162,10 @@
+@@ -2142,6 +2162,10 @@ append_insn (place, ip, address_expr, reloc_type)
  		 | ((address_expr->X_add_number & 0x3fffc) >> 2));
  	      break;
  
@@ -4422,7 +4463,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	    case BFD_RELOC_16_PCREL_S2:
  	      goto need_reloc;
  
-@@ -3005,6 +3029,7 @@
+@@ -3005,6 +3029,7 @@ macro_build (place, counter, ep, name, fmt, va_alist)
    			       (mips_opts.isa
  	      		        | (file_ase_mips16 ? INSN_MIPS16 : 0)),
  			       mips_arch)
@@ -4430,7 +4471,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  && (mips_arch != CPU_R4650 || (insn.insn_mo->pinfo & FP_D) == 0))
  	break;
  
-@@ -3544,6 +3569,24 @@
+@@ -3544,6 +3569,24 @@ check_absolute_expr (ip, ex)
             ? 1                          \
             : 0)
  
@@ -4455,7 +4496,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  /*			load_register()
   *  This routine generates the least number of instructions neccessary to load
   *  an absolute expression value into a register.
-@@ -3557,6 +3600,7 @@
+@@ -3557,6 +3600,7 @@ load_register (counter, reg, ep, dbl)
  {
    int freg;
    expressionS hi32, lo32;
@@ -4463,7 +4504,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  
    if (ep->X_op != O_big)
      {
-@@ -3609,12 +3653,21 @@
+@@ -3609,12 +3653,21 @@ load_register (counter, reg, ep, dbl)
  
    if (HAVE_32BIT_GPRS)
      {
@@ -4485,7 +4526,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  
    if (ep->X_op != O_big)
      {
-@@ -3651,6 +3704,7 @@
+@@ -3651,6 +3704,7 @@ load_register (counter, reg, ep, dbl)
  	    {
  	      macro_build ((char *) NULL, counter, &lo32, "addiu", "t,r,j",
  			   reg, 0, (int) BFD_RELOC_LO16);
@@ -4493,7 +4534,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	      return;
  	    }
  	  if (lo32.X_add_number & 0x80000000)
-@@ -3660,6 +3714,7 @@
+@@ -3660,6 +3714,7 @@ load_register (counter, reg, ep, dbl)
  	      if (lo32.X_add_number & 0xffff)
  		macro_build ((char *) NULL, counter, &lo32, "ori", "t,r,i",
  			     reg, reg, (int) BFD_RELOC_LO16);
@@ -4501,7 +4542,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	      return;
  	    }
  	}
-@@ -3700,6 +3755,7 @@
+@@ -3700,6 +3755,7 @@ load_register (counter, reg, ep, dbl)
  			   (shift >= 32) ? "dsll32" : "dsll",
  			   "d,w,<", reg, reg,
  			   (shift >= 32) ? shift - 32 : shift);
@@ -4509,7 +4550,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	      return;
  	    }
  	  ++shift;
-@@ -3760,6 +3816,7 @@
+@@ -3760,6 +3816,7 @@ load_register (counter, reg, ep, dbl)
  			   (shift >= 32) ? "dsrl32" : "dsrl",
  			   "d,w,<", reg, reg,
  			   (shift >= 32) ? shift - 32 : shift);
@@ -4517,7 +4558,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	      return;
  	    }
  	}
-@@ -3790,11 +3847,13 @@
+@@ -3790,11 +3847,13 @@ load_register (counter, reg, ep, dbl)
  		       (int) BFD_RELOC_HI16);
  	  macro_build ((char *) NULL, counter, (expressionS *) NULL,
  		       "dsrl32", "d,w,<", reg, reg, 0);
@@ -4531,7 +4572,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  macro_build ((char *) NULL, counter, (expressionS *) NULL, "dsll",
  		       "d,w,<", reg, freg, 16);
  	  freg = reg;
-@@ -3810,6 +3869,7 @@
+@@ -3810,6 +3869,7 @@ load_register (counter, reg, ep, dbl)
    if ((lo32.X_add_number & 0xffff) != 0)
      macro_build ((char *) NULL, counter, &lo32, "ori", "t,r,i", reg, freg,
  		 (int) BFD_RELOC_LO16);
@@ -4539,7 +4580,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  }
  
  /* Load an address into a register.  */
-@@ -4683,6 +4743,9 @@
+@@ -4683,6 +4743,9 @@ macro (ip)
  	  if (mips_trap)
  	    macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "teq",
  			 "s,t,q", 0, 0, 7);
@@ -4549,7 +4590,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  else
  	    macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "break",
  			 "c", 7);
-@@ -4705,6 +4768,10 @@
+@@ -4705,6 +4768,10 @@ macro (ip)
  	  macro_build ((char *) NULL, &icnt, &expr1, "bne", "s,t,p", treg, 0);
  	  macro_build ((char *) NULL, &icnt, (expressionS *) NULL,
  		       dbl ? "ddiv" : "div", "z,s,t", sreg, treg);
@@ -4560,7 +4601,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "break",
  		       "c", 7);
  	}
-@@ -4747,6 +4814,10 @@
+@@ -4747,6 +4814,10 @@ macro (ip)
  	     that later insns are available for delay slot filling.  */
  	  --mips_opts.noreorder;
  
@@ -4571,7 +4612,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "break",
  		       "c", 6);
  	}
-@@ -4795,6 +4866,9 @@
+@@ -4795,6 +4866,9 @@ macro (ip)
  	  if (mips_trap)
  	    macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "teq",
  			 "s,t,q", 0, 0, 7);
@@ -4581,7 +4622,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  else
  	    macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "break",
  			 "c", 7);
-@@ -4867,6 +4941,10 @@
+@@ -4867,6 +4941,10 @@ macro (ip)
  	  /* We want to close the noreorder block as soon as possible, so
  	     that later insns are available for delay slot filling.  */
  	  --mips_opts.noreorder;
@@ -4592,7 +4633,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "break",
  		       "c", 7);
  	}
-@@ -6732,7 +6810,7 @@
+@@ -6732,7 +6810,7 @@ macro (ip)
        s = segment_name (S_GET_SEGMENT (offset_expr.X_add_symbol));
        if (strcmp (s, ".lit8") == 0)
  	{
@@ -4601,7 +4642,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	    {
  	      macro_build ((char *) NULL, &icnt, &offset_expr, "ldc1",
  			   "T,o(b)", treg, (int) BFD_RELOC_MIPS_LITERAL,
-@@ -6757,7 +6835,7 @@
+@@ -6757,7 +6835,7 @@ macro (ip)
  	      macro_build_lui (NULL, &icnt, &offset_expr, AT);
  	    }
  
@@ -4610,7 +4651,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	    {
  	      macro_build ((char *) NULL, &icnt, &offset_expr, "ldc1",
  			   "T,o(b)", treg, (int) BFD_RELOC_LO16, AT);
-@@ -6784,7 +6862,7 @@
+@@ -6784,7 +6862,7 @@ macro (ip)
  	 to adjust when loading from memory.  */
        r = BFD_RELOC_LO16;
      dob:
@@ -4619,7 +4660,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
        macro_build ((char *) NULL, &icnt, &offset_expr, "lwc1", "T,o(b)",
  		   target_big_endian ? treg + 1 : treg,
  		   (int) r, breg);
-@@ -6823,7 +6901,7 @@
+@@ -6823,7 +6901,7 @@ macro (ip)
  	}
        /* Itbl support may require additional care here.  */
        coproc = 1;
@@ -4628,7 +4669,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	{
  	  s = "ldc1";
  	  goto ld;
-@@ -6840,7 +6918,7 @@
+@@ -6840,7 +6918,7 @@ macro (ip)
  	  return;
  	}
  
@@ -4637,7 +4678,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	{
  	  s = "sdc1";
  	  goto st;
-@@ -7386,6 +7464,10 @@
+@@ -7386,6 +7464,10 @@ macro2 (ip)
  		       AT);
  	  macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "nop", "",
  		       0);
@@ -4648,7 +4689,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "break",
  		       "c", 6);
  	}
-@@ -7424,6 +7506,10 @@
+@@ -7424,6 +7506,10 @@ macro2 (ip)
  	  macro_build ((char *) NULL, &icnt, &expr1, "beq", "s,t,p", AT, 0);
  	  macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "nop", "",
  		       0);
@@ -4659,7 +4700,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  macro_build ((char *) NULL, &icnt, (expressionS *) NULL, "break",
  		       "c", 6);
  	}
-@@ -7661,7 +7747,7 @@
+@@ -7661,7 +7747,7 @@ macro2 (ip)
  	  as_bad (_("opcode not supported on this processor"));
  	  return;
  	}
@@ -4668,7 +4709,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
        /* Even on a big endian machine $fn comes before $fn+1.  We have
  	 to adjust when storing to memory.  */
        macro_build ((char *) NULL, &icnt, &offset_expr, "swc1", "T,o(b)",
-@@ -7970,7 +8056,7 @@
+@@ -7970,7 +8056,7 @@ macro2 (ip)
  
      case M_TRUNCWS:
      case M_TRUNCWD:
@@ -4677,7 +4718,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
        sreg = (ip->insn_opcode >> 11) & 0x1f;	/* floating reg */
        dreg = (ip->insn_opcode >> 06) & 0x1f;	/* floating reg */
  
-@@ -8509,7 +8595,7 @@
+@@ -8509,7 +8595,7 @@ validate_mips_insn (opc)
        case ',': break;
        case '(': break;
        case ')': break;
@@ -4686,7 +4727,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
      	switch (c = *p++)
  	  {
  	  case 'A': USE_BITS (OP_MASK_SHAMT,	OP_SH_SHAMT);	break;
-@@ -8574,6 +8660,35 @@
+@@ -8574,6 +8660,35 @@ validate_mips_insn (opc)
        case 'P': USE_BITS (OP_MASK_PERFREG,	OP_SH_PERFREG);	break;
        case 'U': USE_BITS (OP_MASK_RD,           OP_SH_RD);
  	        USE_BITS (OP_MASK_RT,           OP_SH_RT);	break;
@@ -4722,7 +4763,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
        case 'e': USE_BITS (OP_MASK_VECBYTE,	OP_SH_VECBYTE);	break;
        case '%': USE_BITS (OP_MASK_VECALIGN,	OP_SH_VECALIGN); break;
        case '[': break;
-@@ -8614,6 +8729,7 @@
+@@ -8614,6 +8729,7 @@ mips_ip (str, ip)
    unsigned int limlo, limhi;
    char *s_reset;
    char save_c = 0;
@@ -4730,7 +4771,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  
    insn_error = NULL;
  
-@@ -8663,6 +8779,7 @@
+@@ -8663,6 +8779,7 @@ mips_ip (str, ip)
  	  insn_error = "unrecognized opcode";
  	  return;
  	}
@@ -4738,7 +4779,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
      }
  
    argsStart = s;
-@@ -8684,7 +8801,8 @@
+@@ -8684,7 +8801,8 @@ mips_ip (str, ip)
  
        if (insn->pinfo != INSN_MACRO)
  	{
@@ -4748,7 +4789,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	    ok = FALSE;
  	}
  
-@@ -8773,11 +8891,13 @@
+@@ -8773,11 +8891,13 @@ mips_ip (str, ip)
  	    case ')':		/* these must match exactly */
  	    case '[':
  	    case ']':
@@ -4763,7 +4804,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	      switch (*++args)
  		{
  		case 'A':		/* ins/ext position, becomes LSB.  */
-@@ -8894,6 +9014,173 @@
+@@ -8894,6 +9014,173 @@ mips_ip (str, ip)
  	      s = expr_end;
  	      continue;
  
@@ -4937,7 +4978,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	    case 'k':		/* cache code */
  	    case 'h':		/* prefx code */
  	      my_getExpression (&imm_expr, s);
-@@ -9007,6 +9294,14 @@
+@@ -9007,6 +9294,14 @@ mips_ip (str, ip)
  	      s_reset = s;
  	      if (s[0] == '$')
  		{
@@ -4952,7 +4993,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  
  		  if (ISDIGIT (s[1]))
  		    {
-@@ -9026,47 +9321,56 @@
+@@ -9026,47 +9321,56 @@ mips_ip (str, ip)
  		    goto notreg;
  		  else
  		    {
@@ -5050,7 +5091,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  			{
  			  char *p, *n;
  			  unsigned long r;
-@@ -9090,7 +9394,7 @@
+@@ -9090,7 +9394,7 @@ mips_ip (str, ip)
  			  else
  			    goto notreg;
  			}
@@ -5059,7 +5100,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  			goto notreg;
  		    }
  		  if (regno == AT
-@@ -9223,6 +9527,14 @@
+@@ -9223,6 +9527,14 @@ mips_ip (str, ip)
  	    case 'R':		/* floating point source register */
  	    case 'V':
  	    case 'W':
@@ -5074,7 +5115,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	      s_reset = s;
  	      /* Accept $fN for FP and MDMX register numbers, and in
                   addition accept $vN for MDMX register numbers.  */
-@@ -9245,6 +9557,7 @@
+@@ -9245,6 +9557,7 @@ mips_ip (str, ip)
  
  		  if ((regno & 1) != 0
  		      && HAVE_32BIT_FPRS
@@ -5082,7 +5123,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  		      && ! (strcmp (str, "mtc1") == 0
  			    || strcmp (str, "mfc1") == 0
  			    || strcmp (str, "lwc1") == 0
-@@ -9323,6 +9636,94 @@
+@@ -9323,6 +9636,94 @@ mips_ip (str, ip)
  		  lastregno = regno;
  		  continue;
  		}
@@ -5177,7 +5218,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  
  	      switch (*args++)
  		{
-@@ -10805,8 +11206,20 @@
+@@ -10805,8 +11206,20 @@ struct option md_longopts[] =
    {"no-relax-branch", no_argument, NULL, OPTION_NO_RELAX_BRANCH},
  #define OPTION_MIPS32R2 (OPTION_MD_BASE + 41)
    {"mips32r2", no_argument, NULL, OPTION_MIPS32R2},
@@ -5199,7 +5240,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  #define OPTION_CALL_SHARED (OPTION_ELF_BASE + 0)
    {"KPIC",        no_argument, NULL, OPTION_CALL_SHARED},
    {"call_shared", no_argument, NULL, OPTION_CALL_SHARED},
-@@ -10898,8 +11311,9 @@
+@@ -10898,8 +11311,9 @@ md_parse_option (c, arg)
  	mips_debug = atoi (arg);
        /* When the MIPS assembler sees -g or -g2, it does not do
           optimizations which limit full symbolic debugging.  We take
@@ -5211,7 +5252,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	mips_optimize = 1;
        break;
  
-@@ -10975,6 +11389,14 @@
+@@ -10975,6 +11389,14 @@ md_parse_option (c, arg)
      case OPTION_NO_M3900:
        break;
  
@@ -5226,7 +5267,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
      case OPTION_MDMX:
        mips_opts.ase_mdmx = 1;
        break;
-@@ -11027,6 +11449,22 @@
+@@ -11027,6 +11449,22 @@ md_parse_option (c, arg)
        mips_relax_branch = 0;
        break;
  
@@ -5249,7 +5290,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  #ifdef OBJ_ELF
        /* When generating ELF code, we permit -KPIC and -call_shared to
  	 select SVR4_PIC, and -non_shared to select no PIC.  This is
-@@ -11216,6 +11654,7 @@
+@@ -11216,6 +11654,7 @@ mips_set_tune (info)
  void
  mips_after_parse_args ()
  {
@@ -5257,7 +5298,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
    /* GP relative stuff not working for PE */
    if (strncmp (TARGET_OS, "pe", 2) == 0
        && g_switch_value != 0)
-@@ -11333,6 +11772,10 @@
+@@ -11333,6 +11772,10 @@ mips_after_parse_args ()
  	mips_flag_mdebug = 1;
        else
  #endif /* OBJ_MAYBE_ECOFF */
@@ -5268,7 +5309,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	mips_flag_mdebug = 0;
      }
  }
-@@ -11580,6 +12023,129 @@
+@@ -11580,6 +12023,129 @@ mips_validate_fix (fixP, seg)
    return 1;
  }
  
@@ -5398,7 +5439,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  #ifdef OBJ_ELF
  static int
  mips_need_elf_addend_fixup (fixP)
-@@ -11785,6 +12351,7 @@
+@@ -11785,6 +12351,7 @@ md_apply_fix3 (fixP, valP, seg)
      case BFD_RELOC_MIPS_CALL_HI16:
      case BFD_RELOC_MIPS_CALL_LO16:
      case BFD_RELOC_MIPS16_GPREL:
@@ -5406,7 +5447,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
        if (fixP->fx_pcrel)
  	as_bad_where (fixP->fx_file, fixP->fx_line,
  		      _("Invalid PC relative reloc"));
-@@ -11933,6 +12500,17 @@
+@@ -11933,6 +12500,17 @@ md_apply_fix3 (fixP, valP, seg)
        else
  	insn = (buf[3] << 24) | (buf[2] << 16) | (buf[1] << 8) | buf[0];
  
@@ -5424,7 +5465,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
        if (value + 0x8000 <= 0xffff)
  	insn |= value & 0xffff;
        else
-@@ -12539,6 +13117,12 @@
+@@ -12539,6 +13117,12 @@ s_mipsset (x)
      mips_opts.ase_mdmx = 1;
    else if (strcmp (name, "nomdmx") == 0)
      mips_opts.ase_mdmx = 0;
@@ -5437,7 +5478,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
    else if (strncmp (name, "mips", 4) == 0)
      {
        int reset = 0;
-@@ -12607,6 +13191,8 @@
+@@ -12607,6 +13191,8 @@ s_mipsset (x)
  
        s = (struct mips_option_stack *) xmalloc (sizeof *s);
        s->next = mips_opts_stack;
@@ -5446,7 +5487,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
        s->options = mips_opts;
        mips_opts_stack = s;
      }
-@@ -12635,6 +13221,8 @@
+@@ -12635,6 +13221,8 @@ s_mipsset (x)
  
  	  mips_opts = s->options;
  	  mips_opts_stack = s->next;
@@ -5455,7 +5496,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  	  free (s);
  	}
      }
-@@ -14909,6 +15497,7 @@
+@@ -14909,6 +15497,7 @@ static const struct mips_cpu_info mips_cpu_info_table[] =
    { "r4600",          0,      ISA_MIPS3,      CPU_R4600 },
    { "orion",          0,      ISA_MIPS3,      CPU_R4600 },
    { "r4650",          0,      ISA_MIPS3,      CPU_R4650 },
@@ -5463,7 +5504,7 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
  
    /* MIPS IV */
    { "r8000",          0,      ISA_MIPS4,      CPU_R8000 },
-@@ -15134,6 +15723,7 @@
+@@ -15134,6 +15723,7 @@ MIPS options:\n\
    show (stream, "4010", &column, &first);
    show (stream, "4100", &column, &first);
    show (stream, "4650", &column, &first);
@@ -5471,10 +5512,11 @@ diff -burN orig.binutils-2.14/gas/config/tc-mips.c binutils-2.14/gas/config/tc-m
    fputc ('\n', stream);
  
    fprintf (stream, _("\
-diff -burN orig.binutils-2.14/gas/configure binutils-2.14/gas/configure
---- orig.binutils-2.14/gas/configure	2003-06-02 22:35:23.000000000 +0200
-+++ binutils-2.14/gas/configure	2017-03-08 00:37:47.501461706 +0100
-@@ -2338,6 +2338,7 @@
+diff --git a/gas/configure b/gas/configure
+index 0354251274..98a5bb7466 100755
+--- a/gas/configure
++++ b/gas/configure
+@@ -2338,6 +2338,7 @@ for this_target in $target $canon_targets ; do
        m5200)		cpu_type=m68k ;;
        m8*)		cpu_type=m88k ;;
        mips*el)		cpu_type=mips endian=little ;;
@@ -5482,7 +5524,7 @@ diff -burN orig.binutils-2.14/gas/configure binutils-2.14/gas/configure
        mips*)		cpu_type=mips endian=big ;;
        or32*)		cpu_type=or32 endian=big ;;
        pjl*)		cpu_type=pj endian=little ;;
-@@ -2423,6 +2424,8 @@
+@@ -2423,6 +2424,8 @@ for this_target in $target $canon_targets ; do
        fr30-*-*)				fmt=elf ;;
        frv-*-*)				fmt=elf ;;
  
@@ -5491,7 +5533,7 @@ diff -burN orig.binutils-2.14/gas/configure binutils-2.14/gas/configure
        hppa-*-linux*)	case ${cpu} in
  			    hppa*64*)	fmt=elf em=hppalinux64;;
  			    hppa*)	fmt=elf em=linux;;
-@@ -2577,6 +2580,7 @@
+@@ -2577,6 +2580,7 @@ EOF
        mips-*-irix6*)			fmt=elf em=irix ;;
        mips-*-irix5*)			fmt=elf em=irix ;;
        mips-*-irix*)			fmt=ecoff em=irix ;;
@@ -5499,7 +5541,7 @@ diff -burN orig.binutils-2.14/gas/configure binutils-2.14/gas/configure
        mips-*-lnews*)			fmt=ecoff em=lnews ;;
        mips-*-riscos*)			fmt=ecoff ;;
        mips*-*-linux*)			fmt=elf em=tmips ;;
-@@ -2586,6 +2590,7 @@
+@@ -2586,6 +2590,7 @@ EOF
        mips-*-netbsd*)			fmt=elf ;;
        mips-*-openbsd*)			fmt=elf ;;
        mips-*-vxworks*)			fmt=elf ;;
@@ -5507,10 +5549,11 @@ diff -burN orig.binutils-2.14/gas/configure binutils-2.14/gas/configure
  
        mmix-*-*)				fmt=elf ;;
        mn10200-*-*)			fmt=elf ;;
-diff -burN orig.binutils-2.14/gas/configure.in binutils-2.14/gas/configure.in
---- orig.binutils-2.14/gas/configure.in	2003-06-02 22:35:23.000000000 +0200
-+++ binutils-2.14/gas/configure.in	2017-03-08 00:37:47.501461706 +0100
-@@ -132,6 +132,7 @@
+diff --git a/gas/configure.in b/gas/configure.in
+index 7b7b40e05f..b2444125a7 100644
+--- a/gas/configure.in
++++ b/gas/configure.in
+@@ -132,6 +132,7 @@ changequote([,])dnl
        m5200)		cpu_type=m68k ;;
        m8*)		cpu_type=m88k ;;
        mips*el)		cpu_type=mips endian=little ;;
@@ -5518,7 +5561,7 @@ diff -burN orig.binutils-2.14/gas/configure.in binutils-2.14/gas/configure.in
        mips*)		cpu_type=mips endian=big ;;
        or32*)		cpu_type=or32 endian=big ;;
        pjl*)		cpu_type=pj endian=little ;;
-@@ -217,6 +218,8 @@
+@@ -217,6 +218,8 @@ changequote([,])dnl
        fr30-*-*)				fmt=elf ;;
        frv-*-*)				fmt=elf ;;
  
@@ -5527,7 +5570,7 @@ diff -burN orig.binutils-2.14/gas/configure.in binutils-2.14/gas/configure.in
        hppa-*-linux*)	case ${cpu} in
  			    hppa*64*)	fmt=elf em=hppalinux64;;
  			    hppa*)	fmt=elf em=linux;;
-@@ -376,6 +379,7 @@
+@@ -376,6 +379,7 @@ changequote([,])dnl
        mips-*-netbsd*)			fmt=elf ;;
        mips-*-openbsd*)			fmt=elf ;;
        mips-*-vxworks*)			fmt=elf ;;
@@ -5535,10 +5578,23 @@ diff -burN orig.binutils-2.14/gas/configure.in binutils-2.14/gas/configure.in
  
        mmix-*-*)				fmt=elf ;;
        mn10200-*-*)			fmt=elf ;;
-diff -burN orig.binutils-2.14/include/dis-asm.h binutils-2.14/include/dis-asm.h
---- orig.binutils-2.14/include/dis-asm.h	2003-04-01 17:50:30.000000000 +0200
-+++ binutils-2.14/include/dis-asm.h	2017-03-08 00:37:47.501461706 +0100
-@@ -242,6 +242,8 @@
+diff --git a/gas/symbols.c b/gas/symbols.c
+index 59658dff0d..e3525792fb 100644
+--- a/gas/symbols.c
++++ b/gas/symbols.c
+@@ -1027,6 +1027,7 @@ resolve_symbol_value (symp)
+ 	      goto exit_dont_set_value;
+ 	    }
+ 	  else if (finalize_syms && final_seg == expr_section
++		   && seg_left != absolute_section
+ 		   && seg_left != expr_section)
+ 	    {
+ 	      /* If the symbol is an expression symbol, do similarly
+diff --git a/include/dis-asm.h b/include/dis-asm.h
+index 392cbf9b46..425ea8ede7 100644
+--- a/include/dis-asm.h
++++ b/include/dis-asm.h
+@@ -242,6 +242,8 @@ extern int print_insn_sh64		PARAMS ((bfd_vma, disassemble_info *));
  extern int print_insn_sh64x_media	PARAMS ((bfd_vma, disassemble_info *));
  extern int print_insn_frv		PARAMS ((bfd_vma, disassemble_info *));
  extern int print_insn_iq2000            PARAMS ((bfd_vma, disassemble_info *));
@@ -5547,9 +5603,10 @@ diff -burN orig.binutils-2.14/include/dis-asm.h binutils-2.14/include/dis-asm.h
  
  extern disassembler_ftype arc_get_disassembler PARAMS ((void *));
  extern disassembler_ftype cris_get_disassembler PARAMS ((bfd *));
-diff -burN orig.binutils-2.14/include/elf/common.h binutils-2.14/include/elf/common.h
---- orig.binutils-2.14/include/elf/common.h	2003-04-23 23:09:04.000000000 +0200
-+++ binutils-2.14/include/elf/common.h	2017-03-08 00:37:47.501461706 +0100
+diff --git a/include/elf/common.h b/include/elf/common.h
+index ca79342860..1d60022723 100644
+--- a/include/elf/common.h
++++ b/include/elf/common.h
 @@ -92,6 +92,7 @@
  #define ET_LOOS		0xFE00	/* Operating system-specific */
  #define ET_HIOS		0xFEFF	/* Operating system-specific */
@@ -5566,10 +5623,11 @@ diff -burN orig.binutils-2.14/include/elf/common.h binutils-2.14/include/elf/com
  
  #define PT_GNU_EH_FRAME	(PT_LOOS + 0x474e550)
  
-diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.h
---- orig.binutils-2.14/include/elf/mips.h	2003-01-28 01:01:08.000000000 +0100
-+++ binutils-2.14/include/elf/mips.h	2017-03-08 00:37:47.501461706 +0100
-@@ -76,6 +76,13 @@
+diff --git a/include/elf/mips.h b/include/elf/mips.h
+index 44f7cb9292..286e637eec 100644
+--- a/include/elf/mips.h
++++ b/include/elf/mips.h
+@@ -76,6 +76,13 @@ START_RELOC_NUMBERS (elf_mips_reloc_type)
    /* These relocs are used for the mips16.  */
    RELOC_NUMBER (R_MIPS16_26, 100)
    RELOC_NUMBER (R_MIPS16_GPREL, 101)
@@ -5583,7 +5641,7 @@ diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.
    /* These are GNU extensions to handle embedded-pic.  */
    RELOC_NUMBER (R_MIPS_PC32, 248)
    RELOC_NUMBER (R_MIPS_PC64, 249)
-@@ -186,6 +193,7 @@
+@@ -186,6 +193,7 @@ END_RELOC_NUMBERS (R_MIPS_maxext)
  #define E_MIPS_MACH_SB1         0x008a0000
  #define E_MIPS_MACH_5400	0x00910000
  #define E_MIPS_MACH_5500	0x00980000
@@ -5591,7 +5649,7 @@ diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.
  
  /* Processor specific section indices.  These sections do not actually
     exist.  Symbols with a st_shndx field corresponding to one of these
-@@ -333,6 +341,17 @@
+@@ -333,6 +341,17 @@ END_RELOC_NUMBERS (R_MIPS_maxext)
  /* Runtime procedure descriptor table exception information (ucode) ??? */
  #define SHT_MIPS_PDR_EXCEPTION	0x70000029
  
@@ -5609,7 +5667,7 @@ diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.
  
  /* A section of type SHT_MIPS_LIBLIST contains an array of the
     following structure.  The sh_link field is the section index of the
-@@ -499,6 +518,10 @@
+@@ -499,6 +518,10 @@ extern void bfd_mips_elf32_swap_reginfo_out
  /* .MIPS.options section.  */
  #define PT_MIPS_OPTIONS		0x70000002
  
@@ -5620,7 +5678,7 @@ diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.
  /* Processor specific dynamic array tags.  */
  
  /* 32 bit version number for runtime linker interface.  */
-@@ -690,6 +713,16 @@
+@@ -690,6 +713,16 @@ extern void bfd_mips_elf32_swap_reginfo_out
  #define STO_HIDDEN		STV_HIDDEN
  #define STO_PROTECTED		STV_PROTECTED
  
@@ -5637,7 +5695,7 @@ diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.
  /* This value is used for a mips16 .text symbol.  */
  #define STO_MIPS16		0xf0
  
-@@ -930,6 +963,31 @@
+@@ -930,6 +963,31 @@ extern void bfd_mips_elf64_swap_reginfo_in
  extern void bfd_mips_elf64_swap_reginfo_out
    PARAMS ((bfd *, const Elf64_Internal_RegInfo *, Elf64_External_RegInfo *));
  
@@ -5669,9 +5727,11 @@ diff -burN orig.binutils-2.14/include/elf/mips.h binutils-2.14/include/elf/mips.
  /* Masks for the info work of an ODK_EXCEPTIONS descriptor.  */
  #define OEX_FPU_MIN	0x1f	/* FPEs which must be enabled.  */
  #define OEX_FPU_MAX	0x1f00	/* FPEs which may be enabled.  */
-diff -burN orig.binutils-2.14/include/opcode/dvp.h binutils-2.14/include/opcode/dvp.h
---- orig.binutils-2.14/include/opcode/dvp.h	1970-01-01 01:00:00.000000000 +0100
-+++ binutils-2.14/include/opcode/dvp.h	2017-03-08 00:37:47.501461706 +0100
+diff --git a/include/opcode/dvp.h b/include/opcode/dvp.h
+new file mode 100644
+index 0000000000..63f065d9c3
+--- /dev/null
++++ b/include/opcode/dvp.h
 @@ -0,0 +1,454 @@
 +/* Opcode table for the DVP.
 +   Copyright 1998 Free Software Foundation, Inc.
@@ -6127,10 +6187,11 @@ diff -burN orig.binutils-2.14/include/opcode/dvp.h binutils-2.14/include/opcode/
 +void dvp_opcode_init_tables PARAMS ((int));
 +void dvp_opcode_init_parse PARAMS ((void));
 +void dvp_opcode_init_print PARAMS ((void));
-diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode/mips.h
---- orig.binutils-2.14/include/opcode/mips.h	2003-04-09 02:12:24.000000000 +0200
-+++ binutils-2.14/include/opcode/mips.h	2017-03-08 00:37:47.501461706 +0100
-@@ -164,6 +164,24 @@
+diff --git a/include/opcode/mips.h b/include/opcode/mips.h
+index 476c8e3112..2044b9ae5e 100644
+--- a/include/opcode/mips.h
++++ b/include/opcode/mips.h
+@@ -164,6 +164,24 @@ Software Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  *
  #define	OP_OP_SDC2		0x3e
  #define	OP_OP_SDC3		0x3f	/* a.k.a. sd */
  
@@ -6155,7 +6216,7 @@ diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode
  /* Values in the 'VSEL' field.  */
  #define MDMX_FMTSEL_IMM_QH	0x1d
  #define MDMX_FMTSEL_IMM_OB	0x1e
-@@ -233,13 +251,13 @@
+@@ -233,13 +251,13 @@ struct mips_opcode
     "x" accept and ignore register name
     "z" must be zero register
     "K" 5 bit Hardware Register (rdhwr instruction) (OP_*_RD)
@@ -6174,7 +6235,7 @@ diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode
  	Enforces: 0 < (pos+size) <= 32.
  
     Floating point instructions:
-@@ -260,8 +278,27 @@
+@@ -260,8 +278,27 @@ struct mips_opcode
     "e" 5 bit vector register byte specifier (OP_*_VECBYTE)
     "%" 3 bit immediate vr5400 vector alignment operand (OP_*_VECALIGN)
     see also "k" above
@@ -6203,7 +6264,7 @@ diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode
  
     Macro instructions:
     "A" General 32 bit expression
-@@ -283,14 +320,15 @@
+@@ -283,14 +320,15 @@ struct mips_opcode
     "()" parens surrounding optional value
     ","  separates operands
     "[]" brackets around index for vector-op scalar operand specifier (vr5400)
@@ -6223,7 +6284,7 @@ diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode
     following), for quick reference when adding more:
     "ABCD"
  */
-@@ -418,6 +456,8 @@
+@@ -418,6 +456,8 @@ struct mips_opcode
  #define INSN_5400		  0x01000000
  /* NEC VR5500 instruction.  */
  #define INSN_5500		  0x02000000
@@ -6232,7 +6293,7 @@ diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode
  
  /* MIPS ISA defines, use instead of hardcoding ISA level.  */
  
-@@ -450,6 +490,7 @@
+@@ -450,6 +490,7 @@ struct mips_opcode
  #define CPU_R5000	5000
  #define CPU_VR5400	5400
  #define CPU_VR5500	5500
@@ -6240,7 +6301,7 @@ diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode
  #define CPU_R6000	6000
  #define CPU_R8000	8000
  #define CPU_R10000	10000
-@@ -479,6 +520,7 @@
+@@ -479,6 +520,7 @@ struct mips_opcode
       || (cpu == CPU_VR4120 && ((insn)->membership & INSN_4120) != 0)	\
       || (cpu == CPU_VR5400 && ((insn)->membership & INSN_5400) != 0)	\
       || (cpu == CPU_VR5500 && ((insn)->membership & INSN_5500) != 0)	\
@@ -6248,10 +6309,29 @@ diff -burN orig.binutils-2.14/include/opcode/mips.h binutils-2.14/include/opcode
       || 0)	/* Please keep this term for easier source merging.  */
  
  /* This is a list of macro expanded instructions.
-diff -burN orig.binutils-2.14/ld/Makefile.am binutils-2.14/ld/Makefile.am
---- orig.binutils-2.14/ld/Makefile.am	2003-04-24 14:36:07.000000000 +0200
-+++ binutils-2.14/ld/Makefile.am	2017-03-08 00:37:47.501461706 +0100
-@@ -154,6 +154,7 @@
+diff --git a/include/splay-tree.h b/include/splay-tree.h
+index 86707fc1d2..e77066a3fd 100644
+--- a/include/splay-tree.h
++++ b/include/splay-tree.h
+@@ -44,8 +44,13 @@ extern "C" {
+    these types, if necessary.  These types should be sufficiently wide
+    that any pointer or scalar can be cast to these types, and then
+    cast back, without loss of precision.  */
++#ifdef __MINGW64__
++typedef unsigned long long int splay_tree_key;
++typedef unsigned long long int splay_tree_value;
++#else
+ typedef unsigned long int splay_tree_key;
+ typedef unsigned long int splay_tree_value;
++#endif
+ 
+ /* Forward declaration for a node in the tree.  */
+ typedef struct splay_tree_node_s *splay_tree_node;
+diff --git a/ld/Makefile.am b/ld/Makefile.am
+index 1cee856f48..5fca4294e7 100644
+--- a/ld/Makefile.am
++++ b/ld/Makefile.am
+@@ -154,6 +154,7 @@ ALL_EMULATIONS = \
  	eelf32_i860.o \
  	eelf32_sparc.o \
  	eelf32b4300.o \
@@ -6259,7 +6339,7 @@ diff -burN orig.binutils-2.14/ld/Makefile.am binutils-2.14/ld/Makefile.am
  	eelf32bmip.o \
  	eelf32bmipn32.o \
  	eelf32btsmip.o \
-@@ -249,6 +250,7 @@
+@@ -249,6 +250,7 @@ ALL_EMULATIONS = \
  	emipsbsd.o \
  	emipsidt.o \
  	emipsidtl.o \
@@ -6267,7 +6347,7 @@ diff -burN orig.binutils-2.14/ld/Makefile.am binutils-2.14/ld/Makefile.am
  	emipslit.o \
  	emipslnews.o \
  	emipspe.o \
-@@ -662,6 +664,9 @@
+@@ -662,6 +664,9 @@ eelf32l4300.c: $(srcdir)/emulparams/elf32l4300.sh \
    $(srcdir)/emulparams/elf32b4300.sh $(srcdir)/emulparams/elf32bmip.sh \
    $(srcdir)/emultempl/elf32.em $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
  	${GENSCRIPTS} elf32l4300 "$(tdir_elf32l4300)"
@@ -6277,7 +6357,7 @@ diff -burN orig.binutils-2.14/ld/Makefile.am binutils-2.14/ld/Makefile.am
  eelf32lmip.c: $(srcdir)/emulparams/elf32lmip.sh \
    $(srcdir)/emulparams/elf32bmip.sh \
    $(srcdir)/emultempl/elf32.em $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
-@@ -1002,6 +1007,9 @@
+@@ -1002,6 +1007,9 @@ emipsidt.c: $(srcdir)/emulparams/mipsidt.sh \
  emipsidtl.c: $(srcdir)/emulparams/mipsidtl.sh \
    $(srcdir)/emultempl/mipsecoff.em $(srcdir)/scripttempl/mips.sc ${GEN_DEPENDS}
  	${GENSCRIPTS} mipsidtl "$(tdir_mipsidtl)"
@@ -6287,10 +6367,11 @@ diff -burN orig.binutils-2.14/ld/Makefile.am binutils-2.14/ld/Makefile.am
  emipslit.c:  $(srcdir)/emulparams/mipslit.sh \
    $(srcdir)/emultempl/generic.em $(srcdir)/scripttempl/mips.sc ${GEN_DEPENDS}
  	${GENSCRIPTS} mipslit "$(tdir_mipslit)"
-diff -burN orig.binutils-2.14/ld/Makefile.in binutils-2.14/ld/Makefile.in
---- orig.binutils-2.14/ld/Makefile.in	2003-04-24 14:36:07.000000000 +0200
-+++ binutils-2.14/ld/Makefile.in	2017-03-08 00:37:47.501461706 +0100
-@@ -283,6 +283,7 @@
+diff --git a/ld/Makefile.in b/ld/Makefile.in
+index cb2e2a41a1..22803b6759 100644
+--- a/ld/Makefile.in
++++ b/ld/Makefile.in
+@@ -283,6 +283,7 @@ ALL_EMULATIONS = \
  	eelf32iq2000.o \
  	eelf32iq10.o \
  	eelf32l4300.o \
@@ -6298,7 +6379,7 @@ diff -burN orig.binutils-2.14/ld/Makefile.in binutils-2.14/ld/Makefile.in
  	eelf32lmip.o \
  	eelf32lppc.o \
  	eelf32lppcnto.o \
-@@ -363,6 +364,7 @@
+@@ -363,6 +364,7 @@ ALL_EMULATIONS = \
  	emipsbsd.o \
  	emipsidt.o \
  	emipsidtl.o \
@@ -6306,7 +6387,7 @@ diff -burN orig.binutils-2.14/ld/Makefile.in binutils-2.14/ld/Makefile.in
  	emipslit.o \
  	emipslnews.o \
  	emipspe.o \
-@@ -1388,6 +1390,9 @@
+@@ -1388,6 +1390,9 @@ eelf32l4300.c: $(srcdir)/emulparams/elf32l4300.sh \
    $(srcdir)/emulparams/elf32b4300.sh $(srcdir)/emulparams/elf32bmip.sh \
    $(srcdir)/emultempl/elf32.em $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
  	${GENSCRIPTS} elf32l4300 "$(tdir_elf32l4300)"
@@ -6316,7 +6397,7 @@ diff -burN orig.binutils-2.14/ld/Makefile.in binutils-2.14/ld/Makefile.in
  eelf32lmip.c: $(srcdir)/emulparams/elf32lmip.sh \
    $(srcdir)/emulparams/elf32bmip.sh \
    $(srcdir)/emultempl/elf32.em $(srcdir)/scripttempl/elf.sc ${GEN_DEPENDS}
-@@ -1728,6 +1733,9 @@
+@@ -1728,6 +1733,9 @@ emipsidt.c: $(srcdir)/emulparams/mipsidt.sh \
  emipsidtl.c: $(srcdir)/emulparams/mipsidtl.sh \
    $(srcdir)/emultempl/mipsecoff.em $(srcdir)/scripttempl/mips.sc ${GEN_DEPENDS}
  	${GENSCRIPTS} mipsidtl "$(tdir_mipsidtl)"
@@ -6326,10 +6407,11 @@ diff -burN orig.binutils-2.14/ld/Makefile.in binutils-2.14/ld/Makefile.in
  emipslit.c:  $(srcdir)/emulparams/mipslit.sh \
    $(srcdir)/emultempl/generic.em $(srcdir)/scripttempl/mips.sc ${GEN_DEPENDS}
  	${GENSCRIPTS} mipslit "$(tdir_mipslit)"
-diff -burN orig.binutils-2.14/ld/configure.tgt binutils-2.14/ld/configure.tgt
---- orig.binutils-2.14/ld/configure.tgt	2003-06-12 16:25:52.000000000 +0200
-+++ binutils-2.14/ld/configure.tgt	2017-03-08 00:37:47.501461706 +0100
-@@ -404,8 +404,15 @@
+diff --git a/ld/configure.tgt b/ld/configure.tgt
+index 1e45cfcda5..15a97d1b79 100644
+--- a/ld/configure.tgt
++++ b/ld/configure.tgt
+@@ -404,8 +404,15 @@ mips*vr4100el-*-elf*)	targ_emul=elf32l4300 ;;
  mips*vr4100-*-elf*)	targ_emul=elf32b4300 ;;
  mips*vr5000el-*-elf*)	targ_emul=elf32l4300 ;;
  mips*vr5000-*-elf*)	targ_emul=elf32b4300 ;;
@@ -6345,44 +6427,21 @@ diff -burN orig.binutils-2.14/ld/configure.tgt binutils-2.14/ld/configure.tgt
  mips*el-*-rtems*)	targ_emul=elf32elmip ;;
  mips*-*-rtems*)		targ_emul=elf32ebmip ;;
  mips*el-*-vxworks*)	targ_emul=elf32elmip ;;
-diff -burN orig.binutils-2.14/ld/emulparams/elf32l5900.sh binutils-2.14/ld/emulparams/elf32l5900.sh
---- orig.binutils-2.14/ld/emulparams/elf32l5900.sh	1970-01-01 01:00:00.000000000 +0100
-+++ binutils-2.14/ld/emulparams/elf32l5900.sh	2017-03-08 00:37:47.501461706 +0100
-@@ -0,0 +1,31 @@
-+SCRIPT_NAME=elf
-+OUTPUT_FORMAT="elf32-littlemips"
-+BIG_OUTPUT_FORMAT="elf32-bigmips"
-+LITTLE_OUTPUT_FORMAT="elf32-littlemips"
-+TEXT_START_ADDR=0x100000
-+MAXPAGESIZE=128
-+OTHER_TEXT_SECTIONS='*(.mips16.fn.*) *(.mips16.call.*)'
-+OTHER_GOT_SYMBOLS='
-+  _gp = ALIGN(16) + 0x7ff0;
-+'
-+OTHER_GOT_SECTIONS='
-+  .lit8 : { *(.lit8) }
-+  .lit4 : { *(.lit4) }
-+'
-+TEXT_START_SYMBOLS='_ftext = . ;'
-+DATA_START_SYMBOLS='_fdata = . ;'
-+OTHER_BSS_SYMBOLS='_fbss = .;'
-+EXECUTABLE_SYMBOLS='_DYNAMIC_LINK = 0;'
-+OTHER_SECTIONS='
-+  .gptab.sdata : { *(.gptab.data) *(.gptab.sdata) }
-+  .gptab.sbss : { *(.gptab.bss) *(.gptab.sbss) }
-+  PROVIDE(_heap_size = -1);
-+  PROVIDE(_stack = -1);
-+  PROVIDE(_stack_size = 128 * 1024);
-+'
+diff --git a/ld/emulparams/elf32l5900.sh b/ld/emulparams/elf32l5900.sh
+new file mode 100644
+index 0000000000..6282c1b227
+--- /dev/null
++++ b/ld/emulparams/elf32l5900.sh
+@@ -0,0 +1,4 @@
 +ARCH="mips:5900"
-+MACHINE=
-+TEMPLATE_NAME=elf32
-+GENERATE_SHLIB_SCRIPT=yes
-+DYNAMIC_LINK=FALSE
-+EMBEDDED=yes
-diff -burN orig.binutils-2.14/ld/emulparams/mipsirx.sh binutils-2.14/ld/emulparams/mipsirx.sh
---- orig.binutils-2.14/ld/emulparams/mipsirx.sh	1970-01-01 01:00:00.000000000 +0100
-+++ binutils-2.14/ld/emulparams/mipsirx.sh	2017-03-08 00:37:47.501461706 +0100
++OUTPUT_FORMAT="elf32-littlemips"
++SCRIPT_NAME=ps2dev
++TEMPLATE_NAME=generic
+diff --git a/ld/emulparams/mipsirx.sh b/ld/emulparams/mipsirx.sh
+new file mode 100644
+index 0000000000..cfa08c5456
+--- /dev/null
++++ b/ld/emulparams/mipsirx.sh
 @@ -0,0 +1,8 @@
 +SCRIPT_NAME=irx
 +OUTPUT_FORMAT="elf32-littlemips"
@@ -6392,9 +6451,11 @@ diff -burN orig.binutils-2.14/ld/emulparams/mipsirx.sh binutils-2.14/ld/emulpara
 +DATA_ADDR=.
 +TEMPLATE_NAME=irx
 +
-diff -burN orig.binutils-2.14/ld/emultempl/irx.em binutils-2.14/ld/emultempl/irx.em
---- orig.binutils-2.14/ld/emultempl/irx.em	1970-01-01 01:00:00.000000000 +0100
-+++ binutils-2.14/ld/emultempl/irx.em	2017-03-08 00:37:47.501461706 +0100
+diff --git a/ld/emultempl/irx.em b/ld/emultempl/irx.em
+new file mode 100644
+index 0000000000..c0679b2e1d
+--- /dev/null
++++ b/ld/emultempl/irx.em
 @@ -0,0 +1,560 @@
 +# This shell script emits a C file. -*- C -*-
 +# It does some substitutions.
@@ -6956,9 +7017,11 @@ diff -burN orig.binutils-2.14/ld/emultempl/irx.em binutils-2.14/ld/emultempl/irx
 +  NULL
 +};
 +EOF
-diff -burN orig.binutils-2.14/ld/scripttempl/irx.sc binutils-2.14/ld/scripttempl/irx.sc
---- orig.binutils-2.14/ld/scripttempl/irx.sc	1970-01-01 01:00:00.000000000 +0100
-+++ binutils-2.14/ld/scripttempl/irx.sc	2017-03-08 00:37:47.504795039 +0100
+diff --git a/ld/scripttempl/irx.sc b/ld/scripttempl/irx.sc
+new file mode 100644
+index 0000000000..8b7b721407
+--- /dev/null
++++ b/ld/scripttempl/irx.sc
 @@ -0,0 +1,121 @@
 +# Link scripts for PlayStation 2 IRXs.
 +
@@ -7081,10 +7144,109 @@ diff -burN orig.binutils-2.14/ld/scripttempl/irx.sc binutils-2.14/ld/scripttempl
 +}
 +
 +EOF
-diff -burN orig.binutils-2.14/opcodes/configure binutils-2.14/opcodes/configure
---- orig.binutils-2.14/opcodes/configure	2003-06-02 22:35:17.000000000 +0200
-+++ binutils-2.14/opcodes/configure	2017-03-08 00:37:47.504795039 +0100
-@@ -4671,6 +4671,7 @@
+diff --git a/ld/scripttempl/ps2dev.sc b/ld/scripttempl/ps2dev.sc
+new file mode 100644
+index 0000000000..e776cf7cef
+--- /dev/null
++++ b/ld/scripttempl/ps2dev.sc
+@@ -0,0 +1,92 @@
++cat <<EOF
++OUTPUT_FORMAT("${OUTPUT_FORMAT}","${OUTPUT_FORMAT}","${OUTPUT_FORMAT}")
++OUTPUT_ARCH(${ARCH})
++
++ENTRY(_start);
++
++SECTIONS {
++	.text 0x00100000: {
++		_ftext = . ;
++		*(.text)
++		*(.text.*)
++		*(.gnu.linkonce.t*)
++		KEEP(*(.init))
++		KEEP(*(.fini))
++		QUAD(0)
++	}
++
++	PROVIDE(_etext = .);
++	PROVIDE(etext = .);
++
++	.reginfo : { *(.reginfo) }
++
++	/* Global/static constructors and deconstructors. */
++	.ctors ALIGN(16): {
++		KEEP(*crtbegin*.o(.ctors))
++		KEEP(*(EXCLUDE_FILE(*crtend*.o) .ctors))
++		KEEP(*(SORT(.ctors.*)))
++		KEEP(*(.ctors))
++	}
++	.dtors ALIGN(16): {
++		KEEP(*crtbegin*.o(.dtors))
++		KEEP(*(EXCLUDE_FILE(*crtend*.o) .dtors))
++		KEEP(*(SORT(.dtors.*)))
++		KEEP(*(.dtors))
++	}
++
++	/* Static data.  */
++	.rodata ALIGN(128): {
++		*(.rodata)
++		*(.rodata.*)
++		*(.gnu.linkonce.r*)
++	}
++
++	.data ALIGN(128): {
++		_fdata = . ;
++		*(.data)
++		*(.data.*)
++		*(.gnu.linkonce.d*)
++		SORT(CONSTRUCTORS)
++	}
++
++	.rdata ALIGN(128): { *(.rdata) }
++	.gcc_except_table ALIGN(128): { *(.gcc_except_table) }
++
++	_gp = ALIGN(128) + 0x7ff0;
++	.lit4 ALIGN(128): { *(.lit4) }
++	.lit8 ALIGN(128): { *(.lit8) }
++
++	.sdata ALIGN(128): {
++		*(.sdata)
++		*(.sdata.*)
++		*(.gnu.linkonce.s*)
++	}
++
++	_edata = .;
++	PROVIDE(edata = .);
++
++	/* Uninitialized data.  */
++	.sbss ALIGN(128) : {
++		_fbss = . ;
++		*(.sbss)
++		*(.sbss.*)
++		*(.gnu.linkonce.sb*)
++		*(.scommon)
++	}
++
++	.bss ALIGN(128) : {
++		*(.bss)
++		*(.bss.*)
++		*(.gnu.linkonce.b*)
++		*(COMMON)
++	}
++	_end_bss = .;
++
++	_end = . ;
++	PROVIDE(end = .);
++
++	/* Symbols needed by crt0.s.  */
++	PROVIDE(_heap_size = -1);
++	PROVIDE(_stack = -1);
++	PROVIDE(_stack_size = 128 * 1024);
++}
+diff --git a/opcodes/configure b/opcodes/configure
+index bb079388ae..99691060b6 100755
+--- a/opcodes/configure
++++ b/opcodes/configure
+@@ -4671,6 +4671,7 @@ if test x${all_targets} = xfalse ; then
          bfd_tic4x_arch)         ta="$ta tic4x-dis.lo" ;;
  	bfd_tic54x_arch)	ta="$ta tic54x-dis.lo tic54x-opc.lo" ;;
  	bfd_tic80_arch)		ta="$ta tic80-dis.lo tic80-opc.lo" ;;
@@ -7092,10 +7254,11 @@ diff -burN orig.binutils-2.14/opcodes/configure binutils-2.14/opcodes/configure
  	bfd_v850_arch)		ta="$ta v850-opc.lo v850-dis.lo" ;;
  	bfd_v850e_arch)		ta="$ta v850-opc.lo v850-dis.lo" ;;
  	bfd_v850ea_arch)	ta="$ta v850-opc.lo v850-dis.lo" ;;
-diff -burN orig.binutils-2.14/opcodes/configure.in binutils-2.14/opcodes/configure.in
---- orig.binutils-2.14/opcodes/configure.in	2003-06-02 22:35:17.000000000 +0200
-+++ binutils-2.14/opcodes/configure.in	2017-03-08 00:37:47.504795039 +0100
-@@ -234,6 +234,7 @@
+diff --git a/opcodes/configure.in b/opcodes/configure.in
+index ea64c849a6..44c110870b 100644
+--- a/opcodes/configure.in
++++ b/opcodes/configure.in
+@@ -234,6 +234,7 @@ if test x${all_targets} = xfalse ; then
          bfd_tic4x_arch)         ta="$ta tic4x-dis.lo" ;;
  	bfd_tic54x_arch)	ta="$ta tic54x-dis.lo tic54x-opc.lo" ;;
  	bfd_tic80_arch)		ta="$ta tic80-dis.lo tic80-opc.lo" ;;
@@ -7103,10 +7266,11 @@ diff -burN orig.binutils-2.14/opcodes/configure.in binutils-2.14/opcodes/configu
  	bfd_v850_arch)		ta="$ta v850-opc.lo v850-dis.lo" ;;
  	bfd_v850e_arch)		ta="$ta v850-opc.lo v850-dis.lo" ;;
  	bfd_v850ea_arch)	ta="$ta v850-opc.lo v850-dis.lo" ;;
-diff -burN orig.binutils-2.14/opcodes/disassemble.c binutils-2.14/opcodes/disassemble.c
---- orig.binutils-2.14/opcodes/disassemble.c	2003-04-01 17:50:30.000000000 +0200
-+++ binutils-2.14/opcodes/disassemble.c	2017-03-08 00:37:47.504795039 +0100
-@@ -75,7 +75,6 @@
+diff --git a/opcodes/disassemble.c b/opcodes/disassemble.c
+index 1408f39b1c..d1980c1cb2 100644
+--- a/opcodes/disassemble.c
++++ b/opcodes/disassemble.c
+@@ -75,7 +75,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
  #define INCLUDE_SHMEDIA
  #endif
  
@@ -7114,7 +7278,7 @@ diff -burN orig.binutils-2.14/opcodes/disassemble.c binutils-2.14/opcodes/disass
  disassembler_ftype
  disassembler (abfd)
       bfd *abfd;
-@@ -232,12 +231,16 @@
+@@ -232,12 +231,16 @@ disassembler (abfd)
        disassemble = print_insn_mcore;
        break;
  #endif
@@ -7132,9 +7296,11 @@ diff -burN orig.binutils-2.14/opcodes/disassemble.c binutils-2.14/opcodes/disass
        break;
  #endif
  #ifdef ARCH_mmix
-diff -burN orig.binutils-2.14/opcodes/dvp-dis.c binutils-2.14/opcodes/dvp-dis.c
---- orig.binutils-2.14/opcodes/dvp-dis.c	1970-01-01 01:00:00.000000000 +0100
-+++ binutils-2.14/opcodes/dvp-dis.c	2017-03-08 00:37:47.504795039 +0100
+diff --git a/opcodes/dvp-dis.c b/opcodes/dvp-dis.c
+new file mode 100644
+index 0000000000..a085466fd1
+--- /dev/null
++++ b/opcodes/dvp-dis.c
 @@ -0,0 +1,439 @@
 +/* Instruction printing code for the DVP
 +   Copyright (C) 1998 Free Software Foundation, Inc. 
@@ -7575,9 +7741,11 @@ diff -burN orig.binutils-2.14/opcodes/dvp-dis.c binutils-2.14/opcodes/dvp-dis.c
 +  *insn_buf = bfd_getl32 (buffer);
 +  return 0;
 +}
-diff -burN orig.binutils-2.14/opcodes/dvp-opc.c binutils-2.14/opcodes/dvp-opc.c
---- orig.binutils-2.14/opcodes/dvp-opc.c	1970-01-01 01:00:00.000000000 +0100
-+++ binutils-2.14/opcodes/dvp-opc.c	2017-03-08 00:37:47.504795039 +0100
+diff --git a/opcodes/dvp-opc.c b/opcodes/dvp-opc.c
+new file mode 100644
+index 0000000000..5fc26b32ef
+--- /dev/null
++++ b/opcodes/dvp-opc.c
 @@ -0,0 +1,3458 @@
 +/* Opcode table for the DVP
 +   Copyright (c) 1998 Free Software Foundation, Inc.
@@ -11037,10 +11205,11 @@ diff -burN orig.binutils-2.14/opcodes/dvp-opc.c binutils-2.14/opcodes/dvp-opc.c
 +
 +  return NULL;
 +}
-diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.c
---- orig.binutils-2.14/opcodes/mips-dis.c	2003-04-08 09:14:47.000000000 +0200
-+++ binutils-2.14/opcodes/mips-dis.c	2017-03-08 00:37:47.504795039 +0100
-@@ -345,6 +345,8 @@
+diff --git a/opcodes/mips-dis.c b/opcodes/mips-dis.c
+index 1ed436a0d0..02029c34b6 100644
+--- a/opcodes/mips-dis.c
++++ b/opcodes/mips-dis.c
+@@ -345,6 +345,8 @@ const struct mips_arch_choice mips_arch_choices[] = {
      mips_cp0_names_numeric, NULL, 0, mips_hwr_names_numeric },
    { "vr5500",	1, bfd_mach_mips5500, CPU_VR5500, ISA_MIPS4,
      mips_cp0_names_numeric, NULL, 0, mips_hwr_names_numeric },
@@ -11049,7 +11218,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.
    { "r6000",	1, bfd_mach_mips6000, CPU_R6000, ISA_MIPS2,
      mips_cp0_names_numeric, NULL, 0, mips_hwr_names_numeric },
    { "r8000",	1, bfd_mach_mips8000, CPU_R8000, ISA_MIPS4,
-@@ -685,10 +687,12 @@
+@@ -685,10 +687,12 @@ print_insn_args (d, l, pc, info)
  	case ')':
  	case '[':
  	case ']':
@@ -11063,7 +11232,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.
  	  /* Extension character; switch for second char.  */
  	  d++;
  	  switch (*d)
-@@ -870,6 +874,140 @@
+@@ -870,6 +874,140 @@ print_insn_args (d, l, pc, info)
  				 mips_fpr_names[(l >> OP_SH_FS) & OP_MASK_FS]);
  	  break;
  
@@ -11204,7 +11373,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.
  	case 'T':
  	case 'W':
  	  (*info->fprintf_func) (info->stream, "%s",
-@@ -1107,8 +1245,12 @@
+@@ -1107,8 +1245,12 @@ print_insn_mips (memaddr, word, info)
  
  	      d = op->args;
  	      if (d != NULL && *d != '\0')
@@ -11218,7 +11387,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.
  		  print_insn_args (d, word, memaddr, info);
  		}
  
-@@ -1138,6 +1280,19 @@
+@@ -1138,6 +1280,19 @@ _print_insn_mips (memaddr, info, endianness)
    bfd_byte buffer[INSNLEN];
    int status;
  
@@ -11238,10 +11407,11 @@ diff -burN orig.binutils-2.14/opcodes/mips-dis.c binutils-2.14/opcodes/mips-dis.
    set_default_mips_dis_options (info);
    parse_mips_dis_options (info->disassembler_options);
  
-diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.c
---- orig.binutils-2.14/opcodes/mips-opc.c	2003-01-01 02:06:13.000000000 +0100
-+++ binutils-2.14/opcodes/mips-opc.c	2017-03-08 00:37:47.508128373 +0100
-@@ -101,6 +101,7 @@
+diff --git a/opcodes/mips-opc.c b/opcodes/mips-opc.c
+index 228357a0c1..df7eb88d8a 100644
+--- a/opcodes/mips-opc.c
++++ b/opcodes/mips-opc.c
+@@ -101,6 +101,7 @@ Software Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  *
  #define L1	INSN_4010
  #define V1	(INSN_4100 | INSN_4111 | INSN_4120)
  #define T3      INSN_3900
@@ -11249,7 +11419,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  #define M1	INSN_10000
  #define SB1     INSN_SB1
  #define N411	INSN_4111
-@@ -110,12 +111,14 @@
+@@ -110,12 +111,14 @@ Software Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  *
  #define N55	INSN_5500
  
  #define G1      (T3             \
@@ -11264,7 +11434,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
                   )
  
  /* The order of overloaded instructions matters.  Label arguments and
-@@ -169,6 +172,7 @@
+@@ -169,6 +172,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"add.qh",  "X,Y,Q",	0x7820000b, 0xfc20003f,	WR_D|RD_S|RD_T|FP_D,	MX	},
  {"adda.ob", "Y,Q",	0x78000037, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	MX|SB1	},
  {"adda.qh", "Y,Q",	0x78200037, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	MX	},
@@ -11272,7 +11442,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"addi",    "t,r,j",	0x20000000, 0xfc000000,	WR_t|RD_s,		I1	},
  {"addiu",   "t,r,j",	0x24000000, 0xfc000000,	WR_t|RD_s,		I1	},
  {"addl.ob", "Y,Q",	0x78000437, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	MX|SB1	},
-@@ -273,7 +277,7 @@
+@@ -273,7 +277,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"bnel",    "s,t,p",	0x54000000, 0xfc000000,	CBL|RD_s|RD_t, 		I2|T3	},
  {"bnel",    "s,I,p",	0,    (int) M_BNEL_I,	INSN_MACRO,		I2|T3	},
  {"break",   "",		0x0000000d, 0xffffffff,	TRAP,			I1	},
@@ -11281,7 +11451,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"break",   "c",	0x0000000d, 0xfc00ffff,	TRAP,			I1	},
  {"break",   "c,q",	0x0000000d, 0xfc00003f,	TRAP,			I1	},
  {"c.f.d",   "S,T",	0x46200030, 0xffe007ff,	RD_S|RD_T|WR_CC|FP_D,	I1	},
-@@ -355,7 +359,13 @@
+@@ -355,7 +359,13 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"c.ngl.ps","M,S,T",	0x46c0003b, 0xffe000ff,	RD_S|RD_T|WR_CC|FP_D,	I5	},
  {"c.lt.d",  "S,T",	0x4620003c, 0xffe007ff,	RD_S|RD_T|WR_CC|FP_D,	I1	},
  {"c.lt.d",  "M,S,T",    0x4620003c, 0xffe000ff, RD_S|RD_T|WR_CC|FP_D,   I4|I32	},
@@ -11296,7 +11466,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"c.lt.s",  "M,S,T",    0x4600003c, 0xffe000ff, RD_S|RD_T|WR_CC|FP_S,   I4|I32	},
  {"c.lt.ob", "Y,Q",	0x78000004, 0xfc2007ff,	WR_CC|RD_S|RD_T|FP_D,	MX|SB1	},
  {"c.lt.ob", "S,T",	0x4ac00004, 0xffe007ff,	WR_CC|RD_S|RD_T,	N54	},
-@@ -372,7 +382,8 @@
+@@ -372,7 +382,8 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"c.nge.ps","M,S,T",	0x46c0003d, 0xffe000ff,	RD_S|RD_T|WR_CC|FP_D,	I5	},
  {"c.le.d",  "S,T",	0x4620003e, 0xffe007ff,	RD_S|RD_T|WR_CC|FP_D,	I1	},
  {"c.le.d",  "M,S,T",    0x4620003e, 0xffe000ff, RD_S|RD_T|WR_CC|FP_D,   I4|I32	},
@@ -11306,7 +11476,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"c.le.s",  "M,S,T",    0x4600003e, 0xffe000ff, RD_S|RD_T|WR_CC|FP_S,   I4|I32	},
  {"c.le.ob", "Y,Q",	0x78000005, 0xfc2007ff,	WR_CC|RD_S|RD_T|FP_D,	MX|SB1	},
  {"c.le.ob", "S,T",	0x4ac00005, 0xffe007ff,	WR_CC|RD_S|RD_T,	N54	},
-@@ -443,14 +454,24 @@
+@@ -443,14 +454,24 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"cfc0",    "t,G",	0x40400000, 0xffe007ff,	LCD|WR_t|RD_C0,		I1	},
  {"cfc1",    "t,G",	0x44400000, 0xffe007ff,	LCD|WR_t|RD_C1|FP_S,	I1	},
  {"cfc1",    "t,S",	0x44400000, 0xffe007ff,	LCD|WR_t|RD_C1|FP_S,	I1	},
@@ -11331,7 +11501,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"ctc3",    "t,G",	0x4cc00000, 0xffe007ff,	COD|RD_t|WR_CC,		I1	},
  {"cvt.d.l", "D,S",	0x46a00021, 0xffff003f,	WR_D|RD_S|FP_D,		I3	},
  {"cvt.d.s", "D,S",	0x46000021, 0xffff003f,	WR_D|RD_S|FP_D|FP_S,	I1	},
-@@ -489,6 +510,7 @@
+@@ -489,6 +510,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"ddivu",   "z,s,t",    0x0000001f, 0xfc00ffff, RD_s|RD_t|WR_HILO,      I3      },
  {"ddivu",   "d,v,t",	0,    (int) M_DDIVU_3,	INSN_MACRO,		I3	},
  {"ddivu",   "d,v,I",	0,    (int) M_DDIVU_3I,	INSN_MACRO,		I3	},
@@ -11339,7 +11509,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"di",      "",		0x41606000, 0xffffffff,	WR_t|WR_C0,		I33	},
  {"di",      "t",	0x41606000, 0xffe0ffff,	WR_t|WR_C0,		I33	},
  /* The MIPS assembler treats the div opcode with two operands as
-@@ -499,6 +521,8 @@
+@@ -499,6 +521,8 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"div",     "z,t",      0x0000001a, 0xffe0ffff, RD_s|RD_t|WR_HILO,      I1      },
  {"div",     "d,v,t",	0,    (int) M_DIV_3,	INSN_MACRO,		I1	},
  {"div",     "d,v,I",	0,    (int) M_DIV_3I,	INSN_MACRO,		I1	},
@@ -11348,7 +11518,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"div.d",   "D,V,T",	0x46200003, 0xffe0003f,	WR_D|RD_S|RD_T|FP_D,	I1	},
  {"div.s",   "D,V,T",	0x46000003, 0xffe0003f,	WR_D|RD_S|RD_T|FP_S,	I1	},
  {"div.ps",  "D,V,T",	0x46c00003, 0xffe0003f,	WR_D|RD_S|RD_T|FP_D,	SB1	},
-@@ -507,6 +531,8 @@
+@@ -507,6 +531,8 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"divu",    "z,t",      0x0000001b, 0xffe0ffff, RD_s|RD_t|WR_HILO,      I1      },
  {"divu",    "d,v,t",	0,    (int) M_DIVU_3,	INSN_MACRO,		I1	},
  {"divu",    "d,v,I",	0,    (int) M_DIVU_3I,	INSN_MACRO,		I1	},
@@ -11357,7 +11527,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"dla",     "t,A(b)",	0,    (int) M_DLA_AB,	INSN_MACRO,		I3	},
  {"dli",     "t,j",      0x24000000, 0xffe00000, WR_t,			I3	}, /* addiu */
  {"dli",	    "t,i",	0x34000000, 0xffe00000, WR_t,			I3	}, /* ori */
-@@ -521,15 +547,22 @@
+@@ -521,15 +547,22 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"dmaccus", "d,s,t",	0x00000469, 0xfc0007ff,	RD_s|RD_t|WR_LO|WR_d,	N412	},
  {"dmadd16", "s,t",      0x00000029, 0xfc00ffff, RD_s|RD_t|MOD_LO,       N411    },
  {"dmfc0",   "t,G",	0x40200000, 0xffe007ff, LCD|WR_t|RD_C0,		I3	},
@@ -11382,7 +11552,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"dmfc2",   "t,G",      0x48200000, 0xffe007ff, LCD|WR_t|RD_C2, 	I3      },
  {"dmfc2",   "t,G,H",    0x48200000, 0xffe007f8, LCD|WR_t|RD_C2, 	I64     },
  {"dmtc2",   "t,G",      0x48a00000, 0xffe007ff, COD|RD_t|WR_C2|WR_CC,   I3      },
-@@ -581,10 +614,11 @@
+@@ -581,10 +614,11 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"dsub",    "d,v,I",	0,    (int) M_DSUB_I,	INSN_MACRO,		I3	},
  {"dsubu",   "d,v,t",	0x0000002f, 0xfc0007ff,	WR_d|RD_s|RD_t,		I3	},
  {"dsubu",   "d,v,I",	0,    (int) M_DSUBU_I,	INSN_MACRO,		I3	},
@@ -11396,7 +11566,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"floor.l.d", "D,S",	0x4620000b, 0xffff003f, WR_D|RD_S|FP_D,		I3	},
  {"floor.l.s", "D,S",	0x4600000b, 0xffff003f, WR_D|RD_S|FP_S,		I3	},
  {"floor.w.d", "D,S",	0x4620000f, 0xffff003f, WR_D|RD_S|FP_D,		I2	},
-@@ -593,7 +627,7 @@
+@@ -593,7 +627,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"flushd",  "",		0xbc020000, 0xffffffff, 0, 			L1	},
  {"flushid", "",		0xbc030000, 0xffffffff, 0, 			L1	},
  {"hibernate","",        0x42000023, 0xffffffff,	0, 			V1	},
@@ -11405,7 +11575,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"jr",      "s",	0x00000008, 0xfc1fffff,	UBD|RD_s,		I1	},
  {"jr.hb",   "s",	0x00000408, 0xfc1fffff,	UBD|RD_s,		I33	},
  {"j",       "s",	0x00000008, 0xfc1fffff,	UBD|RD_s,		I1	}, /* jr */
-@@ -631,8 +665,10 @@
+@@ -631,8 +665,10 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"ldc1",    "T,A(b)",	0,    (int) M_LDC1_AB,	INSN_MACRO,		I2	},
  {"ldc1",    "E,A(b)",	0,    (int) M_LDC1_AB,	INSN_MACRO,		I2	},
  {"l.d",     "T,o(b)",	0xd4000000, 0xfc000000, CLD|RD_b|WR_T|FP_D,	I2	}, /* ldc1 */
@@ -11418,7 +11588,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"ldc2",    "E,o(b)",	0xd8000000, 0xfc000000, CLD|RD_b|WR_CC,		I2	},
  {"ldc2",    "E,A(b)",	0,    (int) M_LDC2_AB,	INSN_MACRO,		I2	},
  {"ldc3",    "E,o(b)",	0xdc000000, 0xfc000000, CLD|RD_b|WR_CC,		I2	},
-@@ -657,6 +693,7 @@
+@@ -657,6 +693,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"lld",     "t,A(b)",	0,    (int) M_LLD_AB,	INSN_MACRO,		I3	},
  {"lui",     "t,u",	0x3c000000, 0xffe00000,	WR_t,			I1	},
  {"luxc1",   "D,t(b)",	0x4c000005, 0xfc00f83f, LDD|WR_D|RD_t|RD_b,	I5|N55	},
@@ -11426,7 +11596,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"lw",      "t,o(b)",	0x8c000000, 0xfc000000,	LDD|RD_b|WR_t,		I1	},
  {"lw",      "t,A(b)",	0,    (int) M_LW_AB,	INSN_MACRO,		I1	},
  {"lwc0",    "E,o(b)",	0xc0000000, 0xfc000000,	CLD|RD_b|WR_CC,		I1	},
-@@ -698,25 +735,35 @@
+@@ -698,25 +735,35 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"madu",    "s,t",      0x70000001, 0xfc00ffff, RD_s|RD_t|MOD_HILO,     P3      },
  {"madd.d",  "D,R,S,T",	0x4c000021, 0xfc00003f, RD_R|RD_S|RD_T|WR_D|FP_D,    I4	},
  {"madd.s",  "D,R,S,T",	0x4c000020, 0xfc00003f, RD_R|RD_S|RD_T|WR_D|FP_S,    I4	},
@@ -11464,7 +11634,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"mfc0",    "t,G,H",    0x40000000, 0xffe007f8, LCD|WR_t|RD_C0, 	I32     },
  {"mfc1",    "t,S",	0x44000000, 0xffe007ff,	LCD|WR_t|RD_S|FP_S,	I1	},
  {"mfc1",    "t,G",	0x44000000, 0xffe007ff,	LCD|WR_t|RD_S|FP_S,	I1	},
-@@ -727,14 +774,24 @@
+@@ -727,14 +774,24 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"mfhc2",   "t,i",	0x48600000, 0xffe00000,	LCD|WR_t|RD_C2,		I33	},
  {"mfc3",    "t,G",	0x4c000000, 0xffe007ff,	LCD|WR_t|RD_C3,		I1	},
  {"mfc3",    "t,G,H",    0x4c000000, 0xffe007f8, LCD|WR_t|RD_C3, 	I32     },
@@ -11489,7 +11659,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"mov.d",   "D,S",	0x46200006, 0xffff003f,	WR_D|RD_S|FP_D,		I1	},
  {"mov.s",   "D,S",	0x46000006, 0xffff003f,	WR_D|RD_S|FP_S,		I1	},
  {"mov.ps",  "D,S",	0x46c00006, 0xffff003f,	WR_D|RD_S|FP_D,		I5	},
-@@ -744,7 +801,7 @@
+@@ -744,7 +801,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"movf.l",  "X,Y,N",	0x46a00011, 0xffe3003f, WR_D|RD_S|RD_CC|FP_D,	MX|SB1	},
  {"movf.s",  "D,S,N",    0x46000011, 0xffe3003f, WR_D|RD_S|RD_CC|FP_S,   I4|I32	},
  {"movf.ps", "D,S,N",	0x46c00011, 0xffe3003f, WR_D|RD_S|RD_CC|FP_D,	I5	},
@@ -11498,7 +11668,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"ffc",     "d,v",	0x0000000b, 0xfc1f07ff,	WR_d|RD_s,		L1	},
  {"movn.d",  "D,S,t",    0x46200013, 0xffe0003f, WR_D|RD_S|RD_t|FP_D,    I4|I32	},
  {"movn.l",  "D,S,t",    0x46a00013, 0xffe0003f, WR_D|RD_S|RD_t|FP_D,    MX|SB1	},
-@@ -757,7 +814,7 @@
+@@ -757,7 +814,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"movt.l",  "X,Y,N",    0x46a10011, 0xffe3003f, WR_D|RD_S|RD_CC|FP_D,   MX|SB1	},
  {"movt.s",  "D,S,N",    0x46010011, 0xffe3003f, WR_D|RD_S|RD_CC|FP_S,   I4|I32	},
  {"movt.ps", "D,S,N",	0x46c10011, 0xffe3003f, WR_D|RD_S|RD_CC|FP_D,	I5	},
@@ -11507,7 +11677,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"ffs",     "d,v",	0x0000000a, 0xfc1f07ff,	WR_d|RD_s,		L1	},
  {"movz.d",  "D,S,t",    0x46200012, 0xffe0003f, WR_D|RD_S|RD_t|FP_D,    I4|I32	},
  {"movz.l",  "D,S,t",    0x46a00012, 0xffe0003f, WR_D|RD_S|RD_t|FP_D,    MX|SB1	},
-@@ -772,15 +829,20 @@
+@@ -772,15 +829,20 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"msgn.qh", "X,Y,Q",	0x78200000, 0xfc20003f,	WR_D|RD_S|RD_T|FP_D,	MX	},
  {"msub.d",  "D,R,S,T",	0x4c000029, 0xfc00003f, RD_R|RD_S|RD_T|WR_D|FP_D, I4	},
  {"msub.s",  "D,R,S,T",	0x4c000028, 0xfc00003f, RD_R|RD_S|RD_T|WR_D|FP_S, I4	},
@@ -11529,7 +11699,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"mtc0",    "t,G,H",    0x40800000, 0xffe007f8, COD|RD_t|WR_C0|WR_CC,   I32     },
  {"mtc1",    "t,S",	0x44800000, 0xffe007ff,	COD|RD_t|WR_S|FP_S,	I1	},
  {"mtc1",    "t,G",	0x44800000, 0xffe007ff,	COD|RD_t|WR_S|FP_S,	I1	},
-@@ -792,8 +854,19 @@
+@@ -792,8 +854,19 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"mtc3",    "t,G",	0x4c800000, 0xffe007ff,	COD|RD_t|WR_C3|WR_CC,	I1	},
  {"mtc3",    "t,G,H",    0x4c800000, 0xffe007f8, COD|RD_t|WR_C3|WR_CC,   I32     },
  {"mtdr",    "t,G",	0x7080003d, 0xffe007ff,	COD|RD_t|WR_C0,		N5	},
@@ -11549,7 +11719,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"mul.d",   "D,V,T",	0x46200002, 0xffe0003f,	WR_D|RD_S|RD_T|FP_D,	I1	},
  {"mul.s",   "D,V,T",	0x46000002, 0xffe0003f,	WR_D|RD_S|RD_T|FP_S,	I1	},
  {"mul.ob",  "X,Y,Q",	0x78000030, 0xfc20003f,	WR_D|RD_S|RD_T|FP_D,	MX|SB1	},
-@@ -811,6 +884,7 @@
+@@ -811,6 +884,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"mula.ob", "S,T[e]",	0x48000033, 0xfe2007ff,	WR_CC|RD_S|RD_T,	N54	},
  {"mula.ob", "S,k",	0x4bc00033, 0xffe007ff,	WR_CC|RD_S|RD_T,	N54	},
  {"mula.qh", "Y,Q",	0x78200033, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	MX	},
@@ -11557,7 +11727,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"mulhi",   "d,s,t",	0x00000258, 0xfc0007ff,	RD_s|RD_t|WR_HILO|WR_d,	N5	},
  {"mulhiu",  "d,s,t",	0x00000259, 0xfc0007ff,	RD_s|RD_t|WR_HILO|WR_d,	N5	},
  {"mull.ob", "Y,Q",	0x78000433, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D, MX|SB1	},
-@@ -839,8 +913,12 @@
+@@ -839,8 +913,12 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"mulsl.qh", "Y,Q",	0x78200432, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	MX	},
  {"mult",    "s,t",      0x00000018, 0xfc00ffff, RD_s|RD_t|WR_HILO|IS_M, I1	},
  {"mult",    "d,s,t",    0x00000018, 0xfc0007ff, RD_s|RD_t|WR_HILO|WR_d|IS_M, G1	},
@@ -11570,7 +11740,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"mulu",    "d,s,t",	0x00000059, 0xfc0007ff,	RD_s|RD_t|WR_HILO|WR_d,	N5	},
  {"neg",     "d,w",	0x00000022, 0xffe007ff,	WR_d|RD_t,		I1	}, /* sub 0 */
  {"negu",    "d,w",	0x00000023, 0xffe007ff,	WR_d|RD_t,		I1	}, /* subu 0 */
-@@ -872,7 +950,49 @@
+@@ -872,7 +950,49 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"ori",     "t,r,i",	0x34000000, 0xfc000000,	WR_t|RD_s,		I1	},
  {"pabsdiff.ob", "X,Y,Q",0x78000009, 0xfc20003f,	WR_D|RD_S|RD_T|FP_D,	SB1	},
  {"pabsdiffc.ob", "Y,Q",	0x78000035, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	SB1	},
@@ -11620,7 +11790,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"pickf.ob", "X,Y,Q",	0x78000002, 0xfc20003f,	WR_D|RD_S|RD_T|FP_D,	MX|SB1	},
  {"pickf.ob", "D,S,T",	0x4ac00002, 0xffe0003f,	WR_D|RD_S|RD_T,		N54	},
  {"pickf.ob", "D,S,T[e]",0x48000002, 0xfe20003f,	WR_D|RD_S|RD_T,		N54	},
-@@ -883,11 +1003,65 @@
+@@ -883,11 +1003,65 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"pickt.ob", "D,S,T[e]",0x48000003, 0xfe20003f,	WR_D|RD_S|RD_T,		N54	},
  {"pickt.ob", "D,S,k",	0x4bc00003, 0xffe0003f,	WR_D|RD_S|RD_T,		N54	},
  {"pickt.qh", "X,Y,Q",	0x78200003, 0xfc20003f,	WR_D|RD_S|RD_T|FP_D,	MX	},
@@ -11686,7 +11856,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"rach.ob", "X",	0x7a00003f, 0xfffff83f,	WR_D|RD_MACC|FP_D,	MX|SB1	},
  {"rach.ob", "D",	0x4a00003f, 0xfffff83f,	WR_D,			N54	},
  {"rach.qh", "X",	0x7a20003f, 0xfffff83f,	WR_D|RD_MACC|FP_D,	MX	},
-@@ -939,6 +1113,7 @@
+@@ -939,6 +1113,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"rsqrt.d", "D,S",	0x46200016, 0xffff003f, WR_D|RD_S|FP_D,		I4	},
  {"rsqrt.ps","D,S",	0x46c00016, 0xffff003f, WR_D|RD_S|FP_D,		SB1	},
  {"rsqrt.s", "D,S",	0x46000016, 0xffff003f, WR_D|RD_S|FP_S,		I4	},
@@ -11694,7 +11864,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"rsqrt1.d",  "D,S",	0x4620001e, 0xffff003f,	WR_D|RD_S|FP_D,		M3D	},
  {"rsqrt1.ps", "D,S",	0x46c0001e, 0xffff003f,	WR_D|RD_S|FP_S,		M3D	},
  {"rsqrt1.s",  "D,S",	0x4600001e, 0xffff003f,	WR_D|RD_S|FP_S,		M3D	},
-@@ -967,13 +1142,15 @@
+@@ -967,13 +1142,15 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"sdc1",    "E,o(b)",	0xf4000000, 0xfc000000, SM|RD_T|RD_b|FP_D,	I2	},
  {"sdc1",    "T,A(b)",	0,    (int) M_SDC1_AB,	INSN_MACRO,		I2	},
  {"sdc1",    "E,A(b)",	0,    (int) M_SDC1_AB,	INSN_MACRO,		I2	},
@@ -11712,7 +11882,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"sdl",     "t,o(b)",	0xb0000000, 0xfc000000,	SM|RD_t|RD_b,		I3	},
  {"sdl",     "t,A(b)",	0,    (int) M_SDL_AB,	INSN_MACRO,		I3	},
  {"sdr",     "t,o(b)",	0xb4000000, 0xfc000000,	SM|RD_t|RD_b,		I3	},
-@@ -1028,7 +1205,9 @@
+@@ -1028,7 +1205,9 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"sltu",    "d,v,I",	0,    (int) M_SLTU_I,	INSN_MACRO,		I1	},
  {"sne",     "d,v,t",	0,    (int) M_SNE,	INSN_MACRO,		I1	},
  {"sne",     "d,v,I",	0,    (int) M_SNE_I,	INSN_MACRO,		I1	},
@@ -11722,7 +11892,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"sqrt.s",  "D,S",	0x46000004, 0xffff003f, WR_D|RD_S|FP_S,		I2	},
  {"sqrt.ps", "D,S",	0x46c00004, 0xffff003f, WR_D|RD_S|FP_D,		SB1	},
  {"srav",    "d,t,s",	0x00000007, 0xfc0007ff,	WR_d|RD_t|RD_s,		I1	},
-@@ -1056,6 +1235,7 @@
+@@ -1056,6 +1235,7 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"sub.qh",  "X,Y,Q",	0x7820000a, 0xfc20003f,	WR_D|RD_S|RD_T|FP_D,	MX	},
  {"suba.ob", "Y,Q",	0x78000036, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	MX|SB1	},
  {"suba.qh", "Y,Q",	0x78200036, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	MX	},
@@ -11730,7 +11900,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"subl.ob", "Y,Q",	0x78000436, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	MX|SB1	},
  {"subl.qh", "Y,Q",	0x78200436, 0xfc2007ff,	WR_MACC|RD_S|RD_T|FP_D,	MX	},
  {"subu",    "d,v,t",	0x00000023, 0xfc0007ff,	WR_d|RD_s|RD_t,		I1	},
-@@ -1086,8 +1266,8 @@
+@@ -1086,8 +1266,8 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"invalidate", "t,A(b)",0,    (int) M_SWR_AB,	INSN_MACRO,		I2	}, /* as swr */
  {"swxc1",   "S,t(b)",   0x4c000008, 0xfc0007ff, SM|RD_S|RD_t|RD_b,	I4	},
  {"sync",    "",		0x0000000f, 0xffffffff,	INSN_SYNC,		I2|G1	},
@@ -11741,7 +11911,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"synci",   "o(b)",	0x041f0000, 0xfc1f0000,	SM|RD_b,		I33	},
  {"syscall", "",		0x0000000c, 0xffffffff,	TRAP,			I1	},
  {"syscall", "B",	0x0000000c, 0xfc00003f,	TRAP,			I1	},
-@@ -1130,6 +1310,9 @@
+@@ -1130,6 +1310,9 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"trunc.w.d", "D,S",	0x4620000d, 0xffff003f, WR_D|RD_S|FP_D,		I2	},
  {"trunc.w.d", "D,S,x",	0x4620000d, 0xffff003f, WR_D|RD_S|FP_D,		I2	},
  {"trunc.w.d", "D,S,t",	0,    (int) M_TRUNCWD,	INSN_MACRO,		I1	},
@@ -11751,7 +11921,7 @@ diff -burN orig.binutils-2.14/opcodes/mips-opc.c binutils-2.14/opcodes/mips-opc.
  {"trunc.w.s", "D,S",	0x4600000d, 0xffff003f,	WR_D|RD_S|FP_S,		I2	},
  {"trunc.w.s", "D,S,x",	0x4600000d, 0xffff003f,	WR_D|RD_S|FP_S,		I2	},
  {"trunc.w.s", "D,S,t",	0,    (int) M_TRUNCWS,	INSN_MACRO,		I1	},
-@@ -1147,6 +1330,132 @@
+@@ -1147,6 +1330,132 @@ const struct mips_opcode mips_builtin_opcodes[] =
  {"ush",     "t,A(b)",	0,    (int) M_USH_A,	INSN_MACRO,		I1	},
  {"usw",     "t,o(b)",	0,    (int) M_USW,	INSN_MACRO,		I1	},
  {"usw",     "t,A(b)",	0,    (int) M_USW_A,	INSN_MACRO,		I1	},
