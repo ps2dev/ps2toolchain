@@ -9,7 +9,7 @@ These scripts download (with wget) and install [binutils 2.14](http://www.gnu.or
 
 ## Requirements
 
-1. Install gcc/clang, make, patch, git, and wget if you don't have those.
+1. Install gcc/clang, make, patch, git, texinfo and wget if you don't have those.
 
 2. Add this to your login script (example: ~/.bash_profile)  
 `export PS2DEV=/usr/local/ps2dev`  

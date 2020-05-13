@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  repository_dispatch:
+    types: [run_build, run_release, run_build_ps2sdk, run_release_ps2sdk, run_build_ps2client, run_release_ps2client]
+
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install Ubuntu texinfo bison flex
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install texinfo bison flex
+    
+    - name: Install Mac texinfo bison flex
+      if: matrix.os == 'macOS-latest'
+      run: |
+        brew update
+        brew install texinfo bison flex
+
+    - name: Runs all the stages in the shell
+      run: |
+        export PS2DEV=$PWD/ps2dev
+        export PS2SDK=$PS2DEV/ps2sdk
+        export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
+        ./toolchain.sh
+    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ps2dev
+        path: ps2dev/
+    
+    - name: Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: toolchain.tar.gz
+        tag_name: ${GITHUB_REF##*/}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
