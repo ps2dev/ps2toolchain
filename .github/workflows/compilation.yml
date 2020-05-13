@@ -35,17 +35,21 @@ jobs:
         export PS2SDK=$PS2DEV/ps2sdk
         export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
         ./toolchain.sh
+
+    - name: Compress ps2dev folder
+      run: |
+        tar -zcvf ps2toolchain.tar.gz ps2dev
     
     - uses: actions/upload-artifact@v2
       with:
-        name: ps2dev
-        path: ps2dev/
+        name: ps2dev-${{matrix.os}}
+        path: ps2toolchain.tar.gz
     
     - name: Release
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
       with:
-        files: toolchain.tar.gz
+        files: ps2toolchain.tar.gz
         tag_name: ${GITHUB_REF##*/}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
