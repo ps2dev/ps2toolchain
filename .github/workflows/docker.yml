@@ -2,26 +2,19 @@ name: CI-Docker
 
 on:
   push:
-  pull_request:
-
+    branches:
+      - master
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: alpine:latest
-
+  
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Install Dependencies
-      run: |
-        apk add --no-cache make bash
-        apk add --no-cache --virtual .build-deps bash gcc musl-dev git make patch wget
-        apk add --no-cache --virtual .build-deps bash gcc musl-dev git make patch wget texinfo
-    
-    - name: Runs all the stages in the shell
-      run: |
-        export PS2DEV=$PWD/ps2dev
-        export PS2SDK=$PS2DEV/ps2sdk
-        export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
-        ./toolchain.sh
+
+    - uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: fjtrujy/ps2dev
+        tags: toolchain-latest
