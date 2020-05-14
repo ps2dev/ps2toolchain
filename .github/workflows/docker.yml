@@ -16,5 +16,5 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: fjtrujy/ps2dev
+        repository: ${{ github.repository_owner }}/ps2dev
         tags: toolchain-latest
