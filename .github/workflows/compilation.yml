@@ -6,7 +6,6 @@ on:
   repository_dispatch:
     types: [run_build, run_release, run_build_ps2sdk, run_release_ps2sdk, run_build_ps2client, run_release_ps2client]
 
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}

@@ -7,7 +7,7 @@ ENV PATH   $PATH:${PS2DEV}/bin:${PS2DEV}/ee/bin:${PS2DEV}/iop/bin:${PS2DEV}/dvp/
 COPY . /src
 
 RUN apk add build-base git bash patch wget texinfo
-RUN cd /src && ls -l && ./toolchain.sh 1 && ./toolchain.sh 2 && ./toolchain.sh 3 && ./toolchain.sh 4
+RUN cd /src && ./toolchain.sh 1 && ./toolchain.sh 2 && ./toolchain.sh 3 && ./toolchain.sh 4
 
 # Second stage of Dockerfile
 FROM alpine:latest  
