@@ -1,3 +1,6 @@
+![CI](https://github.com/ps2dev/ps2toolchain/workflows/CI/badge.svg)
+![CI-Docker](https://github.com/ps2dev/ps2toolchain/workflows/CI-Docker/badge.svg)
+
 # ps2toolchain
 
 This program will automatically build and install a compiler and other tools used in the creation of homebrew software for the Sony PlayStation® 2
