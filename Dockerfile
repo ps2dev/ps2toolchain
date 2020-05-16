@@ -1,3 +1,4 @@
+# First stage of Dockerfile
 FROM alpine:latest
 
 ENV PS2DEV /usr/local/ps2dev
