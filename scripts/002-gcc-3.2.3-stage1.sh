@@ -51,7 +51,7 @@ for TARGET in "ee" "iop"; do
 	fi
 
 	## Compile and install.
-	make --quiet clean && make --quiet -j $PROC_NR && make --quiet install && make --quiet clean || { exit 1; }
+	make --quiet clean && make --quiet -j $PROC_NR CFLAGS="$CFLAGS -O2" LDFLAGS="$LDFLAGS -s" && make --quiet install && make --quiet clean || { exit 1; }
 
 	## Exit the build directory.
 	cd .. || { exit 1; }

@@ -40,4 +40,4 @@ mkdir build-$TARGET && cd build-$TARGET || { exit 1; }
 ../configure --quiet --prefix="$PS2DEV/$TARGET" --target="$TARGET" $TARG_XTRA_OPTS || { exit 1; }
 
 ## Compile and install.
-make --quiet clean && CPPFLAGS="-G0" make --quiet -j $PROC_NR && make --quiet install && make --quiet clean || { exit 1; }
+make --quiet clean && CPPFLAGS="-G0" make --quiet -j $PROC_NR CFLAGS="$CFLAGS -O2" LDFLAGS="$LDFLAGS -s" && make --quiet install && make --quiet clean || { exit 1; }
