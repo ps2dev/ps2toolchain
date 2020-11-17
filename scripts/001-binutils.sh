@@ -1,7 +1,7 @@
 #!/bin/bash
-# binutils-2.14.sh by Naomi Peori (naomi@peori.ca)
+# binutils-2.15.sh by Naomi Peori (naomi@peori.ca)
 
-BINUTILS_VERSION=2.14
+BINUTILS_VERSION=2.15
 ## Download the source code.
 SOURCE=http://ftpmirror.gnu.org/binutils/binutils-$BINUTILS_VERSION.tar.bz2
 wget --continue $SOURCE || { exit 1; }
