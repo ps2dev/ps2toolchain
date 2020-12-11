@@ -1,11 +1,11 @@
 # dvp stage of Dockerfile
-FROM fjtrujy/ps2toolchain-dvp
+FROM fjtrujy/ps2toolchain-dvp:latest
 
 # iop stage of Dockerfile
-FROM fjtrujy/ps2toolchain-iop
+FROM fjtrujy/ps2toolchain-iop:latest
 
 # ee stage of Dockerfile
-FROM fjtrujy/ps2toolchain-ee
+FROM fjtrujy/ps2toolchain-ee:latest
 
 # Second stage of Dockerfile
 FROM alpine:latest  

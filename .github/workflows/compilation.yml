@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
   repository_dispatch:
-    types: [run_build, run_release, run_build_ps2sdk, run_release_ps2sdk, run_build_ps2client, run_release_ps2client]
+    types: [run_build]
 
 jobs:
   build:
