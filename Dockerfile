@@ -1,14 +1,11 @@
-# First stage of Dockerfile
-FROM alpine:latest
+# dvp stage of Dockerfile
+FROM fjtrujy/ps2toolchain-dvp
 
-ENV PS2DEV /usr/local/ps2dev
-ENV PS2SDK $PS2DEV/ps2sdk
-ENV PATH   $PATH:${PS2DEV}/bin:${PS2DEV}/ee/bin:${PS2DEV}/iop/bin:${PS2DEV}/dvp/bin:${PS2SDK}/bin
+# iop stage of Dockerfile
+FROM fjtrujy/ps2toolchain-iop
 
-COPY . /src
-
-RUN apk add build-base git bash patch wget texinfo
-RUN cd /src && ./toolchain.sh
+# ee stage of Dockerfile
+FROM fjtrujy/ps2toolchain-ee
 
 # Second stage of Dockerfile
 FROM alpine:latest  
@@ -18,3 +15,5 @@ ENV PS2SDK $PS2DEV/ps2sdk
 ENV PATH $PATH:${PS2DEV}/bin:${PS2DEV}/ee/bin:${PS2DEV}/iop/bin:${PS2DEV}/dvp/bin:${PS2SDK}/bin
 
 COPY --from=0 ${PS2DEV} ${PS2DEV}
+COPY --from=1 ${PS2DEV} ${PS2DEV}
+COPY --from=2 ${PS2DEV} ${PS2DEV}
