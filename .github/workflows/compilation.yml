@@ -37,5 +37,6 @@ jobs:
       run: |
         export PS2DEV=$PWD/ps2dev
         export PS2SDK=$PS2DEV/ps2sdk
+        export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
         export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
         ./toolchain.sh
