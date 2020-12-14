@@ -2,7 +2,7 @@
 # 002-iop.sh by Francisco Javier Trujillo Mata (fjtrujy@gmail.com)
 
 ## Download the source code.
-REPO_URL="https://github.com/fjtrujy/ps2toolchain-iop"
+REPO_URL="https://github.com/ps2dev/ps2toolchain-iop"
 REPO_FOLDER="ps2toolchain-iop"
 BRANCH_NAME="main"
 if test ! -d "$REPO_FOLDER"; then

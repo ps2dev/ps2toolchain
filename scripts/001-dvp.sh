@@ -2,7 +2,7 @@
 # 001-dvp.sh by Francisco Javier Trujillo Mata (fjtrujy@gmail.com)
 
 ## Download the source code.
-REPO_URL="https://github.com/fjtrujy/ps2toolchain-dvp"
+REPO_URL="https://github.com/ps2dev/ps2toolchain-dvp"
 REPO_FOLDER="ps2toolchain-dvp"
 BRANCH_NAME="main"
 if test ! -d "$REPO_FOLDER"; then
