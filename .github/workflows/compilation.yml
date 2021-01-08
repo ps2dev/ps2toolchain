@@ -26,7 +26,7 @@ jobs:
       if: matrix.os == 'macOS-latest'
       run: |
         brew update
-        brew install texinfo bison flex gnu-sed gsl gmp mpfr isl
+        brew install texinfo bison flex gnu-sed gsl gmp mpfr
 
     - name: Switch to Xcode 11.7
       if: matrix.os == 'macOS-latest'
