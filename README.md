@@ -11,11 +11,16 @@ If you're trying to install in your machine the **WHOLE PS2 Development Environm
 
 ## What these scripts do
 
-These scripts download (with wget) and install [binutils 2.14](http://www.gnu.org/software/binutils/ "binutils") (ee/iop), [gcc 3.2.3](https://gcc.gnu.org/ "gcc") (ee/iop), [newlib 1.14.0](https://sourceware.org/newlib/ "newlib") (ee).
+These scripts download (with `wget`/`git clone`) and install:
+- [binutils 2.14](http://www.gnu.org/software/binutils/ "binutils") (iop, dvp)
+- [binutils 2.35.1](http://www.gnu.org/software/binutils/ "binutils") (ee), 
+- [gcc 3.2.3](https://gcc.gnu.org/ "gcc") (iop)
+- [gcc 10.2.0](https://gcc.gnu.org/ "gcc") (ee)
+- [newlib 4.0.0](https://sourceware.org/newlib/ "newlib") (ee)
 
 ## Requirements
 
-1. Install gcc/clang, make, patch, git, texinfo and wget if you don't have those.
+1. Install gcc/clang, make, patch, git, texinfo, flex, bison, wget, gsl, gmp, mpfr and mpc if you don't have those.
 
 2. Ensure that you have enough permissions for managing PS2DEV location (default to `/usr/local/ps2dev`). PS2DEV location MUST NOT have spaces or special characters in it's path! For example on Linux systems you can set access for current user by running commands:
 ```bash
