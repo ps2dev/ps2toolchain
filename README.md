@@ -20,7 +20,7 @@ These scripts download (with `wget`/`git clone`) and install:
 
 ## Requirements
 
-1. Install gcc/clang, make, patch, git, texinfo, flex, bison, wget, gsl, gmp, mpfr and mpc if you don't have those.
+1. Install gcc/clang, make, patch, git, texinfo, flex, bison, wget, gsl, gmp, mpfr, mpc and gettext if you don't have those.
 
 2. Ensure that you have enough permissions for managing PS2DEV location (default to `/usr/local/ps2dev`). PS2DEV location MUST NOT have spaces or special characters in it's path! For example on Linux systems you can set access for current user by running commands:
 ```bash
