@@ -8,25 +8,37 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os[0] }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [[macos-latest, bash], [ubuntu-latest, bash], [windows-latest, msys2]]
+    defaults:
+     run:
+      shell: ${{ matrix.os[1] }} {0}
 
     steps:
     - uses: actions/checkout@v2
     
     - name: Install Ubuntu texinfo bison flex
-      if: matrix.os == 'ubuntu-latest'
+      if: matrix.os[0] == 'ubuntu-latest'
       run: |
         sudo apt-get update
         sudo apt-get -y install texinfo bison flex gettext libgmp3-dev libmpfr-dev libmpc-dev
     
     - name: Install Mac texinfo bison flex
-      if: matrix.os == 'macOS-latest'
+      if: matrix.os[0] == 'macOS-latest'
       run: |
         brew update
         brew install texinfo bison flex gnu-sed gsl gmp mpfr
+
+    - name: Install MSYS2 texinfo bison flex
+      if: matrix.os[0] == 'windows-latest'
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW32
+        install: base-devel git make texinfo flex bison patch binutils mingw-w64-i686-gcc mpc-devel
+        update: true
+        shell: msys2 {0}
 
     - name: Runs all the stages in the shell
       run: |
