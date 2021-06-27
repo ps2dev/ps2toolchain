@@ -18,13 +18,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Install Ubuntu texinfo bison flex
       if: matrix.os[0] == 'ubuntu-latest'
       run: |
         sudo apt-get update
         sudo apt-get -y install texinfo bison flex gettext libgmp3-dev libmpfr-dev libmpc-dev
-    
+
     - name: Install Mac texinfo bison flex
       if: matrix.os[0] == 'macOS-latest'
       run: |
