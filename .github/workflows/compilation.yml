@@ -12,11 +12,16 @@ jobs:
     runs-on: ${{ matrix.os[0] }}
     strategy:
       matrix:
-        os: [[macos-13, bash], [ubuntu-latest, bash], [windows-latest, msys2]]
+        os: [
+          [macos-latest, arm64, bash],
+          [macos-13, x86_64, bash],
+          [ubuntu-latest, x86_64, bash],
+          [windows-latest, x86_64, msys2]
+        ]
       fail-fast: false
     defaults:
      run:
-      shell: ${{ matrix.os[1] }} {0}
+      shell: ${{ matrix.os[2] }} {0}
 
     steps:
     - uses: actions/checkout@v4
@@ -47,7 +52,6 @@ jobs:
       run: |
         export PS2DEV=$PWD/ps2dev
         export PS2SDK=$PS2DEV/ps2sdk
-        export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-        export PATH="/usr/local/opt/bison/bin:$PATH"
+        export PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH" # This is just needed for MacOS
         export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
         ./toolchain.sh
