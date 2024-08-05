@@ -3,11 +3,15 @@
 
 # ps2toolchain
 
-This program will automatically build and install the compiler tools used in the creation of homebrew software for the Sony PlayStation® 2 videogame system.
-
 ## **ATTENTION**
 
-If you're trying to install in your machine the **WHOLE PS2 Development Environment**, this is **NOT** the repo to use! Instead, you should use instead the [ps2dev](https://github.com/ps2dev/ps2dev "ps2dev") repo.
+If you are confused on how to start developing for PS2, see the
+[getting started](https://ps2dev.github.io/#getting-started) section on
+the ps2dev main page.  
+
+## Introduction
+
+This program will automatically build and install the compiler tools used in the creation of homebrew software for the Sony PlayStation® 2 videogame system.
 
 ## What these scripts do
 
@@ -36,3 +40,8 @@ export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS
 ```
 4.  Run toolchain.sh
     `./toolchain.sh`
+
+## Community
+
+Links for discussion and chat are available
+[here](https://ps2dev.github.io/#community).  
