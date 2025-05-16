@@ -56,3 +56,16 @@ jobs:
         export PATH="$(brew --prefix gnu-sed)/libexec/gnubin:$PATH" # This is just needed for MacOS
         export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
         ./toolchain.sh
+
+    - name: Get short SHA
+      id: slug
+      run: echo "sha8=${MSYSTEM}-sha[$(echo ${GITHUB_SHA} | cut -c1-8)" >> $GITHUB_OUTPUT
+  
+    - name: Prepare ps2dev folder
+      run: |
+        tar -zcvf ps2dev-${{matrix.os[0]}}.tar.gz ps2dev
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ps2dev-${{matrix.os[0]}}-ps2dev-${{matrix.os[1]}}-${{ steps.slug.outputs.sha8 }}
+        path: ps2dev-${{matrix.os[0]}}.tar.gz
